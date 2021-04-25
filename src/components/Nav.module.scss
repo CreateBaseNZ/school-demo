@@ -1,0 +1,19 @@
+@import "../global.scss";
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5rem;
+}
+
+.path {
+  display: flex;
+  color: $lightest;
+  .pathLink {
+    padding: 0 0.5rem;
+  }
+  svg {
+    margin: 0 0.5rem;
+  }
+}
