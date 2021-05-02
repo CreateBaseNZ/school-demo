@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  & > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.75;
+    margin: 0 0.75rem;
+    cursor: pointer;
+    transition: opacity 0.1s ease-out;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  button {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 2px;
+    transition: opacity 0.1s ease-out, background-color 0.1s ease-out;
+    &:hover {
+      background: #282828;
+    }
+  }
+}

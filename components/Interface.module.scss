@@ -1,0 +1,19 @@
+.interface {
+  display: grid;
+  flex: 1 1 0;
+  width: 100%;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+}
+
+.simulation {
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.contents {
+  background: grey;
+}
+
+.editor {
+}

@@ -1,8 +1,8 @@
 import { Fragment as div } from "react";
-import Link from "next/link";
 import Head from "next/head";
 
 import Header from "../components/Header";
+import Interface from "../components/Interface";
 
 import classes from "../styles/Demo.module.scss";
 
@@ -13,8 +13,7 @@ const Demo = () => {
         <title>Demo | CreateBase</title>
       </Head>
       <Header />
-      <h1>Demo Page</h1>
-      <Link href="/">Back to home</Link>
+      <Interface />
     </div>
   );
 };
