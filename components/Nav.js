@@ -6,19 +6,11 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 const Nav = () => {
   return (
     <nav className={classes.nav}>
-      <div className={classes.path}>
-        <Link className={classes.pathLink} href="/">
-          Project Name
-        </Link>
-        <ChevronRightIcon fontSize="small" />
-        <Link className={classes.pathLink} href="/">
-          Subsystem Name
-        </Link>
-        <ChevronRightIcon fontSize="small" />
-        <Link className={classes.pathLink} href="/">
-          Step Name
-        </Link>
-      </div>
+      <Link href="/">Project Name</Link>
+      <ChevronRightIcon fontSize="small" />
+      <Link href="/">Subsystem Name</Link>
+      <ChevronRightIcon fontSize="small" />
+      <Link href="/">Step Name</Link>
     </nav>
   );
 };

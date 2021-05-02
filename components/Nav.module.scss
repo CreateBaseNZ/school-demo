@@ -2,18 +2,18 @@
 
 .nav {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 2.5rem;
-}
-
-.path {
-  display: flex;
   color: $lightest;
-  .pathLink {
-    padding: 0 0.5rem;
-  }
   svg {
     margin: 0 0.5rem;
+    opacity: 0.5;
+  }
+  a {
+    padding: 0 0.5rem;
+    opacity: 0.75;
+    transition: opacity 0.2s ease-out;
+    &:hover {
+      opacity: 1;
+    }
   }
 }
