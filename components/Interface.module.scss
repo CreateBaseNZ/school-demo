@@ -1,19 +1,15 @@
+@import "../styles/variables";
+
 .interface {
   display: grid;
   flex: 1 1 0;
   width: 100%;
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 50% 50%;
+  grid-template-columns: 50% 50%;
 }
 
 .simulation {
   grid-row-start: 1;
   grid-row-end: 3;
-}
-
-.contents {
-  background: grey;
-}
-
-.editor {
+  border-right: thin solid $border-color;
 }

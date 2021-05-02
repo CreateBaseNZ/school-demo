@@ -11,8 +11,8 @@ const Interface = () => {
         <h1>Demo Page</h1>
         <Link href="/">Back to home</Link>
       </div>
-      <Contents className={classes.contents} />
-      <div className={classes.editor}>
+      <Contents />
+      <div>
         <h1>Demo Page</h1>
         <Link href="/">Back to home</Link>
       </div>

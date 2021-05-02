@@ -1,7 +1,50 @@
+@import "../styles/variables";
+
 .contents {
-  .swiper-container {
-    height: 100%;
-    width: 100%;
-    background: red;
+  border-bottom: thin solid $border-color;
+}
+
+.swiperContainer {
+  height: 100%;
+  width: 100%;
+}
+
+.swiperPrev,
+.swiperNext {
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  cursor: pointer;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 4rem;
+  overflow: hidden;
+  opacity: 0.75;
+  border-radius: 0.25rem;
+  border: thin solid $border-color;
+  transition: background-color 0.1s ease-out, border-color 0.1s ease-out;
+  &:hover {
+    background: $hover-bg;
+    opacity: 1;
+    border-color: transparent;
   }
+  &.swiperDisabled {
+    background: none;
+    opacity: 0.25;
+    cursor: default;
+    border: none;
+  }
+}
+.swiperPrev {
+  left: 2rem;
+}
+.swiperNext {
+  right: 2rem;
+}
+
+.swiperSlide {
+  padding: 2vh 8rem;
 }

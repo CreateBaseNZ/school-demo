@@ -1,8 +1,9 @@
+@import "../styles/variables";
 .header {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 2rem;
-  border-bottom: thin solid #343434;
+  border-bottom: thin solid $border-color;
 }
