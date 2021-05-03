@@ -8,15 +8,20 @@
     margin: 0 0.3rem;
     opacity: 0.5;
   }
-  a {
-    padding: 0.4rem 0.7rem;
-    opacity: 0.75;
-    font-size: 14px;
-    border-radius: 2px;
-    transition: opacity 0.1s ease-out, background-color 0.1s ease-out;
-    &:hover {
-      opacity: 1;
-      background: #282828;
+  .navItem {
+    cursor: pointer;
+    position: relative;
+    & > button {
+      border-radius: 2px;
+      padding: 0.4rem 0.7rem;
+      font-size: 14px;
+      opacity: 0.75;
+      transition: opacity 0.1s ease-out, background-color 0.1s ease-out;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+        background: #282828;
+      }
     }
   }
 }

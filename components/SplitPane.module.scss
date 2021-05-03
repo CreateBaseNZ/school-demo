@@ -33,6 +33,7 @@
   justify-content: center;
   &::after {
     content: "";
+    z-index: 2;
     background: $border-color;
     transition: background-color 0.1s ease-out;
   }

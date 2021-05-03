@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
     opacity: 0.75;
-    margin: 0 0.75rem;
+    margin: 0 0.5rem;
     cursor: pointer;
     transition: opacity 0.1s ease-out;
     &:hover {
@@ -26,5 +26,9 @@
     &:hover {
       background: $hover-bg;
     }
+  }
+
+  a {
+    margin-left: 2rem;
   }
 }

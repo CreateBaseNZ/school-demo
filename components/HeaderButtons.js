@@ -10,17 +10,17 @@ import HelpOutlineOutlinedIcon from "@material-ui/icons/HelpOutlineOutlined";
 const HeaderButtons = () => {
   return (
     <div className={classes.container}>
-      <button>
-        <FullscreenIcon style={{ fontSize: 22 }} />
+      <button title="Help">
+        <HelpOutlineOutlinedIcon fontSize="small" />
       </button>
-      <button>
+      <button title="Settings">
         <SettingsIcon fontSize="small" />
       </button>
-      <button>
+      <button title="Feedback">
         <MarkunreadMailboxOutlinedIcon style={{ fontSize: 18 }} />
       </button>
-      <button>
-        <HelpOutlineOutlinedIcon fontSize="small" />
+      <button title="Fullscreen">
+        <FullscreenIcon style={{ fontSize: 22 }} />
       </button>
       <a target="_blank" href="https://createbase.co.nz/">
         <Image
