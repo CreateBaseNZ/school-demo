@@ -1,9 +1,5 @@
 @import "../styles/variables";
 
-.contents {
-  border-bottom: thin solid $border-color;
-}
-
 .swiperContainer {
   height: 100%;
   width: 100%;
@@ -60,20 +56,29 @@
   justify-content: center;
   z-index: 10;
   .bullet {
-    margin: 0 0.25rem;
-    height: 0.75rem;
-    width: 0.75rem;
-    border-radius: 50%;
-    border: medium solid $lightest;
+    padding: 0 0.25rem;
     opacity: 0.25;
     cursor: pointer;
-    transition: opacity 0.1s ease-out, background-color 0.1s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.1s ease-out;
+    &::after {
+      content: "";
+      height: 0.5rem;
+      width: 0.5rem;
+      border-radius: 50%;
+      border: 2px solid $lightest;
+      transition: background-color 0.1s ease-out;
+    }
     &:hover {
       opacity: 0.75;
     }
     &.bulletActive {
       opacity: 0.75;
-      background: $lightest;
+      &::after {
+        background: $lightest;
+      }
     }
   }
 }

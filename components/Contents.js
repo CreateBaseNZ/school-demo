@@ -15,8 +15,6 @@ const renderBullet = (index, className) => {
   return `<span class="${className}"></span>`;
 };
 
-console.log(classes.bullet);
-
 const swiperOptions = {
   observer: true,
   observeParents: true,
@@ -37,21 +35,19 @@ const swiperOptions = {
 
 const Contents = (props) => {
   return (
-    <div className={`${props.className} ${classes.contents}`}>
-      <Swiper {...swiperOptions} className={classes.swiperContainer}>
-        <div className={classes.swiperPrev}>
-          <KeyboardArrowLeftIcon style={{ fontSize: 48, padding: 0 }} />
-        </div>
-        <div className={classes.swiperNext}>
-          <KeyboardArrowRightIcon style={{ fontSize: 48 }} />
-        </div>
-        <SwiperSlide className={classes.swiperSlide}>Slide 1</SwiperSlide>
-        <SwiperSlide className={classes.swiperSlide}>Slide 2</SwiperSlide>
-        <SwiperSlide className={classes.swiperSlide}>Slide 3</SwiperSlide>
-        <SwiperSlide className={classes.swiperSlide}>Slide 4</SwiperSlide>
-        <div className={classes.pagination}></div>
-      </Swiper>
-    </div>
+    <Swiper {...swiperOptions} className={classes.swiperContainer}>
+      <div className={classes.swiperPrev}>
+        <KeyboardArrowLeftIcon style={{ fontSize: 48, padding: 0 }} />
+      </div>
+      <div className={classes.swiperNext}>
+        <KeyboardArrowRightIcon style={{ fontSize: 48 }} />
+      </div>
+      <SwiperSlide className={classes.swiperSlide}>Slide 1</SwiperSlide>
+      <SwiperSlide className={classes.swiperSlide}>Slide 2</SwiperSlide>
+      <SwiperSlide className={classes.swiperSlide}>Slide 3</SwiperSlide>
+      <SwiperSlide className={classes.swiperSlide}>Slide 4</SwiperSlide>
+      <div className={classes.pagination}></div>
+    </Swiper>
   );
 };
 
