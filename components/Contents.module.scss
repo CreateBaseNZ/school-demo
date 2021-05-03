@@ -25,7 +25,8 @@
   opacity: 0.75;
   border-radius: 0.25rem;
   border: thin solid $border-color;
-  transition: background-color 0.1s ease-out, border-color 0.1s ease-out;
+  transition: background-color 0.1s ease-out, border-color 0.1s ease-out,
+    opacity 0.1s ease-out;
   &:hover {
     background: $hover-bg;
     opacity: 1;
@@ -35,7 +36,7 @@
     background: none;
     opacity: 0.25;
     cursor: default;
-    border: none;
+    border-color: transparent;
   }
 }
 .swiperPrev {
@@ -46,5 +47,33 @@
 }
 
 .swiperSlide {
-  padding: 2vh 8rem;
+  padding: 6vh 8rem;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 4vh;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  .bullet {
+    margin: 0 0.25rem;
+    height: 0.75rem;
+    width: 0.75rem;
+    border-radius: 50%;
+    border: medium solid $lightest;
+    opacity: 0.25;
+    cursor: pointer;
+    transition: opacity 0.1s ease-out, background-color 0.1s ease-out;
+    &:hover {
+      opacity: 0.75;
+    }
+    &.bulletActive {
+      opacity: 0.75;
+      background: $lightest;
+    }
+  }
 }
