@@ -39,7 +39,10 @@ const HeaderButtons = () => {
       <button title="Feedback">
         <MarkunreadMailboxOutlinedIcon style={{ fontSize: 18 }} />
       </button>
-      <button title="Fullscreen" onClick={fullscreenHandler}>
+      <button
+        title={fullscreenCtx.isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+        onClick={fullscreenHandler}
+      >
         {fullScreenIcon}
       </button>
       <a target="_blank" href="https://createbase.co.nz/">
