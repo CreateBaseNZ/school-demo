@@ -36,7 +36,14 @@ export const FullscreenContextProvider = (props) => {
   };
 
   const resizeHandler = () => {
-    setIsFullscreen((state) => !state);
+    if (
+      window.innerHeight === screen.height &&
+      window.innerWidth === screen.width
+    ) {
+      setIsFullscreen(true);
+    } else {
+      setIsFullscreen(false);
+    }
   };
 
   return (
