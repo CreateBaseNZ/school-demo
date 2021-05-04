@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 
-const NavContext = React.createContext({
+const NavContext = createContext({
   navIsActive: false,
   activeType: null,
   onHover: () => {},

@@ -1,9 +1,9 @@
 import Head from "next/head";
 
-import Header from "../components/Header";
-import Interface from "../components/Interface";
+import Header from "/components/Header/Header";
+import Interface from "/components/Layout/Interface";
 
-import classes from "../styles/Demo.module.scss";
+import classes from "/styles/Demo.module.scss";
 
 const Demo = () => {
   return (

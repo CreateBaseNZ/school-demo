@@ -1,8 +1,8 @@
-import Nav from "./Nav";
+import Nav from "./Nav/Nav";
 import HeaderButtons from "./HeaderButtons";
 
 import classes from "./Header.module.scss";
-import { NavContextProvider } from "../store/nav-context";
+import { NavContextProvider } from "/store/nav-context";
 
 const Header = () => {
   return (
