@@ -10,14 +10,22 @@ const NavItem = (props) => {
 
   const mouseOverHandler = () => {
     setIsHovered(true);
+    ctx.onHover(props.type);
   };
+
+  const showDropdown =
+    ctx.navIsActive && ctx.activeType === props.type && isHovered;
 
   return (
     <div className={classes.navItem}>
-      <button onClick={ctx.onClick} onMouseOver={mouseOverHandler}>
+      <button
+        className={showDropdown ? classes.active : ""}
+        onClick={ctx.onClick}
+        onMouseOver={mouseOverHandler}
+      >
         {props.title}
       </button>
-      {ctx.isActive && isHovered && (
+      {showDropdown && (
         <div className={classes.dropdown}>
           {props.items &&
             props.items.map((item) => (

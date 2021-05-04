@@ -1,7 +1,7 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import NavItem from "./NavItem";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import NavContext, { NavContextProvider } from "../store/nav-context";
+import NavContext from "../store/nav-context";
 
 import classes from "./Nav.module.scss";
 
@@ -24,23 +24,6 @@ const DUMMY_TASKS = [
 
 const Nav = () => {
   const ctx = useContext(NavContext);
-  // const [isActive, setIsActive] = useState(false);
-
-  // var timerId = null;
-
-  // const onClickHandler = () => {
-  //   setIsActive((currState) => !currState);
-  // };
-
-  // const onBlurHandler = () => {
-  //   timerId = setTimeout(() => {
-  //     setIsActive(false);
-  //   });
-  // };
-
-  // const onFocusHandler = () => {
-  //   clearTimeout(timerId);
-  // };
 
   return (
     <nav className={classes.nav} onBlur={ctx.onBlur} onFocus={ctx.onFocus}>
