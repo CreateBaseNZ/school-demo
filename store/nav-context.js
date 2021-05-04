@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 
 const NavContext = React.createContext({
-  hasFocus: false,
-  timeoutId: null,
+  isActive: false,
   onClick: () => {},
   onBlur: () => {},
   onFocus: () => {},
 });
 
 export const NavContextProvider = (props) => {
-  const [hasFocus, setHasFocus] = useState(false);
-  const [timer, setTimer] = useState(null);
+  const [isActive, setIsActive] = useState(false);
+
+  let timer = null;
 
   const clickHandler = () => {
     console.log("clicked");
+    setIsActive((currState) => !currState);
   };
 
   const blurHandler = () => {
     console.log("blurred");
     timer = setTimeout(() => {
-      setHasFocus(false);
+      setIsActive(false);
     });
   };
 
@@ -31,8 +32,7 @@ export const NavContextProvider = (props) => {
   return (
     <NavContext.Provider
       value={{
-        hasFocus: hasFocus,
-        timer: timer,
+        isActive: isActive,
         onClick: clickHandler,
         onBlur: blurHandler,
         onFocus: focusHandler,

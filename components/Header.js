@@ -7,9 +7,9 @@ import { NavContextProvider } from "../store/nav-context";
 const Header = () => {
   return (
     <header className={classes.header}>
-      {/* <NavContextProvider> */}
-      <Nav />
-      {/* </NavContextProvider> */}
+      <NavContextProvider>
+        <Nav />
+      </NavContextProvider>
       <HeaderButtons />
     </header>
   );

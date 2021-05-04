@@ -23,53 +23,36 @@ const DUMMY_TASKS = [
 ];
 
 const Nav = () => {
-  const [isActive, setIsActive] = useState(false);
+  const ctx = useContext(NavContext);
+  // const [isActive, setIsActive] = useState(false);
 
-  var timerId = null;
+  // var timerId = null;
 
-  const onClickHandler = () => {
-    setIsActive((currState) => !currState);
-  };
+  // const onClickHandler = () => {
+  //   setIsActive((currState) => !currState);
+  // };
 
-  const onBlurHandler = () => {
-    timerId = setTimeout(() => {
-      setIsActive(false);
-    });
-  };
+  // const onBlurHandler = () => {
+  //   timerId = setTimeout(() => {
+  //     setIsActive(false);
+  //   });
+  // };
 
-  const onFocusHandler = () => {
-    clearTimeout(timerId);
-  };
+  // const onFocusHandler = () => {
+  //   clearTimeout(timerId);
+  // };
 
   return (
-    <nav
-      className={classes.nav}
-      onBlur={onBlurHandler}
-      onFocus={onFocusHandler}
-    >
+    <nav className={classes.nav} onBlur={ctx.onBlur} onFocus={ctx.onFocus}>
       <NavItem
         title="Project Step 1"
         items={DUMMY_PROJECT_STEPS}
         type="Project Steps"
-        navActive={isActive}
-        onClick={onClickHandler}
       />
       <ChevronRightIcon fontSize="small" />
-      <NavItem
-        title="Subsystem 1"
-        items={DUMMY_SUBSYSTEMS}
-        type="Subsystems"
-        navActive={isActive}
-        onClick={onClickHandler}
-      />
+      <NavItem title="Subsystem 1" items={DUMMY_SUBSYSTEMS} type="Subsystems" />
       <ChevronRightIcon fontSize="small" />
-      <NavItem
-        title="Task 1"
-        items={DUMMY_TASKS}
-        type="Tasks"
-        navActive={isActive}
-        onClick={onClickHandler}
-      />
+      <NavItem title="Task 1" items={DUMMY_TASKS} type="Tasks" />
     </nav>
   );
 };
