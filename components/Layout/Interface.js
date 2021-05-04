@@ -15,10 +15,7 @@ const Interface = () => {
   return (
     <SplitPane className={classes.interface} orientation="shelve">
       <SplitPaneLeft>
-        <div className={classes.simulation}>
-          <h1>Demo Page</h1>
-          <Link href="/">Back to home</Link>
-        </div>
+        <div>Simulation goes here</div>
       </SplitPaneLeft>
       <Divider orientation="vertical" />
       <SplitPaneRight>
@@ -28,10 +25,7 @@ const Interface = () => {
           </SplitPaneTop>
           <Divider orientation="horizontal" />
           <SplitPaneBottom>
-            <div>
-              <h1>Demo Page</h1>
-              <Link href="/">Back to home</Link>
-            </div>
+            <div>Editor goes here</div>
           </SplitPaneBottom>
         </SplitPane>
       </SplitPaneRight>
