@@ -16,7 +16,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 6rem 9rem;
+  padding: 5rem 8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,6 +44,7 @@
   form {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 450px;
     & > div {
       width: 100%;
@@ -65,6 +66,27 @@
         max-height: 200px;
         line-height: 1.5rem;
         font-weight: 300;
+        &::-webkit-scrollbar {
+          width: 8px;
+        }
+        &::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+          border-radius: 0.5rem;
+          background: rgba(255, 255, 255, 0.25);
+          transition: background-color 0.2s ease-out;
+        }
+        &:hover {
+          &::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.5);
+          }
+        }
+        &:focus {
+          &::-webkit-scrollbar-thumb {
+            background: $logo-dark;
+          }
+        }
       }
       label {
         position: absolute;
@@ -105,9 +127,55 @@
           opacity: 1;
         }
       }
-      input:not([value=""]) + label,
-      textarea:not([value=""]) + label {
+      input:not(:placeholder-shown) + label,
+      textarea:not(:placeholder-shown) + label {
         opacity: 1;
+      }
+      &[status="error"] {
+        input,
+        textarea {
+          border-color: $red;
+        }
+        label {
+          opacity: 1;
+          path {
+            fill: $red;
+          }
+        }
+      }
+    }
+    button {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(to right, $logo-light, $logo-dark);
+      height: 3.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out,
+        filter 0.2s ease-out;
+      svg {
+        margin-left: 1rem;
+        transition: transform 0.1s ease-out, filter 0.1s ease-out;
+      }
+      &:disabled {
+        pointer-events: none;
+        cursor: default;
+        opacity: 0.5;
+        filter: grayscale(100%);
+      }
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 16px -4px rgba(0, 0, 0, 0.5);
+        svg {
+          transform: translate(1px, -1px);
+          -webkit-filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.4));
+          filter: drop-shadow(0px 4px 2px rgba(0, 0, 0, 0.4));
+        }
       }
     }
   }
@@ -115,6 +183,11 @@
 
 .logo {
   position: absolute;
-  bottom: 6rem;
-  left: 9rem;
+  bottom: 5rem;
+  left: 8rem;
+  opacity: 0.5;
+  transition: opacity 0.1s ease-out;
+  &:hover {
+    opacity: 1;
+  }
 }

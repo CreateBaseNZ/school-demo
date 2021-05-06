@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import FeedbackModal from "/components/UI/FeedbackModal";
+import FeedbackModal from "/components/UI/FeedbackForm/FeedbackModal";
 
 import HelpOutlineOutlinedIcon from "@material-ui/icons/HelpOutlineOutlined";
 import SettingsIcon from "@material-ui/icons/Settings";

@@ -1,9 +1,10 @@
 import { Fragment, useContext } from "react";
 import ReactDOM from "react-dom";
 import useForm from "/hooks/useForm";
-import { feedbackForm } from "/utils/formConfig";
+import feedbackForm from "./FeedbackForm";
 
 import WhiteLogo from "/components/UI/WhiteLogo";
+import SendIcon from "@material-ui/icons/Send";
 
 import FeedbackContext from "/store/feedback-context";
 
@@ -32,7 +33,7 @@ const ModalOverlay = (props) => {
       <form>
         {renderFormInputs()}
         <button type="submit" disabled={!isFormValid()}>
-          Submit
+          Submit <SendIcon />
         </button>
       </form>
 

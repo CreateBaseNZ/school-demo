@@ -26,7 +26,7 @@ export const minLengthRule = (inputName, minCharacters) => {
   return createValidationRule(
     "minLength",
     `${inputName} should contain at least ${minCharacters} characters`,
-    (inputValue) => inputValue.length >= minCharacters
+    (inputValue) => !inputValue || inputValue.length >= minCharacters
   );
 };
 

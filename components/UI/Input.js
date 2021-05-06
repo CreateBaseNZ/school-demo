@@ -13,17 +13,16 @@ const Input = (props) => {
   } = props;
 
   return (
-    <div>
+    <div status={errorMessage && !isValid && "error"}>
       <input
         type={type}
         name={name}
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
-        style={errorMessage && !isValid ? { borderColor: "#fa6f6f" } : {}}
       />
       <label>{label}</label>
-      <span>{errorMessage && !isValid ? errorMessage : " "}</span>
+      <span>{errorMessage && !isValid ? errorMessage : ""}</span>
     </div>
   );
 };
@@ -41,14 +40,13 @@ export const InputArea = memo((props) => {
   } = props;
 
   return (
-    <div>
+    <div status={errorMessage && !isValid && "error"}>
       <textarea
         type={type}
         name={name}
         value={value}
         onChange={handleChange}
         placeholder={placeholder}
-        style={errorMessage && !isValid ? { borderColor: "#fa6f6f" } : {}}
       />
       <label>{label}</label>
       <span>{errorMessage && !isValid ? errorMessage : " "}</span>
