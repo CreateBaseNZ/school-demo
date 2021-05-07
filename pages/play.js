@@ -3,11 +3,11 @@ import FullscreenContext from "/store/fullscreen-context";
 
 import Head from "next/head";
 import Header from "/components/Header/Header";
-import Interface from "/components/Layout/Interface";
+import PlayInterface from "/components/Layout/PlayInterface";
 
-import classes from "/styles/Demo.module.scss";
+import classes from "/styles/Play.module.scss";
 
-const Demo = () => {
+const Play = () => {
   const ctx = useContext(FullscreenContext);
 
   useEffect(() => {
@@ -22,14 +22,14 @@ const Demo = () => {
   };
 
   return (
-    <div className={classes.demo}>
+    <div className={classes.play}>
       <Head>
-        <title>Demo | CreateBase</title>
+        <title>Play | CreateBase</title>
       </Head>
       <Header />
-      <Interface />
+      <PlayInterface />
     </div>
   );
 };
 
-export default Demo;
+export default Play;

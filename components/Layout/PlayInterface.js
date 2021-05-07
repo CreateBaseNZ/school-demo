@@ -1,4 +1,3 @@
-import Link from "next/link";
 import SplitPane, {
   Divider,
   SplitPaneBottom,
@@ -9,9 +8,9 @@ import SplitPane, {
 
 import Contents from "./Contents";
 
-import classes from "./Interface.module.scss";
+import classes from "./PlayInterface.module.scss";
 
-const Interface = () => {
+const PlayInterface = () => {
   return (
     <SplitPane className={classes.interface} orientation="shelve">
       <SplitPaneLeft>
@@ -33,4 +32,4 @@ const Interface = () => {
   );
 };
 
-export default Interface;
+export default PlayInterface;

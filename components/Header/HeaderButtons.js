@@ -13,9 +13,18 @@ import FeedbackContext from "/store/feedback-context";
 
 import classes from "./HeaderButtons.module.scss";
 
-const HeaderButtons = () => {
+const HeaderButtons = (props) => {
   const fullscreenCtx = useContext(FullscreenContext);
   const feedbackCtx = useContext(FeedbackContext);
+
+  const {
+    help = true,
+    settings = true,
+    feedback = true,
+    fullscreen = true,
+    logo = true,
+    className = "",
+  } = props;
 
   const fullscreenHandler = () => {
     if (fullscreenCtx.isFullscreen) {
@@ -32,24 +41,32 @@ const HeaderButtons = () => {
   );
 
   return (
-    <div className={classes.container}>
-      <button title="Help">
-        <HelpOutlineOutlinedIcon fontSize="small" />
-      </button>
-      <button title="Settings">
-        <SettingsIcon fontSize="small" />
-      </button>
-      <button title="Feedback" onClick={feedbackCtx.showForm}>
-        <MarkunreadMailboxOutlinedIcon style={{ fontSize: 18 }} />
-      </button>
-      {feedbackCtx.formVisible && <FeedbackModal />}
-      <button
-        title={fullscreenCtx.isFullscreen ? "Exit fullscreen" : "Fullscreen"}
-        onClick={fullscreenHandler}
-      >
-        {fullScreenIcon}
-      </button>
-      <WhiteLogo width="138" height="25" />
+    <div className={`${classes.container} ${className}`}>
+      {help && (
+        <button title="Help">
+          <HelpOutlineOutlinedIcon fontSize="small" />
+        </button>
+      )}
+      {settings && (
+        <button title="Settings">
+          <SettingsIcon fontSize="small" />
+        </button>
+      )}
+      {feedback && (
+        <button title="Feedback" onClick={feedbackCtx.showForm}>
+          <MarkunreadMailboxOutlinedIcon style={{ fontSize: 18 }} />
+        </button>
+      )}
+      {feedback && feedbackCtx.formVisible && <FeedbackModal />}
+      {fullscreen && (
+        <button
+          title={fullscreenCtx.isFullscreen ? "Exit fullscreen" : "Fullscreen"}
+          onClick={fullscreenHandler}
+        >
+          {fullScreenIcon}
+        </button>
+      )}
+      {logo && <WhiteLogo width="138" height="25" />}
     </div>
   );
 };

@@ -32,7 +32,7 @@ const NavItem = (props) => {
               <button key={item.key}>{item.title}</button>
             ))}
           <div className={classes.separator} />
-          <Link href="/">{`See all ${props.type}`}</Link>
+          <Link href="/explore">{`See all ${props.type}`}</Link>
         </div>
       )}
     </div>

@@ -13,7 +13,7 @@ const Home = () => {
         />
       </Head>
       <h1>This is the home page</h1>
-      <Link href="/demo">Go to demo</Link>
+      <Link href="/play">Go to the app</Link>
     </Fragment>
   );
 };

@@ -1,0 +1,15 @@
+@import "/styles/variables";
+
+.explore {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: $bg-dark;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 0.5rem 2rem;
+  border-bottom: thin solid $border-color;
+}

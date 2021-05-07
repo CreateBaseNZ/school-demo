@@ -24,7 +24,7 @@
   transition: background-color 0.1s ease-out, border-color 0.1s ease-out,
     opacity 0.1s ease-out;
   &:hover {
-    background: $hover-bg;
+    background: $hover-bg-light;
     opacity: 1;
     border-color: transparent;
   }

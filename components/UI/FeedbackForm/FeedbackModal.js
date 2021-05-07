@@ -8,6 +8,7 @@ import SendIcon from "@material-ui/icons/Send";
 import FaceBookIcon from "/components/Icons/FacebookIcon";
 import InstagramIcon from "/components/Icons/InstagramIcon";
 import TwitterIcon from "/components/Icons/TwitterIcon";
+import CloseIcon from "@material-ui/icons/Close";
 
 import FeedbackContext from "/store/feedback-context";
 
@@ -20,10 +21,16 @@ const Backdrop = (props) => {
 };
 
 const ModalOverlay = (props) => {
+  const ctx = useContext(FeedbackContext);
   const { renderFormInputs, isFormValid } = useForm(feedbackForm);
 
   return (
     <div className={classes.card}>
+      <CloseIcon
+        style={{ fontSize: 36 }}
+        className={classes.close}
+        onClick={ctx.hideForm}
+      />
       <section>
         <h1>Have your say in shaping the future of STEAM education</h1>
         <p>
@@ -47,7 +54,6 @@ const ModalOverlay = (props) => {
           </div>
         </div>
       </form>
-
       <WhiteLogo className={classes.logo} width="87" height="16" />
     </div>
   );
