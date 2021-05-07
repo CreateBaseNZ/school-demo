@@ -5,6 +5,9 @@ import feedbackForm from "./FeedbackForm";
 
 import WhiteLogo from "/components/UI/WhiteLogo";
 import SendIcon from "@material-ui/icons/Send";
+import FaceBookIcon from "/components/Icons/FacebookIcon";
+import InstagramIcon from "/components/Icons/InstagramIcon";
+import TwitterIcon from "/components/Icons/TwitterIcon";
 
 import FeedbackContext from "/store/feedback-context";
 
@@ -35,6 +38,14 @@ const ModalOverlay = (props) => {
         <button type="submit" disabled={!isFormValid()}>
           Submit <SendIcon />
         </button>
+        <div className={classes.socials}>
+          <span>Or drop us a direct message</span>
+          <div className={classes.icons}>
+            <FaceBookIcon />
+            <InstagramIcon />
+            <TwitterIcon />
+          </div>
+        </div>
       </form>
 
       <WhiteLogo className={classes.logo} width="87" height="16" />

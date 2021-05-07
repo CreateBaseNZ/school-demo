@@ -18,7 +18,8 @@ const feedbackForm = {
       <AccountCircleIcon />,
       "name",
       "text",
-      "Name (optional)"
+      "Name (optional)",
+      "input"
     ),
     validationRules: [minLengthRule("Name", 3), maxLengthRule("Name", 25)],
   },
@@ -27,16 +28,29 @@ const feedbackForm = {
       <EmailRoundedIcon />,
       "email",
       "email",
-      "Email (optional)"
+      "Email (optional)",
+      "input"
     ),
     validationRules: [validEmailRule(), maxLengthRule("Email", 320)],
   },
   subject: {
-    ...createFormFieldConfig(<TitleIcon />, "subject", "text", "Subject"),
+    ...createFormFieldConfig(
+      <TitleIcon />,
+      "subject",
+      "text",
+      "Subject",
+      "input"
+    ),
     validationRules: [requiredRule("Subject"), maxLengthRule("Subject", 50)],
   },
   message: {
-    ...createFormFieldConfig(<NotesIcon />, "message", "textarea", "Message"),
+    ...createFormFieldConfig(
+      <NotesIcon />,
+      "message",
+      "text",
+      "Message",
+      "textarea"
+    ),
     validationRules: [requiredRule("Message")],
   },
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import Input, { InputArea } from "/components/UI/Input";
+import Input from "/components/UI/Input";
 
 /**
  * creates and returns object representation of form field
@@ -14,28 +14,14 @@ const createFormFieldConfig = (
   name,
   type,
   placeholder = "",
+  element,
   defaultValue = ""
 ) => {
   return {
-    renderInput: (handleChange, value, isValid, error, key) => {
-      if (type === "textarea") {
-        return (
-          <InputArea
-            key={key}
-            name={name}
-            type={type}
-            label={label}
-            isValid={isValid}
-            value={value}
-            placeholder={placeholder}
-            handleChange={handleChange}
-            errorMessage={error}
-          />
-        );
-      }
+    renderInput: (handleChange, value, isValid, error) => {
       return (
         <Input
-          key={key}
+          key={name}
           name={name}
           type={type}
           label={label}
@@ -44,6 +30,7 @@ const createFormFieldConfig = (
           placeholder={placeholder}
           handleChange={handleChange}
           errorMessage={error}
+          element={element}
         />
       );
     },
