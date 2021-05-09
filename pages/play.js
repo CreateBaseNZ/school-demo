@@ -2,10 +2,9 @@ import { useContext, useEffect } from "react";
 import FullscreenContext from "/store/fullscreen-context";
 
 import Head from "next/head";
-import Header from "/components/Header/Header";
 import PlayInterface from "/components/Layout/PlayInterface";
 
-import classes from "/styles/Play.module.scss";
+import Layout from "/components/Layout/Layout";
 
 const Play = () => {
   const ctx = useContext(FullscreenContext);
@@ -22,13 +21,12 @@ const Play = () => {
   };
 
   return (
-    <div className={classes.play}>
+    <Layout>
       <Head>
         <title>Play | CreateBase</title>
       </Head>
-      <Header />
       <PlayInterface />
-    </div>
+    </Layout>
   );
 };
 

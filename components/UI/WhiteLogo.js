@@ -9,9 +9,12 @@ const WhiteLogo = (props) => {
     >
       <Image
         src="/header-logo.png"
+        alt="CreateBase"
+        layout={props.layout}
+        objectFit={props.objectFit}
         width={props.width}
         height={props.height}
-        alt="CreateBase"
+        quality={props.quality}
       />
     </a>
   );

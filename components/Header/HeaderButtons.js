@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
+import { useRouter } from "next/router";
 import FeedbackModal from "/components/UI/FeedbackForm/FeedbackModal";
 
 import HelpOutlineOutlinedIcon from "@material-ui/icons/HelpOutlineOutlined";
@@ -17,15 +18,6 @@ const HeaderButtons = (props) => {
   const fullscreenCtx = useContext(FullscreenContext);
   const feedbackCtx = useContext(FeedbackContext);
 
-  const {
-    help = true,
-    settings = true,
-    feedback = true,
-    fullscreen = true,
-    logo = true,
-    className = "",
-  } = props;
-
   const fullscreenHandler = () => {
     if (fullscreenCtx.isFullscreen) {
       fullscreenCtx.exitFullscreen();
@@ -34,39 +26,57 @@ const HeaderButtons = (props) => {
     }
   };
 
-  const fullScreenIcon = fullscreenCtx.isFullscreen ? (
+  const fullscreenIcon = fullscreenCtx.isFullscreen ? (
     <FullscreenExitIcon style={{ fontSize: 22 }} />
   ) : (
     <FullscreenIcon style={{ fontSize: 22 }} />
   );
 
+  const buttons = [
+    {
+      title: "Help",
+      show: props.showHelp,
+      icon: <HelpOutlineOutlinedIcon fontSize="small" />,
+      clickHandler: () => {},
+    },
+    {
+      title: "Settings",
+      show: props.showSettings,
+      icon: <SettingsIcon fontSize="small" />,
+      clickHandler: () => {},
+    },
+    {
+      title: "Feedback",
+      show: props.showFeedback,
+      icon: <MarkunreadMailboxOutlinedIcon style={{ fontSize: 18 }} />,
+      clickHandler: feedbackCtx.showForm,
+    },
+    {
+      title: fullscreenCtx.isFullscreen ? "Exit fullscreen" : "Fullscreen",
+      show: props.showFullscreen,
+      icon: fullscreenIcon,
+      clickHandler: fullscreenHandler,
+    },
+  ];
+
   return (
-    <div className={`${classes.container} ${className}`}>
-      {help && (
-        <button title="Help">
-          <HelpOutlineOutlinedIcon fontSize="small" />
-        </button>
-      )}
-      {settings && (
-        <button title="Settings">
-          <SettingsIcon fontSize="small" />
-        </button>
-      )}
-      {feedback && (
-        <button title="Feedback" onClick={feedbackCtx.showForm}>
-          <MarkunreadMailboxOutlinedIcon style={{ fontSize: 18 }} />
-        </button>
-      )}
-      {feedback && feedbackCtx.formVisible && <FeedbackModal />}
-      {fullscreen && (
+    <div className={classes.container}>
+      {buttons.map((btn) => (
         <button
-          title={fullscreenCtx.isFullscreen ? "Exit fullscreen" : "Fullscreen"}
-          onClick={fullscreenHandler}
+          key={btn.title}
+          title={btn.title}
+          className={btn.show ? "" : classes.hide}
+          onClick={btn.clickHandler}
         >
-          {fullScreenIcon}
+          {btn.icon}
         </button>
-      )}
-      {logo && <WhiteLogo width="138" height="25" />}
+      ))}
+      <WhiteLogo
+        className={props.showLogo ? "" : classes.hide}
+        width="138"
+        height="25"
+      />
+      {props.showFeedback && feedbackCtx.formVisible && <FeedbackModal />}
     </div>
   );
 };

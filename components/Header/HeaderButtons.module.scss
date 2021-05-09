@@ -1,6 +1,8 @@
 @import "/styles/variables";
 
 .container {
+  margin-left: auto;
+  justify-self: flex-end;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -22,9 +24,16 @@
     height: 2rem;
     width: 2rem;
     border-radius: 2px;
-    transition: opacity 0.1s ease-out, background-color 0.1s ease-out;
+    transition: opacity 0.1s ease-out, background-color 0.1s ease-out,
+      width 0.2s ease-out, padding 0.2s ease-out, margin 0.2s ease-out;
     &:hover {
       background: $hover-bg-light;
+    }
+    &.hide {
+      width: 0;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
     }
   }
 
