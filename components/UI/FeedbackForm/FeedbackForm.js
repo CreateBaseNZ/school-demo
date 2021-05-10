@@ -1,4 +1,4 @@
-import createFormFieldConfig from "/utils/formConfig";
+import createFormFieldConfig from "../../../utils/formConfig";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import EmailRoundedIcon from "@material-ui/icons/EmailRounded";
@@ -10,7 +10,7 @@ import {
   minLengthRule,
   maxLengthRule,
   validEmailRule,
-} from "/utils/inputValidationRules";
+} from "../../../utils/inputValidationRules";
 
 const feedbackForm = {
   name: {
@@ -19,7 +19,8 @@ const feedbackForm = {
       "name",
       "text",
       "Name (optional)",
-      "input"
+      "input",
+      true
     ),
     validationRules: [minLengthRule("Name", 3), maxLengthRule("Name", 25)],
   },
@@ -29,7 +30,8 @@ const feedbackForm = {
       "email",
       "email",
       "Email (optional)",
-      "input"
+      "input",
+      true
     ),
     validationRules: [validEmailRule(), maxLengthRule("Email", 320)],
   },

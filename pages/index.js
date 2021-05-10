@@ -1,14 +1,26 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import Layout from "/components/Layout/Layout";
 import Link from "next/link";
 import Head from "next/head";
 
+import Layout from "../components/Layout/Layout";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
-import WhiteLogo from "/components/UI/WhiteLogo";
+import WhiteLogo from "../components/UI/WhiteLogo";
 
-import classes from "/styles/Index.module.scss";
+import classes from "../styles/Index.module.scss";
 
 const Index = () => {
+  const [showHelper, setShowhelper] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
+
+  useEffect(() => {
+    setPageLoaded(true);
+  }, []);
+
+  const helperClickHandler = () => {
+    setShowhelper((state) => !state);
+  };
+
   return (
     <Layout className={classes.index}>
       <Head>
@@ -28,7 +40,7 @@ const Index = () => {
         />
       </div>
       <div className={classes.container}>
-        <h1 className={classes.h1}>
+        <h1 className={`${classes.h1} ${pageLoaded ? classes.loaded : ""}`}>
           <span>D</span>
           <span>E</span>
           <span>M</span>
@@ -44,6 +56,20 @@ const Index = () => {
             <div className={classes.liquid}></div>
           </a>
         </Link>
+      </div>
+      <div className={classes.help}>
+        <button onClick={helperClickHandler}>
+          <span
+            className={`${classes.what} ${showHelper ? classes.moveUp : ""}`}
+          >
+            What's this?
+          </span>
+          <span>Hide</span>
+        </button>
+        <p className={showHelper ? "" : classes.hide}>
+          Lorem ipsum blah blah blah blah blah blah blah blah blah blah blah
+          blah
+        </p>
       </div>
     </Layout>
   );

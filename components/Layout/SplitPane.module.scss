@@ -48,7 +48,7 @@
   min-width: 9px;
   max-width: 9px;
   &::after {
-    width: 1px;
+    width: 2px;
     height: 100%;
   }
   &:active::after,
@@ -63,7 +63,7 @@
   min-height: 9px;
   max-height: 9px;
   &::after {
-    height: 1px;
+    height: 2px;
     width: 100%;
   }
   &:active::after,

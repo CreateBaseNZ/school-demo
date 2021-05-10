@@ -1,7 +1,8 @@
 import { useContext } from "react";
+import NavContext from "../../../store/nav-context";
+
 import NavItem from "./NavItem";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import NavContext from "/store/nav-context";
 
 import classes from "./Nav.module.scss";
 

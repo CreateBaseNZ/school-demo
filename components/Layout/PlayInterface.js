@@ -7,6 +7,7 @@ import SplitPane, {
 } from "./SplitPane";
 
 import Contents from "./Contents";
+import Simulation from "../Simulation/Simulation";
 
 import classes from "./PlayInterface.module.scss";
 
@@ -14,7 +15,7 @@ const PlayInterface = () => {
   return (
     <SplitPane className={classes.interface} orientation="shelve">
       <SplitPaneLeft>
-        <div>Simulation goes here</div>
+        <Simulation />
       </SplitPaneLeft>
       <Divider orientation="vertical" />
       <SplitPaneRight>

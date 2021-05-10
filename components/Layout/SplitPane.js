@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 
-import SplitPaneContext from "/store/split-pane-context";
+import SplitPaneContext from "../../store/split-pane-context";
 
 import classes from "./SplitPane.module.scss";
 

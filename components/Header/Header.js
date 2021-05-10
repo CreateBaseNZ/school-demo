@@ -1,9 +1,10 @@
+import { useRouter } from "next/router";
+import { NavContextProvider } from "../../store/nav-context";
+
 import Nav from "./Nav/Nav";
 import HeaderButtons from "./HeaderButtons";
 
 import classes from "./Header.module.scss";
-import { NavContextProvider } from "/store/nav-context";
-import { useRouter } from "next/router";
 
 const Header = () => {
   const router = useRouter();

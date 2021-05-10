@@ -1,16 +1,15 @@
 import { useContext } from "react";
-import { useRouter } from "next/router";
-import FeedbackModal from "/components/UI/FeedbackForm/FeedbackModal";
 
+import FeedbackModal from "../UI/FeedbackForm/FeedbackModal";
 import HelpOutlineOutlinedIcon from "@material-ui/icons/HelpOutlineOutlined";
 import SettingsIcon from "@material-ui/icons/Settings";
 import MarkunreadMailboxOutlinedIcon from "@material-ui/icons/MarkunreadMailboxOutlined";
 import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
-import WhiteLogo from "/components/UI/WhiteLogo";
+import WhiteLogo from "../UI/WhiteLogo";
 
-import FullscreenContext from "/store/fullscreen-context";
-import FeedbackContext from "/store/feedback-context";
+import FullscreenContext from "../../store/fullscreen-context";
+import FeedbackContext from "../../store/feedback-context";
 
 import classes from "./HeaderButtons.module.scss";
 

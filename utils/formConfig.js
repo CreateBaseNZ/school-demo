@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "/components/UI/Input";
+import Input from "../components/UI/Input";
 
 /**
  * creates and returns object representation of form field
@@ -15,6 +15,7 @@ const createFormFieldConfig = (
   type,
   placeholder = "",
   element,
+  defaultValid = false,
   defaultValue = ""
 ) => {
   return {
@@ -36,7 +37,7 @@ const createFormFieldConfig = (
     },
     name,
     value: defaultValue,
-    valid: false,
+    valid: defaultValid,
     errorMessage: "",
     touched: false,
   };

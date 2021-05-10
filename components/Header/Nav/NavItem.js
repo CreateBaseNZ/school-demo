@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useContext, useState } from "react";
-import NavContext from "/store/nav-context";
+import NavContext from "../../../store/nav-context";
 
 import classes from "./NavItem.module.scss";
 

@@ -1,10 +1,11 @@
 import { useContext, useEffect } from "react";
-import FullscreenContext from "/store/fullscreen-context";
+import FullscreenContext from "../store/fullscreen-context";
+// import createUnityInstance from "/build/Build.loader";
 
 import Head from "next/head";
-import PlayInterface from "/components/Layout/PlayInterface";
 
-import Layout from "/components/Layout/Layout";
+import Layout from "../components/Layout/Layout";
+import PlayInterface from "../components/Layout/PlayInterface";
 
 const Play = () => {
   const ctx = useContext(FullscreenContext);
@@ -31,3 +32,10 @@ const Play = () => {
 };
 
 export default Play;
+
+// export async function getStaticProps() {
+
+//   return {
+//     props: { result },
+//   };
+// }
