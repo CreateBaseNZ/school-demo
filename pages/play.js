@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import FullscreenContext from "../store/fullscreen-context";
-// import createUnityInstance from "/build/Build.loader";
 
 import Head from "next/head";
 
@@ -10,16 +9,17 @@ import PlayInterface from "../components/Layout/PlayInterface";
 const Play = () => {
   const ctx = useContext(FullscreenContext);
 
+  const resizeHandler = () => {
+    console.log("hello");
+    ctx.resizeHandler();
+  };
+
   useEffect(() => {
     window.addEventListener("resize", resizeHandler);
     return () => {
       window.removeEventListener("resize", resizeHandler);
     };
   }, []);
-
-  const resizeHandler = () => {
-    ctx.resizeHandler();
-  };
 
   return (
     <Layout>
@@ -32,10 +32,3 @@ const Play = () => {
 };
 
 export default Play;
-
-// export async function getStaticProps() {
-
-//   return {
-//     props: { result },
-//   };
-// }

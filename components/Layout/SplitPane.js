@@ -105,6 +105,8 @@ export const SplitPaneTop = (props) => {
     topRef.current.style.maxHeight = clientHeight + "px";
   }, [clientHeight]);
 
+  // const focusHandler
+
   return <div {...props} className={classes.pane} ref={topRef}></div>;
 };
 

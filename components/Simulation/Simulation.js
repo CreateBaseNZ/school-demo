@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Unity, { UnityContext } from "react-unity-webgl";
-// import createUnityInstance from "../../build/build.loader";
+
+import _, { debounce } from "lodash";
+
+import classes from "./Simulation.module.scss";
 
 const unityContext = new UnityContext({
   loaderUrl: "simulation/build.loader.js",
@@ -23,7 +26,53 @@ const content = (
 );
 
 const Simulation = (props) => {
-  return <div></div>;
+  const [width, setWidth] = useState();
+  const [height, setHeight] = useState();
+  const [isResizing, setIsResizing] = useState(false);
+
+  // let throttled = false;
+
+  // const resizeHandler = () => {
+  //   if (!throttled) {
+  //     setWidth(window.innerWidth);
+  //     setHeight(window.innerHeight);
+  //     throttled = true;
+  //     setTimeout(() => {
+  //       throttled = false;
+  //     }, 1000);
+  //   }
+  // };
+
+  const debouncedSizing = useCallback(
+    debounce(() => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+      setIsResizing(false);
+    }, 250),
+    []
+  );
+
+  const resizeHandler = () => {
+    setIsResizing(true);
+    debouncedSizing();
+  };
+
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+
+    window.addEventListener("resize", resizeHandler);
+  }, []);
+
+  return (
+    // <div className={isResizing ? classes.resizing : ""}>
+    //   <Unity
+    //     unityContext={unityContext}
+    //     style={{ height: height + "px", width: width + "px" }}
+    //   />
+    // </div>
+    <div></div>
+  );
 };
 
 export default Simulation;

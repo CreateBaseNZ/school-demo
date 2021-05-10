@@ -3,8 +3,6 @@ import { useState, useCallback } from "react";
 const useForm = (formObj) => {
   const [form, setForm] = useState(formObj);
 
-  // console.log(form);
-
   const renderFormInputs = () => {
     return Object.values(form).map((inputObj) => {
       const { value, errorMessage, valid, renderInput } = inputObj;
@@ -72,7 +70,21 @@ const useForm = (formObj) => {
     return isValid;
   }, [form]);
 
-  return { renderFormInputs, isFormValid };
+  const formHasInput = useCallback(() => {
+    let hasInput = false;
+    const inputs = Object.values(form);
+
+    for (const input of inputs) {
+      if (input.value) {
+        hasInput = true;
+        break;
+      }
+    }
+
+    return hasInput;
+  }, [form]);
+
+  return { renderFormInputs, isFormValid, formHasInput };
 };
 
 export default useForm;

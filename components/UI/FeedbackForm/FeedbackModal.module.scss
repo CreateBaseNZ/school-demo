@@ -29,6 +29,7 @@ $padding-side: 10rem;
   border-radius: 1rem;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
   z-index: 100;
+  transition: filter 0.2s ease-out;
   section {
     width: 350px;
     margin-right: 7rem;
@@ -125,9 +126,9 @@ $padding-side: 10rem;
       }
       input:focus,
       textarea:focus {
-        border-color: $logo-dark;
+        border-color: $blue-mid;
         background: $darkest;
-        caret-color: $logo-dark;
+        caret-color: $blue-mid;
         & + label {
           opacity: 1;
         }
@@ -184,6 +185,10 @@ $padding-side: 10rem;
       }
     }
   }
+  &.confirming {
+    filter: brightness(0.25);
+    user-select: none;
+  }
 }
 
 .socials {
@@ -219,7 +224,7 @@ $padding-side: 10rem;
       &:hover {
         background: $darkest;
         svg {
-          fill: $logo-dark;
+          fill: $blue-mid;
         }
       }
     }
@@ -245,9 +250,76 @@ $padding-side: 10rem;
   padding: 0.5rem;
   opacity: 0.5;
   border-radius: 0.25rem;
-  transition: background-color 0.1s ease-out, opacity 0.1s ease-out !important;
+  transition: background-color 0.1s ease-out, opacity 0.1s ease-out,
+    fill 0.1s ease-out !important;
   &:hover {
     opacity: 1;
+    fill: $red;
     background: $hover-bg-light;
+  }
+}
+
+.confirm {
+  background: #181818;
+  border-radius: 0.75rem;
+  border: thin solid $red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: column;
+  padding: 2.5rem 3.5rem 1.5rem 3.5rem;
+  &.show {
+    display: flex;
+    z-index: 100;
+  }
+  h2 {
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  p {
+    font-weight: 300;
+    font-size: 14px;
+    margin-top: 1rem;
+    max-width: 320px;
+    line-height: 1.75em;
+  }
+  .btnContainer {
+    align-self: flex-end;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    & > * {
+      padding: 0.75em 1.5em;
+      border-radius: 0.25rem;
+      line-height: 1.4em;
+    }
+    .cancel {
+      font-weight: 300;
+      margin-right: 1rem;
+      opacity: 0.75;
+      transition: background-color 0.1s ease-out, opacity 0.1s ease-out;
+      &:hover {
+        background: $hover-bg-light;
+        opacity: 1;
+      }
+    }
+    .discard {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      background: $red;
+      box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.5);
+      transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+      svg {
+        margin-right: 0.5rem;
+      }
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.5);
+      }
+    }
   }
 }
