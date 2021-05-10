@@ -52,7 +52,7 @@ const Simulation = (props) => {
     []
   );
 
-  const resizeHandler = () => {
+  const simulationResizeHandler = () => {
     setIsResizing(true);
     debouncedSizing();
   };
@@ -61,7 +61,7 @@ const Simulation = (props) => {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
 
-    window.addEventListener("resize", resizeHandler);
+    window.addEventListener("resize", simulationResizeHandler);
   }, []);
 
   return (

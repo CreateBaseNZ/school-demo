@@ -9,17 +9,17 @@ import PlayInterface from "../components/Layout/PlayInterface";
 const Play = () => {
   const ctx = useContext(FullscreenContext);
 
-  const resizeHandler = () => {
-    console.log("hello");
-    ctx.resizeHandler();
-  };
-
   useEffect(() => {
     window.addEventListener("resize", resizeHandler);
     return () => {
       window.removeEventListener("resize", resizeHandler);
     };
   }, []);
+
+  const resizeHandler = () => {
+    console.log("hello");
+    ctx.resizeHandler();
+  };
 
   return (
     <Layout>

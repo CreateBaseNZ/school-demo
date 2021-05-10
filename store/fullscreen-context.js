@@ -36,11 +36,6 @@ export const FullscreenContextProvider = (props) => {
   };
 
   const resizeHandler = () => {
-    console.log("hello");
-    console.log(window.innerHeight);
-    console.log(window.innerWidth);
-    console.log(screen.height);
-    console.log(screen.width);
     if (
       window.innerHeight === screen.height &&
       window.innerWidth === screen.width
