@@ -3,8 +3,10 @@ import NavContext from "../../../store/nav-context";
 
 import NavItem from "./NavItem";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 
 import classes from "./Nav.module.scss";
+import Link from "next/link";
 
 const DUMMY_PROJECT_STEPS = [
   { key: "123", title: "Step 1" },
@@ -28,6 +30,9 @@ const Nav = () => {
 
   return (
     <nav className={classes.nav} onBlur={ctx.onBlur} onFocus={ctx.onFocus}>
+      <Link href="/">
+        <HomeOutlinedIcon className={classes.home} fontSize="small" />
+      </Link>
       <NavItem
         title="Project Step 1"
         items={DUMMY_PROJECT_STEPS}
