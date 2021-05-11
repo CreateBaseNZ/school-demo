@@ -3,7 +3,7 @@ import NavContext from "../../../store/nav-context";
 
 import NavItem from "./NavItem";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
+import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 
 import classes from "./Nav.module.scss";
 import Link from "next/link";
@@ -31,7 +31,7 @@ const Nav = () => {
   return (
     <nav className={classes.nav} onBlur={ctx.onBlur} onFocus={ctx.onFocus}>
       <Link href="/">
-        <HomeOutlinedIcon className={classes.home} fontSize="small" />
+        <HomeRoundedIcon className={classes.home} fontSize="small" />
       </Link>
       <NavItem
         title="Project Step 1"
