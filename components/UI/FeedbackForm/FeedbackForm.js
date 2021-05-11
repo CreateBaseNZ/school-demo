@@ -53,7 +53,7 @@ const feedbackForm = {
       "Message",
       "textarea"
     ),
-    validationRules: [requiredRule("Message")],
+    validationRules: [requiredRule("Message"), maxLengthRule("Message", 500)],
   },
 };
 
