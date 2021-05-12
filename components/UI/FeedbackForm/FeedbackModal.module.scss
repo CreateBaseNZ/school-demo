@@ -1,8 +1,8 @@
 @import "/styles/variables";
 
-$padding-top: 5rem;
-$padding-bottom: 3rem;
-$padding-side: 10rem;
+$padding-top: calc(2.5vh + 2.5rem);
+$padding-bottom: calc(1.5vh + 1.5rem);
+$padding-side: min(10vw, 10rem);
 
 .backdrop {
   background: black;
@@ -29,10 +29,9 @@ $padding-side: 10rem;
   border-radius: 1rem;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
   z-index: 100;
-  transition: filter 0.2s ease-out;
   section {
-    width: 350px;
-    margin-right: 7rem;
+    width: 25vw;
+    margin-right: 8vw;
     display: flex;
     flex-direction: column;
     h1 {
@@ -51,7 +50,8 @@ $padding-side: 10rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 450px;
+    width: 35vw;
+    max-width: 450px;
     & > div:not(:last-of-type) {
       width: 100%;
       position: relative;
@@ -60,15 +60,16 @@ $padding-side: 10rem;
       input,
       textarea {
         width: 100%;
-        padding: 0.75rem 1rem 0.75rem 3.5rem;
+        font-size: 14px;
+        padding: 0.75em 1em 0.75em 3.5em;
         border: thin solid rgba(255, 255, 255, 0.25);
         border-radius: 0.5rem;
-        line-height: 2rem;
+        line-height: 2em;
         transition: border-color 0.2s ease-out, background-color 0.2s ease-out;
       }
       textarea {
         resize: none;
-        height: 150px;
+        height: 15vh;
         max-height: 200px;
         line-height: 1.5rem;
         font-weight: 300;
@@ -96,7 +97,7 @@ $padding-side: 10rem;
       }
       label {
         position: absolute;
-        top: 1.75rem;
+        top: 1.65em;
         left: 1rem;
         display: flex;
         align-items: center;
@@ -161,7 +162,7 @@ $padding-side: 10rem;
       font-weight: 600;
       letter-spacing: 0.05em;
       cursor: pointer;
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       transition: transform 0.1s ease-out, box-shadow 0.1s ease-out,
         filter 0.2s ease-out;
       svg {
@@ -185,6 +186,9 @@ $padding-side: 10rem;
       }
     }
   }
+  svg {
+    display: block;
+  }
   &.confirming {
     filter: brightness(0.25);
     user-select: none;
@@ -198,16 +202,17 @@ $padding-side: 10rem;
   justify-content: center;
   margin-top: 4rem;
   span {
-    font-size: 14px;
+    font-size: 0.75rem;
     color: $light;
   }
   .icons {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     a {
-      margin: 0 1rem;
+      transform: scale(0.75);
+      margin: 0 0.5rem;
       border-radius: 0.5rem;
       height: 3rem;
       width: 3rem;
@@ -269,7 +274,7 @@ $padding-side: 10rem;
   transform: translate(-50%, -50%);
   display: none;
   flex-direction: column;
-  padding: 2.5rem 3.5rem 1.5rem 3.5rem;
+  padding: 2.25rem 3rem 1.5rem 3rem;
   &.show {
     display: flex;
     z-index: 100;
@@ -281,13 +286,13 @@ $padding-side: 10rem;
   p {
     font-weight: 300;
     font-size: 14px;
-    margin-top: 1rem;
+    margin-top: 0.75rem;
     max-width: 320px;
-    line-height: 1.75em;
+    line-height: 1.7em;
   }
   .btnContainer {
     align-self: flex-end;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     display: flex;
     align-items: center;
     & > * {
