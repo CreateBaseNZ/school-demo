@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
+import useFocus from "../../hooks/useFocus";
 import Unity, { UnityContext } from "react-unity-webgl";
 
 import _, { debounce } from "lodash";
 
 import classes from "./Simulation.module.scss";
 
-const unityContext = new UnityContext({
+export const unityContext = new UnityContext({
   loaderUrl: "simulation/build.loader.js",
   dataUrl: "simulation/build.data",
   frameworkUrl: "simulation/build.framework.js",
@@ -18,30 +19,10 @@ const unityContext = new UnityContext({
   // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
 });
 
-const content = (
-  <Unity
-    unityContext={unityContext}
-    style={{ height: "100%", width: "100%" }}
-  />
-);
-
 const Simulation = (props) => {
   const [width, setWidth] = useState();
   const [height, setHeight] = useState();
   const [isResizing, setIsResizing] = useState(false);
-
-  // let throttled = false;
-
-  // const resizeHandler = () => {
-  //   if (!throttled) {
-  //     setWidth(window.innerWidth);
-  //     setHeight(window.innerHeight);
-  //     throttled = true;
-  //     setTimeout(() => {
-  //       throttled = false;
-  //     }, 1000);
-  //   }
-  // };
 
   const debouncedSizing = useCallback(
     debounce(() => {
@@ -64,14 +45,26 @@ const Simulation = (props) => {
     window.addEventListener("resize", simulationResizeHandler);
   }, []);
 
+  const focusHandler = () => {
+    unityContext.send("GameController", "FocusCanvas", "1");
+  };
+
+  const blurHandler = () => {
+    unityContext.send("GameController", "FocusCanvas", "0");
+  };
+
   return (
-    // <div className={isResizing ? classes.resizing : ""}>
-    //   <Unity
-    //     unityContext={unityContext}
-    //     style={{ height: height + "px", width: width + "px" }}
-    //   />
-    // </div>
-    <div></div>
+    <div
+      className={isResizing ? classes.resizing : ""}
+      onFocus={focusHandler}
+      onBlur={blurHandler}
+      tabIndex={1}
+    >
+      <Unity
+        unityContext={unityContext}
+        style={{ height: height + "px", width: width + "px" }}
+      />
+    </div>
   );
 };
 

@@ -1300,7 +1300,7 @@ function _emscripten_asm_const_ii(code, a0) {
  return ASM_CONSTS[code](a0);
 }
 STATIC_BASE = GLOBAL_BASE;
-STATICTOP = STATIC_BASE + 3298880;
+STATICTOP = STATIC_BASE + 3299520;
 __ATINIT__.push({
  func: (function() {
   __GLOBAL__sub_I_AccessibilityScriptingClasses_cpp();
@@ -3286,7 +3286,7 @@ __ATINIT__.push({
   ___emscripten_environ_constructor();
  })
 });
-var STATIC_BUMP = 3298880;
+var STATIC_BUMP = 3299520;
 Module["STATIC_BASE"] = STATIC_BASE;
 Module["STATIC_BUMP"] = STATIC_BUMP;
 var tempDoublePtr = STATICTOP;
@@ -3358,7 +3358,6 @@ function _JS_Log_Dump(ptr, type) {
   return;
  case 3:
  case 5:
-  console.log(str);
   return;
  default:
   console.error("Unknown console message type!");

@@ -1,7 +1,11 @@
 import Editor from "@monaco-editor/react";
 import { useRef } from "react";
 
+import { unityContext } from "../Simulation/Simulation";
+
 import classes from "./Workspace.module.scss";
+
+const DUMMY_HEADER = "console.log('hello');";
 
 const Workspace = () => {
   const editorRef = useRef();
@@ -10,14 +14,16 @@ const Workspace = () => {
     editorRef.current = editor;
   };
 
-  const getEditorValue = () => {
-    alert(editorRef.current.getValue());
+  const clickHandler = () => {
+    let someVar = unityContext;
+    const header = DUMMY_HEADER;
+    eval(header + editorRef.current.getValue());
   };
 
   return (
     <div className={classes.workspace}>
       <Editor defaultLanguage="javascript" onMount={handleEditorDidMount} />
-      <button onClick={getEditorValue}>Click me</button>
+      <button onClick={clickHandler}>Click me</button>
     </div>
   );
 };
