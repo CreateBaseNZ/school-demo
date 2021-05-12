@@ -1,7 +1,7 @@
 @import "/styles/variables";
 
-$padding-top: calc(2.5vh + 2.5rem);
-$padding-bottom: calc(1.5vh + 1.5rem);
+$padding-top: 8vh;
+$padding-bottom: 4vh;
 $padding-side: min(10vw, 10rem);
 
 .backdrop {
@@ -97,7 +97,7 @@ $padding-side: min(10vw, 10rem);
       }
       label {
         position: absolute;
-        top: 1.65em;
+        top: 1.6em;
         left: 1rem;
         display: flex;
         align-items: center;

@@ -1,6 +1,6 @@
 import { Fragment, useContext } from "react";
 import ReactDOM from "react-dom";
-import feedbackForm from "./FeedbackForm";
+import feedbackForm from "./feedbackForm";
 import useForm from "../../../hooks/useForm";
 
 import SendIcon from "@material-ui/icons/Send";

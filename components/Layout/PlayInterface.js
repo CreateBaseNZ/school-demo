@@ -8,6 +8,7 @@ import SplitPane, {
 
 import Contents from "./Contents";
 import Simulation from "../Simulation/Simulation";
+import Workspace from "../Workspace/Workspace";
 
 import classes from "./PlayInterface.module.scss";
 
@@ -25,7 +26,7 @@ const PlayInterface = () => {
           </SplitPaneTop>
           <Divider orientation="horizontal" />
           <SplitPaneBottom>
-            <div>Editor goes here</div>
+            <Workspace />
           </SplitPaneBottom>
         </SplitPane>
       </SplitPaneRight>
