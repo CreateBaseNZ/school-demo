@@ -1,7 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
 import SplitPane from "react-split-pane";
-
-import _, { debounce } from "lodash";
 
 import Contents from "../Contents/Contents";
 import Simulation from "../Simulation/Simulation";
@@ -9,38 +6,35 @@ import Workspace from "../Workspace/Workspace";
 
 import classes from "./PlayInterface.module.scss";
 
+const verticalDragHandler = () => {
+  document.body.style.cursor = "ew-resize";
+};
+
+const horizontalDragHandler = () => {
+  document.body.style.cursor = "ew-resize";
+};
+
+const dragReleaseHandler = () => {
+  document.body.style.cursor = "default";
+};
+
 const PlayInterface = () => {
-  const [isResizing, setIsResizing] = useState(false);
-
-  const debouncedSizing = useCallback(
-    debounce(() => {
-      setIsResizing(false);
-    }, 500),
-    []
-  );
-
-  const simulationResizeHandler = () => {
-    setIsResizing(true);
-    debouncedSizing();
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", simulationResizeHandler);
-  }, []);
-
   return (
     <SplitPane
       className={classes.splitVertical}
       split="vertical"
       defaultSize={"50%"}
       primary={"second"}
-      onChange={simulationResizeHandler}
+      onDragStarted={verticalDragHandler}
+      onDragFinished={dragReleaseHandler}
     >
-      <Simulation resizing={isResizing} />
+      <Simulation />
       <SplitPane
         split="horizontal"
         className={classes.splitHorizontal}
         defaultSize={"25%"}
+        onDragStarted={horizontalDragHandler}
+        onDragFinished={dragReleaseHandler}
       >
         <Contents />
         <Workspace />

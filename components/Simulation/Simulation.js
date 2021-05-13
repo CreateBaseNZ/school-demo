@@ -15,7 +15,7 @@ export const unityContext = new UnityContext({
   // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
 });
 
-const Simulation = (props) => {
+const Simulation = () => {
   const focusHandler = () => {
     unityContext.send("GameController", "FocusCanvas", "1");
   };
@@ -26,9 +26,7 @@ const Simulation = (props) => {
 
   return (
     <div
-      className={`${classes.simulationContainer} ${
-        props.resizing ? classes.resizing : ""
-      }`}
+      className={classes.simulationContainer}
       onFocus={focusHandler}
       onBlur={blurHandler}
       tabIndex={1}
