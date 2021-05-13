@@ -155,6 +155,14 @@
         margin-top: -1.25rem;
       }
     }
+    .hide {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        margin-right: 0.5em;
+      }
+    }
   }
   p {
     pointer-events: none;
@@ -165,28 +173,30 @@
     font-size: 14px;
     font-weight: 300;
     padding: 1rem 1.25rem;
-    background: #131313;
-    border-radius: 0.25rem 0.25rem 0.25rem 0;
-    width: 200px;
+    background: rgba(19, 19, 19, 0.75);
+    border-radius: 0.4rem 0.4rem 0.4rem 0;
+    width: 30vw;
+    min-width: 300px;
+    max-width: 650px;
     line-height: 1.4em;
     transition: opacity 0.2s ease-out, right 0.2s ease-out;
     &::after {
       content: "";
       position: absolute;
       bottom: 0;
-      left: 1px;
+      left: 0;
       transform: translateX(-100%);
       width: 0;
       height: 0;
-      border-bottom: 0.5rem solid #131313;
+      border-bottom: 0.5rem solid rgba(19, 19, 19, 0.75);
       border-left: 0.5rem solid transparent;
       border-top: 0.5rem solid transparent;
-      border-right: 0.5rem solid #131313;
+      border-right: 0.5rem solid rgba(19, 19, 19, 0.75);
       border-radius: 0 0 0 0.25rem;
     }
     &.hide {
       opacity: 0;
-      right: calc(-2rem + 4px);
+      right: calc(-2rem + 6px);
     }
   }
 }

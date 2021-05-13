@@ -17,7 +17,6 @@ const Play = () => {
   }, []);
 
   const resizeHandler = () => {
-    console.log("hello");
     ctx.resizeHandler();
   };
 

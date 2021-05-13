@@ -5,6 +5,7 @@ import Head from "next/head";
 
 import Layout from "../components/Layout/Layout";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
+import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import WhiteLogo from "../components/UI/WhiteLogo";
 
 import classes from "../styles/Index.module.scss";
@@ -64,11 +65,30 @@ const Index = () => {
           >
             What's this?
           </span>
-          <span>Hide</span>
+          <span className={classes.hide}>
+            <CloseRoundedIcon style={{ fontSize: 16 }} /> Hide
+          </span>
         </button>
         <p className={showHelper ? "" : classes.hide}>
-          Lorem ipsum blah blah blah blah blah blah blah blah blah blah blah
-          blah
+          At CreateBase, we want to change the world by enabling the next
+          generation of creators. That is why we are developing a
+          project-centric educational platform to give people the skills, tools
+          and confidence necessary to unleash their inner technology creator.
+          <br />
+          <br />
+          You are about to start a demo of a very small portion of our final
+          platform. We want to build something you will love, which is why we
+          would really appreciate your feedback upon completion.
+          <br />
+          <br />
+          This demo marks the first step of many. To keep up with our journey or
+          to find out how to work with us, please follow and message our social
+          media.
+          <br />
+          <br />
+          Dream. Learn. Apply. Create.
+          <br />
+          💜 Team CreateBase
         </p>
       </div>
     </Layout>
