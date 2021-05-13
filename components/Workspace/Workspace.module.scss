@@ -1,5 +1,5 @@
 .workspace {
-  padding: 2rem;
+  position: relative;
   height: 100%;
   width: 100%;
   button {
@@ -8,4 +8,18 @@
     right: 4rem;
     background: black;
   }
+}
+
+.editor {
+  & > div {
+    // padding-top: 1rem;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  display: flex;
+  flex-direction: column;
 }

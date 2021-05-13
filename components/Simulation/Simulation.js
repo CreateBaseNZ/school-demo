@@ -62,9 +62,10 @@ const Simulation = (props) => {
     >
       <Unity
         unityContext={unityContext}
-        style={{ height: height + "px", width: width + "px" }}
+        style={{ height: "100%", width: "100%" }}
       />
     </div>
+    // <div className={classes.simulation}></div>
   );
 };
 

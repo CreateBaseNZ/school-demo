@@ -2,7 +2,7 @@
 
 $padding-top: 8vh;
 $padding-bottom: 4vh;
-$padding-side: min(10vw, 10rem);
+$padding-side: min(8vw, 8rem);
 
 .backdrop {
   background: black;
@@ -31,7 +31,7 @@ $padding-side: min(10vw, 10rem);
   z-index: 100;
   section {
     width: 25vw;
-    margin-right: 8vw;
+    margin-right: min(8vw, 8rem);
     display: flex;
     flex-direction: column;
     h1 {
