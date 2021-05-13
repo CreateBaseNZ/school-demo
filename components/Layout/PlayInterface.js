@@ -1,28 +1,42 @@
-// import SplitPane, {
-//   Divider,
-//   SplitPaneBottom,
-//   SplitPaneLeft,
-//   SplitPaneRight,
-//   SplitPaneTop,
-// } from "./SplitPane";
-
+import { useState, useCallback, useEffect } from "react";
 import SplitPane from "react-split-pane";
 
-import Contents from "./Contents";
+import _, { debounce } from "lodash";
+
+import Contents from "../Contents/Contents";
 import Simulation from "../Simulation/Simulation";
 import Workspace from "../Workspace/Workspace";
 
 import classes from "./PlayInterface.module.scss";
 
 const PlayInterface = () => {
+  const [isResizing, setIsResizing] = useState(false);
+
+  const debouncedSizing = useCallback(
+    debounce(() => {
+      setIsResizing(false);
+    }, 500),
+    []
+  );
+
+  const simulationResizeHandler = () => {
+    setIsResizing(true);
+    debouncedSizing();
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", simulationResizeHandler);
+  }, []);
+
   return (
     <SplitPane
       className={classes.splitVertical}
       split="vertical"
       defaultSize={"50%"}
       primary={"second"}
+      onChange={simulationResizeHandler}
     >
-      <Simulation />
+      <Simulation resizing={isResizing} />
       <SplitPane
         split="horizontal"
         className={classes.splitHorizontal}
@@ -32,22 +46,6 @@ const PlayInterface = () => {
         <Workspace />
       </SplitPane>
     </SplitPane>
-    // <SplitPane className={classes.interface} orientation="shelve">
-    //   <SplitPaneLeft>
-    //   </SplitPaneLeft>
-    //   <Divider orientation="vertical" />
-    //   <SplitPaneRight>
-    //     <SplitPane orientation="stack">
-    //       <SplitPaneTop>
-    //         <Contents />
-    //       </SplitPaneTop>
-    //       <Divider orientation="horizontal" />
-    //       <SplitPaneBottom>
-    //         <Workspace />
-    //       </SplitPaneBottom>
-    //     </SplitPane>
-    //   </SplitPaneRight>
-    // </SplitPane>
   );
 };
 
