@@ -1,8 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
-import useFocus from "../../hooks/useFocus";
 import Unity, { UnityContext } from "react-unity-webgl";
-
-import _, { debounce } from "lodash";
 
 import classes from "./Simulation.module.scss";
 
@@ -19,32 +15,7 @@ export const unityContext = new UnityContext({
   // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
 });
 
-const Simulation = (props) => {
-  const [width, setWidth] = useState();
-  const [height, setHeight] = useState();
-  const [isResizing, setIsResizing] = useState(false);
-
-  const debouncedSizing = useCallback(
-    debounce(() => {
-      setWidth(window.innerWidth);
-      setHeight(window.innerHeight);
-      setIsResizing(false);
-    }, 250),
-    []
-  );
-
-  const simulationResizeHandler = () => {
-    setIsResizing(true);
-    debouncedSizing();
-  };
-
-  useEffect(() => {
-    setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
-
-    window.addEventListener("resize", simulationResizeHandler);
-  }, []);
-
+const Simulation = () => {
   const focusHandler = () => {
     unityContext.send("GameController", "FocusCanvas", "1");
   };
@@ -55,16 +26,19 @@ const Simulation = (props) => {
 
   return (
     <div
-      className={isResizing ? classes.resizing : ""}
+      className={classes.simulationContainer}
       onFocus={focusHandler}
       onBlur={blurHandler}
       tabIndex={1}
     >
-      <Unity
-        unityContext={unityContext}
-        style={{ height: height + "px", width: width + "px" }}
-      />
+      <div className={classes.simulationWrapper}>
+        <Unity
+          unityContext={unityContext}
+          style={{ height: "100%", width: "100%" }}
+        />
+      </div>
     </div>
+    // <div className={classes.simulation}></div>
   );
 };
 

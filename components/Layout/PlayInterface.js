@@ -1,35 +1,44 @@
-import SplitPane, {
-  Divider,
-  SplitPaneBottom,
-  SplitPaneLeft,
-  SplitPaneRight,
-  SplitPaneTop,
-} from "./SplitPane";
+import SplitPane from "react-split-pane";
 
-import Contents from "./Contents";
+import Contents from "../Contents/Contents";
 import Simulation from "../Simulation/Simulation";
 import Workspace from "../Workspace/Workspace";
 
 import classes from "./PlayInterface.module.scss";
 
+const verticalDragHandler = () => {
+  document.body.style.cursor = "ew-resize";
+};
+
+const horizontalDragHandler = () => {
+  document.body.style.cursor = "ew-resize";
+};
+
+const dragReleaseHandler = () => {
+  document.body.style.cursor = "default";
+};
+
 const PlayInterface = () => {
   return (
-    <SplitPane className={classes.interface} orientation="shelve">
-      <SplitPaneLeft>
-        <Simulation />
-      </SplitPaneLeft>
-      <Divider orientation="vertical" />
-      <SplitPaneRight>
-        <SplitPane orientation="stack">
-          <SplitPaneTop>
-            <Contents />
-          </SplitPaneTop>
-          <Divider orientation="horizontal" />
-          <SplitPaneBottom>
-            <Workspace />
-          </SplitPaneBottom>
-        </SplitPane>
-      </SplitPaneRight>
+    <SplitPane
+      className={classes.splitVertical}
+      split="vertical"
+      defaultSize={"50%"}
+      primary={"second"}
+      onDragStarted={verticalDragHandler}
+      onDragFinished={dragReleaseHandler}
+    >
+      <Simulation />
+      <SplitPane
+        split="horizontal"
+        className={classes.splitHorizontal}
+        defaultSize={"25%"}
+        onDragStarted={horizontalDragHandler}
+        onDragFinished={dragReleaseHandler}
+      >
+        <Contents />
+        <Workspace />
+      </SplitPane>
     </SplitPane>
   );
 };
