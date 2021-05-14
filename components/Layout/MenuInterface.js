@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Simulation from "../Simulation/Simulation";
 import StepCard from "../UI/Menu/StepCard";
+import DefineCard from "../UI/Menu/DefineCard";
+import PlanCard from "../UI/Menu/PlanCard";
+import CreateCard from "../UI/Menu/CreateCard";
 
 import classes from "./MenuInterface.module.scss";
 
@@ -57,9 +60,9 @@ const MenuInterface = () => {
           })}
         </div>
         <div className={classes.contentContainer}>
-          <div className={classes.defineWrapper}>
-            <h2>Define</h2>
-          </div>
+          {activeStep === 1 && <DefineCard />}
+          {activeStep === 2 && <PlanCard />}
+          {activeStep === 3 && <CreateCard />}
         </div>
       </div>
       <div className={classes.rightArea}>

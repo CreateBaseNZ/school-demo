@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Unity, { UnityContext } from "react-unity-webgl";
 
 import classes from "./Simulation.module.scss";
@@ -16,6 +17,14 @@ export const unityContext = new UnityContext({
 });
 
 const Simulation = (props) => {
+  const [sensorData, setSensorData] = useState();
+
+  useEffect(() => {
+    unityContext.on("GetSensorData", (sensorData) => {
+      setSensorData(sensorData);
+    });
+  }, []);
+
   const focusHandler = () => {
     unityContext.send("GameController", "FocusCanvas", "1");
   };
@@ -38,7 +47,6 @@ const Simulation = (props) => {
         />
       </div>
     </div>
-    // <div className={classes.simulation}></div>
   );
 };
 
