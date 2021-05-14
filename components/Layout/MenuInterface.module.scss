@@ -1,3 +1,8 @@
+@import "../../styles/variables.scss";
+
+$trans-dur: 0.6s;
+$padding-left: 6vw;
+
 .interface {
   width: 100%;
   display: flex;
@@ -5,30 +10,64 @@
   padding: 4vh 0;
 }
 
-.stepContainer {
-  display: flex;
-  flex-direction: column;
+.leftArea {
   width: 35vw;
   height: 100%;
-  padding: 0 0 5vh 5vw;
+  margin-left: $padding-left;
+  margin-bottom: 5vh;
+  position: relative;
+  transition: width $trans-dur ease-out;
+}
+
+.stepContainer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   h1 {
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.1em;
     font-size: 0.75rem;
     margin: 1em 0 1em 1em;
+    transform: translateX(calc(100% + 1rem));
+    transition: opacity 0.4s ease-out 0.2s;
+    pointer-events: none;
   }
   .step {
-    background: black;
+    background: #0c0c0c;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    padding: 0.75rem 1rem;
+    padding: 1rem 1.25rem;
+    width: 80%;
     border-radius: 0.5rem;
     flex: 1 1 0;
     margin: 0.75rem 0;
     overflow: hidden;
     cursor: pointer;
+    position: relative;
+    margin-left: 20%;
+    transform: translateX(100%);
+    &:nth-of-type(1) {
+      transition: transform $trans-dur ease-out, opacity $trans-dur ease-out,
+        margin 0.2s ease-out;
+    }
+    &:nth-of-type(2) {
+      transition: transform $trans-dur ease-out 0.05s,
+        opacity $trans-dur ease-out, margin 0.2s ease-out;
+    }
+    &:nth-of-type(3) {
+      transition: transform $trans-dur ease-out 0.1s,
+        opacity $trans-dur ease-out, margin 0.2s ease-out;
+    }
+    &:nth-of-type(4) {
+      transition: transform $trans-dur ease-out 0.15s,
+        opacity $trans-dur ease-out, margin 0.2s ease-out;
+    }
     h2 {
       font-size: 1.25rem;
       margin: 0.25rem 1rem;
@@ -40,19 +79,121 @@
       text-align: right;
       opacity: 0;
       transform: translateX(8px);
-      transition: opacity 0.2s ease-out, transform 0.4s ease-out;
+      transition: opacity 0.6s ease-out, transform 0.8s ease-out;
     }
     &:hover > p {
       opacity: 1;
       transform: translateX(0);
+      transition: opacity 0.2s ease-out, transform 0.4s ease-out;
+    }
+    h3 {
+      position: absolute;
+      top: 50%;
+      right: 1rem;
+      transform: translate(50%, -50%) rotate(-90deg);
+      transform-origin: center;
+      opacity: 0;
+      transition: right 0.2s ease-out, opacity 0.2s ease-out;
     }
   }
 }
 
-.simulation {
+.contentContainer {
+  width: 100%;
+  height: 100%;
+  h2 {
+    font-size: 1.5rem;
+  }
+  & > div {
+    // background: $blue-mid;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.rightArea {
   height: 100%;
   flex: 1 1 0;
   border-radius: 1rem;
   overflow: hidden;
-  margin: 0 2vw 0 5vw;
+  margin: 0 4vw;
+  position: relative;
+  transition: width $trans-dur ease-out;
+
+  .simulationContainer {
+    width: 100%;
+    left: 0;
+    & > div {
+      width: 100%;
+      left: 0;
+    }
+  }
+}
+
+.contentActive > .leftArea {
+  width: 50vw;
+  .stepContainer {
+    h1 {
+      opacity: 0;
+      transition: opacity 0.4s ease-out;
+    }
+    .step {
+      opacity: 0.5;
+      transform: translateX(calc(-#{$padding-left} + 3rem));
+      &:hover {
+        opacity: 1;
+        &:nth-of-type(1) {
+          transition: transform $trans-dur ease-out, opacity 0.1s ease-out,
+            margin 0.2s ease-out;
+        }
+        &:nth-of-type(2) {
+          transition: transform $trans-dur ease-out 0.05s, opacity 0.1s ease-out,
+            margin 0.2s ease-out;
+        }
+        &:nth-of-type(3) {
+          transition: transform $trans-dur ease-out 0.1s, opacity 0.1s ease-out,
+            margin 0.2s ease-out;
+        }
+        &:nth-of-type(4) {
+          transition: transform $trans-dur ease-out 0.15s, opacity 0.1s ease-out,
+            margin 0.2s ease-out;
+        }
+      }
+      p {
+        display: none;
+      }
+      h3 {
+        opacity: 1;
+        right: 1.5rem;
+      }
+      &:nth-of-type(1) > h3 {
+        transition: right 0.4s ease-out calc(#{$trans-dur} + 0.2s),
+          opacity 0.2s ease-out calc(#{$trans-dur} + 0.2s),
+          padding-bottom 0.2s ease-out;
+      }
+      &:nth-of-type(2) > h3 {
+        transition: right 0.4s ease-out calc(#{$trans-dur} + 0.4s),
+          opacity 0.2s ease-out calc(#{$trans-dur} + 0.4s),
+          padding-bottom 0.2s ease-out;
+      }
+      &:nth-of-type(3) > h3 {
+        transition: right 0.4s ease-out calc(#{$trans-dur} + 0.6s),
+          opacity 0.4s ease-out calc(#{$trans-dur} + 0.6s),
+          padding-bottom 0.2s ease-out;
+      }
+      &:nth-of-type(4) > h3 {
+        transition: right 0.4s ease-out calc(#{$trans-dur} + 0.8s),
+          opacity 0.4s ease-out calc(#{$trans-dur} + 0.8s),
+          padding-bottom 0.2s ease-out;
+      }
+    }
+    .step.activeStep {
+      opacity: 1;
+      margin-left: calc(20% + 1rem);
+      border: solid thin $blue-mid;
+      h3 {
+        padding-bottom: 1rem;
+      }
+    }
+  }
 }

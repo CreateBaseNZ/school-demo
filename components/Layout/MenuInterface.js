@@ -1,40 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Simulation from "../Simulation/Simulation";
+import StepCard from "../UI/Menu/StepCard";
 
 import classes from "./MenuInterface.module.scss";
+
+const DUMMY_DATA = [
+  {
+    step: "Define",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+  {
+    step: "Plan",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+  {
+    step: "Create",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+  {
+    step: "Improve",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  },
+];
 
 const MenuInterface = () => {
   const [activeStep, setActiveStep] = useState(null);
 
   console.log(activeStep);
 
+  const cardClickHandler = (step) => {
+    setActiveStep(step);
+  };
+
   return (
-    <div className={classes.interface}>
-      <div
-        className={`${classes.stepContainer} ${
-          activeStep ? classes.collapse : ""
-        }`}
-      >
-        <h1>Project Steps</h1>
-        <div className={classes.step} onClick={() => setActiveStep(0)}>
-          <h2>Define</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    <div
+      className={`${classes.interface} ${
+        activeStep ? classes.contentActive : ""
+      }`}
+    >
+      <div className={classes.leftArea}>
+        <div className={classes.stepContainer}>
+          <h1>Project Steps</h1>
+          {DUMMY_DATA.map((step, index) => {
+            return (
+              <StepCard
+                className={`${classes.step} ${
+                  activeStep === index + 1 ? classes.activeStep : ""
+                }`}
+                step={step.step}
+                description={step.description}
+                stepNumber={index + 1}
+                key={step.step}
+                onClick={() => cardClickHandler(index + 1)}
+              />
+            );
+          })}
         </div>
-        <div className={classes.step} onClick={() => setActiveStep(1)}>
-          <h2>Plan</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div className={classes.step} onClick={() => setActiveStep(2)}>
-          <h2>Create</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-        <div className={classes.step} onClick={() => setActiveStep(3)}>
-          <h2>Improve</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <div className={classes.contentContainer}>
+          <div className={classes.defineWrapper}>
+            <h2>Define</h2>
+          </div>
         </div>
       </div>
-      <div className={classes.simulation}>
-        <Simulation className={classes.simulation} />
+      <div className={classes.rightArea}>
+        <Simulation className={classes.simulationContainer} />
       </div>
     </div>
   );
