@@ -7,6 +7,7 @@ import SimulationContext, {
 } from "../../store/simulation-context";
 
 import { ServoMotors } from "./ServoMotors.ts";
+import { Actuation } from "./Actuation.ts";
 
 import classes from "./Workspace.module.scss";
 
@@ -29,8 +30,22 @@ const Workspace = () => {
     let someVar = unityContext;
     let RoboticSystemName = "RoboticArm";
     let ServoMotorsClass = ServoMotors;
+    let ActuationClass = Actuation;
+
+    let promise = () => {
+      return new Promise((resolve, reject) => {
+        someVar.on("GetSensorData", (data) => resolve(JSON.parse(data)));
+      });
+    }
+
+    let sensorData;
+    sensorData = await promise();
+
     const header = DUMMY_HEADER;
-    eval(header + editorRef.current.getValue());
+    const ideVal = "async function Test() {" + editorRef.current.getValue() + "}; console.log(Test); Test();";
+    console.log(ideVal);
+    
+    eval(header + ideVal);
     monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
     monacoRef.current.editor.setTheme("customTheme");
   };

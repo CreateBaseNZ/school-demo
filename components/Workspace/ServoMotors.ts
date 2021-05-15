@@ -1,30 +1,33 @@
 
 export class ServoMotors {
-  private UnityContext : any;
-  private RobotSystemName : string;
   private JointIndex : number;
   private TargetVelocity : number;
   private MotorType : string;
+  private formattedInput: any;
 
-  constructor(UnityContext : any, RobotSystemName: string, JointIndex: number, TargetVelocity: number, MotorType: string) {
-    this.UnityContext = UnityContext;
-    this.RobotSystemName = RobotSystemName;
+  constructor(JointIndex: number, TargetVelocity: number, MotorType: string) {
     this.JointIndex = JointIndex;
     this.TargetVelocity = TargetVelocity;
     this.MotorType = MotorType;
-    this.Evaluate();
   }
 
   public Evaluate() {
     switch (this.MotorType) {
       case "6kg":
         this.SixKg();
-        console.log("Evaluated");
+        break;
+      case "12kg":
+        this.TwelveKg();
         break;
     
       default:
         break;
     }
+    return this.formattedInput;
+  }
+
+  public SetVelocity(newTargetVelocity: number) {
+    this.TargetVelocity = newTargetVelocity;
   }
 
   /**
@@ -34,19 +37,12 @@ export class ServoMotors {
     // Configurations
 
     // Format Input
-    let formattedInput;
-    formattedInput = JSON.stringify({
-      motors: [
-        {
-            motorIndex: this.JointIndex,
-            force: 100000,
-            targetVelocity: this.TargetVelocity,
-            freeSpin: true
-        }
-      ]
-    });
-    // Run Unity Simulation
-    this.UnityContext.send(this.RobotSystemName, "SetActuators", formattedInput);
+    this.formattedInput = {
+      motorIndex: this.JointIndex,
+      force: 100000,
+      targetVelocity: this.TargetVelocity,
+      freeSpin: true
+    };
   }
   
   /**
@@ -56,18 +52,11 @@ export class ServoMotors {
     // Configurations
 
     // Format Input
-    let formattedInput;
-    formattedInput = JSON.stringify({
-      motors: [
-        {
-            motorIndex: this.JointIndex,
-            force: 100000,
-            targetVelocity: this.TargetVelocity,
-            freeSpin: true
-        }
-      ]
-    });
-    // Run Unity Simulation
-    this.UnityContext.send(this.RobotSystemName, "SetActuators", formattedInput);
+    this.formattedInput = {
+      motorIndex: this.JointIndex,
+      force: 2000000000,
+      targetVelocity: this.TargetVelocity,
+      freeSpin: true
+    };
   }
 }
