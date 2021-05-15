@@ -1,29 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Unity, { UnityContext } from "react-unity-webgl";
+import SimulationContext, {
+  unityContext,
+} from "../../store/simulation-context";
 
 import classes from "./Simulation.module.scss";
 
-export const unityContext = new UnityContext({
-  loaderUrl: "simulation/build.loader.js",
-  dataUrl: "simulation/build.data",
-  frameworkUrl: "simulation/build.framework.js",
-  codeUrl: "simulation/build.wasm",
-  productName: "Simulation",
-  productVersion: "0.1",
-  companyName: "CreateBase",
-  // streamingAssetsUrl: "StreamingAssets",
-  // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
-  // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-});
-
 const Simulation = (props) => {
-  const [sensorData, setSensorData] = useState();
-
-  useEffect(() => {
-    unityContext.on("GetSensorData", (sensorData) => {
-      setSensorData(sensorData);
-    });
-  }, []);
+  const ctx = useContext(SimulationContext);
 
   const focusHandler = () => {
     unityContext.send("GameController", "FocusCanvas", "1");

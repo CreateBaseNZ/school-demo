@@ -1,8 +1,10 @@
 import Editor from "@monaco-editor/react";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import themes from "../../utils/themes";
 
-import { unityContext } from "../Simulation/Simulation";
+import SimulationContext, {
+  unityContext,
+} from "../../store/simulation-context";
 
 import { ServoMotors } from "./ServoMotors.ts";
 
@@ -13,6 +15,7 @@ const DUMMY_HEADER = "console.log('hello');";
 const Workspace = () => {
   const editorRef = useRef();
   const monacoRef = useRef();
+  const ctx = useContext(SimulationContext);
   // const [monacoTheme, setMonacoTheme] = useState("Monokai");
   // console.log(monacoTheme);
 
@@ -22,6 +25,7 @@ const Workspace = () => {
   };
 
   const clickHandler = () => {
+    let someCtx = ctx;
     let someVar = unityContext;
     let RoboticSystemName = "RoboticArm";
     let ServoMotorsClass = ServoMotors;

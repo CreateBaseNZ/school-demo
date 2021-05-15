@@ -66,7 +66,8 @@ const MenuInterface = () => {
         </div>
       </div>
       <div className={classes.rightArea}>
-        <Simulation className={classes.simulationContainer} />
+        {/* <Simulation className={classes.simulationContainer} /> */}
+        <div></div>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import SplitPane from "react-split-pane";
+import { SimulationContextProvider } from "../../store/simulation-context";
 
 import Contents from "../Contents/Contents";
 import Simulation from "../Simulation/Simulation";
@@ -20,26 +21,28 @@ const dragReleaseHandler = () => {
 
 const PlayInterface = () => {
   return (
-    <SplitPane
-      className={classes.splitVertical}
-      split="vertical"
-      defaultSize={"50%"}
-      primary={"second"}
-      onDragStarted={verticalDragHandler}
-      onDragFinished={dragReleaseHandler}
-    >
-      <Simulation />
+    <SimulationContextProvider>
       <SplitPane
-        split="horizontal"
-        className={classes.splitHorizontal}
-        defaultSize={"25%"}
-        onDragStarted={horizontalDragHandler}
+        className={classes.splitVertical}
+        split="vertical"
+        defaultSize={"50%"}
+        primary={"second"}
+        onDragStarted={verticalDragHandler}
         onDragFinished={dragReleaseHandler}
       >
-        <Contents />
-        <Workspace />
+        <Simulation />
+        <SplitPane
+          split="horizontal"
+          className={classes.splitHorizontal}
+          defaultSize={"25%"}
+          onDragStarted={horizontalDragHandler}
+          onDragFinished={dragReleaseHandler}
+        >
+          <Contents />
+          <Workspace />
+        </SplitPane>
       </SplitPane>
-    </SplitPane>
+    </SimulationContextProvider>
   );
 };
 
