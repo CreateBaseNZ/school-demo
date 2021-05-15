@@ -25,27 +25,23 @@ const Workspace = () => {
     monacoRef.current = monaco;
   };
 
-  const clickHandler = () => {
+  const clickHandler = async () => {
     let someCtx = ctx;
     let someVar = unityContext;
     let RoboticSystemName = "RoboticArm";
     let ServoMotorsClass = ServoMotors;
     let ActuationClass = Actuation;
-
+    let sensorData;
     let promise = () => {
       return new Promise((resolve, reject) => {
-        someVar.on("GetSensorData", (data) => resolve(JSON.parse(data)));
+        someVar.on("GetSensorData", (data) => {
+          sensorData = JSON.parse(data);
+          resolve();
+        });
       });
     }
-
-    let sensorData;
     sensorData = await promise();
-
-    const header = DUMMY_HEADER;
-    const ideVal = "async function Test() {" + editorRef.current.getValue() + "}; console.log(Test); Test();";
-    console.log(ideVal);
-    
-    eval(header + ideVal);
+    eval("(async () => {" + editorRef.current.getValue() + "})()");
     monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
     monacoRef.current.editor.setTheme("customTheme");
   };
