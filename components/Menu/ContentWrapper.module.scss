@@ -1,0 +1,49 @@
+@import "../../styles/variables";
+
+.contentWrapper {
+  background: #141414;
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.5);
+  max-height: calc(100vh - 49px - 8vh);
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  section {
+    margin: 1rem 0;
+  }
+  p {
+    font-size: 14px;
+    line-height: 1.75em;
+  }
+  ul,
+  ol {
+    margin: 0.25rem 0 0.25rem 2rem;
+    line-height: 1.5em;
+    font-size: 14px;
+    li {
+      font-size: inherit;
+    }
+  }
+  ol > li {
+    padding-left: 0.25rem;
+  }
+  .subsystemList {
+    margin: 2rem 0 2rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+.createWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.improveWrapper {
+  display: flex;
+  flex-direction: column;
+  & > div {
+    margin: 2vh 0;
+  }
+}

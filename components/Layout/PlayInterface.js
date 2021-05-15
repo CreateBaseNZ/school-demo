@@ -26,11 +26,9 @@ const PlayInterface = () => {
         className={classes.splitVertical}
         split="vertical"
         defaultSize={"50%"}
-        primary={"second"}
         onDragStarted={verticalDragHandler}
         onDragFinished={dragReleaseHandler}
       >
-        <Simulation />
         <SplitPane
           split="horizontal"
           className={classes.splitHorizontal}
@@ -41,6 +39,7 @@ const PlayInterface = () => {
           <Contents />
           <Workspace />
         </SplitPane>
+        <Simulation />
       </SplitPane>
     </SimulationContextProvider>
   );

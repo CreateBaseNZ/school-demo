@@ -1,43 +1,4 @@
-@import "../../../styles/variables";
-
-.contentWrapper {
-  background: #141414;
-  padding: 3rem;
-  border-radius: 1rem;
-  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.5);
-  h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-  section {
-    margin: 1rem 0;
-  }
-  p {
-    font-size: 14px;
-    line-height: 1.75em;
-  }
-  ul,
-  ol {
-    margin: 0.25rem 0 0.25rem 2rem;
-    line-height: 1.5em;
-    font-size: 14px;
-    li {
-      font-size: inherit;
-    }
-  }
-  ol > li {
-    padding-left: 0.25rem;
-  }
-  .subsystemList {
-    margin: 2rem 0 2rem 2rem;
-    font-size: 1rem;
-  }
-}
-
-.createWrapper {
-  display: flex;
-  flex-wrap: wrap;
-}
+@import "../../styles/variables";
 
 .subsystemCard {
   flex: 1 1 35%;
@@ -67,7 +28,7 @@
     flex-direction: column;
     width: 100%;
     height: 40%;
-    padding: 2rem;
+    padding: calc(0.5rem + 1.5vw);
     overflow-y: auto;
     h3 {
       font-weight: 500;
@@ -86,7 +47,7 @@
         height: 100%;
         width: 1px;
         background: $border-color;
-        margin: 0 1.5rem;
+        margin: 0 calc(0.5rem + 1vw);
         flex: 0 0 auto;
       }
       .recommended {

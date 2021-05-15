@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import Simulation from "../Simulation/Simulation";
-import StepCard from "../UI/Menu/StepCard";
-import DefineCard from "../UI/Menu/DefineCard";
-import PlanCard from "../UI/Menu/PlanCard";
-import CreateCard from "../UI/Menu/CreateCard";
+import StepCard from "../Menu/StepCard";
+import DefineCard from "../Menu/DefineCard";
+import PlanCard from "../Menu/PlanCard";
+import CreateCard from "../Menu/CreateCard";
 
 import classes from "./MenuInterface.module.scss";
+import ImproveCard from "../Menu/ImproveCard";
 
 const DUMMY_DATA = [
   {
@@ -63,6 +64,7 @@ const MenuInterface = () => {
           {activeStep === 1 && <DefineCard />}
           {activeStep === 2 && <PlanCard />}
           {activeStep === 3 && <CreateCard />}
+          {activeStep === 4 && <ImproveCard />}
         </div>
       </div>
       <div className={classes.rightArea}>
