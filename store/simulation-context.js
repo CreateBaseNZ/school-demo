@@ -26,6 +26,10 @@ export const SimulationContextProvider = (props) => {
     unityContext.on("GetSensorData", (sensorData) => {
       setSensorData(sensorData);
     });
+    console.log(unityContext);
+    unityContext.on("quitted", () => {
+      console.log("are you quitting");
+    });
   }, []);
 
   const setSensorDataWrapper = (data) => {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Simulation from "../Simulation/Simulation";
 import StepCard from "../Menu/StepCard";
 import DefineCard from "../Menu/DefineCard";
@@ -28,7 +29,26 @@ const DUMMY_DATA = [
 ];
 
 const MenuInterface = () => {
-  const [activeStep, setActiveStep] = useState(null);
+  const router = useRouter();
+  const [activeStep, setActiveStep] = useState(0);
+
+  // useEffect(() => {
+  //   const {
+  //     query: { step },
+  //   } = router;
+  //   setActiveStep(step);
+  // }, []);
+
+  // useEffect(() => {
+  //   let path = "/menu";
+  //   switch (activeStep) {
+  //     case 0:
+  //       break;
+  //     case 1:
+  //       path += "/define";
+  //   }
+  //   router.push({ pathname: path, query: {} }, undefined, { shallow: true });
+  // }, [activeStep]);
 
   console.log(activeStep);
 

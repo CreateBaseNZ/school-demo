@@ -9,36 +9,25 @@ import classes from "./Header.module.scss";
 const Header = () => {
   const router = useRouter();
 
-  let showNav = true;
-  let buttons = {
-    showHelp: true,
-    showSettings: true,
-    showFeedback: true,
-    showFullscreen: true,
-    showLogo: true,
-  };
-  let underline = true;
-
+  let showHeader = true;
+  let showStage = true;
   const url = router.pathname;
 
   if (url === "/") {
-    return null;
-  } else if (url === "/explore") {
-    showNav = false;
-    buttons = { ...buttons, showSettings: false, showFullscreen: false };
-    underline = false;
+    showHeader = false;
+  } else if (url === "/menu") {
+    showStage = false;
   }
 
   return (
     <header
-      className={`${classes.header} ${underline ? "" : classes.noUnderline}`}
+      className={classes.header}
+      style={{ display: showHeader ? "flex" : "none" }}
     >
-      {showNav && (
-        <NavContextProvider>
-          <Nav />
-        </NavContextProvider>
-      )}
-      <HeaderButtons {...buttons} />
+      <NavContextProvider>
+        <Nav showStage={showStage} />
+      </NavContextProvider>
+      <HeaderButtons />
     </header>
   );
 };

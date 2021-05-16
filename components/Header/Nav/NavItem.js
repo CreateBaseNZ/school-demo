@@ -29,10 +29,12 @@ const NavItem = (props) => {
         <div className={classes.dropdown}>
           {props.items &&
             props.items.map((item) => (
-              <button key={item.key}>{item.title}</button>
+              <button key={item.title}>{item.title}</button>
             ))}
           <div className={classes.separator} />
-          <Link href="/explore">{`See all ${props.type}`}</Link>
+          <Link
+            href={{ pathname: "/menu", query: { step: props.step } }}
+          >{`See all ${props.type}`}</Link>
         </div>
       )}
     </div>
