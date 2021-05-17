@@ -1,33 +1,48 @@
 
+
 export class ServoMotors {
   private JointIndex : number;
-  private TargetVelocity : number;
-  private MotorType : string;
+  private TargetAngle : number;
+  private MotorType: string;
+  private Gain: number;
   private formattedInput: any;
 
-  constructor(JointIndex: number, TargetVelocity: number, MotorType: string) {
+  constructor(JointIndex: number, Gain: number, MotorType: string) {
     this.JointIndex = JointIndex;
-    this.TargetVelocity = TargetVelocity;
+    this.TargetAngle = 0;
     this.MotorType = MotorType;
+    this.Gain = Gain;
   }
 
-  public Evaluate() {
-    switch (this.MotorType) {
-      case "6kg":
-        this.SixKg();
-        break;
-      case "12kg":
-        this.TwelveKg();
-        break;
+  public Evaluate(CurrentAngle: number) {
+    const error: number = this.TargetAngle - CurrentAngle;
+    const absError: number = Math.abs(error);
     
-      default:
-        break;
+    let speed: number=this.Gain*error;
+    if (absError < 10) {
+      speed *= 0.8;
+    } else if (absError < 5) {
+      speed *= 0.4;
+    } else if (absError < 2) {
+      speed *= 0.2;
     }
+    if(Math.abs(speed)>1000){
+      speed=1000*Math.sign(speed);
+    }
+    const strength: number = parseFloat(this.MotorType) * 100000000000;
+    //console.log(this.JointIndex, error, speed, strength);
+
+    this.formattedInput = {
+      motorIndex: this.JointIndex,
+      force: strength,
+      targetVelocity: speed,
+      freeSpin: true
+    };
     return this.formattedInput;
   }
 
-  public SetVelocity(newTargetVelocity: number) {
-    this.TargetVelocity = newTargetVelocity;
+  public SetAngle(newTargetAngle: number) {
+    this.TargetAngle = newTargetAngle;
   }
 
   /**
@@ -40,7 +55,7 @@ export class ServoMotors {
     this.formattedInput = {
       motorIndex: this.JointIndex,
       force: 100000,
-      targetVelocity: this.TargetVelocity,
+      targetVelocity: 0,
       freeSpin: true
     };
   }
@@ -55,7 +70,7 @@ export class ServoMotors {
     this.formattedInput = {
       motorIndex: this.JointIndex,
       force: 2000000000,
-      targetVelocity: this.TargetVelocity,
+      targetVelocity: 0,
       freeSpin: true
     };
   }
