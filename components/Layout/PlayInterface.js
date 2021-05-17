@@ -20,7 +20,7 @@ const dragReleaseHandler = () => {
   document.body.style.cursor = "default";
 };
 
-const PlayInterface = () => {
+const PlayInterface = (props) => {
   const [unityContext, sensorData, setSensorDataWrapper] = useUnity();
 
   return (

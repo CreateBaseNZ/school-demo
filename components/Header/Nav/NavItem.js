@@ -33,7 +33,10 @@ const NavItem = (props) => {
             ))}
           <div className={classes.separator} />
           <Link
-            href={{ pathname: "/menu", query: { step: props.step } }}
+            href={{
+              pathname: "/menu",
+              query: { req: "" },
+            }}
           >{`See all ${props.type}`}</Link>
         </div>
       )}

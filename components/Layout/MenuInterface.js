@@ -11,19 +11,19 @@ import ImproveCard from "../Menu/ImproveCard";
 
 const DUMMY_DATA = [
   {
-    step: "Define",
+    title: "Define",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
   },
   {
-    step: "Plan",
+    title: "Plan",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
   },
   {
-    step: "Create",
+    title: "Create",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
   },
   {
-    step: "Improve",
+    title: "Improve",
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
   },
 ];
@@ -32,25 +32,10 @@ const MenuInterface = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState(0);
 
-  // useEffect(() => {
-  //   const {
-  //     query: { step },
-  //   } = router;
-  //   setActiveStep(step);
-  // }, []);
-
-  // useEffect(() => {
-  //   let path = "/menu";
-  //   switch (activeStep) {
-  //     case 0:
-  //       break;
-  //     case 1:
-  //       path += "/define";
-  //   }
-  //   router.push({ pathname: path, query: {} }, undefined, { shallow: true });
-  // }, [activeStep]);
-
-  console.log(activeStep);
+  useEffect(() => {
+    const { req } = router.query;
+    setActiveStep(req);
+  }, []);
 
   const cardClickHandler = (step) => {
     setActiveStep(step);
@@ -65,26 +50,25 @@ const MenuInterface = () => {
       <div className={classes.leftArea}>
         <div className={classes.stepContainer}>
           <h1>Project Steps</h1>
-          {DUMMY_DATA.map((step, index) => {
+          {DUMMY_DATA.map((step) => {
             return (
               <StepCard
                 className={`${classes.step} ${
-                  activeStep === index + 1 ? classes.activeStep : ""
+                  activeStep === step.title ? classes.activeStep : ""
                 }`}
-                step={step.step}
+                step={step.title}
                 description={step.description}
-                stepNumber={index + 1}
-                key={step.step}
+                key={step.title}
                 onClick={() => cardClickHandler(index + 1)}
               />
             );
           })}
         </div>
         <div className={classes.contentContainer}>
-          {activeStep === 1 && <DefineCard />}
-          {activeStep === 2 && <PlanCard />}
-          {activeStep === 3 && <CreateCard />}
-          {activeStep === 4 && <ImproveCard />}
+          {activeStep === "define" && <DefineCard />}
+          {activeStep === "plan" && <PlanCard />}
+          {activeStep === "create" && <CreateCard />}
+          {activeStep === "improve" && <ImproveCard />}
         </div>
       </div>
       <div className={classes.rightArea}>

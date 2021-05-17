@@ -6,7 +6,7 @@ import Head from "next/head";
 import Layout from "../components/Layout/Layout";
 import PlayInterface from "../components/Layout/PlayInterface";
 
-const Play = () => {
+const Play = (props) => {
   const ctx = useContext(FullscreenContext);
 
   useEffect(() => {
