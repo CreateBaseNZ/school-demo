@@ -42,7 +42,7 @@ const CreateCard = () => {
   return (
     <div className={classes.createWrapper}>
       {DUMMY_DATA.map((subsystem) => {
-        return <SubsystemCard {...subsystem} />;
+        return <SubsystemCard {...subsystem} key={subsystem.title} />;
       })}
     </div>
   );

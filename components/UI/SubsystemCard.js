@@ -5,12 +5,8 @@ import classes from "./SubsystemCard.module.scss";
 
 const SubsystemCard = (props) => {
   return (
-    <Link href={props.href} key={props.title}>
-      <div
-        className={classes.subsystemCard}
-        key={props.title}
-        href={props.href}
-      >
+    <Link href={props.href}>
+      <div className={classes.subsystemCard}>
         <div className={classes.imgWrapper}>
           <Image
             src={props.src}
