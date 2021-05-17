@@ -22,6 +22,7 @@ const HeaderButtons = (props) => {
     showSettings = true,
     showFeedback = true,
     showFullscreen = true,
+    showLogo = true,
   } = props;
 
   const fullscreenHandler = () => {
@@ -78,11 +79,11 @@ const HeaderButtons = (props) => {
         </button>
       ))}
       <WhiteLogo
-        className={props.showLogo ? "" : classes.hide}
+        className={showLogo ? "" : classes.hide}
         width="138"
         height="25"
       />
-      {props.showFeedback && feedbackCtx.formVisible && <FeedbackModal />}
+      {showFeedback && feedbackCtx.formVisible && <FeedbackModal />}
     </div>
   );
 };
