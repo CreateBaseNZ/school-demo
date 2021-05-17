@@ -39,7 +39,7 @@ const PlayInterface = () => {
         onDragFinished={dragReleaseHandler}
       >
         <Contents />
-        <Workspace />
+        <Workspace unityContext={unityContext} />
       </SplitPane>
       <Simulation unityContext={unityContext} />
     </SplitPane>

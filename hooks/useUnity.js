@@ -21,9 +21,6 @@ const useUnity = () => {
     unityContext.on("GetSensorData", (sensorData) => {
       setSensorData(sensorData);
     });
-    // unityContext.on("quitted", () => {
-    //   unityContext = null;
-    // });
   }, []);
 
   const setSensorDataWrapper = useCallback((data) => {

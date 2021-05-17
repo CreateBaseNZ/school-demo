@@ -26,15 +26,15 @@ const Workspace = (props) => {
     let ServoMotorsClass = ServoMotors;
     let ActuationClass = Actuation;
     let sensorData;
-    let promise = () => {
-      return new Promise((resolve, reject) => {
-        someVar.on("GetSensorData", (data) => {
-          sensorData = JSON.parse(data);
-          resolve();
-        });
-      });
-    };
-    sensorData = await promise();
+    // let promise = () => {
+    //   return new Promise((resolve, reject) => {
+    //     someVar.on("GetSensorData", (data) => {
+    //       sensorData = JSON.parse(data);
+    //       resolve();
+    //     });
+    //   });
+    // };
+    // sensorData = await promise();
     eval("(async () => {" + editorRef.current.getValue() + "})()");
     monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
     monacoRef.current.editor.setTheme("customTheme");
