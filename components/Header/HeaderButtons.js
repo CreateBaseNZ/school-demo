@@ -17,6 +17,13 @@ const HeaderButtons = (props) => {
   const fullscreenCtx = useContext(FullscreenContext);
   const feedbackCtx = useContext(FeedbackContext);
 
+  const {
+    showHelp = true,
+    showSettings = true,
+    showFeedback = true,
+    showFullscreen = true,
+  } = props;
+
   const fullscreenHandler = () => {
     if (fullscreenCtx.isFullscreen) {
       fullscreenCtx.exitFullscreen();
@@ -34,25 +41,25 @@ const HeaderButtons = (props) => {
   const buttons = [
     {
       title: "Help",
-      show: props.showHelp,
+      show: showHelp,
       icon: <HelpOutlineOutlinedIcon fontSize="small" />,
       clickHandler: () => {},
     },
     {
       title: "Settings",
-      show: props.showSettings,
+      show: showSettings,
       icon: <SettingsIcon fontSize="small" />,
       clickHandler: () => {},
     },
     {
       title: "Feedback",
-      show: props.showFeedback,
+      show: showFeedback,
       icon: <MarkunreadMailboxOutlinedIcon style={{ fontSize: 18 }} />,
       clickHandler: feedbackCtx.showForm,
     },
     {
       title: fullscreenCtx.isFullscreen ? "Exit fullscreen" : "Fullscreen",
-      show: props.showFullscreen,
+      show: showFullscreen,
       icon: fullscreenIcon,
       clickHandler: fullscreenHandler,
     },

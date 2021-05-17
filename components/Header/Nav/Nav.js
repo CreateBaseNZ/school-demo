@@ -9,8 +9,10 @@ import classes from "./Nav.module.scss";
 import Link from "next/link";
 
 const DUMMY_PROJECT_STEPS = [
-  { key: "123", title: "Step 1" },
-  { key: "456", title: "Step 2" },
+  { title: "Define" },
+  { title: "Plan" },
+  { title: "Create" },
+  { title: "Improve" },
 ];
 const DUMMY_SUBSYSTEMS = [
   { key: "101", title: "Subsystem 1" },
@@ -25,7 +27,7 @@ const DUMMY_TASKS = [
   { key: "555", title: "Task 5" },
 ];
 
-const Nav = () => {
+const Nav = (props) => {
   const ctx = useContext(NavContext);
 
   return (
@@ -33,15 +35,27 @@ const Nav = () => {
       <Link href="/">
         <HomeRoundedIcon className={classes.home} fontSize="small" />
       </Link>
-      <NavItem
-        title="Project Step 1"
-        items={DUMMY_PROJECT_STEPS}
-        type="Project Steps"
-      />
-      <ChevronRightIcon fontSize="small" />
-      <NavItem title="Subsystem 1" items={DUMMY_SUBSYSTEMS} type="Subsystems" />
-      <ChevronRightIcon fontSize="small" />
-      <NavItem title="Task 1" items={DUMMY_TASKS} type="Tasks" />
+      {props.showStage && (
+        <NavItem
+          title="Project Step 1"
+          items={DUMMY_PROJECT_STEPS}
+          type="Project Steps"
+          step="1"
+        />
+      )}
+      {props.showStage && <ChevronRightIcon fontSize="small" />}
+      {props.showStage && (
+        <NavItem
+          title="Subsystem 1"
+          items={DUMMY_SUBSYSTEMS}
+          type="Subsystems"
+          step="3"
+        />
+      )}
+      {props.showStage && <ChevronRightIcon fontSize="small" />}
+      {props.showStage && (
+        <NavItem title="Task 1" items={DUMMY_TASKS} type="Tasks" />
+      )}
     </nav>
   );
 };

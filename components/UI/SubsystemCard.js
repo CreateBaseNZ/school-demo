@@ -5,7 +5,7 @@ import classes from "./SubsystemCard.module.scss";
 
 const SubsystemCard = (props) => {
   return (
-    <Link href={props.href}>
+    <Link href={props.href} key={props.title}>
       <div
         className={classes.subsystemCard}
         key={props.title}
@@ -30,7 +30,7 @@ const SubsystemCard = (props) => {
               <ul>
                 {props.recommended.map((recom) => {
                   return (
-                    <li>
+                    <li key={props.title + "-" + recom.title}>
                       <Link href={recom.href}>{recom.title}</Link>
                     </li>
                   );

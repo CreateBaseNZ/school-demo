@@ -1,20 +1,15 @@
-import { useContext, useEffect, useState } from "react";
-import Unity, { UnityContext } from "react-unity-webgl";
-import SimulationContext, {
-  unityContext,
-} from "../../store/simulation-context";
+import { useState, useEffect } from "react";
+import Unity from "react-unity-webgl";
 
 import classes from "./Simulation.module.scss";
 
 const Simulation = (props) => {
-  const ctx = useContext(SimulationContext);
-
   const focusHandler = () => {
-    unityContext.send("GameController", "FocusCanvas", "1");
+    props.unityContext.send("GameController", "FocusCanvas", "1");
   };
 
   const blurHandler = () => {
-    unityContext.send("GameController", "FocusCanvas", "0");
+    props.unityContext.send("GameController", "FocusCanvas", "0");
   };
 
   return (
@@ -26,7 +21,7 @@ const Simulation = (props) => {
     >
       <div className={classes.simulationWrapper}>
         <Unity
-          unityContext={unityContext}
+          unityContext={props.unityContext}
           style={{ height: "100%", width: "100%" }}
         />
       </div>

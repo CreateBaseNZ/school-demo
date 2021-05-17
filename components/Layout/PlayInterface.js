@@ -1,5 +1,6 @@
+import { useEffect, useState } from "react";
 import SplitPane from "react-split-pane";
-import { SimulationContextProvider } from "../../store/simulation-context";
+import useUnity from "../../hooks/useUnity";
 
 import Contents from "../Contents/Contents";
 import Simulation from "../Simulation/Simulation";
@@ -20,28 +21,28 @@ const dragReleaseHandler = () => {
 };
 
 const PlayInterface = () => {
+  const [unityContext, sensorData, setSensorDataWrapper] = useUnity();
+
   return (
-    <SimulationContextProvider>
+    <SplitPane
+      className={classes.splitVertical}
+      split="vertical"
+      defaultSize={"50%"}
+      onDragStarted={verticalDragHandler}
+      onDragFinished={dragReleaseHandler}
+    >
       <SplitPane
-        className={classes.splitVertical}
-        split="vertical"
-        defaultSize={"50%"}
-        onDragStarted={verticalDragHandler}
+        split="horizontal"
+        className={classes.splitHorizontal}
+        defaultSize={"25%"}
+        onDragStarted={horizontalDragHandler}
         onDragFinished={dragReleaseHandler}
       >
-        <SplitPane
-          split="horizontal"
-          className={classes.splitHorizontal}
-          defaultSize={"25%"}
-          onDragStarted={horizontalDragHandler}
-          onDragFinished={dragReleaseHandler}
-        >
-          <Contents />
-          <Workspace />
-        </SplitPane>
-        <Simulation />
+        <Contents />
+        <Workspace />
       </SplitPane>
-    </SimulationContextProvider>
+      <Simulation unityContext={unityContext} />
+    </SplitPane>
   );
 };
 

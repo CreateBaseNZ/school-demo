@@ -1,7 +1,7 @@
-import { useState, useEffect, createContext } from "react";
-import Unity, { UnityContext } from "react-unity-webgl";
+import { useCallback, useEffect, useState } from "react";
+import { UnityContext } from "react-unity-webgl";
 
-export const unityContext = new UnityContext({
+const unityContext = new UnityContext({
   loaderUrl: "simulation/build.loader.js",
   dataUrl: "simulation/build.data",
   frameworkUrl: "simulation/build.framework.js",
@@ -14,34 +14,23 @@ export const unityContext = new UnityContext({
   // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
 });
 
-const SimulationContext = createContext({
-  sensorData: null,
-  setSensorDataWrapper: () => {},
-});
-
-export const SimulationContextProvider = (props) => {
+const useUnity = () => {
   const [sensorData, setSensorData] = useState();
 
   useEffect(() => {
     unityContext.on("GetSensorData", (sensorData) => {
       setSensorData(sensorData);
     });
+    // unityContext.on("quitted", () => {
+    //   unityContext = null;
+    // });
   }, []);
 
-  const setSensorDataWrapper = (data) => {
+  const setSensorDataWrapper = useCallback((data) => {
     setSensorData(data);
-  };
+  }, []);
 
-  return (
-    <SimulationContext.Provider
-      value={{
-        sensorData: sensorData,
-        setSensorData: setSensorDataWrapper,
-      }}
-    >
-      {props.children}
-    </SimulationContext.Provider>
-  );
+  return [unityContext, sensorData, setSensorDataWrapper];
 };
 
-export default SimulationContext;
+export default useUnity;

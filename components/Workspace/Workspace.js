@@ -1,10 +1,6 @@
 import Editor from "@monaco-editor/react";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import themes from "../../utils/themes";
-
-import SimulationContext, {
-    unityContext,
-} from "../../store/simulation-context";
 
 import { ServoMotors } from "./ServoMotors.ts";
 import { Actuation } from "./Actuation.ts";
@@ -14,10 +10,9 @@ import classes from "./Workspace.module.scss";
 
 const DUMMY_HEADER = "console.log('hello');";
 
-const Workspace = () => {
+const Workspace = (props) => {
     const editorRef = useRef();
     const monacoRef = useRef();
-    const ctx = useContext(SimulationContext);
     // const [monacoTheme, setMonacoTheme] = useState("Monokai");
     // console.log(monacoTheme);
 
