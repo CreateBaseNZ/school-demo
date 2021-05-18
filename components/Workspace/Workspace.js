@@ -6,10 +6,10 @@ import classes from "./Workspace.module.scss";
 const Workspace = (props) => {
   return (
     <div className={classes.workspace}>
-      <MonacoEditor
+      {/* <MonacoEditor
         unityContext={props.unityContext}
         sensorData={props.sensorData}
-      />
+      /> */}
       <FlowEditor />
     </div>
   );
