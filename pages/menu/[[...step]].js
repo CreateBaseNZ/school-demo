@@ -1,6 +1,6 @@
 import Head from "next/head";
-import Layout from "../components/Layout/Layout";
-import MenuInterface from "../components/Layout/MenuInterface";
+import Layout from "../../components/Layout/Layout";
+import MenuInterface from "../../components/Layout/MenuInterface";
 
 const Menu = (props) => {
   return (

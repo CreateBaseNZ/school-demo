@@ -8,6 +8,7 @@ import CreateCard from "../Menu/CreateCard";
 
 import classes from "./MenuInterface.module.scss";
 import ImproveCard from "../Menu/ImproveCard";
+import { Step } from "@material-ui/core";
 
 const DUMMY_DATA = [
   {
@@ -30,14 +31,17 @@ const DUMMY_DATA = [
 
 const MenuInterface = () => {
   const router = useRouter();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState();
 
+  console.log(activeStep);
+
+  const { asPath } = router;
   useEffect(() => {
-    const { req } = router.query;
-    setActiveStep(req);
-  }, []);
+    setActiveStep(asPath.substring(asPath.lastIndexOf("/") + 1));
+  }, [asPath]);
 
   const cardClickHandler = (step) => {
+    router.push("/menu", "/menu/" + step, { shallow: true });
     setActiveStep(step);
   };
 
@@ -54,7 +58,9 @@ const MenuInterface = () => {
             return (
               <StepCard
                 className={`${classes.step} ${
-                  activeStep === step.title ? classes.activeStep : ""
+                  activeStep === step.title.toLowerCase()
+                    ? classes.activeStep
+                    : ""
                 }`}
                 step={step.title}
                 description={step.description}

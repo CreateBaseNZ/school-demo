@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useContext, useState } from "react";
+import Router from "next/router";
 import NavContext from "../../../store/nav-context";
 
 import classes from "./NavItem.module.scss";
@@ -11,6 +12,11 @@ const NavItem = (props) => {
   const mouseOverHandler = () => {
     setIsHovered(true);
     ctx.onHover(props.type);
+  };
+
+  const clickHandler = (item) => {
+    Router.push("/menu", item.path);
+    ctx.onClick();
   };
 
   const showDropdown =
@@ -29,15 +35,16 @@ const NavItem = (props) => {
         <div className={classes.dropdown}>
           {props.items &&
             props.items.map((item) => (
-              <button key={item.title}>{item.title}</button>
+              <button key={item.title} onClick={() => clickHandler(item)}>
+                {item.title}
+              </button>
             ))}
           <div className={classes.separator} />
-          <Link
-            href={{
-              pathname: "/menu",
-              query: { req: "" },
-            }}
-          >{`See all ${props.type}`}</Link>
+          <button
+            onClick={() =>
+              clickHandler({ path: props.path, query: props.query })
+            }
+          >{`See all ${props.type}`}</button>
         </div>
       )}
     </div>

@@ -9,22 +9,22 @@ import classes from "./Nav.module.scss";
 import Link from "next/link";
 
 const DUMMY_PROJECT_STEPS = [
-  { title: "Define" },
-  { title: "Plan" },
-  { title: "Create" },
-  { title: "Improve" },
+  { title: "Define", path: "/menu/define", query: "define" },
+  { title: "Plan", path: "/menu/plan", query: "plan" },
+  { title: "Create", path: "/menu/create", query: "create" },
+  { title: "Improve", path: "/menu/improve", query: "improve" },
 ];
 const DUMMY_SUBSYSTEMS = [
-  { key: "101", title: "Subsystem 1" },
-  { key: "010", title: "Subsystem 2" },
-  { key: "111", title: "Subsystem 3" },
+  { title: "Subsystem 1", path: "/menu/create", query: "create" },
+  { title: "Subsystem 2", path: "/menu/create", query: "create" },
+  { title: "Subsystem 3", path: "/menu/create", query: "create" },
 ];
 const DUMMY_TASKS = [
-  { key: "999", title: "Task 1" },
-  { key: "888", title: "Task 2" },
-  { key: "777", title: "Task 3" },
-  { key: "666", title: "Task 4" },
-  { key: "555", title: "Task 5" },
+  { title: "Task 1" },
+  { title: "Task 2" },
+  { title: "Task 3" },
+  { title: "Task 4" },
+  { title: "Task 5" },
 ];
 
 const Nav = (props) => {
@@ -40,7 +40,7 @@ const Nav = (props) => {
           title="Project Step 1"
           items={DUMMY_PROJECT_STEPS}
           type="Project Steps"
-          step="1"
+          path="/menu"
         />
       )}
       {props.showStage && <ChevronRightIcon fontSize="small" />}
@@ -49,7 +49,8 @@ const Nav = (props) => {
           title="Subsystem 1"
           items={DUMMY_SUBSYSTEMS}
           type="Subsystems"
-          step="3"
+          path="/menu/create"
+          query="create"
         />
       )}
       {props.showStage && <ChevronRightIcon fontSize="small" />}
