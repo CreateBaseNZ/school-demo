@@ -19,13 +19,6 @@ const DUMMY_SUBSYSTEMS = [
   { title: "Subsystem 2", path: "/menu/create", query: "create" },
   { title: "Subsystem 3", path: "/menu/create", query: "create" },
 ];
-const DUMMY_TASKS = [
-  { title: "Task 1" },
-  { title: "Task 2" },
-  { title: "Task 3" },
-  { title: "Task 4" },
-  { title: "Task 5" },
-];
 
 const Nav = (props) => {
   const ctx = useContext(NavContext);
@@ -37,7 +30,7 @@ const Nav = (props) => {
       </Link>
       {props.showStage && (
         <NavItem
-          title="Project Step 1"
+          title="Improve"
           items={DUMMY_PROJECT_STEPS}
           type="Project Steps"
           path="/menu"
@@ -52,10 +45,6 @@ const Nav = (props) => {
           path="/menu/create"
           query="create"
         />
-      )}
-      {props.showStage && <ChevronRightIcon fontSize="small" />}
-      {props.showStage && (
-        <NavItem title="Task 1" items={DUMMY_TASKS} type="Tasks" />
       )}
     </nav>
   );
