@@ -45,7 +45,7 @@ const ImproveCard = () => {
       <div className={classes.contentWrapper}></div>
       <div className={classes.createWrapper}>
         {DUMMY_DATA.map((subsystem) => {
-          return <SubsystemCard {...subsystem} />;
+          return <SubsystemCard {...subsystem} key={subsystem.title} />;
         })}
       </div>
     </div>

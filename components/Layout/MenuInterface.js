@@ -59,7 +59,7 @@ const MenuInterface = () => {
                 step={step.title}
                 description={step.description}
                 key={step.title}
-                onClick={() => cardClickHandler(index + 1)}
+                onClick={() => cardClickHandler(step.title.toLowerCase())}
               />
             );
           })}

@@ -71,22 +71,18 @@ const Index = () => {
         </button>
         <p className={showHelper ? "" : classes.hide}>
           At CreateBase, we want to change the world by enabling the next
-          generation of creators. That is why we are developing a
-          project-centric educational platform to give people the skills, tools
-          and confidence necessary to unleash their inner technology creator.
+          generation of creators. That's why we're developing a project-centric
+          educational platform to give people the skills, tools, and confidence
+          to unleash their inner technology creator.
           <br />
           <br />
-          You are about to start a demo of a very small portion of our final
-          platform. We want to build something you will love, which is why we
-          would really appreciate your feedback upon completion.
+          You're about to experience a tiny portion of our final platform,
+          something that we call a <i>Project</i>. You'll be introduced to a
+          situation and will need to apply skills and problem-solving to build a
+          working solution. Your progress will be saved as you move through the
+          Project, so feel free to take your time and, most importantly, have
+          fun along the way.
           <br />
-          <br />
-          This demo marks the first step of many. To keep up with our journey or
-          to find out how to work with us, please follow and message our social
-          media.
-          <br />
-          <br />
-          Dream. Learn. Apply. Create.
           <br />
           💜 Team CreateBase
         </p>
