@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useContext, useState } from "react";
 import Router from "next/router";
 import NavContext from "../../../store/nav-context";

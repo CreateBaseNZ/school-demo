@@ -40,30 +40,30 @@ const HeaderButtons = (props) => {
   );
 
   const buttons = [
-    {
-      title: "Help",
-      show: showHelp,
-      icon: <HelpOutlineOutlinedIcon fontSize="small" />,
-      clickHandler: () => {},
-    },
-    {
-      title: "Settings",
-      show: showSettings,
-      icon: <SettingsIcon fontSize="small" />,
-      clickHandler: () => {},
-    },
+    // {
+    //   title: "Help",
+    //   show: showHelp,
+    //   icon: <HelpOutlineOutlinedIcon fontSize="small" />,
+    //   clickHandler: () => {},
+    // },
+    // {
+    //   title: "Settings",
+    //   show: showSettings,
+    //   icon: <SettingsIcon fontSize="small" />,
+    //   clickHandler: () => {},
+    // },
     {
       title: "Feedback",
       show: showFeedback,
       icon: <MarkunreadMailboxOutlinedIcon style={{ fontSize: 18 }} />,
       clickHandler: feedbackCtx.showForm,
     },
-    {
-      title: fullscreenCtx.isFullscreen ? "Exit fullscreen" : "Fullscreen",
-      show: showFullscreen,
-      icon: fullscreenIcon,
-      clickHandler: fullscreenHandler,
-    },
+    // {
+    //   title: fullscreenCtx.isFullscreen ? "Exit fullscreen" : "Fullscreen",
+    //   show: showFullscreen,
+    //   icon: fullscreenIcon,
+    //   clickHandler: fullscreenHandler,
+    // },
   ];
 
   return (

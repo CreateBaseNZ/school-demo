@@ -20,7 +20,7 @@ const DUMMY_SUBSYSTEMS = [
   { title: "Subsystem 3", path: "/menu/create", query: "create" },
 ];
 
-const Nav = (props) => {
+const Nav = ({ showStep, showSubsystem }) => {
   const ctx = useContext(NavContext);
 
   return (
@@ -28,18 +28,18 @@ const Nav = (props) => {
       <Link href="/">
         <HomeRoundedIcon className={classes.home} fontSize="small" />
       </Link>
-      {props.showStage && (
+      {showStep && (
         <NavItem
-          title="Improve"
+          title={ctx.activeStep}
           items={DUMMY_PROJECT_STEPS}
           type="Project Steps"
           path="/menu"
         />
       )}
-      {props.showStage && <ChevronRightIcon fontSize="small" />}
-      {props.showStage && (
+      {showSubsystem && <ChevronRightIcon fontSize="small" />}
+      {showSubsystem && (
         <NavItem
-          title="Subsystem 1"
+          title={ctx.activeSubsystem}
           items={DUMMY_SUBSYSTEMS}
           type="Subsystems"
           path="/menu/create"

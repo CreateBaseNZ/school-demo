@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { NavContextProvider } from "../../store/nav-context";
 
 import Nav from "./Nav/Nav";
 import HeaderButtons from "./HeaderButtons";
@@ -10,13 +9,14 @@ const Header = () => {
   const router = useRouter();
 
   let showHeader = true;
-  let showStage = true;
+  let showSubsystem = true;
+  let showStep = true;
   const url = router.pathname;
 
   if (url === "/") {
     showHeader = false;
-  } else if (url === "/menu") {
-    showStage = false;
+  } else if (url.includes("menu")) {
+    showSubsystem = false;
   }
 
   return (
@@ -24,9 +24,7 @@ const Header = () => {
       className={classes.header}
       style={{ display: showHeader ? "flex" : "none" }}
     >
-      <NavContextProvider>
-        <Nav showStage={showStage} />
-      </NavContextProvider>
+      <Nav showStep={showStep} showSubsystem={showSubsystem} />
       <HeaderButtons />
     </header>
   );

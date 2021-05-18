@@ -19,8 +19,6 @@ const Workspace = (props) => {
   // const [monacoTheme, setMonacoTheme] = useState("Monokai");
   // console.log(monacoTheme);
 
-  console.log(props.sensorData);
-
   useEffect(async () => {
     const loadElena = async () => {
       const { FlowEditor } = await import("elena-editor");

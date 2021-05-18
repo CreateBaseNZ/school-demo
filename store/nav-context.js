@@ -3,6 +3,10 @@ import React, { useState, createContext } from "react";
 const NavContext = createContext({
   navIsActive: false,
   activeType: null,
+  activeStep: null,
+  activeSubsystem: null,
+  setActiveStep: () => {},
+  setActiveSubsystem: () => {},
   onHover: () => {},
   onClick: () => {},
   onBlur: () => {},
@@ -12,6 +16,8 @@ const NavContext = createContext({
 export const NavContextProvider = (props) => {
   const [navIsActive, setNavIsActive] = useState(false);
   const [activeType, setActiveType] = useState();
+  const [activeStep, setActiveStep] = useState();
+  const [activeSubsystem, setActiveSubsystem] = useState();
 
   let timer = null;
 
@@ -33,11 +39,23 @@ export const NavContextProvider = (props) => {
     setActiveType(type);
   };
 
+  const changeActiveStep = (step) => {
+    setActiveStep(step);
+  };
+
+  const changeActiveSubsystem = (step) => {
+    setActiveSubsystem(step);
+  };
+
   return (
     <NavContext.Provider
       value={{
         navIsActive: navIsActive,
         activeType: activeType,
+        activeStep: activeStep,
+        activeSubsystem: activeSubsystem,
+        setActiveStep: changeActiveStep,
+        setActiveSubsystem: changeActiveSubsystem,
         onHover: hoverHandler,
         onClick: clickHandler,
         onBlur: blurHandler,

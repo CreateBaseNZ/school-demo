@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Simulation from "../Simulation/Simulation";
+import NavContext from "../../store/nav-context";
+
 import StepCard from "../Menu/StepCard";
 import DefineCard from "../Menu/DefineCard";
 import PlanCard from "../Menu/PlanCard";
@@ -8,7 +9,6 @@ import CreateCard from "../Menu/CreateCard";
 
 import classes from "./MenuInterface.module.scss";
 import ImproveCard from "../Menu/ImproveCard";
-import { Step } from "@material-ui/core";
 
 const DUMMY_DATA = [
   {
@@ -29,19 +29,31 @@ const DUMMY_DATA = [
   },
 ];
 
+const capitalise = (str) => {
+  const splitStr = str.toLowerCase().split(" ");
+  for (var i = 0; i < splitStr.length; i++) {
+    splitStr[i] =
+      splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+  }
+  // Directly return the joined string
+  return splitStr.join(" ");
+};
+
 const MenuInterface = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState();
-
-  console.log(activeStep);
+  const navCtx = useContext(NavContext);
 
   const { asPath } = router;
   useEffect(() => {
-    setActiveStep(asPath.substring(asPath.lastIndexOf("/") + 1));
+    const step = asPath.substring(asPath.lastIndexOf("/") + 1);
+    setActiveStep(step);
+    navCtx.setActiveStep(capitalise(step));
   }, [asPath]);
 
   const cardClickHandler = (step) => {
     router.push("/menu", "/menu/" + step, { shallow: true });
+    navCtx.setActiveStep(capitalise(step));
     setActiveStep(step);
   };
 
