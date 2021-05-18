@@ -19,10 +19,11 @@ const Workspace = (props) => {
   // const [monacoTheme, setMonacoTheme] = useState("Monokai");
   // console.log(monacoTheme);
 
+  console.log(props.sensorData);
+
   useEffect(async () => {
     const loadElena = async () => {
       const { FlowEditor } = await import("elena-editor");
-      console.log(FlowEditor);
       return (
         <FlowEditor
           nodeList={[
@@ -55,8 +56,6 @@ const Workspace = (props) => {
     setFlowEditor(await loadElena());
   }, []);
 
-  console.log(flowEditor);
-
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = editor;
     monacoRef.current = monaco;
@@ -67,16 +66,16 @@ const Workspace = (props) => {
     let RoboticSystemName = "RoboticArm";
     let ServoMotorsClass = ServoMotors;
     let ActuationClass = Actuation;
-    let sensorData;
-    let promise = () => {
-      return new Promise((resolve, reject) => {
-        someVar.on("GetSensorData", (data) => {
-          sensorData = JSON.parse(data);
-          resolve();
-        });
-      });
-    };
-    sensorData = await promise();
+    let sensorData = props.sensorData;
+    // let promise = () => {
+    //   return new Promise((resolve, reject) => {
+    //     someVar.on("GetSensorData", (data) => {
+    //       sensorData = JSON.parse(data);
+    //       resolve();
+    //     });
+    //   });
+    // };
+    // sensorData = await promise();
     eval("(async () => {" + editorRef.current.getValue() + "})()");
     monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
     monacoRef.current.editor.setTheme("customTheme");
@@ -88,7 +87,7 @@ const Workspace = (props) => {
 
   return (
     <div className={classes.workspace}>
-      {/* <Editor
+      <Editor
         defaultLanguage="javascript"
         defaultValue="// Start coding!"
         onMount={handleEditorDidMount}
@@ -99,8 +98,8 @@ const Workspace = (props) => {
       <div className={classes.dropdown}>
         <button className={classes.dropdownBtn}> Click me </button>{" "}
         <div className={classes.dropdownMenu}> {themeOptions} </div>{" "}
-      </div> */}
-      {flowEditor}
+      </div>
+      {/* {flowEditor} */}
     </div>
   );
 };

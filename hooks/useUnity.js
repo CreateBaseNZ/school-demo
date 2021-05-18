@@ -20,6 +20,7 @@ const useUnity = () => {
   useEffect(() => {
     unityContext.on("GetSensorData", (sensorData) => {
       setSensorData(sensorData);
+      console.log("hello");
     });
   }, []);
 

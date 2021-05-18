@@ -15,7 +15,8 @@ const NavItem = (props) => {
   };
 
   const clickHandler = (item) => {
-    Router.push({ pathname: "/menu", query: { query: item.query } }, item.path);
+    Router.push("/menu", item.path);
+    ctx.onClick();
   };
 
   const showDropdown =

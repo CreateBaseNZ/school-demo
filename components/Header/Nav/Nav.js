@@ -12,7 +12,7 @@ const DUMMY_PROJECT_STEPS = [
   { title: "Define", path: "/menu/define", query: "define" },
   { title: "Plan", path: "/menu/plan", query: "plan" },
   { title: "Create", path: "/menu/create", query: "create" },
-  { title: "Improve", path: "/menu/improvise", query: "improvise" },
+  { title: "Improve", path: "/menu/improve", query: "improve" },
 ];
 const DUMMY_SUBSYSTEMS = [
   { title: "Subsystem 1", path: "/menu/create", query: "create" },
