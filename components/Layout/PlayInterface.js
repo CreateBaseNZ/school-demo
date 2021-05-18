@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import SplitPane from "react-split-pane";
 import useUnity from "../../hooks/useUnity";
 

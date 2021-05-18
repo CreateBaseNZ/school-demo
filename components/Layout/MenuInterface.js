@@ -6,9 +6,9 @@ import StepCard from "../Menu/StepCard";
 import DefineCard from "../Menu/DefineCard";
 import PlanCard from "../Menu/PlanCard";
 import CreateCard from "../Menu/CreateCard";
+import ImproveCard from "../Menu/ImproveCard";
 
 import classes from "./MenuInterface.module.scss";
-import ImproveCard from "../Menu/ImproveCard";
 
 const DUMMY_DATA = [
   {
@@ -46,9 +46,14 @@ const MenuInterface = () => {
 
   const { asPath } = router;
   useEffect(() => {
-    const step = asPath.substring(asPath.lastIndexOf("/") + 1);
-    setActiveStep(step);
-    navCtx.setActiveStep(capitalise(step));
+    const strArr = asPath.split("/");
+    if (strArr.length > 2) {
+      setActiveStep(strArr[2]);
+      navCtx.setActiveStep(capitalise(strArr[2]));
+    } else {
+      setActiveStep("");
+      navCtx.setActiveStep("");
+    }
   }, [asPath]);
 
   const cardClickHandler = (step) => {
