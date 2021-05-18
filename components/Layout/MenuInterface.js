@@ -33,8 +33,9 @@ const MenuInterface = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
-    const { req } = router.query;
-    setActiveStep(req);
+    const { query } = router.query;
+    console.log;
+    setActiveStep(query);
   }, []);
 
   const cardClickHandler = (step) => {
