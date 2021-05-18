@@ -1,7 +1,6 @@
 import Editor from "@monaco-editor/react";
-// import { FlowEditor } from "elena-editor";
 
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 import themes from "../../utils/themes";
 
 import { ServoMotors } from "./ServoMotors.ts";
@@ -15,44 +14,8 @@ const DUMMY_HEADER = "console.log('hello');";
 const Workspace = (props) => {
   const editorRef = useRef();
   const monacoRef = useRef();
-  const [flowEditor, setFlowEditor] = useState();
   // const [monacoTheme, setMonacoTheme] = useState("Monokai");
   // console.log(monacoTheme);
-
-  useEffect(async () => {
-    const loadElena = async () => {
-      const { FlowEditor } = await import("elena-editor");
-      return (
-        <FlowEditor
-          nodeList={[
-            {
-              id: "base_start",
-              isStatic: true,
-              name: "Start",
-              priority: 0,
-              type: "Terminator",
-              xPos: 0,
-              yPos: 0,
-              code: "console.log('hello')",
-            },
-            {
-              id: "base_process_1",
-              isStatic: true,
-              name: "Proc",
-              priority: 0,
-              type: "Process",
-              xPos: 0,
-              yPos: 0,
-              inputs: ["in1", "in2"],
-              outputs: ["out2"],
-              code: "hi there",
-            },
-          ]}
-        />
-      );
-    };
-    setFlowEditor(await loadElena());
-  }, []);
 
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = editor;
@@ -97,7 +60,6 @@ const Workspace = (props) => {
         <button className={classes.dropdownBtn}> Click me </button>{" "}
         <div className={classes.dropdownMenu}> {themeOptions} </div>{" "}
       </div>
-      {/* {flowEditor} */}
     </div>
   );
 };
