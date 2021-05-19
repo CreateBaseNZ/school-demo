@@ -1,30 +1,167 @@
+@import "../../../styles/variables";
+
 .wrapper {
   width: 200px;
   min-width: 150px;
   max-width: 200px;
-  padding: 1rem 0.75rem;
   font-size: 0.75rem;
-  background: white;
+  background: #262626;
 
   & > div {
     margin-bottom: 10px;
   }
 }
 
-.dndnode {
-  height: 20px;
-  padding: 4px;
-  border: 1px solid #1a192b;
-  border-radius: 2px;
+.description {
+  font-size: 1rem;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: $border-color;
+}
+
+.dndNode {
+  margin: 1rem;
+  border: 2px solid $blue-dark;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  border-radius: 6px;
   cursor: grab;
-  color: black;
-  &.input {
-    border-color: #0041d0;
+  background: #3d3d3d;
+  h5 {
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+    display: flex;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    border-bottom: thin solid #212121;
+    color: $lighter;
+    svg {
+      margin-right: 0.25em;
+      path {
+        fill: $lighter;
+      }
+    }
   }
-  &.output {
-    border-color: #ff0072;
+  &.move {
+    border-color: $blue-dark;
+    input:focus {
+      border-color: $blue-dark;
+    }
+  }
+  &.read {
+    border-color: $logo-light;
+    select:focus {
+      border-color: $logo-light;
+    }
+  }
+  &.set {
+    border-color: $red;
+    select:focus {
+      border-color: $red;
+    }
+  }
+  &.pause {
+    border-color: $orange;
+    input:focus {
+      border-color: $orange;
+    }
+    select:focus {
+      border-color: $orange;
+    }
+  }
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  .inputWrapper {
+    padding: 0.5rem 0.25rem 0.5rem 0.75rem;
+    &:not(:last-child) {
+      border-bottom: thin solid #202020;
+    }
+  }
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  label {
+    font-size: 14px;
+    color: $blue-dark;
+    margin-right: 0.75rem;
+    font-weight: 700;
+  }
+  input {
+    padding: 1px 5px;
+    width: 2.5rem;
+    text-align: right;
+    background: #2a2a2a;
+    border-radius: 0.25rem;
+    border: thin solid #202020;
+    transition: border-color 0.1s ease-out, background-color 0.1s ease-out;
+    &::placeholder {
+      opacity: 0.75;
+      transition: opacity 0.1s ease-out;
+    }
+    &:hover {
+      background: #1d1d1d;
+      &::placeholder {
+        opacity: 1;
+      }
+    }
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.selectWrapper {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  select {
+    width: 100%;
+    padding: 1px 5px;
+    background: #2a2a2a;
+    border-radius: 0.25rem;
+    border: thin solid #202020;
+    cursor: pointer;
+    transition: border-color 0.1s ease-out;
+    &:invalid {
+      color: rgb(255, 255, 255, 0.25);
+      font-weight: 300;
+    }
+  }
+}
+
+.selectAndInput {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  .inputWrapper {
+    padding: 0;
+    flex: 1 1 0;
+    margin-right: 0.5rem;
+    input {
+      padding: 2px 5px;
+      width: 100%;
+    }
+  }
+  .selectWrapper {
+    padding: 0;
+    flex: 0 0 auto;
   }
 }
