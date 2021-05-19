@@ -81,6 +81,12 @@ export default [
     label: "animated edge",
   },
   {
+    id: "8",
+    type: "move",
+    position: { x: 100, y: 100 },
+    data: { text: "Move" },
+  },
+  {
     id: "e4-5",
     source: "4",
     target: "5",

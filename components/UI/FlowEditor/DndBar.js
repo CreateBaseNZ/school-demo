@@ -22,7 +22,7 @@ const DndBar = () => {
       <div className={classes.description}>Drag &amp; Drop</div>
       <div
         className={`${classes.dndNode} ${classes.move}`}
-        onDragStart={(event) => onDragStart(event, "input")}
+        onDragStart={(event) => onDragStart(event, "move")}
         draggable
       >
         <h5>
@@ -31,15 +31,15 @@ const DndBar = () => {
         </h5>
         <div className={classes.inputContainer}>
           <div className={classes.inputWrapper}>
-            <label for="move-x">X</label>
+            <label htmlFor="move-x">X</label>
             <input type="number" id="move-x" placeholder="0" />
           </div>
           <div className={classes.inputWrapper}>
-            <label for="move-y">Y</label>
+            <label htmlFor="move-y">Y</label>
             <input type="number" id="move-y" placeholder="0" />
           </div>
           <div className={classes.inputWrapper}>
-            <label for="move-z">Z</label>
+            <label htmlFor="move-z">Z</label>
             <input type="number" id="move-z" placeholder="0" />
           </div>
         </div>
@@ -54,8 +54,13 @@ const DndBar = () => {
           Read Encoder
         </h5>
         <div className={classes.selectWrapper}>
-          <select name="read-motor" id="read-motor" required>
-            <option value="" disabled selected hidden>
+          <select
+            name="read-motor"
+            id="read-motor"
+            defaultValue="Select a motor"
+            required
+          >
+            <option value="" hidden>
               Select a motor
             </option>
             <option value="Motor A">Motor A</option>
@@ -74,8 +79,13 @@ const DndBar = () => {
           Set Up Arm
         </h5>
         <div className={classes.selectWrapper}>
-          <select name="set-motor" id="set-motor" required>
-            <option value="" disabled selected hidden>
+          <select
+            name="set-motor"
+            id="set-motor"
+            defaultValue="Select a motor"
+            required
+          >
+            <option value="" hidden>
               Select a motor
             </option>
             <option value="Motor A">Motor A</option>
@@ -98,8 +108,13 @@ const DndBar = () => {
             <input type="number" id="pause-duration" placeholder="0" />
           </div>
           <div className={classes.selectWrapper}>
-            <select name="pause-unit" id="pause-unit" required>
-              <option value="" disabled selected hidden>
+            <select
+              name="pause-unit"
+              id="pause-unit"
+              defaultValue="Unit"
+              required
+            >
+              <option value="" hidden>
                 Unit
               </option>
               <option value="ms">ms</option>
