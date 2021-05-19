@@ -1,0 +1,13 @@
+.editorContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  svg {
+    display: block;
+  }
+}
+
+.editorWrapper {
+  height: 100%;
+  flex-grow: 1;
+}
