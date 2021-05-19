@@ -43,10 +43,12 @@ const FlowEditor = () => {
     event.preventDefault();
 
     const reactFlowBounds = wrapperRef.current.getBoundingClientRect();
-    const type = event.dataTransfer.getData("application/reactflow");
+    const [type, x, y] = event.dataTransfer
+      .getData("application/reactflow")
+      .split("-");
     const position = reactFlowInstance.project({
-      x: event.clientX - reactFlowBounds.left,
-      y: event.clientY - reactFlowBounds.top,
+      x: event.clientX - reactFlowBounds.left - parseFloat(x),
+      y: event.clientY - reactFlowBounds.top - parseFloat(y),
     });
     const newNode = {
       id: getId(),
