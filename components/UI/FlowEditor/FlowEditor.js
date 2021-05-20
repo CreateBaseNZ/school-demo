@@ -34,18 +34,34 @@ const edgeTypes = {
 };
 
 const miniMapStrokeColoriser = (node) => {
-  if (node.style?.background) return node.style.background;
-  if (node.type === "input") return "#0041d0";
-  if (node.type === "output") return "#ff0072";
-  if (node.type === "default") return "#1a192b";
-
-  return "#eee";
+  switch (node.type) {
+    case "move":
+      return "#0a73dc";
+    case "read":
+      return "#8258dc";
+    case "set":
+      return "#fa6f6f";
+    case "pause":
+      return "#ffb649";
+    default:
+      return "#eee";
+  }
 };
 
 const miniMapColoriser = (node) => {
-  if (node.style?.background) return node.style.background;
-
-  return "#fff";
+  // switch (node.type) {
+  //   case "move":
+  //     return "#0a73dc";
+  //   case "read":
+  //     return "#8258dc";
+  //   case "set":
+  //     return "#fa6f6f";
+  //   case "pause":
+  //     return "#ffb649";
+  //   default:
+  //     return "#eee";
+  // }
+  return "none";
 };
 
 const FlowEditor = () => {
@@ -119,7 +135,15 @@ const FlowEditor = () => {
             <MiniMap
               nodeStrokeColor={miniMapStrokeColoriser}
               nodeColor={miniMapColoriser}
-              nodeBorderRadius={2}
+              nodeBorderRadius={16}
+              nodeStrokeWidth={4}
+              maskColor="rgba(0,0,0,0.5)"
+              style={{
+                backgroundColor: "#353535",
+                height: "100",
+                width: "150",
+              }}
+              className={classes.miniMap}
             />
             <Controls />
             <Background color="#aaa" gap={16} />
