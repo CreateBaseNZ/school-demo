@@ -1,0 +1,95 @@
+[
+  {
+    "name": "",
+    "define": [
+      {
+        "type": "normal",
+        "indent": 0,
+        "text": "The first step to produce the solution is to understand the problem:"
+      },
+      {
+        "type": "normal",
+        "indent": 0,
+        "text": "We are trying to program the arm to make it possible to pick up the rubbish and transport it to the rubbish bin."
+      },
+      {
+        "type": "normal",
+        "indent": 0,
+        "text": "As we already have the arm, we should understand its capabilities:"
+      },
+      {
+        "type": "point",
+        "indent": 1,
+        "text": "The arm has five motors, 4 to move the arm around the space and 1 to open and close the claw."
+      },
+      {
+        "type": "point",
+        "indent": 1,
+        "text": "The claw should be used to pick up the rubbish."
+      },
+      {
+        "type": "point",
+        "indent": 1,
+        "text": "The claw is closed above the rubbish to pick up the rubbish and opened."
+      }
+    ],
+    "plan": [
+      {
+        "type": "normal",
+        "indent": 0,
+        "text": "Once we understand what should be done, a good practice is to implement a divide and conquer approach. Through this approach, we will divide our solution into different parts that we could solve on its own, then we could combine it at the end."
+      },
+      {
+        "type": "normal",
+        "indent": 0,
+        "text": "From the define stage, we would then need:"
+      },
+      {
+        "type": "label",
+        "label": "1",
+        "indent": 1,
+        "text": "Moving the arm between points."
+      },
+      {
+        "type": "point",
+        "indent": 2,
+        "text": "Learn the functions to move the arm from one location to another."
+      },
+      {
+        "type": "label",
+        "label": 2,
+        "indent": 1,
+        "text": "Familiarize with the claw."
+      },
+      {
+        "type": "point",
+        "indent": 2,
+        "text": "Learn how to operate the claw to be able to pick up the rubbish."
+      },
+      {
+        "type": "normal",
+        "text": "After being able to work these two subsystems we will be able to combine the work into one system solving our problem."
+      }
+    ],
+    "subsystems": [
+      {
+        "id": "0001",
+        "type": "",
+        "order": 1,
+        "prerequisite": []
+      },
+      {
+        "id": "0002",
+        "type": "",
+        "order": 2,
+        "prerequisite": []
+      },
+      {
+        "id": "0003",
+        "type": "",
+        "order": 3,
+        "prerequisite": [ 1, 2 ]
+      }
+    ]
+  }
+]
