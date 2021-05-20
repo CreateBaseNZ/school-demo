@@ -53,6 +53,9 @@
   border-radius: 6px;
   cursor: grab;
   background: #3d3d3d;
+  * {
+    font-size: 14px;
+  }
   h5 {
     padding: 0.5rem 0.75rem;
     width: 100%;
@@ -60,7 +63,6 @@
     font-weight: 400;
     display: flex;
     align-items: center;
-    font-size: 1rem;
     border-bottom: thin solid #212121;
     color: $lighter;
     svg {

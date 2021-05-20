@@ -7,7 +7,7 @@ import classes from "./Nodes.module.scss";
 
 const MoveNode = ({ data }) => {
   return (
-    <div className={classes.node}>
+    <div className={`${classes.node} ${classes.move}`}>
       <Handle
         type="target"
         position="left"

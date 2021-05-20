@@ -47,7 +47,7 @@ const DndBar = () => {
         </div>
         <div
           className={`${classes.dndNode} ${classes.read}`}
-          onDragStart={(event) => onDragStart(event, "default")}
+          onDragStart={(event) => onDragStart(event, "read")}
           draggable
         >
           <h5>
@@ -72,7 +72,7 @@ const DndBar = () => {
         </div>
         <div
           className={`${classes.dndNode} ${classes.set}`}
-          onDragStart={(event) => onDragStart(event, "output")}
+          onDragStart={(event) => onDragStart(event, "set")}
           draggable
         >
           <h5>
@@ -97,7 +97,7 @@ const DndBar = () => {
         </div>
         <div
           className={`${classes.dndNode} ${classes.pause}`}
-          onDragStart={(event) => onDragStart(event, "output")}
+          onDragStart={(event) => onDragStart(event, "pause")}
           draggable
         >
           <h5>

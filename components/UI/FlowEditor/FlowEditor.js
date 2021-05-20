@@ -6,9 +6,14 @@ import ReactFlow, {
   MiniMap,
   Controls,
   Background,
+  SmoothStepEdge,
 } from "react-flow-renderer";
 import DndBar from "./DndBar";
 import MoveNode from "./MoveNode";
+import ReadNode from "./ReadNode";
+import SetNode from "./SetNode";
+import PauseNode from "./PauseNode";
+import CustomEdge, { CustomConnectionLine } from "./CustomEdge";
 
 import initialElements from "../../../utils/initialElements";
 
@@ -17,10 +22,18 @@ import classes from "./FlowEditor.module.scss";
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-const nodeTypes = { move: MoveNode };
+const nodeTypes = {
+  move: MoveNode,
+  read: ReadNode,
+  set: SetNode,
+  pause: PauseNode,
+};
+
+const edgeTypes = {
+  custom: CustomEdge,
+};
 
 const miniMapStrokeColoriser = (node) => {
-  console.log(node);
   if (node.style?.background) return node.style.background;
   if (node.type === "input") return "#0041d0";
   if (node.type === "output") return "#ff0072";
@@ -38,17 +51,19 @@ const miniMapColoriser = (node) => {
 const FlowEditor = () => {
   const wrapperRef = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-
   const [elements, setElements] = useState(initialElements);
+
+  console.log(elements);
 
   const onElementsRemove = useCallback((elementsToRemove) => {
     setElements((els) => removeElements(elementsToRemove, els));
   }, []);
 
-  const onConnect = useCallback(
-    (params) => setElements((els) => addEdge(params, els)),
-    []
-  );
+  const onConnect = useCallback((params) => {
+    setElements((els) => {
+      return addEdge({ ...params, type: "custom", animated: true }, els);
+    });
+  }, []);
 
   const onLoad = (_reactFlowInstance) => {
     console.log("flow loaded:", _reactFlowInstance);
@@ -91,6 +106,7 @@ const FlowEditor = () => {
           <ReactFlow
             elements={elements}
             nodeTypes={nodeTypes}
+            edgeTypes={edgeTypes}
             onElementsRemove={onElementsRemove}
             onConnect={onConnect}
             onLoad={onLoad}
@@ -98,6 +114,7 @@ const FlowEditor = () => {
             onDragOver={onDragOver}
             snapToGrid={true}
             snapGrid={[16, 16]}
+            connectionLineComponent={CustomConnectionLine}
           >
             <MiniMap
               nodeStrokeColor={miniMapStrokeColoriser}
