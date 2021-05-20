@@ -12,12 +12,10 @@ const MoveNode = ({ data }) => {
         type="target"
         position="left"
         style={{
-          background: "#0a73dc",
-          borderStyle: "none",
           height: "8px",
           width: "8px",
-          cursor: "cell",
         }}
+        className={`${classes.handle} ${classes.target}`}
         onConnect={(params) => console.log("handle onConnect", params)}
       />
       <h5>
@@ -43,12 +41,10 @@ const MoveNode = ({ data }) => {
         position="right"
         id="a"
         style={{
-          background: "#0a73dc",
-          borderStyle: "none",
           height: "8px",
           width: "8px",
-          cursor: "cell",
         }}
+        className={`${classes.handle} ${classes.source}`}
       />
     </div>
   );

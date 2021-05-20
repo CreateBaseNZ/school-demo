@@ -31,17 +31,36 @@
     input:focus {
       border-color: $blue-dark;
     }
+    .handle.source {
+      background: $blue-dark;
+      border: thin solid $lightest;
+    }
+    .handle.target {
+      border: 2px solid $blue-dark;
+    }
   }
   &.read {
     border-color: $logo-light;
     select:focus {
       border-color: $logo-light;
     }
+    .handle.source {
+      background: $logo-light;
+    }
+    .handle.target {
+      border: 2px solid $logo-light;
+    }
   }
   &.set {
     border-color: $red;
     select:focus {
       border-color: $red;
+    }
+    .handle.source {
+      background: $red;
+    }
+    .handle.target {
+      border: 2px solid $red;
     }
   }
   &.pause {
@@ -51,6 +70,12 @@
     }
     select:focus {
       border-color: $orange;
+    }
+    .handle.source {
+      background: $orange;
+    }
+    .handle.target {
+      border: 2px solid $orange;
     }
   }
 }
@@ -144,5 +169,16 @@
   .selectWrapper {
     padding: 0;
     flex: 0 0 auto;
+  }
+}
+
+.handle {
+  cursor: cell !important;
+  transition: transform 0.1s ease-out, border 0.1s ease-out;
+  &:hover {
+    transform: scale(1.5) translateY(-40%);
+  }
+  &.target {
+    background: black !important;
   }
 }

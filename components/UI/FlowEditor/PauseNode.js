@@ -12,13 +12,11 @@ const PauseNode = ({ data }) => {
         type="target"
         position="left"
         style={{
-          background: "#ffb649",
-          borderStyle: "none",
           height: "8px",
           width: "8px",
-          cursor: "cell",
         }}
         onConnect={(params) => console.log("handle onConnect", params)}
+        className={`${classes.handle} ${classes.target}`}
       />
       <h5>
         <PauseCircleOutlineOutlinedIcon />
@@ -48,12 +46,10 @@ const PauseNode = ({ data }) => {
         position="right"
         id="a"
         style={{
-          background: "#ffb649",
-          borderStyle: "none",
           height: "8px",
           width: "8px",
-          cursor: "cell",
         }}
+        className={`${classes.handle} ${classes.source}`}
       />
     </div>
   );
