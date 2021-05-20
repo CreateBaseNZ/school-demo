@@ -8,6 +8,8 @@ import ReactFlow, {
   Background,
 } from "react-flow-renderer";
 import DndBar from "./DndBar";
+import StartNode from "./StartNode";
+import EndNode from "./EndNode";
 import MoveNode from "./MoveNode";
 import ReadNode from "./ReadNode";
 import SetNode from "./SetNode";
@@ -22,6 +24,8 @@ let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 const nodeTypes = {
+  start: StartNode,
+  end: EndNode,
   move: MoveNode,
   read: ReadNode,
   set: SetNode,
@@ -39,11 +43,15 @@ const miniMapStrokeColoriser = (node) => {
     case "read":
       return "#8258dc";
     case "set":
-      return "#fa6f6f";
+      return "#36c4e8";
     case "pause":
       return "#ffb649";
+    case "start":
+      return "#18dbac";
+    case "end":
+      return "#fa6f6f";
     default:
-      return "#eee";
+      return "#ffffff";
   }
 };
 

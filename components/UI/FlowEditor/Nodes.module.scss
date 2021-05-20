@@ -26,6 +26,26 @@
       }
     }
   }
+  &.start {
+    border-color: $green;
+    h5 {
+      border: none;
+      padding-right: 1rem;
+    }
+    .handle.source {
+      background: $green;
+    }
+  }
+  &.end {
+    border-color: $red;
+    h5 {
+      border: none;
+      padding-right: 1rem;
+    }
+    .handle.target {
+      border: 2px solid $red;
+    }
+  }
   &.move {
     border-color: $blue-dark;
     input:focus {
@@ -33,7 +53,6 @@
     }
     .handle.source {
       background: $blue-dark;
-      border: thin solid $lightest;
     }
     .handle.target {
       border: 2px solid $blue-dark;
@@ -52,30 +71,30 @@
     }
   }
   &.set {
-    border-color: $red;
+    border-color: $blue-light;
     select:focus {
-      border-color: $red;
+      border-color: $blue-light;
     }
     .handle.source {
-      background: $red;
+      background: $blue-light;
     }
     .handle.target {
-      border: 2px solid $red;
+      border: 2px solid $blue-light;
     }
   }
   &.pause {
-    border-color: $orange;
+    border-color: $amber;
     input:focus {
-      border-color: $orange;
+      border-color: $amber;
     }
     select:focus {
-      border-color: $orange;
+      border-color: $amber;
     }
     .handle.source {
-      background: $orange;
+      background: $amber;
     }
     .handle.target {
-      border: 2px solid $orange;
+      border: 2px solid $amber;
     }
   }
 }

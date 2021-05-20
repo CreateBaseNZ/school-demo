@@ -85,18 +85,18 @@
     }
   }
   &.set {
-    border-color: $red;
+    border-color: $blue-light;
     select:focus {
-      border-color: $red;
+      border-color: $blue-light;
     }
   }
   &.pause {
-    border-color: $orange;
+    border-color: $amber;
     input:focus {
-      border-color: $orange;
+      border-color: $amber;
     }
     select:focus {
-      border-color: $orange;
+      border-color: $amber;
     }
   }
 }
