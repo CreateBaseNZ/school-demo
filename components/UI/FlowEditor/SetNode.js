@@ -16,6 +16,7 @@ const SetNode = ({ data }) => {
           borderStyle: "none",
           height: "8px",
           width: "8px",
+          cursor: "cell",
         }}
         onConnect={(params) => console.log("handle onConnect", params)}
       />
@@ -47,6 +48,7 @@ const SetNode = ({ data }) => {
           borderStyle: "none",
           height: "8px",
           width: "8px",
+          cursor: "cell",
         }}
       />
     </div>

@@ -64,7 +64,15 @@ const FlowEditor = () => {
 
   const onConnect = useCallback((params) => {
     setElements((els) => {
-      return addEdge({ ...params, type: "custom", animated: true }, els);
+      return addEdge(
+        {
+          ...params,
+          type: "custom",
+          animated: true,
+          arrowHeadType: "arrowclosed",
+        },
+        els
+      );
     });
   }, []);
 
