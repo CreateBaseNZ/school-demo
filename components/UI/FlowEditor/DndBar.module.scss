@@ -132,6 +132,7 @@
     border-radius: 0.25rem;
     border: thin solid #202020;
     transition: border-color 0.1s ease-out, background-color 0.1s ease-out;
+    pointer-events: none;
     &::placeholder {
       opacity: 0.75;
       transition: opacity 0.1s ease-out;
@@ -167,6 +168,7 @@
     border: thin solid #202020;
     cursor: pointer;
     transition: border-color 0.1s ease-out;
+    pointer-events: none;
     &:invalid {
       color: rgb(255, 255, 255, 0.25);
       font-weight: 300;
