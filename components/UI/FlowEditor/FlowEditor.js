@@ -6,7 +6,6 @@ import ReactFlow, {
   MiniMap,
   Controls,
   Background,
-  SmoothStepEdge,
 } from "react-flow-renderer";
 import DndBar from "./DndBar";
 import MoveNode from "./MoveNode";
@@ -49,18 +48,6 @@ const miniMapStrokeColoriser = (node) => {
 };
 
 const miniMapColoriser = (node) => {
-  // switch (node.type) {
-  //   case "move":
-  //     return "#0a73dc";
-  //   case "read":
-  //     return "#8258dc";
-  //   case "set":
-  //     return "#fa6f6f";
-  //   case "pause":
-  //     return "#ffb649";
-  //   default:
-  //     return "#eee";
-  // }
   return "none";
 };
 
@@ -139,13 +126,13 @@ const FlowEditor = () => {
               nodeStrokeWidth={4}
               maskColor="rgba(0,0,0,0.5)"
               style={{
-                backgroundColor: "#353535",
+                backgroundColor: "#1d1d1d",
                 height: "100",
                 width: "150",
               }}
               className={classes.miniMap}
             />
-            <Controls />
+            <Controls className={classes.controls} />
             <Background color="#aaa" gap={16} />
           </ReactFlow>
         </div>
