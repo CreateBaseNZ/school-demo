@@ -67,7 +67,10 @@ const FlowEditor = () => {
   console.log(elements);
 
   const onElementsRemove = useCallback((elementsToRemove) => {
-    setElements((els) => removeElements(elementsToRemove, els));
+    const filteredElements = elementsToRemove.filter(
+      (el) => el.id !== "start" && el.id !== "end"
+    );
+    setElements((els) => removeElements(filteredElements, els));
   }, []);
 
   const onConnect = useCallback((params) => {
@@ -134,6 +137,7 @@ const FlowEditor = () => {
             snapToGrid={true}
             snapGrid={[16, 16]}
             connectionLineComponent={CustomConnectionLine}
+            arrowHeadColor="#ffffff"
           >
             <MiniMap
               nodeStrokeColor={miniMapStrokeColoriser}

@@ -9,6 +9,7 @@
   cursor: grab;
   background: #3d3d3d;
   font-size: 1rem;
+  transition: box-shadow 0.1s ease-out;
   h5 {
     padding: 0.5rem 0.75rem;
     width: 100%;
@@ -96,6 +97,11 @@
     .handle.target {
       border: 2px solid $amber;
     }
+  }
+  &:hover {
+    box-shadow: 0 4px 24px 0 rgb(0, 0, 0);
+  }
+  &.selected {
   }
 }
 
@@ -195,7 +201,7 @@
   cursor: cell !important;
   transition: transform 0.1s ease-out, border 0.1s ease-out;
   &:hover {
-    transform: scale(1.5) translateY(-40%);
+    transform: scale(1.5) translateY(-30%);
   }
   &.target {
     background: black !important;
