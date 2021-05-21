@@ -1,6 +1,6 @@
 [
   {
-    "roboticSystem": "RoboticArm",
+    "robot": "RoboticArm",
     "type": "move",
     "function": {
       "name": "MoveArm",
@@ -13,18 +13,20 @@
     }
   },
   {
-    "roboticSystem": "RoboticArm",
+    "robot": "RoboticArm",
     "type": "move",
     "function": {
       "name": "OpenClaw",
+      "inputs": [],
       "logic": "const TargetAngles = [-20, 20];\nconst resolution = 1000/40;\nfor (let i = noOfJoints; i < noOfMotors; i++) {\n\tJoints[i].SetAngle(TargetAngles[i - noOfJoints]);\n}\nlet interval = setInterval(() => {\n\tlet Reached = true;\n\tfor (let i = 0; i < noOfMotors - noOfJoints; i++) {\n\t\tconst error = Math.abs(TargetAngles[i] - sensorData.jointData[i + noOfJoints].angle);\n\t\tif (error > 3) {\n\t\t\tReached = false;\n\t\t\tbreak;\n\t\t}\n\t}\n\t// Conditional statement to exit the promise\n\tif (Reached) {\n\t\tclearInterval(interval);\n\t\tresolve();\n\t}\n}, resolution);"
     }
   },
   {
-    "roboticSystem": "RoboticArm",
+    "robot": "RoboticArm",
     "type": "move",
     "function": {
       "name": "CloseClaw",
+      "inputs": [],
       "logic": "const TargetAngles = [-0, 0];\nconst resolution = 1000/40;\nfor (let i = noOfJoints; i < noOfMotors; i++) {\n\tJoints[i].SetAngle(TargetAngles[i - noOfJoints]);\n}\nlet interval = setInterval(() => {\n\tlet Reached = true;\n\tfor (let i = 0; i < noOfMotors - noOfJoints; i++) {\n\t\tconst error = Math.abs(TargetAngles[i] - sensorData.jointData[i + noOfJoints].angle);\n\t\tif (error > 3) {\n\t\t\tReached = false;\n\t\t\tbreak;\n\t\t}\n\t}\n\t// Conditional statement to exit the promise\n\tif (Reached) {\n\t\tclearInterval(interval);\n\t\tresolve();\n\t}\n}, resolution);"
     }
   }
