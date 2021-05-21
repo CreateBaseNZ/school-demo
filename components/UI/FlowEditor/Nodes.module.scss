@@ -99,9 +99,10 @@
     }
   }
   &:hover {
-    box-shadow: 0 4px 24px 0 rgb(0, 0, 0);
+    box-shadow: 0 2px 10px 2px rgb(0, 0, 0, 0.75);
   }
   &.selected {
+    background: $darkest;
   }
 }
 

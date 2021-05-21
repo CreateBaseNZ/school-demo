@@ -3,6 +3,7 @@ import ReactFlow, {
   ReactFlowProvider,
   removeElements,
   addEdge,
+  updateEdge,
   MiniMap,
   Controls,
   Background,
@@ -73,6 +74,10 @@ const FlowEditor = () => {
     setElements((els) => removeElements(filteredElements, els));
   }, []);
 
+  const onElementClick = useCallback((event, element) => {
+    console.log(element);
+  }, []);
+
   const onConnect = useCallback((params) => {
     setElements((els) => {
       return addEdge(
@@ -87,11 +92,17 @@ const FlowEditor = () => {
     });
   }, []);
 
-  const onLoad = (_reactFlowInstance) => {
+  const onEdgeUpdate = useCallback(
+    (oldEdge, newConnection) =>
+      setElements((els) => updateEdge(oldEdge, newConnection, els)),
+    []
+  );
+
+  const onLoad = useCallback((_reactFlowInstance) => {
     console.log("flow loaded:", _reactFlowInstance);
     _reactFlowInstance.fitView();
     setReactFlowInstance(_reactFlowInstance);
-  };
+  }, []);
 
   const onDragOver = (event) => {
     event.preventDefault();
@@ -129,11 +140,13 @@ const FlowEditor = () => {
             elements={elements}
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
-            onElementsRemove={onElementsRemove}
-            onConnect={onConnect}
             onLoad={onLoad}
+            onElementClick={onElementClick}
+            onElementsRemove={onElementsRemove}
             onDrop={onDrop}
             onDragOver={onDragOver}
+            onConnect={onConnect}
+            onEdgeUpdate={onEdgeUpdate}
             snapToGrid={true}
             snapGrid={[16, 16]}
             connectionLineComponent={CustomConnectionLine}
