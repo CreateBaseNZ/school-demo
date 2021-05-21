@@ -1,0 +1,31 @@
+[
+  {
+    "roboticSystem": "RoboticArm",
+    "type": "move",
+    "function": {
+      "name": "MoveArm",
+      "inputs": [
+        { "variable": "x", "type": "number", "value": 0 },
+        { "variable": "y", "type": "number", "value": 0 },
+        { "variable": "z", "type": "number", "value": 0 }
+      ],
+      "logic": "const TargetAngles = actions.InverseKinematics(x, y, z);\nconst resolution = 1000/40;\nif (TargetAngles) {\n\tfor (let i = 0; i < noOfJoints; i++) {\n\t\tJoints[i].SetAngle(TargetAngles[i]);\n\t}\n}\nlet interval = setInterval(() => {\n\tlet Reached = true;\n\tfor (let i = 0; i < noOfJoints; i++) {\n\t\tconst error = Math.abs(TargetAngles[i] - sensorData.jointData[i].angle);\n\t\tif (error > 5) {\n\t\t\tReached = false;\n\t\t\tbreak;\n\t\t}\n\t}\n\t// Conditional statement to exit the promise\n\tif (Reached) {\n\t\tclearInterval(interval);\n\t\tresolve();\n\t}\n}, resolution);"
+    }
+  },
+  {
+    "roboticSystem": "RoboticArm",
+    "type": "move",
+    "function": {
+      "name": "OpenClaw",
+      "logic": "const TargetAngles = [-20, 20];\nconst resolution = 1000/40;\nfor (let i = noOfJoints; i < noOfMotors; i++) {\n\tJoints[i].SetAngle(TargetAngles[i - noOfJoints]);\n}\nlet interval = setInterval(() => {\n\tlet Reached = true;\n\tfor (let i = 0; i < noOfMotors - noOfJoints; i++) {\n\t\tconst error = Math.abs(TargetAngles[i] - sensorData.jointData[i + noOfJoints].angle);\n\t\tif (error > 3) {\n\t\t\tReached = false;\n\t\t\tbreak;\n\t\t}\n\t}\n\t// Conditional statement to exit the promise\n\tif (Reached) {\n\t\tclearInterval(interval);\n\t\tresolve();\n\t}\n}, resolution);"
+    }
+  },
+  {
+    "roboticSystem": "RoboticArm",
+    "type": "move",
+    "function": {
+      "name": "CloseClaw",
+      "logic": "const TargetAngles = [-0, 0];\nconst resolution = 1000/40;\nfor (let i = noOfJoints; i < noOfMotors; i++) {\n\tJoints[i].SetAngle(TargetAngles[i - noOfJoints]);\n}\nlet interval = setInterval(() => {\n\tlet Reached = true;\n\tfor (let i = 0; i < noOfMotors - noOfJoints; i++) {\n\t\tconst error = Math.abs(TargetAngles[i] - sensorData.jointData[i + noOfJoints].angle);\n\t\tif (error > 3) {\n\t\t\tReached = false;\n\t\t\tbreak;\n\t\t}\n\t}\n\t// Conditional statement to exit the promise\n\tif (Reached) {\n\t\tclearInterval(interval);\n\t\tresolve();\n\t}\n}, resolution);"
+    }
+  }
+]
