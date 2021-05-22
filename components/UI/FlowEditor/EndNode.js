@@ -26,7 +26,7 @@ const EndNode = ({ data }) => {
       </h5>
       <Handle
         type="source"
-        position="right"
+        position="left"
         style={{
           height: "8px",
           width: "8px",
