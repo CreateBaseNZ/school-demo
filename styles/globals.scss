@@ -77,3 +77,8 @@ svg {
   background: #1a1a1a;
   box-shadow: 0 0 6px 0;
 }
+
+.react-flow__edge.selected > path {
+  stroke-width: 2px !important;
+  stroke-dasharray: 2.5 !important;
+}

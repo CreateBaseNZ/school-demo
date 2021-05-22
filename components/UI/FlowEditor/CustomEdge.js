@@ -1,7 +1,7 @@
 import { getSmoothStepPath, getMarkerEnd } from "react-flow-renderer";
 
 const borderRadius = 6;
-const strokeWidth = 1.5;
+const strokeWidth = 1;
 
 export const CustomConnectionLine = ({
   sourceX,
