@@ -1,0 +1,208 @@
+@import "../../../styles/variables";
+
+.node {
+  border: 2px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: grab;
+  background: #3d3d3d;
+  font-size: 1rem;
+  transition: box-shadow 0.1s ease-out, background-color 0.1s ease-out;
+  h5 {
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+    display: flex;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    border-bottom: thin solid #212121;
+    color: $lighter;
+    svg {
+      margin-right: 0.25em;
+      path {
+        fill: $lighter;
+      }
+    }
+  }
+  &.start {
+    color: $green;
+    h5 {
+      border: none;
+      padding-right: 1rem;
+    }
+    .handle.source {
+      background: $green;
+    }
+  }
+  &.end {
+    color: $red;
+    h5 {
+      border: none;
+      padding-right: 1rem;
+    }
+    .handle.target {
+      border: 2px solid $red;
+    }
+  }
+  &.move {
+    color: $blue-dark;
+    input:focus {
+      border-color: $blue-dark;
+    }
+    .handle.source {
+      background: $blue-dark;
+    }
+    .handle.target {
+      border: 2px solid $blue-dark;
+    }
+  }
+  &.read {
+    color: $logo-light;
+    select:focus {
+      border-color: $logo-light;
+    }
+    .handle.source {
+      background: $logo-light;
+    }
+    .handle.target {
+      border: 2px solid $logo-light;
+    }
+  }
+  &.set {
+    color: $blue-light;
+    select:focus {
+      border-color: $blue-light;
+    }
+    .handle.source {
+      background: $blue-light;
+    }
+    .handle.target {
+      border: 2px solid $blue-light;
+    }
+  }
+  &.pause {
+    color: $amber;
+    input:focus {
+      border-color: $amber;
+    }
+    select:focus {
+      border-color: $amber;
+    }
+    .handle.source {
+      background: $amber;
+    }
+    .handle.target {
+      border: 2px solid $amber;
+    }
+  }
+  &:hover {
+    box-shadow: 0 0 6px 0;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  .inputWrapper:first-child {
+    margin-top: 0.25rem;
+  }
+  .inputWrapper:last-child {
+    margin-bottom: 0.25rem;
+  }
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  label {
+    font-size: 14px;
+    color: $blue-dark;
+    margin-right: 0.75rem;
+    font-weight: 700;
+  }
+  input {
+    padding: 1px 5px;
+    width: 100%;
+    max-width: 6rem;
+    text-align: right;
+    background: #2a2a2a;
+    border-radius: 0.25rem;
+    border: thin solid #202020;
+    transition: border-color 0.1s ease-out, background-color 0.1s ease-out;
+    &::placeholder {
+      opacity: 0.75;
+      transition: opacity 0.1s ease-out;
+    }
+    &:hover {
+      background: #1d1d1d;
+      &::placeholder {
+        opacity: 1;
+      }
+    }
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.selectWrapper {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  select {
+    width: 100%;
+    padding: 1px 5px;
+    background: #2a2a2a;
+    border-radius: 0.25rem;
+    border: thin solid #202020;
+    cursor: pointer;
+    transition: border-color 0.1s ease-out;
+    &:invalid {
+      color: rgb(255, 255, 255, 0.25);
+      font-weight: 300;
+    }
+  }
+}
+
+.selectAndInput {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  .inputWrapper {
+    padding: 0;
+    flex: 1 1 0;
+    margin-right: 0.5rem;
+    input {
+      padding: 2px 5px;
+      width: 3rem;
+    }
+  }
+  .selectWrapper {
+    padding: 0;
+    flex: 0 0 auto;
+  }
+}
+
+.handle {
+  cursor: cell !important;
+  transition: transform 0.1s ease-out, border 0.1s ease-out;
+  &:hover {
+    transform: scale(1.5) translateY(-30%);
+  }
+  &.target {
+    background: black !important;
+  }
+}

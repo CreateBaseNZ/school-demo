@@ -36,11 +36,11 @@ svg {
 
 .Resizer {
   background: $border-color;
-  z-index: 1;
+  z-index: 5;
   background-clip: padding-box;
   &:hover,
   &:active {
-    z-index: 2;
+    z-index: 6;
     background: $blue-mid;
     background-clip: padding-box;
     transition: all 0.1s ease-out 0.2s;
@@ -71,4 +71,14 @@ svg {
       border-right: 2px solid $blue-mid;
     }
   }
+}
+
+.react-flow__node.selected > div {
+  background: #1a1a1a;
+  box-shadow: 0 0 6px 0;
+}
+
+.react-flow__edge.selected > path {
+  stroke-width: 2px !important;
+  stroke-dasharray: 2.5 !important;
 }
