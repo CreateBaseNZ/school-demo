@@ -1,7 +1,10 @@
+import OutlinedFlagIcon from "@material-ui/icons/OutlinedFlag";
 import OpenWithRoundedIcon from "@material-ui/icons/OpenWithRounded";
 import MemoryIcon from "@material-ui/icons/Memory";
 import SettingsInputHdmiOutlinedIcon from "@material-ui/icons/SettingsInputHdmiOutlined";
 import PauseCircleOutlineOutlinedIcon from "@material-ui/icons/PauseCircleOutlineOutlined";
+
+import StartNode from "./StartNode";
 
 import classes from "./DndBar.module.scss";
 
@@ -21,6 +24,16 @@ const DndBar = () => {
     <aside className={classes.container}>
       <div className={classes.description}>Drag &amp; Drop</div>
       <div className={classes.wrapper}>
+        <div
+          className={`${classes.dndNode} ${classes.start}`}
+          onDragStart={(event) => onDragStart(event, "start")}
+          draggable
+        >
+          <h5>
+            <OutlinedFlagIcon />
+            Start
+          </h5>
+        </div>
         <div
           className={`${classes.dndNode} ${classes.move}`}
           onDragStart={(event) => onDragStart(event, "move")}

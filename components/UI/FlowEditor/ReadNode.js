@@ -40,7 +40,6 @@ const ReadNode = ({ data }) => {
       <Handle
         type="source"
         position="right"
-        id="a"
         style={{
           height: "8px",
           width: "8px",

@@ -72,6 +72,9 @@
       }
     }
   }
+  &.start {
+    border-color: $green;
+  }
   &.move {
     border-color: $blue-dark;
     input:focus {

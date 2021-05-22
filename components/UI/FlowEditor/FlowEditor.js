@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from "react";
 import ReactFlow, {
   ReactFlowProvider,
+  isNode,
   removeElements,
   addEdge,
   updateEdge,
@@ -75,10 +76,13 @@ const FlowEditor = () => {
   }, []);
 
   const onElementClick = useCallback((event, element) => {
-    console.log(element);
+    if (isNode(element)) {
+      console.log("this is a node");
+    }
   }, []);
 
   const onConnect = useCallback((params) => {
+    console.log(params);
     setElements((els) => {
       return addEdge(
         {
@@ -100,6 +104,7 @@ const FlowEditor = () => {
 
   const onLoad = useCallback((_reactFlowInstance) => {
     console.log("flow loaded:", _reactFlowInstance);
+
     _reactFlowInstance.fitView();
     setReactFlowInstance(_reactFlowInstance);
   }, []);
