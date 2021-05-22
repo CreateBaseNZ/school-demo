@@ -66,8 +66,6 @@ const FlowEditor = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [elements, setElements] = useState(initialElements);
 
-  console.log(elements);
-
   const onElementsRemove = useCallback((elementsToRemove) => {
     const filteredElements = elementsToRemove.filter(
       (el) => el.id !== "start" && el.id !== "end"

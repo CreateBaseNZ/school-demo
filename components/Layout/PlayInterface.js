@@ -38,10 +38,9 @@ const PlayInterface = (props) => {
         onDragFinished={dragReleaseHandler}
       >
         <Contents />
-        <Workspace unityContext={unityContext} sensorData={sensorData} />
+        <Workspace />
       </SplitPane>
-      {/* <Simulation unityContext={unityContext} /> */}
-      <div></div>
+      <Simulation unityContext={unityContext} sensorData={sensorData} />
     </SplitPane>
   );
 };
