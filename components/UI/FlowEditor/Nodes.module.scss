@@ -22,8 +22,10 @@
     color: $lighter;
     svg {
       margin-right: 0.25em;
+      color: inherit;
       path {
-        fill: $lighter;
+        color: inherit;
+        fill: currentColor;
       }
     }
   }
@@ -230,7 +232,7 @@
   }
   label {
     margin-left: 0.5em;
-    opacity: 0.75;
+    opacity: 0.5;
     transition: opacity 0.1s ease-out;
   }
   input:checked + .customRadio,
@@ -243,7 +245,10 @@
     border: thin solid $blue-dark;
     opacity: 1;
   }
-  input:hover + label {
+  input:hover ~ label {
+    opacity: 0.75;
+  }
+  input:checked ~ label {
     opacity: 1;
   }
 }

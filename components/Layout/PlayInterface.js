@@ -47,7 +47,8 @@ const PlayInterface = (props) => {
         {/* <Contents /> */}
         <Workspace />
       </SplitPane>
-      <Simulation unityContext={unityContext} sensorData={sensorData} />
+      {/* <Simulation unityContext={unityContext} sensorData={sensorData} /> */}
+      <div></div>
     </SplitPane>
   );
 };

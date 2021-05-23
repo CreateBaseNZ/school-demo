@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import ReactFlow, {
   ReactFlowProvider,
   isNode,
@@ -25,6 +25,11 @@ import classes from "./FlowEditor.module.scss";
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
+
+const initialData = {
+  start: {},
+  end: {},
+};
 
 const nodeTypes = {
   start: StartNode,
@@ -69,6 +74,11 @@ const FlowEditor = () => {
   const wrapperRef = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [elements, setElements] = useState(initialElements);
+  const [data, setData] = useState(initialData);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   const onElementsRemove = useCallback((elementsToRemove) => {
     const filteredElements = elementsToRemove.filter(
@@ -131,10 +141,16 @@ const FlowEditor = () => {
       id: getId(),
       type,
       position,
-      data: { label: `${type} node` },
+      data: {
+        label: `${type} node`,
+        input: true,
+        callBack: (input) =>
+          setData((state) => ({ ...state, id: { input: !input } })),
+      },
     };
 
     setElements((es) => es.concat(newNode));
+    setData((data) => ({...data, newNode.id: {input: newNode.data.input} }));
   };
 
   return (
