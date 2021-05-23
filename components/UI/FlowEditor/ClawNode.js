@@ -6,10 +6,11 @@ import SettingsEthernetRoundedIcon from "@material-ui/icons/SettingsEthernetRoun
 import classes from "./Nodes.module.scss";
 
 const ClawNode = ({ data }) => {
-  console.log(data);
-  const changeHandler = (event) => {
-    event.preventDefault();
-    data.callBack(!data.input);
+  const [isOpen, setValue] = useState(data.default.isOpen);
+
+  const changeHandler = () => {
+    data.callBack({ isOpen: !isOpen });
+    setValue((current) => !current);
   };
 
   return (
@@ -22,7 +23,7 @@ const ClawNode = ({ data }) => {
           width: "8px",
         }}
         className={`${classes.handle} ${classes.target}`}
-        onConnect={(params) => console.log("handle onConnect", params)}
+        onConnect={(data) => console.log("handle onConnect", data)}
       />
       <h5>
         <SettingsEthernetRoundedIcon />
@@ -35,7 +36,7 @@ const ClawNode = ({ data }) => {
             id="open"
             name="activeClaw"
             value="open"
-            checked={data.input}
+            checked={isOpen}
             onChange={changeHandler}
           />
           <span className={classes.customRadio}></span>
@@ -47,7 +48,7 @@ const ClawNode = ({ data }) => {
             id="close"
             name="activeClaw"
             value="close"
-            checked={!data.input}
+            checked={!isOpen}
             onChange={changeHandler}
           />
           <span className={classes.customRadio}></span>

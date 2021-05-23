@@ -89,7 +89,7 @@ const FlowEditor = () => {
 
   const onElementClick = useCallback((event, element) => {
     if (isNode(element)) {
-      console.log("this is a node");
+      // console.log("this is a node");
     }
   }, []);
 
@@ -137,20 +137,30 @@ const FlowEditor = () => {
       x: event.clientX - reactFlowBounds.left - parseFloat(x),
       y: event.clientY - reactFlowBounds.top - parseFloat(y),
     });
+    const id = getId();
+    let defaultValues = null;
+    if (type === "claw") {
+      defaultValues = { isOpen: true };
+    } else if (type === "move") {
+      defaultValues = { x: 0, y: 0, z: 0 };
+    }
+    console.log(defaultValues);
+    setData((data) => ({
+      ...data,
+      [id]: { ...defaultValues },
+    }));
     const newNode = {
-      id: getId(),
+      id: id,
       type,
       position,
       data: {
-        label: `${type} node`,
-        input: true,
-        callBack: (input) =>
-          setData((state) => ({ ...state, id: { input: !input } })),
+        default: defaultValues,
+        callBack: (newValues) => {
+          setData((state) => ({ ...state, [id]: { ...newValues } }));
+        },
       },
     };
-
     setElements((es) => es.concat(newNode));
-    setData((data) => ({...data, newNode.id: {input: newNode.data.input} }));
   };
 
   return (
