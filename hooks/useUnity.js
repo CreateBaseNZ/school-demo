@@ -16,10 +16,14 @@ const unityContext = new UnityContext({
 
 const useUnity = () => {
   const [sensorData, setSensorData] = useState();
+  const [gameState, setGameState] = useState();
 
   useEffect(() => {
     unityContext.on("GetSensorData", (sensorData) => {
       setSensorData(sensorData);
+    });
+    unityContext.on("GetGameState", (gameState) => {
+      setGameState(gameState);
     });
   }, []);
 
@@ -27,7 +31,17 @@ const useUnity = () => {
     setSensorData(data);
   }, []);
 
-  return [unityContext, sensorData, setSensorDataWrapper];
+  const setGameStateWrapper = useCallback((data) => {
+    setGameState(data);
+  });
+
+  return [
+    unityContext,
+    sensorData,
+    setSensorDataWrapper,
+    gameState,
+    setGameStateWrapper,
+  ];
 };
 
 export default useUnity;
