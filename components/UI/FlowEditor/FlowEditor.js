@@ -13,6 +13,7 @@ import DndBar from "./DndBar";
 import StartNode from "./StartNode";
 import EndNode from "./EndNode";
 import MoveNode from "./MoveNode";
+import ClawNode from "./ClawNode";
 import ReadNode from "./ReadNode";
 import SetNode from "./SetNode";
 import PauseNode from "./PauseNode";
@@ -29,6 +30,7 @@ const nodeTypes = {
   start: StartNode,
   end: EndNode,
   move: MoveNode,
+  claw: ClawNode,
   read: ReadNode,
   set: SetNode,
   pause: PauseNode,
@@ -48,10 +50,8 @@ const miniMapStrokeColoriser = (node) => {
       return "#36c4e8";
     case "pause":
       return "#ffb649";
-    case "start":
-      return "#18dbac";
-    case "end":
-      return "#fa6f6f";
+    case "claw":
+      return "#0a73dc";
     default:
       return "#ffffff";
   }

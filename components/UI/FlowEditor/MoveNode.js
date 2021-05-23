@@ -7,7 +7,7 @@ import classes from "./Nodes.module.scss";
 
 const MoveNode = ({ data }) => {
   return (
-    <div className={`${classes.node} ${classes.move}`}>
+    <div className={`${classes.node} ${classes.move} ${classes.arm}`}>
       <Handle
         type="target"
         position="left"
@@ -20,7 +20,7 @@ const MoveNode = ({ data }) => {
       />
       <h5>
         <OpenWithRoundedIcon />
-        Move Motor
+        Move Arm
       </h5>
       <div className={classes.inputContainer}>
         <div className={classes.inputWrapper}>

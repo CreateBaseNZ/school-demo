@@ -1,4 +1,4 @@
-import OutlinedFlagIcon from "@material-ui/icons/OutlinedFlag";
+import SettingsEthernetRoundedIcon from "@material-ui/icons/SettingsEthernetRounded";
 import OpenWithRoundedIcon from "@material-ui/icons/OpenWithRounded";
 import MemoryIcon from "@material-ui/icons/Memory";
 import SettingsInputHdmiOutlinedIcon from "@material-ui/icons/SettingsInputHdmiOutlined";
@@ -25,16 +25,6 @@ const DndBar = () => {
       <div className={classes.description}>Drag &amp; Drop</div>
       <div className={classes.wrapper}>
         <div
-          className={`${classes.dndNode} ${classes.start}`}
-          onDragStart={(event) => onDragStart(event, "start")}
-          draggable
-        >
-          <h5>
-            <OutlinedFlagIcon />
-            Start
-          </h5>
-        </div>
-        <div
           className={`${classes.dndNode} ${classes.move}`}
           onDragStart={(event) => onDragStart(event, "move")}
           draggable
@@ -46,15 +36,35 @@ const DndBar = () => {
           <div className={classes.inputContainer}>
             <div className={classes.inputWrapper}>
               <label htmlFor="move-x">X</label>
-              <input type="number" id="move-x" placeholder="0" />
+              <input type="number" id="move-x" />
             </div>
             <div className={classes.inputWrapper}>
               <label htmlFor="move-y">Y</label>
-              <input type="number" id="move-y" placeholder="0" />
+              <input type="number" id="move-y" />
             </div>
             <div className={classes.inputWrapper}>
               <label htmlFor="move-z">Z</label>
-              <input type="number" id="move-z" placeholder="0" />
+              <input type="number" id="move-z" />
+            </div>
+          </div>
+        </div>
+        <div
+          className={`${classes.dndNode} ${classes.move} ${classes.claw}`}
+          onDragStart={(event) => onDragStart(event, "claw")}
+          draggable
+        >
+          <h5>
+            <SettingsEthernetRoundedIcon />
+            Activate Claw
+          </h5>
+          <div className={classes.radioContainer}>
+            <div className={classes.radioWrapper}>
+              <span className={classes.customRadio}></span>
+              <label>Open</label>
+            </div>
+            <div className={classes.radioWrapper}>
+              <span className={classes.customRadio}></span>
+              <label>Close</label>
             </div>
           </div>
         </div>
@@ -68,15 +78,8 @@ const DndBar = () => {
             Read Encoder
           </h5>
           <div className={classes.selectWrapper}>
-            <select
-              name="read-motor"
-              id="read-motor"
-              defaultValue="Select a motor"
-              required
-            >
-              <option value="" hidden>
-                Select a motor
-              </option>
+            <select name="read-motor" id="read-motor" required>
+              <option value="" hidden></option>
               <option value="Motor A">Motor A</option>
               <option value="Motor B">Motor B</option>
               <option value="Motor C">Motor C</option>
@@ -93,15 +96,8 @@ const DndBar = () => {
             Set Up Arm
           </h5>
           <div className={classes.selectWrapper}>
-            <select
-              name="set-motor"
-              id="set-motor"
-              defaultValue="Select a motor"
-              required
-            >
-              <option value="" hidden>
-                Select a motor
-              </option>
+            <select name="set-motor" id="set-motor" required>
+              <option value="" hidden></option>
               <option value="Motor A">Motor A</option>
               <option value="Motor B">Motor B</option>
               <option value="Motor C">Motor C</option>
@@ -119,18 +115,11 @@ const DndBar = () => {
           </h5>
           <div className={classes.selectAndInput}>
             <div className={classes.inputWrapper}>
-              <input type="number" id="pause-duration" placeholder="0" />
+              <input type="number" id="pause-duration" />
             </div>
             <div className={classes.selectWrapper}>
-              <select
-                name="pause-unit"
-                id="pause-unit"
-                defaultValue="Unit"
-                required
-              >
-                <option value="" hidden>
-                  Unit
-                </option>
+              <select name="pause-unit" id="pause-unit" required>
+                <option value="" hidden></option>
                 <option value="ms">ms</option>
                 <option value="s">s</option>
               </select>

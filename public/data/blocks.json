@@ -2,6 +2,7 @@
   {
     "robot": "RoboticArm",
     "type": "move",
+    "name": "Move Arm",
     "function": {
       "name": "MoveArm",
       "inputs": [
