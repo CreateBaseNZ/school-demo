@@ -44,14 +44,18 @@ const miniMapStrokeColoriser = (node) => {
   switch (node.type) {
     case "move":
       return "#0a73dc";
+    case "claw":
+      return "#0a73dc";
     case "read":
       return "#8258dc";
     case "set":
       return "#36c4e8";
     case "pause":
       return "#ffb649";
-    case "claw":
-      return "#0a73dc";
+    case "start":
+      return "#18dbac";
+    case "end":
+      return "#fa6f6f";
     default:
       return "#ffffff";
   }

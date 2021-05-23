@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { Handle } from "react-flow-renderer";
 
 import SettingsEthernetRoundedIcon from "@material-ui/icons/SettingsEthernetRounded";
@@ -6,6 +6,12 @@ import SettingsEthernetRoundedIcon from "@material-ui/icons/SettingsEthernetRoun
 import classes from "./Nodes.module.scss";
 
 const ClawNode = ({ data }) => {
+  const [checkedOption, setCheckedOption] = useState(true);
+
+  const changeHandler = () => {
+    setCheckedOption((state) => !state);
+  };
+
   return (
     <div className={`${classes.node} ${classes.move} ${classes.claw}`}>
       <Handle
@@ -29,13 +35,21 @@ const ClawNode = ({ data }) => {
             id="open"
             name="activeClaw"
             value="open"
-            checked="checked"
+            checked={checkedOption}
+            onChange={changeHandler}
           />
           <span className={classes.customRadio}></span>
           <label htmlFor="open">Open</label>
         </div>
         <div className={classes.radioWrapper}>
-          <input type="radio" id="close" name="activeClaw" value="close" />
+          <input
+            type="radio"
+            id="close"
+            name="activeClaw"
+            value="close"
+            checked={!checkedOption}
+            onChange={changeHandler}
+          />
           <span className={classes.customRadio}></span>
           <label htmlFor="close">Close</label>
         </div>
