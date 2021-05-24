@@ -31,7 +31,6 @@ const ClientOnlyPortal = ({ children, selector }) => {
 const codeGen = new CodeGenerator();
 
 const Workspace = (props) => {
-  console.log(props);
   const [isFlow, setIsFlow] = useState(true);
   const [textCode, setTextCode] = useState("// Start coding!");
   const flowRef = useRef();
