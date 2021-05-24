@@ -20,11 +20,7 @@ export class CodeGenerator {
   private start(blockDetail: any) {
     // Fetch the Block Function
     const blockFunction = this.blockFunctions.find(element => {
-      if (element.type === "start") {
-        return (element.robot === blockDetail.robot);
-      } else {
-        return false;
-      }
+      return (element.robot === blockDetail.robot && blockDetail.type === "start");
     });
     // Add to content
     this.content += blockFunction.logic;
@@ -74,8 +70,16 @@ export class CodeGenerator {
     this.executes.push(execute);
   }
 
-  private end (blockDetail: any) {
-    
+  private end(blockDetail: any) {
+    // Fetch the Block Function
+    const blockFunction = this.blockFunctions.find(element => {
+      return (element.robot === blockDetail.robot && element.type === "end");
+    });
+    // Add to execute
+    for (let i = 0; i < blockFunction.executes.length; i++) {
+      const element = blockFunction.executes[i];
+      this.executes.push(element);
+    }
   }
 
   private run() {
@@ -90,7 +94,6 @@ export class CodeGenerator {
   public build(blockDetails: Array<any> = []) {
     for (let i = 0; i < blockDetails.length; i++) {
       const element = blockDetails[i];
-      console.log(element);
       switch (element.type) {
         case "start": this.start(element); break;
         case "move": this.move(element); break;
