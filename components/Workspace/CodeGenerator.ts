@@ -73,7 +73,7 @@ export class CodeGenerator {
   private end(blockDetail: any) {
     // Fetch the Block Function
     const blockFunction = this.blockFunctions.find(element => {
-      return (element.robot === blockDetail.robot && blockDetail.type === "end");
+      return (element.robot === blockDetail.robot && element.type === "end");
     });
     // Add to execute
     for (let i = 0; i < blockFunction.executes.length; i++) {
@@ -94,7 +94,6 @@ export class CodeGenerator {
   public build(blockDetails: Array<any> = []) {
     for (let i = 0; i < blockDetails.length; i++) {
       const element = blockDetails[i];
-      console.log(element);
       switch (element.type) {
         case "start": this.start(element); break;
         case "move": this.move(element); break;
