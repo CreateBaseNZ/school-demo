@@ -5,7 +5,7 @@ const math = create(all, config)
 
 export class Block {
     _noOfJoints = 4;
-    _jointLengths = [0.5, 1, 1, 0.45];
+    _jointLengths = [2.7, 3.1, 3.1, 2.7];
     constructor() {
 
     }
@@ -192,9 +192,13 @@ export class Block {
         if (Math.abs(angles[3]) > pi / 2) {
             return false;
         }
+        let jointLocations = this._ForwardKinematics(angles);
+        let lastJointLoc = math.squeeze(jointLocations.subset(math.index(4, math.range(0, 3), 3)));
+        lastJointLoc.forEach((data) => { console.log(data) });
         for (let i = 0; i < this._noOfJoints; i++) {
             angles[i] *= 180 / pi;
         }
+       
         return angles; //angles.map((val) => val * 180 / pi);
     }
 }
