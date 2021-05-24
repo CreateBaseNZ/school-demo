@@ -75,19 +75,43 @@ const FlowEditor = () => {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [elements, setElements] = useState(initialElements);
   const [data, setData] = useState(initialData);
+  const [code, setCode] = useState("");
 
   const testHandler = () => {
+    let blocksConfig = [{ robot: "RoboticArm", type: "start" }];
+    let currentNode = getOutgoers(elements[0], elements)[0];
     let traverse = true;
-    let currentNode = elements[0];
     while (traverse) {
-      console.log(currentNode);
-      console.log(data[currentNode.id]);
+      let block = {
+        robot: "RoboticArm",
+        value: { ...data[currentNode.id] },
+      };
+      switch (currentNode.type) {
+        case "move":
+          block = {
+            ...block,
+            name: "MoveArm",
+            type: "move",
+          };
+          break;
+        case "claw":
+          block = {
+            ...block,
+            name: "ToggleClaw",
+            type: "move",
+          };
+          break;
+        default:
+          break;
+      }
+      blocksConfig.push(block);
       const nextNode = getOutgoers(currentNode, elements)[0];
-      if (nextNode) {
+      if (nextNode.id !== "end") {
         currentNode = nextNode;
       } else {
         traverse = false;
-        console.log("ended");
+        blocksConfig.push({ robot: "RoboticArm", type: "end" });
+        console.log(blocksConfig);
         break;
       }
     }

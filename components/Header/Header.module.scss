@@ -8,12 +8,13 @@
   justify-content: space-between;
   padding: 0.5rem 2rem;
   border-bottom: thin solid $border-color;
-  &.indexStyling {
-    display: none;
+  & > * {
+    flex: 1 1 0;
   }
-  &.menuStyling {
-    & > *:first-child {
-      display: none;
-    }
-  }
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

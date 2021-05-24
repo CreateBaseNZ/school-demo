@@ -25,6 +25,7 @@ const Header = () => {
       style={{ display: showHeader ? "flex" : "none" }}
     >
       <Nav showStep={showStep} showSubsystem={showSubsystem} />
+      <div id="editor-toggle-portal" className={classes.switch}></div>
       <HeaderButtons />
     </header>
   );
