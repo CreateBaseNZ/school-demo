@@ -2,7 +2,6 @@ import React, {
   useState,
   useRef,
   useCallback,
-  forwardRef,
   useImperativeHandle,
 } from "react";
 import ReactFlow, {
@@ -15,15 +14,16 @@ import ReactFlow, {
   Background,
   getOutgoers,
 } from "react-flow-renderer";
+import {
+  initialData,
+  nodeTypes,
+  edgeTypes,
+  miniMapColoriser,
+  miniMapStrokeColoriser,
+} from "../../../utils/flowConfig";
 import DndBar from "./DndBar";
-import StartNode from "./StartNode";
-import EndNode from "./EndNode";
-import MoveNode from "./MoveNode";
-import ClawNode from "./ClawNode";
-import ReadNode from "./ReadNode";
-import SetNode from "./SetNode";
-import PauseNode from "./PauseNode";
-import CustomEdge, { CustomConnectionLine } from "./CustomEdge";
+
+import { CustomConnectionLine } from "./CustomEdge";
 
 import initialElements from "../../../utils/initialElements";
 
@@ -31,50 +31,6 @@ import classes from "./FlowEditor.module.scss";
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
-
-const initialData = {
-  start: {},
-  end: {},
-};
-
-const nodeTypes = {
-  start: StartNode,
-  end: EndNode,
-  move: MoveNode,
-  claw: ClawNode,
-  read: ReadNode,
-  set: SetNode,
-  pause: PauseNode,
-};
-
-const edgeTypes = {
-  custom: CustomEdge,
-};
-
-const miniMapStrokeColoriser = (node) => {
-  switch (node.type) {
-    case "move":
-      return "#0a73dc";
-    case "claw":
-      return "#0a73dc";
-    case "read":
-      return "#8258dc";
-    case "set":
-      return "#36c4e8";
-    case "pause":
-      return "#ffb649";
-    case "start":
-      return "#18dbac";
-    case "end":
-      return "#fa6f6f";
-    default:
-      return "#ffffff";
-  }
-};
-
-const miniMapColoriser = (node) => {
-  return "none";
-};
 
 const FlowEditor = (props) => {
   const wrapperRef = useRef(null);
@@ -205,6 +161,16 @@ const FlowEditor = (props) => {
     };
     setElements((es) => es.concat(newNode));
   };
+
+  // const onEdgeUpdateStart = (event, edge) => {
+  //   console.log(event);
+  //   console.log(edge);
+  // };
+
+  // const onEdgeMouseLeave = (event, edge) => {
+  //   console.log(event);
+  //   console.log(edge);
+  // };
 
   return (
     <div

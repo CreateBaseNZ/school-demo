@@ -32,7 +32,6 @@ const MoveNode = ({ data }) => {
           width: "8px",
         }}
         className={`${classes.handle} ${classes.target}`}
-        onConnect={(params) => console.log("handle onConnect", params)}
       />
       <h5>
         <OpenWithRoundedIcon />
