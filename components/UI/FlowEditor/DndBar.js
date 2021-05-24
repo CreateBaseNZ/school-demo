@@ -55,7 +55,7 @@ const DndBar = () => {
         >
           <h5>
             <SettingsEthernetRoundedIcon />
-            Activate Claw
+            Toggle Claw
           </h5>
           <div className={classes.radioContainer}>
             <div className={classes.radioWrapper}>
@@ -68,7 +68,7 @@ const DndBar = () => {
             </div>
           </div>
         </div>
-        <div
+        {/* <div
           className={`${classes.dndNode} ${classes.read}`}
           onDragStart={(event) => onDragStart(event, "read")}
           draggable
@@ -85,8 +85,8 @@ const DndBar = () => {
               <option value="Motor C">Motor C</option>
             </select>
           </div>
-        </div>
-        <div
+        </div> */}
+        {/* <div
           className={`${classes.dndNode} ${classes.set}`}
           onDragStart={(event) => onDragStart(event, "set")}
           draggable
@@ -103,8 +103,8 @@ const DndBar = () => {
               <option value="Motor C">Motor C</option>
             </select>
           </div>
-        </div>
-        <div
+        </div> */}
+        {/* <div
           className={`${classes.dndNode} ${classes.pause}`}
           onDragStart={(event) => onDragStart(event, "pause")}
           draggable
@@ -125,7 +125,7 @@ const DndBar = () => {
               </select>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </aside>
   );

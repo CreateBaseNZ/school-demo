@@ -76,10 +76,6 @@ const FlowEditor = () => {
   const [elements, setElements] = useState(initialElements);
   const [data, setData] = useState(initialData);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   const onElementsRemove = useCallback((elementsToRemove) => {
     const filteredElements = elementsToRemove.filter(
       (el) => el.id !== "start" && el.id !== "end"
@@ -89,7 +85,7 @@ const FlowEditor = () => {
 
   const onElementClick = useCallback((event, element) => {
     if (isNode(element)) {
-      // console.log("this is a node");
+      console.log("this is a node");
     }
   }, []);
 
@@ -144,7 +140,6 @@ const FlowEditor = () => {
     } else if (type === "move") {
       defaultValues = { x: 0, y: 0, z: 0 };
     }
-    console.log(defaultValues);
     setData((data) => ({
       ...data,
       [id]: { ...defaultValues },

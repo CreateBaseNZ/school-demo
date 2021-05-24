@@ -27,7 +27,7 @@ const ClawNode = ({ data }) => {
       />
       <h5>
         <SettingsEthernetRoundedIcon />
-        Activate Claw
+        Toggle Claw
       </h5>
       <div className={classes.radioContainer}>
         <div className={classes.radioWrapper}>

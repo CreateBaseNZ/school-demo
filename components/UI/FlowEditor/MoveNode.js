@@ -18,6 +18,10 @@ const MoveNode = ({ data }) => {
     event.target.select();
   };
 
+  const dragHandler = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <div className={`${classes.node} ${classes.move} ${classes.arm}`}>
       <Handle
@@ -45,6 +49,7 @@ const MoveNode = ({ data }) => {
             value={coords.x}
             onChange={changeHandler}
             onFocus={focusHandler}
+            onDragStart={dragHandler}
           />
         </div>
         <div className={classes.inputWrapper}>
@@ -57,6 +62,7 @@ const MoveNode = ({ data }) => {
             value={coords.y}
             onChange={changeHandler}
             onFocus={focusHandler}
+            onDragStart={dragHandler}
           />
         </div>
         <div className={classes.inputWrapper}>
@@ -69,6 +75,7 @@ const MoveNode = ({ data }) => {
             value={coords.z}
             onChange={changeHandler}
             onFocus={focusHandler}
+            onDragStart={dragHandler}
           />
         </div>
       </div>
