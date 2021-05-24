@@ -155,6 +155,8 @@ const FlowEditor = () => {
     console.log("flow loaded:", _reactFlowInstance);
 
     _reactFlowInstance.fitView();
+    _reactFlowInstance.zoomOut();
+    _reactFlowInstance.zoomOut();
     setReactFlowInstance(_reactFlowInstance);
   }, []);
 
