@@ -1,13 +1,13 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import ReactFlow, {
   ReactFlowProvider,
-  isNode,
   removeElements,
   addEdge,
   updateEdge,
   MiniMap,
   Controls,
   Background,
+  getOutgoers,
 } from "react-flow-renderer";
 import DndBar from "./DndBar";
 import StartNode from "./StartNode";
@@ -76,6 +76,23 @@ const FlowEditor = () => {
   const [elements, setElements] = useState(initialElements);
   const [data, setData] = useState(initialData);
 
+  const testHandler = () => {
+    let traverse = true;
+    let currentNode = elements[0];
+    while (traverse) {
+      console.log(currentNode);
+      console.log(data[currentNode.id]);
+      const nextNode = getOutgoers(currentNode, elements)[0];
+      if (nextNode) {
+        currentNode = nextNode;
+      } else {
+        traverse = false;
+        console.log("ended");
+        break;
+      }
+    }
+  };
+
   const onElementsRemove = useCallback((elementsToRemove) => {
     const filteredElements = elementsToRemove.filter(
       (el) => el.id !== "start" && el.id !== "end"
@@ -84,9 +101,9 @@ const FlowEditor = () => {
   }, []);
 
   const onElementClick = useCallback((event, element) => {
-    if (isNode(element)) {
-      console.log("this is a node");
-    }
+    // if (isNode(element)) {
+    //   console.log("this is a node");
+    // }
   }, []);
 
   const onConnect = useCallback((params) => {
@@ -198,6 +215,12 @@ const FlowEditor = () => {
           </ReactFlow>
         </div>
       </ReactFlowProvider>
+      <button
+        onClick={testHandler}
+        style={{ position: "absolute", top: "0", right: "0", zIndex: "10" }}
+      >
+        CLICK ME
+      </button>
     </div>
   );
 };

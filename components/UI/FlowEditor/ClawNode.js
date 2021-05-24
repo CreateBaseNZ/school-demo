@@ -5,7 +5,7 @@ import SettingsEthernetRoundedIcon from "@material-ui/icons/SettingsEthernetRoun
 
 import classes from "./Nodes.module.scss";
 
-const ClawNode = ({ data }) => {
+const ClawNode = ({ id, data }) => {
   const [isOpen, setValue] = useState(data.default.isOpen);
 
   const changeHandler = () => {
@@ -34,7 +34,7 @@ const ClawNode = ({ data }) => {
           <input
             type="radio"
             id="open"
-            name="activeClaw"
+            name={id + "_claw"}
             value="open"
             checked={isOpen}
             onChange={changeHandler}
@@ -46,7 +46,7 @@ const ClawNode = ({ data }) => {
           <input
             type="radio"
             id="close"
-            name="activeClaw"
+            name={id + "_claw"}
             value="close"
             checked={!isOpen}
             onChange={changeHandler}
