@@ -5,7 +5,7 @@ const math = create(all, config)
 
 export class Block {
     _noOfJoints = 4;
-    _jointLengths = [0.5, 1, 1, 0.45];
+    _jointLengths = [2.7, 3.1, 3.1, 2.7];
     constructor() {
 
     }
@@ -115,7 +115,6 @@ export class Block {
         let targetJoint = 2;
         const totaljointLengths = this._jointLengths.reduce((sum, current) => sum + current, -this._jointLengths[0] - this._jointLengths[this._jointLengths.length - 1]);
         angles[0] = Math.atan2(-x_t, y_t);
-        console.log(angles[0]);
         if (angles[0] > pi / 2) {
             angles[0] -= pi;
         } else if (angles[0] < -pi / 2) {
@@ -125,9 +124,6 @@ export class Block {
         const y = y_t - this._jointLengths[3] * Math.cos(theta) * Math.sin(angles[0] - pi / 2);
         const z = z_t - this._jointLengths[3] * Math.sin(theta);
         const totalDistance = math.sqrt(math.square(x) + math.square(y) + math.square(z - this._jointLengths[0]));
-        console.log(angles[0]);
-        console.log(x, y, z);
-        console.log(totalDistance, totaljointLengths);
         if ((totalDistance - totaljointLengths) > 0.1) {
 
             return false;
@@ -188,10 +184,18 @@ export class Block {
         }
         //angles[0] = pi / 2;
         angles[3] = -theta + pi / 2 - angles[1] - angles[2];
-        console.log(angles);
+        if (angles[3] > pi / 2) {
+            angles[3] -= 2 * pi;
+        } else if (angles[3] < -pi / 2) {
+            angles[3] += 2 * pi;
+        }
+        if (Math.abs(angles[3]) > pi / 2) {
+            return false;
+        }
         for (let i = 0; i < this._noOfJoints; i++) {
             angles[i] *= 180 / pi;
         }
+       
         return angles; //angles.map((val) => val * 180 / pi);
     }
 }

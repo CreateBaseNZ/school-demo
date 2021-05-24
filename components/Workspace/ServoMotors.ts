@@ -1,24 +1,23 @@
-
-
 export class ServoMotors {
   private JointIndex : number;
   private TargetAngle : number;
   private MotorType: string;
-  private Gain: number;
+  private GainP: number;
+  private GainD: number;
   private formattedInput: any;
-
-  constructor(JointIndex: number, Gain: number, MotorType: string) {
+  constructor(JointIndex: number, MotorType: string, GainP: number, GainD: number = 0) {
     this.JointIndex = JointIndex;
     this.TargetAngle = 0;
     this.MotorType = MotorType;
-    this.Gain = Gain;
+    this.GainP = GainP;
+    this.GainD = GainD;
   }
 
-  public Evaluate(CurrentAngle: number) {
+  public Evaluate(CurrentAngle: number,CurrentVelocity:number =0) {
     const error: number = this.TargetAngle - CurrentAngle;
     const absError: number = Math.abs(error);
     
-    let speed: number=this.Gain*error;
+    let speed: number=this.GainP*error-this.GainD*CurrentVelocity;
     if (absError < 10) {
       speed *= 0.8;
     } else if (absError < 5) {
@@ -44,6 +43,18 @@ export class ServoMotors {
   public SetAngle(newTargetAngle: number) {
     this.TargetAngle = newTargetAngle;
   }
+  public StopMotor() {
+    const strength: number = parseFloat(this.MotorType) * 100000000000;
+
+    this.formattedInput = {
+      motorIndex: this.JointIndex,
+      force: strength,
+      targetVelocity: 0.0000001,
+      freeSpin: true
+    };
+    return this.formattedInput;
+  }
+
 
   /**
    * SixKg

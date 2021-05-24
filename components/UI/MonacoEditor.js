@@ -25,7 +25,7 @@ const MonacoEditor = (props) => {
     let ActuationClass = Actuation;
     let sensorData = props.sensorData;
     let BlockClass = Block;
-    console.log(props);
+
     let promise = () => {
       return new Promise((resolve, reject) => {
         someVar.on("GetSensorData", (data) => {
