@@ -192,9 +192,6 @@ export class Block {
         if (Math.abs(angles[3]) > pi / 2) {
             return false;
         }
-        let jointLocations = this._ForwardKinematics(angles);
-        let lastJointLoc = math.squeeze(jointLocations.subset(math.index(4, math.range(0, 3), 3)));
-        lastJointLoc.forEach((data) => { console.log(data) });
         for (let i = 0; i < this._noOfJoints; i++) {
             angles[i] *= 180 / pi;
         }

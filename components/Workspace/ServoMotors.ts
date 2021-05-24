@@ -1,5 +1,3 @@
-
-
 export class ServoMotors {
   private JointIndex : number;
   private TargetAngle : number;
@@ -7,7 +5,7 @@ export class ServoMotors {
   private GainP: number;
   private GainD: number;
   private formattedInput: any;
-  constructor(JointIndex: number, GainP: number,GainD:number, MotorType: string) {
+  constructor(JointIndex: number, MotorType: string, GainP: number, GainD: number = 0) {
     this.JointIndex = JointIndex;
     this.TargetAngle = 0;
     this.MotorType = MotorType;
