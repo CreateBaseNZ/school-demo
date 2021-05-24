@@ -45,10 +45,9 @@ const PlayInterface = (props) => {
       >
         <button onClick={clickHandler}>CLICK ME PLEASE</button>
         {/* <Contents /> */}
-        <Workspace />
+        <Workspace unityContext={unityContext} sensorData={sensorData} />
       </SplitPane>
-      {/* <Simulation unityContext={unityContext} sensorData={sensorData} /> */}
-      <div></div>
+      <Simulation unityContext={unityContext} sensorData={sensorData} />
     </SplitPane>
   );
 };

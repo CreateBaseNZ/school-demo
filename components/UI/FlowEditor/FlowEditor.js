@@ -1,4 +1,10 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import ReactFlow, {
   ReactFlowProvider,
   removeElements,
@@ -70,52 +76,51 @@ const miniMapColoriser = (node) => {
   return "none";
 };
 
-const FlowEditor = () => {
+const FlowEditor = (props) => {
   const wrapperRef = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [elements, setElements] = useState(initialElements);
   const [data, setData] = useState(initialData);
-  const [code, setCode] = useState("");
 
-  const testHandler = () => {
-    let blocksConfig = [{ robot: "RoboticArm", type: "start" }];
-    let currentNode = getOutgoers(elements[0], elements)[0];
-    let traverse = true;
-    while (traverse) {
-      let block = {
-        robot: "RoboticArm",
-        value: { ...data[currentNode.id] },
-      };
-      switch (currentNode.type) {
-        case "move":
-          block = {
-            ...block,
-            name: "MoveArm",
-            type: "move",
-          };
+  useImperativeHandle(props.forwardedRef, () => ({
+    getBlockConfig: () => {
+      let blocksConfig = [];
+      let currentNode = elements[0];
+      let traverse = true;
+      while (traverse) {
+        let block = {
+          robot: "Arm",
+          value: { ...data[currentNode.id] },
+          type: currentNode.type,
+        };
+        switch (currentNode.type) {
+          case "move":
+            block = {
+              ...block,
+              name: "MoveArm",
+            };
+            break;
+          case "claw":
+            block = {
+              ...block,
+              name: "ToggleClaw",
+            };
+            break;
+          default:
+            break;
+        }
+        blocksConfig.push(block);
+        const nextNode = getOutgoers(currentNode, elements)[0];
+        if (nextNode) {
+          currentNode = nextNode;
+        } else {
+          traverse = false;
           break;
-        case "claw":
-          block = {
-            ...block,
-            name: "ToggleClaw",
-            type: "move",
-          };
-          break;
-        default:
-          break;
+        }
       }
-      blocksConfig.push(block);
-      const nextNode = getOutgoers(currentNode, elements)[0];
-      if (nextNode.id !== "end") {
-        currentNode = nextNode;
-      } else {
-        traverse = false;
-        blocksConfig.push({ robot: "RoboticArm", type: "end" });
-        console.log(blocksConfig);
-        break;
-      }
-    }
-  };
+      return blocksConfig;
+    },
+  }));
 
   const onElementsRemove = useCallback((elementsToRemove) => {
     const filteredElements = elementsToRemove.filter(
@@ -202,7 +207,10 @@ const FlowEditor = () => {
   };
 
   return (
-    <div className={classes.editorContainer}>
+    <div
+      className={classes.editorContainer}
+      style={{ display: props.hide && "none" }}
+    >
       <ReactFlowProvider>
         <DndBar />
 
@@ -241,12 +249,6 @@ const FlowEditor = () => {
           </ReactFlow>
         </div>
       </ReactFlowProvider>
-      <button
-        onClick={testHandler}
-        style={{ position: "absolute", top: "0", right: "0", zIndex: "10" }}
-      >
-        CLICK ME
-      </button>
     </div>
   );
 };

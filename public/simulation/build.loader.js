@@ -235,10 +235,10 @@ function createUnityInstance(canvas, config, onProgress) {
       hasFullscreen: !!document.body.requestFullscreen || !!document.body.webkitRequestFullscreen, // Safari still uses the webkit prefixed version
       hasThreads: hasThreads,
       hasWasm: hasWasm,
-      hasWasmThreads: (function() {
-        var wasmMemory = hasWasm && hasThreads && new WebAssembly.Memory({"initial": 1, "maximum": 1, "shared": true});
-        return wasmMemory && wasmMemory.buffer instanceof SharedArrayBuffer;
-      })(),
+      // This should be updated when we re-enable wasm threads. Previously it checked for WASM thread
+      // support with: var wasmMemory = hasWasm && hasThreads && new WebAssembly.Memory({"initial": 1, "maximum": 1, "shared": true});
+      // which caused Chrome to have a warning that SharedArrayBuffer requires cross origin isolation.
+      hasWasmThreads: false,
     };
   })();
 
