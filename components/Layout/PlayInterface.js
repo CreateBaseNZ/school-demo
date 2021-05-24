@@ -20,7 +20,13 @@ const dragReleaseHandler = () => {
 };
 
 const PlayInterface = (props) => {
-  const [unityContext, sensorData, setSensorDataWrapper] = useUnity();
+  const [unityContext, sensorData, setSensorData, gameState, setGameState] =
+    useUnity();
+
+  const clickHandler = () => {
+    unityContext.send("SceneController", "LoadScene", "Training_Arm_0");
+    // unityContext.send("SceneController", "ResetScene");
+  };
 
   return (
     <SplitPane
@@ -37,11 +43,11 @@ const PlayInterface = (props) => {
         onDragStarted={horizontalDragHandler}
         onDragFinished={dragReleaseHandler}
       >
-        <Contents />
+        <button onClick={clickHandler}>CLICK ME PLEASE</button>
+        {/* <Contents /> */}
         <Workspace unityContext={unityContext} sensorData={sensorData} />
       </SplitPane>
-      {/* <Simulation unityContext={unityContext} /> */}
-      <div></div>
+      <Simulation unityContext={unityContext} sensorData={sensorData} />
     </SplitPane>
   );
 };

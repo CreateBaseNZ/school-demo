@@ -20,19 +20,21 @@ const MonacoEditor = (props) => {
 
   const clickHandler = async () => {
     let someVar = props.unityContext;
-    let RoboticSystemName = "RoboticArm";
+    let RoboticSystemName = "Arm";
     let ServoMotorsClass = ServoMotors;
     let ActuationClass = Actuation;
     let sensorData = props.sensorData;
-    // let promise = () => {
-    //   return new Promise((resolve, reject) => {
-    //     someVar.on("GetSensorData", (data) => {
-    //       sensorData = JSON.parse(data);
-    //       resolve();
-    //     });
-    //   });
-    // };
-    // sensorData = await promise();
+    let BlockClass = Block;
+    console.log(props);
+    let promise = () => {
+      return new Promise((resolve, reject) => {
+        someVar.on("GetSensorData", (data) => {
+          sensorData = JSON.parse(data);
+          resolve();
+        });
+      });
+    };
+    sensorData = await promise();
     eval("(async () => {" + editorRef.current.getValue() + "})()");
     monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
     monacoRef.current.editor.setTheme("customTheme");
@@ -48,10 +50,13 @@ const MonacoEditor = (props) => {
   // });
 
   return (
-    <div className={classes.editorContainer}>
+    <div
+      className={classes.editorContainer}
+      style={{ display: props.hide && "none" }}
+    >
       <Editor
         defaultLanguage="javascript"
-        defaultValue="// Start coding!"
+        value={props.code}
         onMount={handleEditorDidMount}
         className={classes.editor}
         theme={"vs-dark"}

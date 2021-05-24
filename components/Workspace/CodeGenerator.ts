@@ -17,10 +17,23 @@ export class CodeGenerator {
     this.code = "";
   }
 
+  private start(blockDetail: any) {
+    // Fetch the Block Function
+    const blockFunction = this.blockFunctions.find(element => {
+      return (element.robot === blockDetail.robot && blockDetail.type === "start");
+    });
+    // Add to content
+    this.content += blockFunction.logic;
+  }
+
   private move(blockDetail: any) {
     // Fetch the Block Function
     const blockFunction = this.blockFunctions.find(element => {
-      return ((element.function.name === blockDetail.name) && (element.robot === blockDetail.robot));
+      if (element.type === "move") {
+        return ((element.function.name === blockDetail.name) && (element.robot === blockDetail.robot));
+      } else {
+        return false;
+      }
     });
     // Build input
     let inputVariables: string = "";
@@ -46,17 +59,34 @@ export class CodeGenerator {
       });
     }\n\n
     `;
-    this.content += func;
+    //this.content += func;
     // Add execute
-    const execute = `await ${functionName}(${inputs});`;
+    const execute = `// ${blockFunction.name}
+    await ((${inputVariables}) => {
+      return new Promise((resolve, reject) => {
+        ${blockFunction.function.logic}
+      });
+    })(${inputs});`;
     this.executes.push(execute);
+  }
+
+  private end(blockDetail: any) {
+    // Fetch the Block Function
+    const blockFunction = this.blockFunctions.find(element => {
+      return (element.robot === blockDetail.robot && element.type === "end");
+    });
+    // Add to execute
+    for (let i = 0; i < blockFunction.executes.length; i++) {
+      const element = blockFunction.executes[i];
+      this.executes.push(element);
+    }
   }
 
   private run() {
     this.execute = "const run = async () => {\n";
     for (let i = 0; i < this.executes.length; i++) {
       const element = this.executes[i];
-      this.execute += "\t" + element + "\n";
+      this.execute += "\t" + element + "\n\n";
     }
     this.execute += "};\nrun();";
   }
@@ -64,8 +94,11 @@ export class CodeGenerator {
   public build(blockDetails: Array<any> = []) {
     for (let i = 0; i < blockDetails.length; i++) {
       const element = blockDetails[i];
-      if (element.type === "move") {
-        this.move(element);
+      switch (element.type) {
+        case "start": this.start(element); break;
+        case "move": this.move(element); break;
+        case "end": this.end(element); break;
+        default: break;
       }
     }
     this.run();

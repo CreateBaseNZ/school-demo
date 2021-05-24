@@ -73,9 +73,14 @@ svg {
   }
 }
 
-.react-flow__node.selected > div {
-  background: #1a1a1a;
-  box-shadow: 0 0 6px 0;
+.react-flow__node.selected {
+  & > div {
+    background: #1a1a1a;
+    box-shadow: 0 0 6px 0;
+  }
+  h5 {
+    color: inherit;
+  }
 }
 
 .react-flow__edge.selected > path {

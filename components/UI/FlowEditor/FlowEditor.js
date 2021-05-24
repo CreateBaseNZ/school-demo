@@ -1,18 +1,25 @@
-import { useState, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import ReactFlow, {
   ReactFlowProvider,
-  isNode,
   removeElements,
   addEdge,
   updateEdge,
   MiniMap,
   Controls,
   Background,
+  getOutgoers,
 } from "react-flow-renderer";
 import DndBar from "./DndBar";
 import StartNode from "./StartNode";
 import EndNode from "./EndNode";
 import MoveNode from "./MoveNode";
+import ClawNode from "./ClawNode";
 import ReadNode from "./ReadNode";
 import SetNode from "./SetNode";
 import PauseNode from "./PauseNode";
@@ -25,10 +32,16 @@ import classes from "./FlowEditor.module.scss";
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
+const initialData = {
+  start: {},
+  end: {},
+};
+
 const nodeTypes = {
   start: StartNode,
   end: EndNode,
   move: MoveNode,
+  claw: ClawNode,
   read: ReadNode,
   set: SetNode,
   pause: PauseNode,
@@ -41,6 +54,8 @@ const edgeTypes = {
 const miniMapStrokeColoriser = (node) => {
   switch (node.type) {
     case "move":
+      return "#0a73dc";
+    case "claw":
       return "#0a73dc";
     case "read":
       return "#8258dc";
@@ -61,12 +76,51 @@ const miniMapColoriser = (node) => {
   return "none";
 };
 
-const FlowEditor = () => {
+const FlowEditor = (props) => {
   const wrapperRef = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [elements, setElements] = useState(initialElements);
+  const [data, setData] = useState(initialData);
 
-  console.log(elements);
+  useImperativeHandle(props.forwardedRef, () => ({
+    getBlockConfig: () => {
+      let blocksConfig = [];
+      let currentNode = elements[0];
+      let traverse = true;
+      while (traverse) {
+        let block = {
+          robot: "Arm",
+          value: { ...data[currentNode.id] },
+          type: currentNode.type,
+        };
+        switch (currentNode.type) {
+          case "move":
+            block = {
+              ...block,
+              name: "MoveArm",
+            };
+            break;
+          case "claw":
+            block = {
+              ...block,
+              name: "ToggleClaw",
+            };
+            break;
+          default:
+            break;
+        }
+        blocksConfig.push(block);
+        const nextNode = getOutgoers(currentNode, elements)[0];
+        if (nextNode) {
+          currentNode = nextNode;
+        } else {
+          traverse = false;
+          break;
+        }
+      }
+      return blocksConfig;
+    },
+  }));
 
   const onElementsRemove = useCallback((elementsToRemove) => {
     const filteredElements = elementsToRemove.filter(
@@ -76,9 +130,9 @@ const FlowEditor = () => {
   }, []);
 
   const onElementClick = useCallback((event, element) => {
-    if (isNode(element)) {
-      console.log("this is a node");
-    }
+    // if (isNode(element)) {
+    //   console.log("this is a node");
+    // }
   }, []);
 
   const onConnect = useCallback((params) => {
@@ -106,6 +160,8 @@ const FlowEditor = () => {
     console.log("flow loaded:", _reactFlowInstance);
 
     _reactFlowInstance.fitView();
+    _reactFlowInstance.zoomOut();
+    _reactFlowInstance.zoomOut();
     setReactFlowInstance(_reactFlowInstance);
   }, []);
 
@@ -125,18 +181,36 @@ const FlowEditor = () => {
       x: event.clientX - reactFlowBounds.left - parseFloat(x),
       y: event.clientY - reactFlowBounds.top - parseFloat(y),
     });
+    const id = getId();
+    let defaultValues = null;
+    if (type === "claw") {
+      defaultValues = { isOpen: true };
+    } else if (type === "move") {
+      defaultValues = { x: 0, y: 0, z: 0 };
+    }
+    setData((data) => ({
+      ...data,
+      [id]: { ...defaultValues },
+    }));
     const newNode = {
-      id: getId(),
+      id: id,
       type,
       position,
-      data: { label: `${type} node` },
+      data: {
+        default: defaultValues,
+        callBack: (newValues) => {
+          setData((state) => ({ ...state, [id]: { ...newValues } }));
+        },
+      },
     };
-
     setElements((es) => es.concat(newNode));
   };
 
   return (
-    <div className={classes.editorContainer}>
+    <div
+      className={classes.editorContainer}
+      style={{ display: props.hide && "none" }}
+    >
       <ReactFlowProvider>
         <DndBar />
 
