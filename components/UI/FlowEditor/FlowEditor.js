@@ -105,6 +105,7 @@ const FlowEditor = (props) => {
               ...block,
               name: "ToggleClaw",
             };
+            block.type = "move";
             break;
           default:
             break;
