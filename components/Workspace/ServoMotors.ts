@@ -16,8 +16,7 @@ export class ServoMotors {
   public Evaluate(CurrentAngle: number,CurrentVelocity:number =0) {
     const error: number = this.TargetAngle - CurrentAngle;
     const absError: number = Math.abs(error);
-    
-    let speed: number=this.GainP*error-this.GainD*CurrentVelocity;
+    let speed: number = this.GainP * error-this.GainD*CurrentVelocity;
     if (absError < 10) {
       speed *= 0.8;
     } else if (absError < 5) {
@@ -25,8 +24,8 @@ export class ServoMotors {
     } else if (absError < 2) {
       speed *= 0.2;
     }
-    if(Math.abs(speed)>1000){
-      speed=1000*Math.sign(speed);
+    if(Math.abs(speed)>200){
+      speed=200*Math.sign(speed);
     }
     const strength: number = parseFloat(this.MotorType) * 100000000000;
     //console.log(this.JointIndex, error, speed, strength);
