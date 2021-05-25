@@ -3,7 +3,7 @@ import classes from "./ContentWrapper.module.scss";
 const DefineCard = () => {
   return (
     <div className={classes.contentWrapper}>
-      <h2>Project Name</h2>
+      <h2>H.E.R.&#216;</h2>
       <section>
         <p style={{ fontWeight: 500 }}>
           The first step to produce the solution is to understand the problem:

@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import useUnity from "../../hooks/useUnity";
 import NavContext from "../../store/nav-context";
 import capitalise from "../../utils/capitaliseString";
+import Simulation from "../Simulation/Simulation";
 
 import StepCard from "../Menu/StepCard";
 import DefineCard from "../Menu/DefineCard";
@@ -38,6 +40,8 @@ const MenuInterface = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState();
   const navCtx = useContext(NavContext);
+  const [unityContext, sensorData, setSensorData, gameState, setGameState] =
+    useUnity();
 
   const { asPath } = router;
   useEffect(() => {
@@ -90,8 +94,7 @@ const MenuInterface = () => {
         </div>
       </div>
       <div className={classes.rightArea}>
-        {/* <Simulation className={classes.simulationContainer} /> */}
-        <div></div>
+        <Simulation unityContext={unityContext} sensorData={sensorData} />
       </div>
     </div>
   );

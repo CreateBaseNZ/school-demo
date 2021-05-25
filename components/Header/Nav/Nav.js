@@ -16,9 +16,17 @@ const DUMMY_PROJECT_STEPS = [
   { title: "Improve", path: "/menu/improve", query: "improve" },
 ];
 const DUMMY_SUBSYSTEMS = [
-  { title: "Moving the Arm", path: "/menu/create", query: "create" },
-  { title: "Operating the Claw", path: "/menu/create", query: "create" },
-  { title: "Collecting the Items", path: "/menu/create", query: "create" },
+  { title: "Moving the Arm", path: "/play/moving-the-arm", query: "create" },
+  {
+    title: "Operating the Claw",
+    path: "/play/operating-the-claw",
+    query: "create",
+  },
+  {
+    title: "Collecting the Items",
+    path: "/play/collecting-the-items",
+    query: "create",
+  },
 ];
 
 const Nav = ({ showStep, showSubsystem }) => {

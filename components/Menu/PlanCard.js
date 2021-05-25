@@ -3,7 +3,7 @@ import classes from "./ContentWrapper.module.scss";
 const PlanCard = () => {
   return (
     <div className={classes.contentWrapper}>
-      <h2>Project Name</h2>
+      <h2>H.E.R.&#216;</h2>
       <section>
         <p>
           Now that we understand our problem and the tools we have access to, we
