@@ -23,6 +23,32 @@ const dragReleaseHandler = () => {
   document.body.style.cursor = "default";
 };
 
+const getSubsystemIndex = (subsystem) => {
+  switch (subsystem) {
+    case "moving-the-arm":
+      return 0;
+    case "operating-the-claw":
+      return 1;
+    case "collecting-the-items":
+      return 2;
+    default:
+      return 0;
+  }
+};
+
+const getSubsystemScene = (subsystem) => {
+  switch (subsystem) {
+    case "moving-the-arm":
+      return "Training_Arm_0";
+    case "operating-the-claw":
+      return "Training_Arm_2";
+    case "collecting-the-items":
+      return "Project_Industrial_0";
+    default:
+      return "Project_Industrial_0";
+  }
+};
+
 const PlayInterface = (props) => {
   const router = useRouter();
   const navCtx = useContext(NavContext);
@@ -31,7 +57,6 @@ const PlayInterface = (props) => {
     useUnity();
 
   const { asPath } = router;
-  console.log(asPath);
   useEffect(() => {
     const strArr = asPath.split("/");
     if (strArr.length > 2) {
@@ -43,23 +68,14 @@ const PlayInterface = (props) => {
     }
   }, [asPath]);
 
-  const clickHandler = () => {
-    unityContext.send("SceneController", "LoadScene", "Training_Arm_0");
-    // unityContext.send("SceneController", "ResetScene");
-  };
-
-  const getSubsystemIndex = () => {
-    switch (activeSubsystem) {
-      case "moving-the-arm":
-        return 0;
-      case "operating-the-claw":
-        return 1;
-      case "collecting-the-items":
-        return 2;
-      default:
-        return 0;
-    }
-  };
+  useEffect(() => {
+    console.log(getSubsystemScene(activeSubsystem));
+    unityContext.send(
+      "SceneController",
+      "LoadScene",
+      getSubsystemScene(activeSubsystem)
+    );
+  }, [activeSubsystem]);
 
   return (
     <SplitPane
@@ -76,8 +92,7 @@ const PlayInterface = (props) => {
         onDragStarted={horizontalDragHandler}
         onDragFinished={dragReleaseHandler}
       >
-        {/* <button onClick={clickHandler}>CLICK ME PLEASE</button> */}
-        <Contents subsystemIndex={getSubsystemIndex()} />
+        <Contents subsystemIndex={getSubsystemIndex(activeSubsystem)} />
         <Workspace unityContext={unityContext} sensorData={sensorData} />
       </SplitPane>
       <Simulation unityContext={unityContext} sensorData={sensorData} />

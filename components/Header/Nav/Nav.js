@@ -20,12 +20,12 @@ const DUMMY_SUBSYSTEMS = [
   {
     title: "Operating the Claw",
     path: "/play/operating-the-claw",
-    query: "create",
+    query: "",
   },
   {
     title: "Collecting the Items",
     path: "/play/collecting-the-items",
-    query: "create",
+    query: "",
   },
 ];
 
@@ -51,8 +51,7 @@ const Nav = ({ showStep, showSubsystem }) => {
           title={formatSubsystemName(ctx.activeSubsystem)}
           items={DUMMY_SUBSYSTEMS}
           type="Subsystems"
-          path="/menu/create"
-          query="create"
+          path="/menu"
         />
       )}
     </nav>
