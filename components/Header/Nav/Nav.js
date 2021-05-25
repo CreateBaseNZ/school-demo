@@ -24,8 +24,6 @@ const DUMMY_SUBSYSTEMS = [
 const Nav = ({ showStep, showSubsystem }) => {
   const ctx = useContext(NavContext);
 
-  console.log(ctx.activeSubsystem);
-
   return (
     <nav className={classes.nav} onBlur={ctx.onBlur} onFocus={ctx.onFocus}>
       <Link href="/">
