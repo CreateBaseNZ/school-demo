@@ -15,9 +15,9 @@ const DUMMY_PROJECT_STEPS = [
   { title: "Improve", path: "/menu/improve", query: "improve" },
 ];
 const DUMMY_SUBSYSTEMS = [
-  { title: "Subsystem 1", path: "/menu/create", query: "create" },
-  { title: "Subsystem 2", path: "/menu/create", query: "create" },
-  { title: "Subsystem 3", path: "/menu/create", query: "create" },
+  { title: "Moving the Arm", path: "/menu/create", query: "create" },
+  { title: "Operating the Claw", path: "/menu/create", query: "create" },
+  { title: "Collecting the Items", path: "/menu/create", query: "create" },
 ];
 
 const Nav = ({ showStep, showSubsystem }) => {

@@ -7,7 +7,9 @@ const DefineCard = () => {
       <section>
         <p>
           The first step to produce the solution is to understand the problem:
-          we are trying to program the arm to make it possible to pick up the
+        </p>
+        <p>
+          We are trying to program the arm to make it possible to pick up the
           rubbish and transport it to the rubbish bin.
         </p>
       </section>

@@ -11,28 +11,62 @@ import classes from "./Contents.module.scss";
 
 SwiperCore.use([Pagination, Navigation]);
 
-const DUMMY_SLIDES = [
-  {
-    id: 1234,
-    title: "Slide 1",
-    type: "text",
-    contents:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ex nunc, elementum ac felis et, rhoncus vestibulum sapien. Quisque erat mi, lobortis tincidunt semper vel, scelerisque non sapien. Mauris eget dignissim elit. Proin sed convallis mauris, ut porttitor metus. Maecenas convallis eleifend orci non ornare.",
-  },
-  {
-    id: 1235,
-    title: "Slide 2",
-    type: "text",
-    contents:
-      "Vivamus sagittis diam quis tristique rutrum. Proin at magna risus. Vestibulum eu gravida massa. In viverra libero nec massa bibendum, ultricies faucibus dui consectetur. Curabitur luctus sem lorem, pulvinar facilisis neque faucibus et. Proin accumsan nulla tristique orci suscipit luctus. Phasellus ac elit ut arcu pellentesque pulvinar. Duis dapibus laoreet orci a vestibulum.",
-  },
-  {
-    id: 1236,
-    title: "Slide 3",
-    type: "text",
-    contents:
-      "Mauris faucibus, odio vitae tincidunt euismod, odio lorem vehicula neque, in volutpat eros nisi sit amet tortor. Vivamus in ultricies metus. Donec cursus molestie tortor. Donec interdum dui at urna feugiat, et hendrerit magna semper. Ut libero nulla, tempor quis bibendum vitae, feugiat et augue.",
-  },
+const DUMMY_DATA = [
+  [
+    {
+      id: "sub1-page1",
+      title: "Slide 1",
+      type: "text",
+      contents:
+        "In this subsystem, you have to collect the gems floating around by moving the robotic arm end effector to the gem’s location. The gems locations are displayed above each gem.",
+    },
+    {
+      id: "sub1-page2",
+      title: "Slide 2",
+      type: "text",
+      contents:
+        "The location of each gem is written in a cartesian coordinate. This means the first number is the x coordinate of the gem, followed by the y coordinate. The last number is the z coordinate.",
+    },
+    {
+      id: "sub1-page3",
+      title: "Slide 3",
+      type: "text",
+      contents:
+        "Have the movement consecutively to move from one location to the next.",
+    },
+  ],
+  [
+    {
+      id: "sub1-page1",
+      title: "Slide 1",
+      type: "text",
+      contents:
+        "In this subsystem, you have to catch an object in midair. By default, the claw will close as soon as the code is run. You will need to determine the timing for when you should order the claw to close.",
+    },
+    {
+      id: "sub1-page2",
+      title: "Slide 2",
+      type: "text",
+      contents:
+        "Use the delay block to delay when the robotic arm closes. Using trial-and-error, you will need to find the correct time to wait before trying to close the claw so that it catches the object.",
+    },
+  ],
+  [
+    {
+      id: "sub1-page1",
+      title: "Slide 1",
+      type: "text",
+      contents:
+        "Within this subsystem, the aim is to collect the trash from the ground, carry it, move it to the rubbish bin, and drop the rubbish into the bin. You will have to combine the first two subsystems to do this part.",
+    },
+    {
+      id: "sub1-page2",
+      title: "Slide 2",
+      type: "text",
+      contents:
+        "Make sure when you approach a piece of rubbish that the claw is already open. The location of each rubbish and the bin can be found by hovering your cursor above each.",
+    },
+  ],
 ];
 
 const renderBullet = (index, className) => {
@@ -66,7 +100,7 @@ const Contents = (props) => {
       <div className={classes.swiperNext}>
         <KeyboardArrowRightIcon style={{ fontSize: 48 }} />
       </div>
-      {DUMMY_SLIDES.map((slide) => (
+      {DUMMY_DATA[props.subsystemIndex].map((slide) => (
         <SwiperSlide key={slide.id} className={classes.swiperSlide}>
           {slide.contents}
         </SwiperSlide>

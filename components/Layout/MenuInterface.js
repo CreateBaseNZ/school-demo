@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NavContext from "../../store/nav-context";
+import capitalise from "../../utils/capitaliseString";
 
 import StepCard from "../Menu/StepCard";
 import DefineCard from "../Menu/DefineCard";
@@ -19,29 +20,19 @@ const DUMMY_DATA = [
   {
     title: "Plan",
     description:
-      "Break down a proposed solution into a series of easily achievable subsystems. We will then create a plan for how we are going to create and integrate these subsystems",
+      "Create a plan for solving the problem by breaking down a proposed solution into a series of simpler subsystems",
   },
   {
     title: "Create",
     description:
-      "Learn how to create each of the subsystems that we defined, then bring your new knowledge together to program and test a solution to the situation",
+      "Implement each subsystem, then bring your new knowledge together to program and test a final solution",
   },
   {
     title: "Improve",
     description:
-      "Challenge yourself by going beyond the basic solution. In this optional step, we will introduce new requirements that will require a more advanced solution",
+      "Challenge yourself in this optional step, where we introduce new requirements that will require a more advanced solution",
   },
 ];
-
-const capitalise = (str) => {
-  const splitStr = str.toLowerCase().split(" ");
-  for (var i = 0; i < splitStr.length; i++) {
-    splitStr[i] =
-      splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-  }
-  // Directly return the joined string
-  return splitStr.join(" ");
-};
 
 const MenuInterface = () => {
   const router = useRouter();

@@ -37,13 +37,13 @@ const PlanCard = () => {
           combine the work into one system solving our problem.
         </p>
       </section>
-      <section>
+      {/* <section>
         <ul className={classes.subsystemList}>
           <li>Subsystem 1</li>
           <li>Subsystem 2</li>
           <li>Subsystem 3</li>
         </ul>
-      </section>
+      </section> */}
     </div>
   );
 };
