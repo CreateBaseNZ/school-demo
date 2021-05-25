@@ -92,6 +92,13 @@ export class CodeGenerator {
   }
 
   public build(blockDetails: Array<any> = []) {
+    // Reset Values
+    this.content = "";
+    this.executes = [];
+    this.execute = "";
+    this.increment = 1;
+    this.code = "";
+    //
     for (let i = 0; i < blockDetails.length; i++) {
       const element = blockDetails[i];
       switch (element.type) {
