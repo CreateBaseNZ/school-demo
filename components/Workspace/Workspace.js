@@ -45,6 +45,10 @@ const Workspace = (props) => {
   };
 
   const radioHandler = (option) => {
+    if (activeTab === "flow" && option === "text") {
+      const newCode = codeGen.build(flowRef.current.getBlockConfig());
+      setTextCode(newCode);
+    }
     setActiveTab(option);
   };
 

@@ -36,8 +36,12 @@
 }
 
 .createWrapper {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-auto-rows: max(250px, min(35vh, 400px));
+  grid-gap: 1rem;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .improveWrapper {

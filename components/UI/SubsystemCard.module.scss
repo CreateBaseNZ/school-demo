@@ -1,22 +1,19 @@
 @import "../../styles/variables";
 
 .subsystemCard {
-  flex: 1 1 35%;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 0.5rem;
   overflow: hidden;
-  min-height: 250px;
-  height: 35vh;
-  max-height: 400px;
   background: #141414;
-  margin: 1rem;
   box-shadow: 0 1rem 1.5rem -1rem rgba(0, 0, 0, 0.5);
   transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
   cursor: pointer;
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 1rem 2.5rem -1.25rem rgba(0, 0, 0, 0.75);
+    box-shadow: 0 1rem 2.5rem -1.25rem rgba(255, 255, 255, 0.25);
   }
   .imgWrapper {
     height: 60%;

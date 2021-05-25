@@ -3,35 +3,32 @@ import classes from "./ContentWrapper.module.scss";
 
 const DUMMY_DATA = [
   {
-    title: "Subsystem A",
+    title: "Moving the Arm",
     href: "/",
     src: "/subsystem.jpg",
     description:
-      "In the metaphysics of identity, the ship of Theseus is a thought experiment that raises the question of whether an object that has had all of its components replaced remains fundamentally the same object. The concept is one of the oldest in Western philosophy, having been discussed by the likes of Heraclitus and Plato by c. 500–400 BC.",
-    recommended: [
-      {
-        title: "Subsystem A",
-        href: "/",
-      },
-      {
-        title: "Subsystem B",
-        href: "/",
-      },
-    ],
+      "Collect a sequence of floating gems by touching them with the end of the robotic arm. ",
   },
   {
-    title: "Subsystem B",
+    title: "Operating the Claw",
     href: "/",
     src: "/subsystem.jpg",
     description:
-      "In the metaphysics of identity, the ship of Theseus is a thought experiment that raises the question of whether an object that has had all of its components replaced remains fundamentally the same object. The concept is one of the oldest in Western philosophy, having been discussed by the likes of Heraclitus and Plato by c. 500–400 BC.",
+      "Find the right timing to catch and release an object with a robotic claw attachment.",
+  },
+  {
+    title: "Collecting the Items",
+    href: "/",
+    src: "/subsystem.jpg",
+    description:
+      "Combine your learnings from the first two subsystems to use the claw and the robotic arm to pick up pieces of rubbish at specific locations, before transporting and dropping them into a collection bin.",
     recommended: [
       {
-        title: "Subsystem A",
+        title: "Moving the Arm",
         href: "/",
       },
       {
-        title: "Subsystem B",
+        title: "Collecting the Items",
         href: "/",
       },
     ],
