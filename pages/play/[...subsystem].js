@@ -14,7 +14,6 @@ const Play = (props) => {
   useEffect(() => {
     window.addEventListener("resize", resizeHandler);
     navCtx.setActiveStep("Create");
-    navCtx.setActiveSubsystem("Subsytem A");
 
     return () => {
       window.removeEventListener("resize", resizeHandler);

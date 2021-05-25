@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import NavContext from "../../../store/nav-context";
+import { formatSubsystemName } from "../../../utils/capitaliseString";
 
 import NavItem from "./NavItem";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -23,6 +24,8 @@ const DUMMY_SUBSYSTEMS = [
 const Nav = ({ showStep, showSubsystem }) => {
   const ctx = useContext(NavContext);
 
+  console.log(ctx.activeSubsystem);
+
   return (
     <nav className={classes.nav} onBlur={ctx.onBlur} onFocus={ctx.onFocus}>
       <Link href="/">
@@ -39,7 +42,7 @@ const Nav = ({ showStep, showSubsystem }) => {
       {showSubsystem && <ChevronRightIcon fontSize="small" />}
       {showSubsystem && (
         <NavItem
-          title={ctx.activeSubsystem}
+          title={formatSubsystemName(ctx.activeSubsystem)}
           items={DUMMY_SUBSYSTEMS}
           type="Subsystems"
           path="/menu/create"

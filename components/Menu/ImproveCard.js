@@ -4,7 +4,7 @@ import SubsystemCard from "../UI/SubsystemCard";
 
 const DUMMY_DATA = [
   {
-    title: "Subsystem A",
+    title: "Subsystem ",
     href: "/",
     src: "/subsystem.jpg",
     description:
