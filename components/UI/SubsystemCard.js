@@ -20,19 +20,23 @@ const SubsystemCard = (props) => {
           <h3>{props.title}</h3>
           <div className={classes.mainWrapper}>
             <p>{props.description}</p>
-            <div className={classes.separator} />
-            <div className={classes.recommended}>
-              <h4>Recommended</h4>
-              <ul>
-                {props.recommended.map((recom) => {
-                  return (
-                    <li key={props.title + "-" + recom.title}>
-                      <Link href={recom.href}>{recom.title}</Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            {props.recommended && (
+              <>
+                <div className={classes.separator} />
+                <div className={classes.recommended}>
+                  <h4>Recommended</h4>
+                  <ul>
+                    {props.recommended.map((recom) => {
+                      return (
+                        <li key={props.title + "-" + recom.title}>
+                          <Link href={recom.href}>{recom.title}</Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

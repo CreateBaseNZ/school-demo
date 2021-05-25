@@ -13,19 +13,23 @@ import classes from "./MenuInterface.module.scss";
 const DUMMY_DATA = [
   {
     title: "Define",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    description:
+      "After experiencing the situation, clearly define a problem statement and determine the requirements of a successful solution",
   },
   {
     title: "Plan",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    description:
+      "Break down a proposed solution into a series of easily achievable subsystems. We will then create a plan for how we are going to create and integrate these subsystems",
   },
   {
     title: "Create",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    description:
+      "Learn how to create each of the subsystems that we defined, then bring your new knowledge together to program and test a solution to the situation",
   },
   {
     title: "Improve",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    description:
+      "Challenge yourself by going beyond the basic solution. In this optional step, we will introduce new requirements that will require a more advanced solution",
   },
 ];
 
