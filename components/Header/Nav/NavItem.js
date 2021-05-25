@@ -14,7 +14,9 @@ const NavItem = (props) => {
   };
 
   const clickHandler = (item) => {
-    Router.push("/menu", item.path);
+    console.log("hello");
+    console.log(item.path);
+    Router.push(item.path, item.path);
     ctx.onClick();
   };
 

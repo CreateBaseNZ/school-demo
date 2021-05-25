@@ -2,10 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 import { UnityContext } from "react-unity-webgl";
 
 const unityContext = new UnityContext({
-  loaderUrl: "simulation/build.loader.js",
-  dataUrl: "simulation/build.data",
-  frameworkUrl: "simulation/build.framework.js",
-  codeUrl: "simulation/build.wasm",
+  loaderUrl: "/simulation/build.loader.js",
+  dataUrl: "/simulation/build.data",
+  frameworkUrl: "/simulation/build.framework.js",
+  codeUrl: "/simulation/build.wasm",
   productName: "Simulation",
   productVersion: "0.1",
   companyName: "CreateBase",

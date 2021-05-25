@@ -1,5 +1,9 @@
+import { useState, useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 import SplitPane from "react-split-pane";
 import useUnity from "../../hooks/useUnity";
+import NavContext from "../../store/nav-context";
+import capitalise from "../../utils/capitaliseString";
 
 import Contents from "../Contents/Contents";
 import Simulation from "../Simulation/Simulation";
@@ -19,14 +23,59 @@ const dragReleaseHandler = () => {
   document.body.style.cursor = "default";
 };
 
+const getSubsystemIndex = (subsystem) => {
+  switch (subsystem) {
+    case "moving-the-arm":
+      return 0;
+    case "operating-the-claw":
+      return 1;
+    case "collecting-the-items":
+      return 2;
+    default:
+      return 0;
+  }
+};
+
+const getSubsystemScene = (subsystem) => {
+  switch (subsystem) {
+    case "moving-the-arm":
+      return "Training_Arm_0";
+    case "operating-the-claw":
+      return "Training_Arm_2";
+    case "collecting-the-items":
+      return "Project_Industrial_0";
+    default:
+      return "Project_Industrial_0";
+  }
+};
+
 const PlayInterface = (props) => {
+  const router = useRouter();
+  const navCtx = useContext(NavContext);
+  const [activeSubsystem, setActiveSubsystem] = useState();
   const [unityContext, sensorData, setSensorData, gameState, setGameState] =
     useUnity();
 
-  const clickHandler = () => {
-    unityContext.send("SceneController", "LoadScene", "Training_Arm_0");
-    // unityContext.send("SceneController", "ResetScene");
-  };
+  const { asPath } = router;
+  useEffect(() => {
+    const strArr = asPath.split("/");
+    if (strArr.length > 2) {
+      setActiveSubsystem(strArr[2]);
+      navCtx.setActiveSubsystem(capitalise(strArr[2]));
+    } else {
+      setActiveSubsystem("");
+      navCtx.setActiveSubsystem("");
+    }
+  }, [asPath]);
+
+  useEffect(() => {
+    console.log(getSubsystemScene(activeSubsystem));
+    unityContext.send(
+      "SceneController",
+      "LoadScene",
+      getSubsystemScene(activeSubsystem)
+    );
+  }, [activeSubsystem]);
 
   return (
     <SplitPane
@@ -39,12 +88,11 @@ const PlayInterface = (props) => {
       <SplitPane
         split="horizontal"
         className={classes.splitHorizontal}
-        defaultSize={"25%"}
+        defaultSize={"20%"}
         onDragStarted={horizontalDragHandler}
         onDragFinished={dragReleaseHandler}
       >
-        <button onClick={clickHandler}>CLICK ME PLEASE</button>
-        {/* <Contents /> */}
+        <Contents subsystemIndex={getSubsystemIndex(activeSubsystem)} />
         <Workspace unityContext={unityContext} sensorData={sensorData} />
       </SplitPane>
       <Simulation unityContext={unityContext} sensorData={sensorData} />

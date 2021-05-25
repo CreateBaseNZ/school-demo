@@ -56,6 +56,12 @@ const TabBar = (props) => {
         />
         <label htmlFor="console-tab">Console</label>
       </div>
+      <div
+        className={classes.divider}
+        style={{
+          opacity: props.active === "console" ? 0 : 0.25,
+        }}
+      />
     </div>
   );
 };

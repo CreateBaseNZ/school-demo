@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import NavContext from "../../../store/nav-context";
+import { formatSubsystemName } from "../../../utils/capitaliseString";
 
 import NavItem from "./NavItem";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -15,9 +16,17 @@ const DUMMY_PROJECT_STEPS = [
   { title: "Improve", path: "/menu/improve", query: "improve" },
 ];
 const DUMMY_SUBSYSTEMS = [
-  { title: "Subsystem 1", path: "/menu/create", query: "create" },
-  { title: "Subsystem 2", path: "/menu/create", query: "create" },
-  { title: "Subsystem 3", path: "/menu/create", query: "create" },
+  { title: "Moving the Arm", path: "/play/moving-the-arm", query: "create" },
+  {
+    title: "Operating the Claw",
+    path: "/play/operating-the-claw",
+    query: "",
+  },
+  {
+    title: "Collecting the Items",
+    path: "/play/collecting-the-items",
+    query: "",
+  },
 ];
 
 const Nav = ({ showStep, showSubsystem }) => {
@@ -39,11 +48,10 @@ const Nav = ({ showStep, showSubsystem }) => {
       {showSubsystem && <ChevronRightIcon fontSize="small" />}
       {showSubsystem && (
         <NavItem
-          title={ctx.activeSubsystem}
+          title={formatSubsystemName(ctx.activeSubsystem)}
           items={DUMMY_SUBSYSTEMS}
           type="Subsystems"
-          path="/menu/create"
-          query="create"
+          path="/menu"
         />
       )}
     </nav>

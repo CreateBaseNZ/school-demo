@@ -4,7 +4,7 @@ import SubsystemCard from "../UI/SubsystemCard";
 
 const DUMMY_DATA = [
   {
-    title: "Subsystem A",
+    title: "Subsystem ",
     href: "/",
     src: "/subsystem.jpg",
     description:
@@ -42,12 +42,12 @@ const DUMMY_DATA = [
 const ImproveCard = () => {
   return (
     <div className={classes.improveWrapper}>
-      <div className={classes.contentWrapper}></div>
+      {/* <div className={classes.contentWrapper}></div>
       <div className={classes.createWrapper}>
         {DUMMY_DATA.map((subsystem) => {
           return <SubsystemCard {...subsystem} key={subsystem.title} />;
         })}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -16,6 +16,7 @@
   p {
     font-size: 14px;
     line-height: 1.75em;
+    font-weight: 300;
   }
   ul,
   ol {
@@ -24,6 +25,7 @@
     font-size: 14px;
     li {
       font-size: inherit;
+      font-weight: 300;
     }
   }
   ol > li {
@@ -33,13 +35,19 @@
     margin: 2rem 0 2rem 2rem;
     font-size: 1rem;
   }
+  b {
+    font-size: inherit;
+    font-weight: 700;
+    font-size: inherit;
+  }
 }
 
 .createWrapper {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-auto-rows: max(250px, min(35vh, 400px));
-  grid-gap: 1rem;
+  grid-column-gap: 2vw;
+  grid-row-gap: 4vh;
   justify-content: flex-start;
   align-items: flex-start;
 }
