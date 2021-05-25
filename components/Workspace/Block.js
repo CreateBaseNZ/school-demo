@@ -104,6 +104,13 @@ export class Block {
 
     /*This function takes either 3 or 4 inputs. The first 3 inputs are the location x,y and z*/
     InverseKinematics(x_t, y_t, z_t, theta_deg = -90) {
+        let x_inter, y_inter, z_inter;
+        y_inter = z_t;
+        z_inter = -x_t;
+        x_inter = -y_t;
+        x_t = x_inter;
+        y_t = y_inter;
+        z_t = z_inter;
         const angles = [0, 0, 0, 0];
         let distance = 5000;
         const tolerence = 0.01;
@@ -125,7 +132,7 @@ export class Block {
         const z = z_t - this._jointLengths[3] * Math.sin(theta);
         const totalDistance = math.sqrt(math.square(x) + math.square(y) + math.square(z - this._jointLengths[0]));
         if ((totalDistance - totaljointLengths) > 0.1) {
-
+            console.log("Can't Reach 1");
             return false;
         }
         const targetPoint = [x, y, z];
@@ -190,6 +197,8 @@ export class Block {
             angles[3] += 2 * pi;
         }
         if (Math.abs(angles[3]) > pi / 2) {
+            console.log("Can't Reach 2");
+
             return false;
         }
         for (let i = 0; i < this._noOfJoints; i++) {
