@@ -5,7 +5,7 @@ const math = create(all, config)
 
 export class Block {
     _noOfJoints = 4;
-    _jointLengths = [0.5, 1, 1, 0.45];
+    _jointLengths = [2.7, 3.1, 3.1, 2.7];
     constructor() {
 
     }
@@ -103,7 +103,14 @@ export class Block {
 
 
     /*This function takes either 3 or 4 inputs. The first 3 inputs are the location x,y and z*/
-    InverseKinematics(x_t, y_t, z_t, theta_deg = -90) {
+    InverseKinematics(x_t, y_t, z_t, theta_deg = 0) {
+        let x_inter, y_inter, z_inter;
+        y_inter = -x_t;
+        z_inter = y_t;
+        x_inter = -z_t;
+        x_t = x_inter;
+        y_t = y_inter;
+        z_t = z_inter;
         const angles = [0, 0, 0, 0];
         let distance = 5000;
         const tolerence = 0.01;
@@ -115,7 +122,6 @@ export class Block {
         let targetJoint = 2;
         const totaljointLengths = this._jointLengths.reduce((sum, current) => sum + current, -this._jointLengths[0] - this._jointLengths[this._jointLengths.length - 1]);
         angles[0] = Math.atan2(-x_t, y_t);
-        console.log(angles[0]);
         if (angles[0] > pi / 2) {
             angles[0] -= pi;
         } else if (angles[0] < -pi / 2) {
@@ -125,11 +131,8 @@ export class Block {
         const y = y_t - this._jointLengths[3] * Math.cos(theta) * Math.sin(angles[0] - pi / 2);
         const z = z_t - this._jointLengths[3] * Math.sin(theta);
         const totalDistance = math.sqrt(math.square(x) + math.square(y) + math.square(z - this._jointLengths[0]));
-        console.log(angles[0]);
-        console.log(x, y, z);
-        console.log(totalDistance, totaljointLengths);
         if ((totalDistance - totaljointLengths) > 0.1) {
-
+            console.log("Can't Reach 1");
             return false;
         }
         const targetPoint = [x, y, z];
@@ -188,10 +191,115 @@ export class Block {
         }
         //angles[0] = pi / 2;
         angles[3] = -theta + pi / 2 - angles[1] - angles[2];
-        console.log(angles);
+        if (angles[3] > pi / 2) {
+            angles[3] -= 2 * pi;
+        } else if (angles[3] < -pi / 2) {
+            angles[3] += 2 * pi;
+        }
+        if (Math.abs(angles[3]) > pi / 2) {
+            angles[3] = Math.sign(angles[3]) * pi / 2;
+        }
         for (let i = 0; i < this._noOfJoints; i++) {
             angles[i] *= 180 / pi;
         }
+       
         return angles; //angles.map((val) => val * 180 / pi);
     }
+
+
+    InverseKinematics_2(x_t, y_t, z_t) {
+        let x_inter, y_inter, z_inter;
+        y_inter = -x_t;
+        z_inter = y_t;
+        x_inter = -z_t;
+        x_t = x_inter;
+        y_t = y_inter;
+        z_t = z_inter;
+        const angles = [0, 0, 0, 0];
+        let distance = 5000;
+        const tolerence = 0.01;
+        const maxRep = 50;
+        const maxLoop = maxRep * (this._noOfJoints - 1);
+        let repNo = 0;
+        const jointNo = this._noOfJoints ;
+        let targetJoint = 3;
+        const totaljointLengths = this._jointLengths.reduce((sum, current) => sum + current, -this._jointLengths[0]);
+        angles[0] = Math.atan2(-x_t, y_t);
+        if (angles[0] > pi / 2) {
+            angles[0] -= pi;
+        } else if (angles[0] < -pi / 2) {
+            angles[0] += pi;
+        }
+        const x = x_t;
+        const y = y_t;
+        const z = z_t;
+        const totalDistance = math.sqrt(math.square(x) + math.square(y) + math.square(z - this._jointLengths[0]));
+        if ((totalDistance - totaljointLengths) > 0.1) {
+            console.log("Can't Reach 1");
+            return false;
+        }
+        const targetPoint = [x, y, z];
+
+        while (tolerence < distance && repNo < maxLoop) {
+            let jointLocations = this._ForwardKinematics(angles);
+            const endeffector_jointVector = [0, 0, 0];
+            const target_jointVector = [0, 0, 0];
+            let jointLoc = math.squeeze(jointLocations.subset(math.index(targetJoint, math.range(0, 3), 3)));
+            let lastJointLoc = math.squeeze(jointLocations.subset(math.index(jointNo, math.range(0, 3), 3)));
+            for (let i = 0; i < endeffector_jointVector.length; i++) {
+                endeffector_jointVector[i] = lastJointLoc.subset(math.index(i)) - jointLoc.subset(math.index(i));
+                target_jointVector[i] = targetPoint[i] - jointLoc.subset(math.index(i));
+            }
+
+            let angleChange = this._FindAngle(endeffector_jointVector, target_jointVector);
+            if (abs(angleChange) < 0.1 * Math.PI / 180) {
+                if (repNo == 0) {
+                    angles[1] = pi / 4;
+                    angles[2] = pi / 4;
+                    angles[3] = pi / 4;
+                } else {
+                    repNo++;
+                }
+                continue;
+            }
+            angles[targetJoint] -= angleChange;
+
+            jointLocations = this._ForwardKinematics(angles);
+            jointLoc = math.squeeze(jointLocations.subset(math.index(targetJoint, math.range(0, 3), 3)));
+            lastJointLoc = math.squeeze(jointLocations.subset(math.index(jointNo, math.range(0, 3), 3)));
+            for (let i = 0; i < endeffector_jointVector.length; i++) {
+                endeffector_jointVector[i] = lastJointLoc.subset(math.index(i)) - jointLoc.subset(math.index(i));
+                target_jointVector[i] = targetPoint[i] - jointLoc.subset(math.index(i));
+            }
+            angleChange = this._FindAngle(endeffector_jointVector, target_jointVector);
+            angles[targetJoint] += angleChange;
+            if (Math.abs(angles[targetJoint]) > 15 * pi / 16) {
+                angles[targetJoint] += 2 * pi;
+            }
+            if (Math.abs(angles[targetJoint]) > pi / 2) {
+                angles[targetJoint] = Math.sign(angles[targetJoint]) * pi / 2;
+            }
+            jointLocations = this._ForwardKinematics(angles);
+            lastJointLoc = math.squeeze(jointLocations.subset(math.index(jointNo, math.range(0, 3), 3)));
+            const distanceVector = [0, 0, 0];
+            for (let i = 0; i < endeffector_jointVector.length; i++) {
+                distanceVector[i] = targetPoint[i] - lastJointLoc.subset(math.index(i));
+            }
+            distance = this._vectorLength(distanceVector);
+            targetJoint--;
+            if (targetJoint < 1) {
+                targetJoint = 3;
+            }
+            repNo++;
+            if (repNo >= maxLoop) { break; }
+        }
+        for (let i = 0; i < this._noOfJoints; i++) {
+            angles[i] *= 180 / pi;
+        }
+       
+        return angles; //angles.map((val) => val * 180 / pi);
+    }
+    
+    
+    
 }
