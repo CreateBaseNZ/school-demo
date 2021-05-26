@@ -8,6 +8,8 @@ import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import "swiper/components/navigation/navigation.min.css";
 
+import SlowMotionVideoIcon from "@material-ui/icons/SlowMotionVideo";
+
 import classes from "./Contents.module.scss";
 
 SwiperCore.use([Pagination, Navigation]);
@@ -106,6 +108,16 @@ const Contents = (props) => {
           {slide.contents}
         </SwiperSlide>
       ))}
+      <SwiperSlide className={classes.swiperSlide}>
+        When you have connected each of your blocks together in the correct
+        order, go to the next slide and hit verify to check your code answer!
+      </SwiperSlide>
+      <SwiperSlide className={`${classes.swiperSlide} ${classes.checkSlide}`}>
+        <button>
+          <SlowMotionVideoIcon fontSize="large" />
+          Verify your code!
+        </button>
+      </SwiperSlide>
       <div className={classes.pagination}></div>
     </Swiper>
   );

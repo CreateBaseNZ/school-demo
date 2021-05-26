@@ -41,7 +41,7 @@ const MenuInterface = () => {
   const [activeStep, setActiveStep] = useState();
   const navCtx = useContext(NavContext);
   const [unityContext, sensorData, setSensorData, gameState, setGameState] =
-    useUnity();
+    useUnity("Project_Industrial_0");
 
   const { asPath } = router;
   useEffect(() => {

@@ -58,6 +58,7 @@ const Workspace = (props) => {
   };
 
   const playHandler = async () => {
+    const newCode = codeGen.build(flowRef.current.getBlockConfig());
     let someVar = props.unityContext;
     let RoboticSystemName = "Arm";
     let ServoMotorsClass = ServoMotors;
@@ -75,7 +76,9 @@ const Workspace = (props) => {
     };
 
     await promise();
-    eval("(async () => {" + textCode + "})()");
+    eval("(async () => {" + newCode + "})()");
+
+    setTextCode(newCode);
     // monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
     // monacoRef.current.editor.setTheme("customTheme");
   };
@@ -95,11 +98,13 @@ const Workspace = (props) => {
         clickHandler={props.clickHandler}
       />
       <TabBar active={activeTab} onChange={radioHandler} />
-      <PlayButtons
-        clickHandler={props.clickHandler}
-        playHandler={playHandler}
-        isPlaying={props.isPlaying}
-      />
+      <ClientOnlyPortal selector="#play-buttons-portal">
+        <PlayButtons
+          clickHandler={props.clickHandler}
+          playHandler={playHandler}
+          isPlaying={props.isPlaying}
+        />
+      </ClientOnlyPortal>
     </div>
   );
 };
