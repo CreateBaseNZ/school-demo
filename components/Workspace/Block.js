@@ -94,16 +94,17 @@ export class Block {
             const l1 = this._vectorLength(v1);
             const l2 = this._vectorLength(v2);
             let cosAngle = (dot / (l1 * l2));
-            if (Math.abs(cosAngle) > 1) {
+            if (Math.abs(cosAngle) > 1) {   
                 cosAngle = 1 * Math.sign(cosAngle);
             }
+            
             return Math.acos(cosAngle);
         }
     }
 
 
     /*This function takes either 3 or 4 inputs. The first 3 inputs are the location x,y and z*/
-    InverseKinematics(x_t, y_t, z_t, theta_deg = 0) {
+    InverseKinematics_zeroAngle(x_t, y_t, z_t, theta_deg = 0) {
         let x_inter, y_inter, z_inter;
         y_inter = -x_t;
         z_inter = y_t;
@@ -136,7 +137,6 @@ export class Block {
             return false;
         }
         const targetPoint = [x, y, z];
-
         while (tolerence < distance && repNo < maxLoop) {
             let jointLocations = this._ForwardKinematics(angles);
             const endeffector_jointVector = [0, 0, 0];
@@ -147,13 +147,17 @@ export class Block {
                 endeffector_jointVector[i] = lastJointLoc.subset(math.index(i)) - jointLoc.subset(math.index(i));
                 target_jointVector[i] = targetPoint[i] - jointLoc.subset(math.index(i));
             }
-
             let angleChange = this._FindAngle(endeffector_jointVector, target_jointVector);
             if (angleChange == 0) {
                 if (repNo == 0) {
                     angles[1] = pi / 4;
                     angles[2] = pi / 4;
                 } else {
+                    
+                    targetJoint--;
+                    if (targetJoint < 1) {
+                        targetJoint = 2;
+                    }
                     repNo++;
                 }
                 continue;
@@ -187,7 +191,9 @@ export class Block {
                 targetJoint = 2;
             }
             repNo++;
-            if (repNo >= maxLoop) { break; }
+            if (repNo >= maxLoop) {
+                break;
+            }
         }
         //angles[0] = pi / 2;
         angles[3] = -theta + pi / 2 - angles[1] - angles[2];
@@ -207,7 +213,7 @@ export class Block {
     }
 
 
-    InverseKinematics_2(x_t, y_t, z_t) {
+    InverseKinematics(x_t, y_t, z_t) {
         let x_inter, y_inter, z_inter;
         y_inter = -x_t;
         z_inter = y_t;
@@ -258,6 +264,10 @@ export class Block {
                     angles[2] = pi / 4;
                     angles[3] = pi / 4;
                 } else {
+                    targetJoint--;
+                    if (targetJoint < 1) {
+                        targetJoint = 3;
+                    }
                     repNo++;
                 }
                 continue;
