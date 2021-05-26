@@ -17,7 +17,7 @@ const DUMMY_DATA = [
   {
     title: "Define",
     description:
-      "After experiencing the situation, clearly define a problem statement and determine the requirements of a successful solution",
+      "Clearly define a problem statement and determine the requirements of a successful solution",
   },
   {
     title: "Plan",
@@ -32,7 +32,7 @@ const DUMMY_DATA = [
   {
     title: "Improve",
     description:
-      "Challenge yourself in this optional step, where we introduce new requirements that will require a more advanced solution",
+      "Challenge yourself in this optional step, where new requirements will require a more advanced solution",
   },
 ];
 

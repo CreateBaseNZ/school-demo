@@ -5,43 +5,38 @@ const DefineCard = () => {
     <div className={classes.contentWrapper}>
       <h2>H.E.R.&#216;</h2>
       <section>
-        <p style={{ fontWeight: 500 }}>
-          The first step to produce the solution is to understand the problem:
+        <p style={{ fontWeight: 600 }}>
+          When designing a solution, the first step is to understand the problem:
         </p>
         <p>
-          In this situation, a self-driving transport vehicle has spilt items of
-          rubbish all over a factory floor! Rather than having to clean it up
-          ourselves, we could instead program the robotic arm in the centre of
-          the room to pick up the rubbish and transport it to the rubbish bins
-          at the edge of the room for us!
+        After watching the cutscene, we can see that a self-driving vehicle has 
+        spilt bags of rubbish all over a factory floor! Luckily, there are a pair 
+        of bins at the edge of the room that we can deposit the rubbish into. 
+        However, rather than cleaning it up ourselves, what if we program the 
+        robotic arm to do it for us?
         </p>
       </section>
       <section>
-        <p style={{ fontWeight: 500 }}>
-          If we are going to use the robotic arm to try and solve our problem,
-          we will first need to understand its capabilities. This will help us
-          decide if it will be a suitable tool for the task:
+      <p style={{ fontWeight: 600 }}>
+      <br/>
+          If we are going to solve our problem with the robotic arm,
+          we will first need to understand its capabilities:
         </p>
-        <ul>
+        <ol>
           <li>
             There is a claw attachment on the end of the arm that can be opened
             and closed. It could be used to grasp the items of rubbish.
           </li>
           <li>
             The arm has five motors, four to move the arm around the space and
-            one to open and close the claw. We could control them individually
-            or instead use a function that uses inverse kinematics to move them
-            together.
+            one to open and close the claw. We could control each motor individually
+            or instead use a pre-made function to move them together.
           </li>
           <li>
-            The robotic arm is strong enough to lift up and move any of the
-            individual pieces of rubbish.
+            We can’t move this robotic arm and open/close its claw at the same time. 
+            We will have to do one after the other.
           </li>
-          <li>
-            Because of how it needs to be programmed, we can’t move this robotic
-            arm and open/close its claw at the same time.
-          </li>
-        </ul>
+        </ol>
       </section>
     </div>
   );
