@@ -63,6 +63,8 @@ const Workspace = (props) => {
         sensorData={props.sensorData}
         code={textCode}
         hide={activeTab !== "text"}
+        isPlaying={props.isPlaying}
+        clickHandler={props.clickHandler}
       />
       <TabBar active={activeTab} onChange={radioHandler} />
     </div>

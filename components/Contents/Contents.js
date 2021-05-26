@@ -1,3 +1,4 @@
+import { memo } from "react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
@@ -110,4 +111,4 @@ const Contents = (props) => {
   );
 };
 
-export default Contents;
+export default memo(Contents);

@@ -1,15 +1,27 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Editor from "@monaco-editor/react";
 
 import { ServoMotors } from "../Workspace/ServoMotors.ts";
 import { Actuation } from "../Workspace/Actuation.ts";
 import { Block } from "../Workspace/Block";
+import PlayButtons from "./PlayButtons";
 
 import themes from "../../utils/themes";
 
 import classes from "./MonacoEditor.module.scss";
 
-const DUMMY_HEADER = "console.log('hello');";
+const ClientOnlyPortal = ({ children, selector }) => {
+  const ref = useRef();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    ref.current = document.querySelector(selector);
+    setMounted(true);
+  }, [selector]);
+
+  return mounted ? createPortal(children, ref.current) : null;
+};
 
 const MonacoEditor = (props) => {
   const editorRef = useRef();
@@ -18,7 +30,7 @@ const MonacoEditor = (props) => {
   // const [monacoTheme, setMonacoTheme] = useState("Monokai");
   // console.log(monacoTheme);
 
-  const clickHandler = async () => {
+  const playHandler = async () => {
     let someVar = props.unityContext;
     let RoboticSystemName = "Arm";
     let ServoMotorsClass = ServoMotors;
@@ -36,8 +48,8 @@ const MonacoEditor = (props) => {
     };
     sensorData = await promise();
     eval("(async () => {" + editorRef.current.getValue() + "})()");
-    monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
-    monacoRef.current.editor.setTheme("customTheme");
+    // monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
+    // monacoRef.current.editor.setTheme("customTheme");
   };
 
   const handleEditorDidMount = (editor, monaco) => {
@@ -61,7 +73,13 @@ const MonacoEditor = (props) => {
         className={classes.editor}
         theme={"vs-dark"}
       />
-      <button onClick={clickHandler}>Click me</button>
+      <ClientOnlyPortal selector="#play-buttons-portal">
+        <PlayButtons
+          isPlaying={props.isPlaying}
+          clickHandler={props.clickHandler}
+          playHandler={playHandler}
+        />
+      </ClientOnlyPortal>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import capitalise from "../../utils/capitaliseString";
 import Contents from "../Contents/Contents";
 import Simulation from "../Simulation/Simulation";
 import Workspace from "../Workspace/Workspace";
+import PlayButtons from "../UI/PlayButtons";
 
 import classes from "./PlayInterface.module.scss";
 
@@ -53,6 +54,7 @@ const PlayInterface = (props) => {
   const router = useRouter();
   const navCtx = useContext(NavContext);
   const [activeSubsystem, setActiveSubsystem] = useState();
+  const [isPlaying, setIsPlaying] = useState(false);
   const [unityContext, sensorData, setSensorData, gameState, setGameState] =
     useUnity();
 
@@ -77,26 +79,40 @@ const PlayInterface = (props) => {
     );
   }, [activeSubsystem]);
 
+  const clickHandler = () => {
+    console.log("hello");
+    setIsPlaying((current) => !current);
+  };
+
   return (
-    <SplitPane
-      className={classes.splitVertical}
-      split="vertical"
-      defaultSize={"50%"}
-      onDragStarted={verticalDragHandler}
-      onDragFinished={dragReleaseHandler}
-    >
+    <>
       <SplitPane
-        split="horizontal"
-        className={classes.splitHorizontal}
-        defaultSize={"20%"}
-        onDragStarted={horizontalDragHandler}
+        className={classes.splitVertical}
+        split="vertical"
+        defaultSize={"50%"}
+        onDragStarted={verticalDragHandler}
         onDragFinished={dragReleaseHandler}
       >
-        <Contents subsystemIndex={getSubsystemIndex(activeSubsystem)} />
-        <Workspace unityContext={unityContext} sensorData={sensorData} />
+        <SplitPane
+          split="horizontal"
+          className={classes.splitHorizontal}
+          defaultSize={"20%"}
+          onDragStarted={horizontalDragHandler}
+          onDragFinished={dragReleaseHandler}
+        >
+          <Contents subsystemIndex={getSubsystemIndex(activeSubsystem)} />
+          <Workspace
+            unityContext={unityContext}
+            sensorData={sensorData}
+            isPlaying={isPlaying}
+            clickHandler={clickHandler}
+          />
+        </SplitPane>
+        <Simulation unityContext={unityContext} sensorData={sensorData} />
       </SplitPane>
-      <Simulation unityContext={unityContext} sensorData={sensorData} />
-    </SplitPane>
+      {/* <PlayButtons clickHandler={clickHandler} isPlaying={isPlaying} /> */}
+      <div id="play-buttons-portal" />
+    </>
   );
 };
 
