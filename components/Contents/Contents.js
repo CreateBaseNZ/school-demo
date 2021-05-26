@@ -73,8 +73,7 @@ const DUMMY_DATA = [
       id: "sub1-page1",
       title: "Slide 1",
       type: "text",
-      contents:
-        "Within this subsystem, the aim is to collect the trash from the ground, carry it, move it to the rubbish bin, and drop the rubbish into the bin. You will have to combine the first two subsystems to do this part.",
+      contents: `Within this subsystem, the aim is to collect the trash from the ground, carry it, move it to the rubbish bin, and drop the rubbish into the bin. You will have to combine the first two subsystems to do this part.`,
     },
     {
       id: "sub1-page2",
@@ -118,9 +117,11 @@ const Contents = (props) => {
         <KeyboardArrowRightIcon style={{ fontSize: 48 }} />
       </div>
       {DUMMY_DATA[props.subsystemIndex].map((slide) => (
-        <SwiperSlide key={slide.id} className={classes.swiperSlide}>
-          {slide.contents}
-        </SwiperSlide>
+        <SwiperSlide
+          key={slide.id}
+          className={classes.swiperSlide}
+          dangerouslySetInnerHTML={{ __html: slide.contents }}
+        ></SwiperSlide>
       ))}
       <SwiperSlide className={classes.swiperSlide}>
         When you have connected each of your blocks together in the correct
