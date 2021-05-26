@@ -97,6 +97,7 @@ const PlayInterface = (props) => {
         </SplitPane>
         <Simulation unityContext={unityContext} sensorData={sensorData} />
       </SplitPane>
+      <div id="play-buttons-portal"></div>
     </>
   );
 };

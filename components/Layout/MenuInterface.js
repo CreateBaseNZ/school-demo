@@ -18,21 +18,37 @@ const DUMMY_DATA = [
     title: "Define",
     description:
       "Clearly define a problem statement and determine the requirements of a successful solution",
+    img: {
+      src: "/define.jpg",
+      alt: "Define",
+    },
   },
   {
     title: "Plan",
     description:
       "Create a plan for solving the problem by breaking down a proposed solution into a series of simpler subsystems",
+    img: {
+      src: "/plan.jpg",
+      alt: "Define",
+    },
   },
   {
     title: "Create",
     description:
       "Implement each subsystem, then bring your new knowledge together to program and test a final solution",
+    img: {
+      src: "/create.jpg",
+      alt: "Define",
+    },
   },
   {
     title: "Improve",
     description:
       "Challenge yourself in this optional step, where new requirements will require a more advanced solution",
+    img: {
+      src: "/improve.jpg",
+      alt: "Define",
+    },
   },
 ];
 
@@ -41,7 +57,7 @@ const MenuInterface = () => {
   const [activeStep, setActiveStep] = useState();
   const navCtx = useContext(NavContext);
   const [unityContext, sensorData, setSensorData, gameState, setGameState] =
-    useUnity();
+    useUnity("Project_Industrial_0");
 
   const { asPath } = router;
   useEffect(() => {
@@ -81,6 +97,7 @@ const MenuInterface = () => {
                 step={step.title}
                 description={step.description}
                 key={step.title}
+                img={step.img}
                 onClick={() => cardClickHandler(step.title.toLowerCase())}
               />
             );
@@ -94,7 +111,7 @@ const MenuInterface = () => {
         </div>
       </div>
       <div className={classes.rightArea}>
-        <Simulation unityContext={unityContext} sensorData={sensorData} />
+        {/* <Simulation unityContext={unityContext} sensorData={sensorData} /> */}
       </div>
     </div>
   );

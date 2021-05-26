@@ -68,7 +68,7 @@ $padding-left: 6vw;
         opacity $trans-dur ease-out, margin 0.2s ease-out;
     }
     h2 {
-      font-size: 1.30rem;
+      font-size: 1.3rem;
       margin: 0.25rem 1rem;
     }
     p {
@@ -93,6 +93,13 @@ $padding-left: 6vw;
       transform-origin: center;
       opacity: 0;
       transition: right 0.2s ease-out, opacity 0.2s ease-out;
+    }
+    img {
+      z-index: -1;
+      transition: filter 0.2s ease-out;
+    }
+    &:hover img {
+      filter: brightness(0.5);
     }
   }
 }
@@ -152,6 +159,9 @@ $padding-left: 6vw;
         &:nth-of-type(4) {
           transition: transform $trans-dur ease-out 0.15s, opacity 0.1s ease-out,
             margin 0.2s ease-out;
+        }
+        img {
+          filter: brightness(0.75);
         }
       }
       p {
