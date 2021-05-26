@@ -14,7 +14,7 @@ const unityContext = new UnityContext({
   // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
 });
 
-const useUnity = () => {
+const useUnity = (subsystem) => {
   const [sensorData, setSensorData] = useState();
   const [gameState, setGameState] = useState();
 
@@ -33,6 +33,12 @@ const useUnity = () => {
 
   const setGameStateWrapper = useCallback((data) => {
     setGameState(data);
+  });
+
+  unityContext.on("loaded", () => {
+    setTimeout(() => {
+      unityContext.send("SceneController", "LoadScene", subsystem);
+    }, 4000);
   });
 
   return [

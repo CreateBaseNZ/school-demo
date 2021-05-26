@@ -16,7 +16,7 @@ const DUMMY_PROJECT_STEPS = [
   { title: "Improve", path: "/menu/improve", query: "improve" },
 ];
 const DUMMY_SUBSYSTEMS = [
-  { title: "Moving the Arm", path: "/play/moving-the-arm", query: "create" },
+  { title: "Moving the Arm", path: "/play/moving-the-arm", query: "" },
   {
     title: "Operating the Claw",
     path: "/play/operating-the-claw",

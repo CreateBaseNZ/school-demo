@@ -42,7 +42,7 @@ const getSubsystemScene = (subsystem) => {
     case "moving-the-arm":
       return "Training_Arm_0";
     case "operating-the-claw":
-      return "Training_Arm_2";
+      return "Training_Arm_1";
     case "collecting-the-items":
       return "Project_Industrial_0";
     default:
@@ -53,31 +53,19 @@ const getSubsystemScene = (subsystem) => {
 const PlayInterface = (props) => {
   const router = useRouter();
   const navCtx = useContext(NavContext);
-  const [activeSubsystem, setActiveSubsystem] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
   const [unityContext, sensorData, setSensorData, gameState, setGameState] =
-    useUnity();
+    useUnity(getSubsystemScene(props.subsystem));
 
   const { asPath } = router;
   useEffect(() => {
     const strArr = asPath.split("/");
     if (strArr.length > 2) {
-      setActiveSubsystem(strArr[2]);
       navCtx.setActiveSubsystem(capitalise(strArr[2]));
     } else {
-      setActiveSubsystem("");
       navCtx.setActiveSubsystem("");
     }
   }, [asPath]);
-
-  useEffect(() => {
-    console.log(getSubsystemScene(activeSubsystem));
-    unityContext.send(
-      "SceneController",
-      "LoadScene",
-      getSubsystemScene(activeSubsystem)
-    );
-  }, [activeSubsystem]);
 
   const clickHandler = () => {
     setIsPlaying((current) => !current);
@@ -99,7 +87,7 @@ const PlayInterface = (props) => {
           onDragStarted={horizontalDragHandler}
           onDragFinished={dragReleaseHandler}
         >
-          <Contents subsystemIndex={getSubsystemIndex(activeSubsystem)} />
+          <Contents subsystemIndex={getSubsystemIndex(props.subsystem)} />
           <Workspace
             unityContext={unityContext}
             sensorData={sensorData}
