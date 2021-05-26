@@ -42,7 +42,7 @@ const getSubsystemScene = (subsystem) => {
     case "moving-the-arm":
       return "Training_Arm_0";
     case "operating-the-claw":
-      return "Training_Arm_2";
+      return "Training_Arm_1";
     case "collecting-the-items":
       return "Project_Industrial_0";
     default:
@@ -71,6 +71,7 @@ const PlayInterface = (props) => {
   }, [asPath]);
 
   useEffect(() => {
+    console.log(activeSubsystem);
     console.log(getSubsystemScene(activeSubsystem));
     unityContext.send(
       "SceneController",

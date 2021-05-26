@@ -38,7 +38,7 @@ const codeGen = new CodeGenerator();
 
 const Workspace = (props) => {
   const [activeTab, setActiveTab] = useState("flow");
-  const [textCode, setTextCode] = useState("// Start coding!");
+  const [textCode, setTextCode] = useState("console.log('Hi');");
   const flowRef = useRef();
 
   const toggleHandler = () => {
@@ -62,22 +62,20 @@ const Workspace = (props) => {
     let RoboticSystemName = "Arm";
     let ServoMotorsClass = ServoMotors;
     let ActuationClass = Actuation;
-    let sensorData = props.sensorData;
     let BlockClass = Block;
-
-    console.log(someVar);
-
+    // Fetch Sensor Data
+    let sensorData;
     let promise = () => {
       return new Promise((resolve, reject) => {
         someVar.on("GetSensorData", (data) => {
           sensorData = JSON.parse(data);
-          resolve();
+          return resolve();
         });
       });
     };
-    sensorData = await promise();
-    eval("(async () => {" + textCode + "})()");
 
+    await promise();
+    eval("(async () => {" + textCode + "})()");
     // monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
     // monacoRef.current.editor.setTheme("customTheme");
   };
