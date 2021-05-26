@@ -19,21 +19,35 @@ const DUMMY_DATA = [
       title: "Slide 1",
       type: "text",
       contents:
-        "In this subsystem, you have to collect the gems floating around by moving the robotic arm end effector to the gem’s location. The gems locations are displayed above each gem.",
+        "To complete the subsystem, you have to collect all of the floating gems by moving the collector at the robotic arm’s end through each of their locations.",
     },
     {
       id: "sub1-page2",
       title: "Slide 2",
       type: "text",
       contents:
-        "The location of each gem is written in a cartesian coordinate. This means the first number is the x coordinate of the gem, followed by the y coordinate. The last number is the z coordinate.",
+        "Place your cursor over each gem to reveal the location of the centre of that gem. The first number is the x coordinate (distance along the x-axis), followed by the y coordinate (distance along the y-axis). The last number is the z coordinate (height above the ground).",
     },
     {
       id: "sub1-page3",
       title: "Slide 3",
       type: "text",
       contents:
-        "Have the movement consecutively to move from one location to the next.",
+        "You can program the robotic arm to move to a specific location by placing a Move Motor block and entering the desired coordinates. To run your code, you will need to connect it to the start and end blocks, then press run. Connecting blocks together is as simple as dragging from the output handle of one block to the input handle of another.",
+    },
+    {
+      id: "sub1-page4",
+      title: "Slide 4",
+      type: "text",
+      contents:
+        "To make the end of the robotic arm travel to multiple locations, you will need to place a sequence of Move Motor blocks into the workspace and connect them together in your desired order.",
+    },
+    {
+      id: "sub1-page5",
+      title: "Slide 5",
+      type: "text",
+      contents:
+        "Once you have connected each of your blocks in the correct order (don’t forget to connect to the start and end blocks), hit verify to check your code answer.",
     },
   ],
   [
