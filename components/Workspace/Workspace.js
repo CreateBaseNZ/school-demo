@@ -3,7 +3,12 @@ import { createPortal } from "react-dom";
 import dynamic from "next/dynamic";
 import MonacoEditor from "../UI/MonacoEditor";
 import EditorToggleButton from "../UI/EditorToggleButton";
+import PlayButtons from "../UI/PlayButtons";
 import TabBar from "./TabBar";
+
+import { ServoMotors } from "./ServoMotors.ts";
+import { Actuation } from "./Actuation.ts";
+import { Block } from "./Block";
 
 import { CodeGenerator } from "./CodeGenerator.ts";
 
@@ -52,6 +57,31 @@ const Workspace = (props) => {
     setActiveTab(option);
   };
 
+  const playHandler = async () => {
+    let someVar = props.unityContext;
+    let RoboticSystemName = "Arm";
+    let ServoMotorsClass = ServoMotors;
+    let ActuationClass = Actuation;
+    let sensorData = props.sensorData;
+    let BlockClass = Block;
+
+    console.log(someVar);
+
+    let promise = () => {
+      return new Promise((resolve, reject) => {
+        someVar.on("GetSensorData", (data) => {
+          sensorData = JSON.parse(data);
+          resolve();
+        });
+      });
+    };
+    sensorData = await promise();
+    eval("(async () => {" + textCode + "})()");
+
+    // monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
+    // monacoRef.current.editor.setTheme("customTheme");
+  };
+
   return (
     <div className={classes.workspace}>
       {/* <ClientOnlyPortal selector="#editor-toggle-portal">
@@ -67,6 +97,11 @@ const Workspace = (props) => {
         clickHandler={props.clickHandler}
       />
       <TabBar active={activeTab} onChange={radioHandler} />
+      <PlayButtons
+        clickHandler={props.clickHandler}
+        playHandler={playHandler}
+        isPlaying={props.isPlaying}
+      />
     </div>
   );
 };

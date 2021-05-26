@@ -80,7 +80,6 @@ const PlayInterface = (props) => {
   }, [activeSubsystem]);
 
   const clickHandler = () => {
-    console.log("hello");
     setIsPlaying((current) => !current);
   };
 
@@ -110,8 +109,6 @@ const PlayInterface = (props) => {
         </SplitPane>
         <Simulation unityContext={unityContext} sensorData={sensorData} />
       </SplitPane>
-      {/* <PlayButtons clickHandler={clickHandler} isPlaying={isPlaying} /> */}
-      <div id="play-buttons-portal" />
     </>
   );
 };
