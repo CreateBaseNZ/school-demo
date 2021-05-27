@@ -94,7 +94,7 @@ export class CodeGenerator {
   public build(blockDetails: Array<any> = []) {
     // Reset Values
     this.content = "";
-    this.executes = [ "document.querySelector('#stop-button').addEventListener('click', () => { clearInterval(communication); clearInterval(interval); });" ];
+    this.executes = [ "document.querySelector('#play-button').addEventListener('click', () => { clearInterval(communication);\nclearInterval(interval);\ndocument.querySelector('#play-button').removeEventListener('click', () => { clearInterval(communication); clearInterval(interval); });});", "if (document.querySelector('#cancel-verify-button')) {\n\tdocument.querySelector('#cancel-verify-button').addEventListener('click', () => { clearInterval(communication); clearInterval(interval);\ndocument.querySelector('#cancel-verify-button').removeEventListener('click', () => { clearInterval(communication); clearInterval(interval); });});\n}" ];
     this.execute = "";
     this.increment = 1;
     this.code = "";
