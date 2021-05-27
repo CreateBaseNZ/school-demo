@@ -1,7 +1,118 @@
+@import "../../styles/variables";
+
 .workspace {
   position: relative;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.lastSlideWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .verifyBtn {
+    background: linear-gradient(to right, $logo-dark, $logo-light);
+    border-radius: 0.75rem;
+    padding: 1em 2em;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.75);
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.1s ease-out;
+    svg {
+      margin-right: 0.5em;
+      transition: transform 0.1s ease-out;
+    }
+    &:hover {
+      box-shadow: 0 8px 12px -2px rgba(130, 88, 220, 0.5);
+      svg {
+        transform: translateX(4px);
+      }
+    }
+  }
+  .cancelBtn {
+    background: $hover-bg-light;
+    font-size: 14px;
+    padding: 0.5em 0.75em;
+    border-radius: 0.25rem;
+    transition: background-color 0.1s ease-out;
+    &:hover {
+      background: $red;
+    }
+    svg {
+      margin-right: 0.25em;
+    }
+  }
+  span {
+    margin: 1rem 0 0.5rem 0;
+    opacity: 0.75;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+  }
+}
+
+.ldsEllipsis {
+  display: inline-block;
+  position: relative;
+  width: 66px;
+  height: 10px;
+  margin-bottom: 2rem;
+}
+.ldsEllipsis div {
+  position: absolute;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $logo-mid;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.ldsEllipsis div:nth-child(1) {
+  left: 8px;
+  animation: ldsEllipsis1 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(2) {
+  left: 8px;
+  animation: ldsEllipsis2 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(3) {
+  left: 28px;
+  animation: ldsEllipsis2 0.6s infinite;
+}
+.ldsEllipsis div:nth-child(4) {
+  left: 48px;
+  animation: ldsEllipsis3 0.6s infinite;
+}
+@keyframes ldsEllipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes ldsEllipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes ldsEllipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(20px, 0);
+  }
 }

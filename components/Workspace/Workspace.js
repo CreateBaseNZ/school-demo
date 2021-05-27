@@ -5,6 +5,8 @@ import MonacoEditor from "../UI/MonacoEditor";
 import EditorToggleButton from "../UI/EditorToggleButton";
 import PlayButtons from "../UI/PlayButtons";
 import TabBar from "./TabBar";
+import SlowMotionVideoIcon from "@material-ui/icons/SlowMotionVideo";
+import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 
 import { ServoMotors } from "./ServoMotors.ts";
 import { Actuation } from "./Actuation.ts";
@@ -83,6 +85,15 @@ const Workspace = (props) => {
     // monacoRef.current.editor.setTheme("customTheme");
   };
 
+  const verifyHandler = () => {
+    playHandler();
+    props.verifyHandler();
+  };
+
+  const cancelHandler = () => {
+    props.cancelVerifyHandler();
+  };
+
   return (
     <div className={classes.workspace}>
       {/* <ClientOnlyPortal selector="#editor-toggle-portal">
@@ -98,12 +109,46 @@ const Workspace = (props) => {
         clickHandler={props.clickHandler}
       />
       <TabBar active={activeTab} onChange={radioHandler} />
-      <ClientOnlyPortal selector="#play-buttons-portal">
-        <PlayButtons
-          clickHandler={props.clickHandler}
-          playHandler={playHandler}
-          isPlaying={props.isPlaying}
-        />
+      {!props.isVerifying && (
+        <ClientOnlyPortal selector="#play-buttons-portal">
+          <PlayButtons
+            clickHandler={props.clickHandler}
+            playHandler={playHandler}
+            isPlaying={props.isPlaying}
+          />
+        </ClientOnlyPortal>
+      )}
+      <ClientOnlyPortal selector="#last-slide">
+        <div className={classes.lastSlideWrapper}>
+          {!props.isVerifying && !props.isPlaying && (
+            <button className={classes.verifyBtn} onClick={verifyHandler}>
+              <SlowMotionVideoIcon fontSize="large" />
+              Verify my code!
+            </button>
+          )}
+          {props.isVerifying && (
+            <>
+              <span>VERIFYING</span>
+              <div className={classes.ldsEllipsis}>
+                <div />
+                <div />
+                <div />
+                <div />
+              </div>
+              <button
+                id="cancel-verify-button"
+                className={classes.cancelBtn}
+                onClick={cancelHandler}
+              >
+                <CloseRoundedIcon fontSize="small" />
+                Cancel
+              </button>
+            </>
+          )}
+          {props.isPlaying && (
+            <div style={{ opacity: 0.75 }}>Simulation in progress...</div>
+          )}
+        </div>
       </ClientOnlyPortal>
     </div>
   );

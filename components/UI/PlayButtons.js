@@ -39,13 +39,15 @@ export const StopButton = (props) => {
 const PlayButtons = (props) => {
   return (
     <div className={classes.container}>
-      {!props.isPlaying && (
-        <PlayButton
-          clickHandler={props.clickHandler}
-          playHandler={props.playHandler}
-        />
-      )}
-      {props.isPlaying && <StopButton onClick={props.clickHandler} />}
+      <PlayButton
+        clickHandler={props.clickHandler}
+        playHandler={props.playHandler}
+        style={{ visibility: props.isPlaying ? "hidden" : "visible" }}
+      />
+      <StopButton
+        onClick={props.clickHandler}
+        style={{ visibility: props.isPlaying ? "hidden" : "visible" }}
+      />
     </div>
   );
 };

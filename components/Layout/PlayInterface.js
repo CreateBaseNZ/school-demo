@@ -54,6 +54,7 @@ const PlayInterface = (props) => {
   const router = useRouter();
   const navCtx = useContext(NavContext);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
   const [unityContext, sensorData, setSensorData, gameState, setGameState] =
     useUnity(getSubsystemScene(props.subsystem));
 
@@ -69,6 +70,15 @@ const PlayInterface = (props) => {
 
   const clickHandler = () => {
     setIsPlaying((current) => !current);
+  };
+
+  const verifyHandler = () => {
+    setIsVerifying(true);
+  };
+
+  const cancelVerifyHandler = () => {
+    setIsVerifying(false);
+    unityContext.send("SceneController", "ResetScene");
   };
 
   return (
@@ -87,12 +97,19 @@ const PlayInterface = (props) => {
           onDragStarted={horizontalDragHandler}
           onDragFinished={dragReleaseHandler}
         >
-          <Contents subsystemIndex={getSubsystemIndex(props.subsystem)} />
+          <Contents
+            subsystemIndex={getSubsystemIndex(props.subsystem)}
+            isPlaying={isPlaying}
+            isVerifying={isVerifying}
+          />
           <Workspace
             unityContext={unityContext}
             sensorData={sensorData}
             isPlaying={isPlaying}
+            isVerifying={isVerifying}
             clickHandler={clickHandler}
+            verifyHandler={verifyHandler}
+            cancelVerifyHandler={cancelVerifyHandler}
           />
         </SplitPane>
         <Simulation unityContext={unityContext} sensorData={sensorData} />
