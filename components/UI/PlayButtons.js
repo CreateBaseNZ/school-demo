@@ -40,8 +40,6 @@ export const StopButton = (props) => {
 };
 
 const PlayButtons = (props) => {
-  console.log(props.isPlaying);
-
   return (
     <div className={classes.container}>
       <PlayButton

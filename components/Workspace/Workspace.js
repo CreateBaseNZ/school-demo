@@ -93,6 +93,8 @@ const Workspace = (props) => {
 
   const verifyHandler = () => {
     playHandler();
+    console.log(props.gameState);
+
     props.verifyHandler();
   };
 

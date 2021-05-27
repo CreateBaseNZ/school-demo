@@ -73,6 +73,9 @@ const PlayInterface = (props) => {
   };
 
   const verifyHandler = () => {
+    unityContext.on("GetGameState", (gameState) => {
+      setGameState(gameState);
+    });
     setIsVerifying(true);
   };
 
@@ -105,6 +108,7 @@ const PlayInterface = (props) => {
           <Workspace
             unityContext={unityContext}
             sensorData={sensorData}
+            gameState={gameState}
             isPlaying={isPlaying}
             isVerifying={isVerifying}
             clickHandler={clickHandler}
