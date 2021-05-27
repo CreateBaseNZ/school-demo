@@ -8,8 +8,6 @@ import "swiper/swiper.min.css";
 import "swiper/components/pagination/pagination.min.css";
 import "swiper/components/navigation/navigation.min.css";
 
-import SlowMotionVideoIcon from "@material-ui/icons/SlowMotionVideo";
-
 import classes from "./Contents.module.scss";
 
 SwiperCore.use([Pagination, Navigation]);
@@ -87,21 +85,21 @@ const DUMMY_DATA = [
       title: "Slide 2",
       type: "text",
       contents:
-        "The arm will automatically move into the correct position above the bin, you only need to control the claw. By default, if you add a <span style=\"font-weight: 700;\">Toggle Claw</span> block to the workspace and then click <span style=\"font-weight: 700; color: #18dbac;\">Play</span>, the claw will open as soon as the code is run. This will cause it to drop the rubbish too early.",
+        'The arm will automatically move into the correct position above the bin, you only need to control the claw. By default, if you add a <span style="font-weight: 700;">Toggle Claw</span> block to the workspace and then click <span style="font-weight: 700; color: #18dbac;">Play</span>, the claw will open as soon as the code is run. This will cause it to drop the rubbish too early.',
     },
     {
       id: "sub1-page3",
       title: "Slide 3",
       type: "text",
       contents:
-        "You will need to use a <span style=\"font-weight: 700;\">Delay</span> block followed by a <span style=\"font-weight: 700;\">Toggle Claw</span> block to make the claw open only once it is in the correct position. Using trial-and-error, you will need to find the correct time to wait.",
+        'You will need to use a <span style="font-weight: 700;">Delay</span> block followed by a <span style="font-weight: 700;">Toggle Claw</span> block to make the claw open only once it is in the correct position. Using trial-and-error, you will need to find the correct time to wait.',
     },
     {
       id: "sub1-page4",
       title: "Slide 4",
       type: "text",
       contents:
-        "When you have connected each of your blocks together in the correct order, press <span style=\"font-weight: 700; color: #9063f1;\">Verify my code!</span> on the next slide to check your code answer. Note: If you want to run some code you are testing without having your answer checked, then use the <span style=\"font-weight: 700; color: #18dbac;\">Play</span> button instead.",
+        'When you have connected each of your blocks together in the correct order, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer. Note: If you want to run some code you are testing without having your answer checked, then use the <span style="font-weight: 700; color: #18dbac;">Play</span> button instead.',
     },
   ],
 
@@ -146,7 +144,7 @@ const DUMMY_DATA = [
       title: "Slide 6",
       type: "text",
       contents:
-        "When you have connected each of your blocks together in the correct order, press <span style=\"font-weight: 700; color: #9063f1;\">Verify my code!</span> on the next slide to check your final answer. ",
+        'When you have connected each of your blocks together in the correct order, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your final answer. ',
     },
   ],
 ];
@@ -176,10 +174,16 @@ const swiperOptions = {
 const Contents = (props) => {
   return (
     <Swiper {...swiperOptions} className={classes.swiperContainer}>
-      <div className={classes.swiperPrev}>
+      <div
+        className={classes.swiperPrev}
+        style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
+      >
         <KeyboardArrowLeftIcon style={{ fontSize: 48, padding: 0 }} />
       </div>
-      <div className={classes.swiperNext}>
+      <div
+        className={classes.swiperNext}
+        style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
+      >
         <KeyboardArrowRightIcon style={{ fontSize: 48 }} />
       </div>
       {DUMMY_DATA[props.subsystemIndex].map((slide) => (
@@ -189,17 +193,16 @@ const Contents = (props) => {
           dangerouslySetInnerHTML={{ __html: slide.contents }}
         ></SwiperSlide>
       ))}
-      {/* <SwiperSlide className={classes.swiperSlide}>
-        When you have connected each of your blocks together in the correct
-        order, go to the next slide and hit verify to check your code answer!
-      </SwiperSlide> */}
-      <SwiperSlide className={`${classes.swiperSlide} ${classes.checkSlide}`}>
-        <button>
-          <SlowMotionVideoIcon fontSize="large" />
-          Verify my code!
-        </button>
-      </SwiperSlide>
-      <div className={classes.pagination}></div>
+      <SwiperSlide
+        id="last-slide"
+        className={`${classes.swiperSlide} ${
+          props.isVerifying && classes.verifying
+        }`}
+      ></SwiperSlide>
+      <div
+        className={classes.pagination}
+        style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
+      ></div>
     </Swiper>
   );
 };

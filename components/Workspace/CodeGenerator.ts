@@ -94,7 +94,20 @@ export class CodeGenerator {
   public build(blockDetails: Array<any> = []) {
     // Reset Values
     this.content = "";
-    this.executes = [];
+    this.executes = [
+      `document.querySelector("#play-button").addEventListener('click', function handler() {
+        clearInterval(communication);
+        clearInterval(interval);
+        console.log("Interval Clear");
+        this.removeEventListener('click', handler);
+      });`,
+      `document.querySelector("#cancel-verify-button").addEventListener('click', function handler() {
+        clearInterval(communication);
+        clearInterval(interval);
+        console.log("Interval Clear");
+        this.removeEventListener('click', handler);
+      });`
+    ];
     this.execute = "";
     this.increment = 1;
     this.code = "";

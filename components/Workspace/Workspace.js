@@ -5,6 +5,8 @@ import MonacoEditor from "../UI/MonacoEditor";
 import EditorToggleButton from "../UI/EditorToggleButton";
 import PlayButtons from "../UI/PlayButtons";
 import TabBar from "./TabBar";
+import SlowMotionVideoIcon from "@material-ui/icons/SlowMotionVideo";
+import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 
 import { ServoMotors } from "./ServoMotors.ts";
 import { Actuation } from "./Actuation.ts";
@@ -57,30 +59,47 @@ const Workspace = (props) => {
     setActiveTab(option);
   };
 
+  // Declarations for playHandler
+  let sensorData;
+  let communication;
+  let interval;
   const playHandler = async () => {
     const newCode = codeGen.build(flowRef.current.getBlockConfig());
+    // Declare header functions and configurations
     let someVar = props.unityContext;
     let RoboticSystemName = "Arm";
     let ServoMotorsClass = ServoMotors;
     let ActuationClass = Actuation;
     let BlockClass = Block;
-    // Fetch Sensor Data
-    let sensorData;
-    let promise = () => {
-      return new Promise((resolve, reject) => {
-        someVar.on("GetSensorData", (data) => {
-          sensorData = JSON.parse(data);
-          return resolve();
+    // Activate fetching of sensor data
+    if (!sensorData) {
+      let promise = () => {
+        return new Promise((resolve, reject) => {
+          someVar.on("GetSensorData", (data) => {
+            sensorData = JSON.parse(data);
+            return resolve();
+          });
         });
-      });
-    };
-
-    await promise();
+      };
+      await promise();
+    }
+    // Run the function
     eval("(async () => {" + newCode + "})()");
 
     setTextCode(newCode);
     // monacoRef.current.editor.defineTheme("customTheme", themes["Monokai"]);
     // monacoRef.current.editor.setTheme("customTheme");
+  };
+
+  const verifyHandler = () => {
+    playHandler();
+    console.log(props.gameState);
+
+    props.verifyHandler();
+  };
+
+  const cancelHandler = () => {
+    props.cancelVerifyHandler();
   };
 
   return (
@@ -103,7 +122,49 @@ const Workspace = (props) => {
           clickHandler={props.clickHandler}
           playHandler={playHandler}
           isPlaying={props.isPlaying}
+          style={{ display: props.isVerifying ? "none" : "flex" }}
         />
+      </ClientOnlyPortal>
+      <ClientOnlyPortal selector="#last-slide">
+        <div className={classes.lastSlideWrapper}>
+          <button
+            className={classes.verifyBtn}
+            onClick={verifyHandler}
+            style={{
+              display: props.isVerifying || props.isPlaying ? "none" : "flex",
+            }}
+          >
+            <SlowMotionVideoIcon fontSize="large" />
+            Verify my code!
+          </button>
+          <div
+            style={{
+              display: props.isVerifying ? "flex" : "none",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <span>VERIFYING</span>
+            <div className={classes.ldsEllipsis}>
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+            <button
+              id="cancel-verify-button"
+              className={classes.cancelBtn}
+              onClick={cancelHandler}
+            >
+              <CloseRoundedIcon fontSize="small" />
+              Cancel
+            </button>
+          </div>
+          {props.isPlaying && (
+            <div style={{ opacity: 0.75 }}>Simulation in progress...</div>
+          )}
+        </div>
       </ClientOnlyPortal>
     </div>
   );

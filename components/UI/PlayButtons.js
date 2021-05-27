@@ -16,6 +16,7 @@ export const PlayButton = (props) => {
       id="play-button"
       className={`${classes.button} ${classes.play}`}
       onClick={clickHandler}
+      style={props.style}
     >
       <PlayCircleFilledRoundedIcon />
       Play
@@ -29,6 +30,7 @@ export const StopButton = (props) => {
       id="stop-button"
       className={`${classes.button} ${classes.stop}`}
       onClick={props.onClick}
+      style={props.style}
     >
       <StopRoundedIcon />
       Stop
@@ -38,14 +40,16 @@ export const StopButton = (props) => {
 
 const PlayButtons = (props) => {
   return (
-    <div className={classes.container}>
-      {!props.isPlaying && (
-        <PlayButton
-          clickHandler={props.clickHandler}
-          playHandler={props.playHandler}
-        />
-      )}
-      {props.isPlaying && <StopButton onClick={props.clickHandler} />}
+    <div className={classes.container} style={props.style}>
+      <PlayButton
+        clickHandler={props.clickHandler}
+        playHandler={props.playHandler}
+        style={{ display: props.isPlaying ? "none" : "flex" }}
+      />
+      <StopButton
+        onClick={props.clickHandler}
+        style={{ display: props.isPlaying ? "flex" : "none" }}
+      />
     </div>
   );
 };

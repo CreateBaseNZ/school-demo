@@ -5,21 +5,21 @@ const DUMMY_DATA = [
   {
     title: "Moving the Arm",
     href: "/play/moving-the-arm",
-    src: "/subsystem.jpg",
+    src: "/moving-the-arm.png",
     description:
       "Collect a sequence of floating gems by touching them with the end of the robotic arm. ",
   },
   {
     title: "Operating the Claw",
     href: "/play/operating-the-claw",
-    src: "/subsystem.jpg",
+    src: "/operating-the-claw.png",
     description:
       "Find the right timing to catch and release an object with a robotic claw attachment.",
   },
   {
     title: "Collecting the Items",
     href: "/play/collecting-the-items",
-    src: "/subsystem.jpg",
+    src: "/collecting-the-items.png",
     description:
       "Combine your learnings from the first two subsystems to use the claw and the robotic arm to pick up pieces of rubbish at specific locations, before transporting and dropping them into a collection bin.",
     recommended: [

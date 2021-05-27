@@ -8,7 +8,7 @@ import capitalise from "../../utils/capitaliseString";
 import Contents from "../Contents/Contents";
 import Simulation from "../Simulation/Simulation";
 import Workspace from "../Workspace/Workspace";
-import PlayButtons from "../UI/PlayButtons";
+import SuccessModal from "../UI/SuccessModal";
 
 import classes from "./PlayInterface.module.scss";
 
@@ -54,6 +54,7 @@ const PlayInterface = (props) => {
   const router = useRouter();
   const navCtx = useContext(NavContext);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
   const [unityContext, sensorData, setSensorData, gameState, setGameState] =
     useUnity(getSubsystemScene(props.subsystem));
 
@@ -69,6 +70,22 @@ const PlayInterface = (props) => {
 
   const clickHandler = () => {
     setIsPlaying((current) => !current);
+  };
+
+  const verifyHandler = () => {
+    unityContext.on("GetGameState", (gameState) => {
+      setGameState(gameState);
+    });
+    setIsVerifying(true);
+  };
+
+  const cancelVerifyHandler = () => {
+    setIsVerifying(false);
+    unityContext.send("SceneController", "ResetScene"); // TODO: fix
+  };
+
+  const tempHandler = () => {
+    setIsVerifying(false);
   };
 
   return (
@@ -87,17 +104,26 @@ const PlayInterface = (props) => {
           onDragStarted={horizontalDragHandler}
           onDragFinished={dragReleaseHandler}
         >
-          <Contents subsystemIndex={getSubsystemIndex(props.subsystem)} />
+          <Contents
+            subsystemIndex={getSubsystemIndex(props.subsystem)}
+            isPlaying={isPlaying}
+            isVerifying={isVerifying}
+          />
           <Workspace
             unityContext={unityContext}
             sensorData={sensorData}
+            gameState={gameState}
             isPlaying={isPlaying}
+            isVerifying={isVerifying}
             clickHandler={clickHandler}
+            verifyHandler={verifyHandler}
+            cancelVerifyHandler={cancelVerifyHandler}
           />
         </SplitPane>
         <Simulation unityContext={unityContext} sensorData={sensorData} />
       </SplitPane>
       <div id="play-buttons-portal"></div>
+      {isVerifying && <SuccessModal tempHandler={tempHandler} />}
     </>
   );
 };
