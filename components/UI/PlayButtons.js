@@ -46,7 +46,7 @@ const PlayButtons = (props) => {
       />
       <StopButton
         onClick={props.clickHandler}
-        style={{ visibility: props.isPlaying ? "hidden" : "visible" }}
+        style={{ visibility: props.isPlaying ? "visible" : "hidden" }}
       />
     </div>
   );
