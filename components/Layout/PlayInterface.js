@@ -5,10 +5,10 @@ import useUnity from "../../hooks/useUnity";
 import NavContext from "../../store/nav-context";
 import capitalise from "../../utils/capitaliseString";
 
-import Contents from "../Contents/Contents";
-import Simulation from "../Simulation/Simulation";
-import Workspace from "../Workspace/Workspace";
-import SuccessModal from "../UI/SuccessModal";
+import Contents from "../Play/Contents/Contents";
+import Simulation from "../Play/Simulation/Simulation";
+import Workspace from "../Play/Workspace/Workspace";
+import SuccessModal from "../Play/SuccessModal";
 
 import classes from "./PlayInterface.module.scss";
 
@@ -55,8 +55,9 @@ const PlayInterface = (props) => {
   const navCtx = useContext(NavContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
-  const [unityContext, sensorData, setSensorData, gameState, setGameState] =
-    useUnity(getSubsystemScene(props.subsystem));
+  const [unityContext, sensorData, gameState, setGameState] = useUnity(
+    getSubsystemScene(props.subsystem)
+  );
 
   const { asPath } = router;
   useEffect(() => {

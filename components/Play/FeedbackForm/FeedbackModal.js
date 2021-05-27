@@ -1,14 +1,14 @@
 import { Fragment, useContext } from "react";
 import ReactDOM from "react-dom";
 import feedbackForm from "./feedbackForm";
-import useForm from "../../../hooks/useForm";
+import useForm from "/hooks/useForm";
 
 import SendIcon from "@material-ui/icons/Send";
 import CloseIcon from "@material-ui/icons/Close";
-import WhiteLogo from "../../UI/WhiteLogo";
-import FaceBookIcon from "../../Icons/FacebookIcon";
-import InstagramIcon from "../../Icons/InstagramIcon";
-import TwitterIcon from "../../Icons/TwitterIcon";
+import WhiteLogo from "/components/UI/Icons/WhiteLogo";
+import FaceBookIcon from "../../UI/Icons/FacebookIcon";
+import InstagramIcon from "../../UI/Icons/InstagramIcon";
+import TwitterIcon from "../../UI/Icons/TwitterIcon";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 
 import FeedbackContext from "../../../store/feedback-context";

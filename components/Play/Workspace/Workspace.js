@@ -1,12 +1,13 @@
 import { useRef, useEffect, useState, forwardRef } from "react";
 import { createPortal } from "react-dom";
 import dynamic from "next/dynamic";
-import MonacoEditor from "../UI/MonacoEditor";
-import EditorToggleButton from "../UI/EditorToggleButton";
-import PlayButtons from "../UI/PlayButtons";
+import MonacoEditor from "./MonacoEditor/MonacoEditor";
+import EditorToggleButton from "/components/Header/EditorToggleButton";
+import PlayButtons from "../PlayButtons";
 import TabBar from "./TabBar";
 import SlowMotionVideoIcon from "@material-ui/icons/SlowMotionVideo";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
+import EllipsesLoading from "/components/UI/EllipsesLoading";
 
 import { ServoMotors } from "./ServoMotors.ts";
 import { Actuation } from "./Actuation.ts";
@@ -16,7 +17,7 @@ import { CodeGenerator } from "./CodeGenerator.ts";
 
 import classes from "./Workspace.module.scss";
 
-const FlowEditorRender = dynamic(() => import("../UI/FlowEditor/FlowEditor"), {
+const FlowEditorRender = dynamic(() => import("./FlowEditor/FlowEditor"), {
   ssr: false,
 });
 
@@ -51,7 +52,7 @@ const Workspace = (props) => {
     setActiveTab((state) => !state);
   };
 
-  const radioHandler = (option) => {
+  const changeTabHandler = (option) => {
     if (activeTab === "flow" && option === "text") {
       const newCode = codeGen.build(flowRef.current.getBlockConfig());
       setTextCode(newCode);
@@ -116,7 +117,7 @@ const Workspace = (props) => {
         isPlaying={props.isPlaying}
         clickHandler={props.clickHandler}
       />
-      <TabBar active={activeTab} onChange={radioHandler} />
+      <TabBar active={activeTab} onChange={changeTabHandler} />
       <ClientOnlyPortal selector="#play-buttons-portal">
         <PlayButtons
           clickHandler={props.clickHandler}
@@ -146,12 +147,7 @@ const Workspace = (props) => {
             }}
           >
             <span>VERIFYING</span>
-            <div className={classes.ldsEllipsis}>
-              <div />
-              <div />
-              <div />
-              <div />
-            </div>
+            <EllipsesLoading />
             <button
               id="cancel-verify-button"
               className={classes.cancelBtn}

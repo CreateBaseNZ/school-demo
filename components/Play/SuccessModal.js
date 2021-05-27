@@ -1,6 +1,7 @@
 import { Fragment, useContext } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
+import Link from "next/link";
 
 import ReplayRoundedIcon from "@material-ui/icons/ReplayRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
@@ -30,10 +31,12 @@ const ModalOverlay = (props) => {
       <div className={classes.wrapper}>
         <h2>Good work!</h2>
         <p>You have finished this subsystem</p>
-        <button className={classes.continue}>
-          Continue
-          <SendRoundedIcon style={{ fontSize: 28 }} />
-        </button>
+        <Link href="/menu/create">
+          <button className={classes.continue}>
+            Continue
+            <SendRoundedIcon style={{ fontSize: 28 }} />
+          </button>
+        </Link>
         <button className={classes.restart}>
           Restart
           <ReplayRoundedIcon style={{ fontSize: 28 }} />

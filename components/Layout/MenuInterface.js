@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import useUnity from "../../hooks/useUnity";
-import NavContext from "../../store/nav-context";
-import capitalise from "../../utils/capitaliseString";
-import Simulation from "../Simulation/Simulation";
+import useUnity from "/hooks/useUnity";
+import NavContext from "/store/nav-context";
+import capitalise from "/utils/capitaliseString";
+import Simulation from "/components/Play/Simulation/Simulation";
 
-import StepCard from "../Menu/StepCard";
-import DefineCard from "../Menu/DefineCard";
-import PlanCard from "../Menu/PlanCard";
-import CreateCard from "../Menu/CreateCard";
-import ImproveCard from "../Menu/ImproveCard";
+import StepCard from "/components/Menu/StepCard";
+import DefineCard from "/components/Menu/DefineCard";
+import PlanCard from "/components/Menu/PlanCard";
+import CreateCard from "/components/Menu/CreateCard";
+import ImproveCard from "/components/Menu/ImproveCard";
 
 import classes from "./MenuInterface.module.scss";
 

@@ -1,11 +1,11 @@
-import StartNode from "../components/UI/FlowEditor/StartNode";
-import EndNode from "../components/UI/FlowEditor/EndNode";
-import MoveNode from "../components/UI/FlowEditor/MoveNode";
-import ClawNode from "../components/UI/FlowEditor/ClawNode";
-import ReadNode from "../components/UI/FlowEditor/ReadNode";
-import SetNode from "../components/UI/FlowEditor/SetNode";
-import PauseNode from "../components/UI/FlowEditor/PauseNode";
-import CustomEdge from "../components/UI/FlowEditor/CustomEdge";
+import StartNode from "/components/Play/Workspace/FlowEditor/StartNode";
+import EndNode from "/components/Play/Workspace/FlowEditor/EndNode";
+import MoveNode from "/components/Play/Workspace/FlowEditor/MoveNode";
+import ClawNode from "/components/Play/Workspace/FlowEditor/ClawNode";
+import ReadNode from "/components/Play/Workspace/FlowEditor/ReadNode";
+import SetNode from "/components/Play/Workspace/FlowEditor/SetNode";
+import PauseNode from "/components/Play/Workspace/FlowEditor/PauseNode";
+import CustomEdge from "/components/Play/Workspace/FlowEditor/CustomEdge";
 
 export const initialData = {
   start: {},

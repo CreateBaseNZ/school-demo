@@ -1,6 +1,6 @@
 import Image from "next/image";
 import classes from "./ContentWrapper.module.scss";
-import SubsystemCard from "../UI/SubsystemCard";
+import SubsystemCard from "/components/UI/SubsystemCard";
 
 const DUMMY_DATA = [
   {

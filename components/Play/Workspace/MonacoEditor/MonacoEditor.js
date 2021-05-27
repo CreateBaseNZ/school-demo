@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import Editor from "@monaco-editor/react";
 
-import themes from "../../utils/themes";
+import themes from "/utils/themes";
 
 import classes from "./MonacoEditor.module.scss";
 

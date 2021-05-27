@@ -1,4 +1,4 @@
-import SubsystemCard from "../UI/SubsystemCard";
+import SubsystemCard from "/components/UI/SubsystemCard";
 import classes from "./ContentWrapper.module.scss";
 
 const DUMMY_DATA = [

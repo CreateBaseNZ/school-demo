@@ -1,4 +1,4 @@
-import blockFunctions from "../../public/data/blocks.json";
+import blockFunctions from "../../../public/data/blocks.json";
 
 export class CodeGenerator {
   private blockFunctions: Array<any>;
@@ -19,8 +19,10 @@ export class CodeGenerator {
 
   private start(blockDetail: any) {
     // Fetch the Block Function
-    const blockFunction = this.blockFunctions.find(element => {
-      return (element.robot === blockDetail.robot && blockDetail.type === "start");
+    const blockFunction = this.blockFunctions.find((element) => {
+      return (
+        element.robot === blockDetail.robot && blockDetail.type === "start"
+      );
     });
     // Add to content
     this.content += blockFunction.logic;
@@ -28,9 +30,12 @@ export class CodeGenerator {
 
   private move(blockDetail: any) {
     // Fetch the Block Function
-    const blockFunction = this.blockFunctions.find(element => {
+    const blockFunction = this.blockFunctions.find((element) => {
       if (element.type === "move") {
-        return ((element.function.name === blockDetail.name) && (element.robot === blockDetail.robot));
+        return (
+          element.function.name === blockDetail.name &&
+          element.robot === blockDetail.robot
+        );
       } else {
         return false;
       }
@@ -40,7 +45,7 @@ export class CodeGenerator {
     let inputs: string = "";
     for (let i = 0; i < blockFunction.function.inputs.length; i++) {
       const element = blockFunction.function.inputs[i];
-      if (i === (blockFunction.function.inputs.length - 1)) {
+      if (i === blockFunction.function.inputs.length - 1) {
         inputVariables += element.variable;
         inputs += String(blockDetail.value[element.variable]);
       } else {
@@ -72,8 +77,8 @@ export class CodeGenerator {
 
   private end(blockDetail: any) {
     // Fetch the Block Function
-    const blockFunction = this.blockFunctions.find(element => {
-      return (element.robot === blockDetail.robot && element.type === "end");
+    const blockFunction = this.blockFunctions.find((element) => {
+      return element.robot === blockDetail.robot && element.type === "end";
     });
     // Add to execute
     for (let i = 0; i < blockFunction.executes.length; i++) {
@@ -106,7 +111,7 @@ export class CodeGenerator {
         clearInterval(interval);
         console.log("Interval Clear");
         this.removeEventListener('click', handler);
-      });`
+      });`,
     ];
     this.execute = "";
     this.increment = 1;
@@ -115,13 +120,20 @@ export class CodeGenerator {
     for (let i = 0; i < blockDetails.length; i++) {
       const element = blockDetails[i];
       switch (element.type) {
-        case "start": this.start(element); break;
-        case "move": this.move(element); break;
-        case "end": this.end(element); break;
-        default: break;
+        case "start":
+          this.start(element);
+          break;
+        case "move":
+          this.move(element);
+          break;
+        case "end":
+          this.end(element);
+          break;
+        default:
+          break;
       }
     }
     this.run();
-    return (this.content + this.execute);
+    return this.content + this.execute;
   }
 }

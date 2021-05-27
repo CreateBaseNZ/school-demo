@@ -1,4 +1,4 @@
-import createFormFieldConfig from "../../../utils/formConfig";
+import createFormFieldConfig from "/utils/formConfig";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import EmailRoundedIcon from "@material-ui/icons/EmailRounded";

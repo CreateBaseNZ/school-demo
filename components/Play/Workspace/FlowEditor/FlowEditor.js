@@ -20,12 +20,12 @@ import {
   edgeTypes,
   miniMapColoriser,
   miniMapStrokeColoriser,
-} from "../../../utils/flowConfig";
+} from "/utils/flowConfig";
 import DndBar from "./DndBar";
 
 import { CustomConnectionLine } from "./CustomEdge";
 
-import initialElements from "../../../utils/initialElements";
+import initialElements from "/utils/initialElements";
 
 import classes from "./FlowEditor.module.scss";
 
