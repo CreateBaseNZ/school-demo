@@ -40,7 +40,7 @@ export const StopButton = (props) => {
 
 const PlayButtons = (props) => {
   return (
-    <div className={classes.container}>
+    <div className={classes.container} style={props.style}>
       <PlayButton
         clickHandler={props.clickHandler}
         playHandler={props.playHandler}

@@ -8,6 +8,7 @@ import capitalise from "../../utils/capitaliseString";
 import Contents from "../Contents/Contents";
 import Simulation from "../Simulation/Simulation";
 import Workspace from "../Workspace/Workspace";
+import SuccessModal from "../UI/SuccessModal";
 
 import classes from "./PlayInterface.module.scss";
 
@@ -80,7 +81,11 @@ const PlayInterface = (props) => {
 
   const cancelVerifyHandler = () => {
     setIsVerifying(false);
-    unityContext.send("SceneController", "ResetScene");
+    unityContext.send("SceneController", "ResetScene"); // TODO: fix
+  };
+
+  const tempHandler = () => {
+    setIsVerifying(false);
   };
 
   return (
@@ -118,6 +123,7 @@ const PlayInterface = (props) => {
         <Simulation unityContext={unityContext} sensorData={sensorData} />
       </SplitPane>
       <div id="play-buttons-portal"></div>
+      {isVerifying && <SuccessModal tempHandler={tempHandler} />}
     </>
   );
 };

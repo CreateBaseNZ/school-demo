@@ -117,15 +117,14 @@ const Workspace = (props) => {
         clickHandler={props.clickHandler}
       />
       <TabBar active={activeTab} onChange={radioHandler} />
-      {!props.isVerifying && (
-        <ClientOnlyPortal selector="#play-buttons-portal">
-          <PlayButtons
-            clickHandler={props.clickHandler}
-            playHandler={playHandler}
-            isPlaying={props.isPlaying}
-          />
-        </ClientOnlyPortal>
-      )}
+      <ClientOnlyPortal selector="#play-buttons-portal">
+        <PlayButtons
+          clickHandler={props.clickHandler}
+          playHandler={playHandler}
+          isPlaying={props.isPlaying}
+          style={{ display: props.isVerifying ? "none" : "flex" }}
+        />
+      </ClientOnlyPortal>
       <ClientOnlyPortal selector="#last-slide">
         <div className={classes.lastSlideWrapper}>
           <button
