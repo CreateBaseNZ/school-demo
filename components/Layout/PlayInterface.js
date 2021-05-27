@@ -8,7 +8,6 @@ import capitalise from "../../utils/capitaliseString";
 import Contents from "../Contents/Contents";
 import Simulation from "../Simulation/Simulation";
 import Workspace from "../Workspace/Workspace";
-import PlayButtons from "../UI/PlayButtons";
 
 import classes from "./PlayInterface.module.scss";
 

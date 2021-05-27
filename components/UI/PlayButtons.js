@@ -17,7 +17,6 @@ export const PlayButton = (props) => {
       className={`${classes.button} ${classes.play}`}
       onClick={clickHandler}
       style={props.style}
-      s
     >
       <PlayCircleFilledRoundedIcon />
       Play

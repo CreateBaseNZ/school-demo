@@ -128,31 +128,40 @@ const Workspace = (props) => {
       )}
       <ClientOnlyPortal selector="#last-slide">
         <div className={classes.lastSlideWrapper}>
-          {!props.isVerifying && !props.isPlaying && (
-            <button className={classes.verifyBtn} onClick={verifyHandler}>
-              <SlowMotionVideoIcon fontSize="large" />
-              Verify my code!
+          <button
+            className={classes.verifyBtn}
+            onClick={verifyHandler}
+            style={{
+              display: props.isVerifying || props.isPlaying ? "none" : "flex",
+            }}
+          >
+            <SlowMotionVideoIcon fontSize="large" />
+            Verify my code!
+          </button>
+          <div
+            style={{
+              display: props.isVerifying ? "flex" : "none",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <span>VERIFYING</span>
+            <div className={classes.ldsEllipsis}>
+              <div />
+              <div />
+              <div />
+              <div />
+            </div>
+            <button
+              id="cancel-verify-button"
+              className={classes.cancelBtn}
+              onClick={cancelHandler}
+            >
+              <CloseRoundedIcon fontSize="small" />
+              Cancel
             </button>
-          )}
-          {props.isVerifying && (
-            <>
-              <span>VERIFYING</span>
-              <div className={classes.ldsEllipsis}>
-                <div />
-                <div />
-                <div />
-                <div />
-              </div>
-              <button
-                id="cancel-verify-button"
-                className={classes.cancelBtn}
-                onClick={cancelHandler}
-              >
-                <CloseRoundedIcon fontSize="small" />
-                Cancel
-              </button>
-            </>
-          )}
+          </div>
           {props.isPlaying && (
             <div style={{ opacity: 0.75 }}>Simulation in progress...</div>
           )}
