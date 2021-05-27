@@ -21,6 +21,14 @@ const MonacoEditor = (props) => {
   //   return <button key={key}> {key} </button>;
   // });
 
+  const editorOptions = {
+    automaticLayout: true,
+    wordWrap: "on",
+    wrappingStrategy: "advanced",
+    folding: true,
+    foldingStrategy: "indentation",
+  };
+
   return (
     <div
       className={classes.editorContainer}
@@ -32,6 +40,7 @@ const MonacoEditor = (props) => {
         onMount={handleEditorDidMount}
         className={classes.editor}
         theme={"vs-dark"}
+        options={editorOptions}
       />
     </div>
   );
