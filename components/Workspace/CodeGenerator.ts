@@ -94,7 +94,7 @@ export class CodeGenerator {
   public build(blockDetails: Array<any> = []) {
     // Reset Values
     this.content = "";
-    this.executes = [];
+    this.executes = [ "document.querySelector('#stop-button').addEventListener('click', () => { clearInterval(communication); clearInterval(interval); });" ];
     this.execute = "";
     this.increment = 1;
     this.code = "";

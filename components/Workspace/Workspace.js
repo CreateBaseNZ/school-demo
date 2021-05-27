@@ -59,25 +59,31 @@ const Workspace = (props) => {
     setActiveTab(option);
   };
 
+  // Declarations for playHandler
+  let sensorData;
+  let communication;
+  let interval;
   const playHandler = async () => {
     const newCode = codeGen.build(flowRef.current.getBlockConfig());
+    // Declare header functions and configurations
     let someVar = props.unityContext;
     let RoboticSystemName = "Arm";
     let ServoMotorsClass = ServoMotors;
     let ActuationClass = Actuation;
     let BlockClass = Block;
-    // Fetch Sensor Data
-    let sensorData;
-    let promise = () => {
-      return new Promise((resolve, reject) => {
-        someVar.on("GetSensorData", (data) => {
-          sensorData = JSON.parse(data);
-          return resolve();
+    // Activate fetching of sensor data
+    if (!sensorData) {
+      let promise = () => {
+        return new Promise((resolve, reject) => {
+          someVar.on("GetSensorData", (data) => {
+            sensorData = JSON.parse(data);
+            return resolve();
+          });
         });
-      });
-    };
-
-    await promise();
+      };
+      await promise();
+    }
+    // Run the function
     eval("(async () => {" + newCode + "})()");
 
     setTextCode(newCode);
