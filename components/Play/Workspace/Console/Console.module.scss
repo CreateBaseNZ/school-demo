@@ -1,0 +1,36 @@
+@import "/styles/variables";
+
+.console {
+  width: 100%;
+  background: #1a1a1a;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  span {
+    padding: 0.5rem 1rem 0.5rem 3rem;
+    width: 100%;
+    font-size: 14px;
+    font-family: $exo-2;
+    border-top: thin solid rgba(255, 255, 255, 0.1);
+    border-bottom: thin solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    line-height: 1.5em;
+    svg {
+      position: absolute;
+      top: 0.5rem;
+      left: 1rem;
+    }
+    &.error {
+      border-color: #790a0a;
+      color: #f07c7c;
+      background: #280001;
+      svg {
+        display: inline;
+        path {
+          fill: #f07c7c;
+        }
+      }
+    }
+  }
+}

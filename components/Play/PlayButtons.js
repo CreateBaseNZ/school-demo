@@ -44,11 +44,11 @@ const PlayButtons = (props) => {
       <PlayButton
         clickHandler={props.clickHandler}
         playHandler={props.playHandler}
-        style={{ display: props.isPlaying ? "none" : "flex" }}
+        style={{ display: props.isPlaying && "none" }}
       />
       <StopButton
         onClick={props.clickHandler}
-        style={{ display: props.isPlaying ? "flex" : "none" }}
+        style={{ display: !props.isPlaying && "none" }}
       />
     </div>
   );
