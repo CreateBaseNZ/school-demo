@@ -21,46 +21,53 @@ const DUMMY_DATA = [
       title: "Slide 1",
       type: "text",
       contents:
-        "In this subsystem, you will learn how to use the <span style=\"font-weight: 700;\">Move Motor</span> code block to move the end of a robotic arm to specific x, y, z coordinates. To complete the subsystem, you have to collect all of the floating gems by moving the gem collector through each of their locations.",
+        "In this subsystem, you will learn how to use the <span style=\"font-weight: 700;\">Move Motor</span> code block to move the end of a robotic arm to specific x, y, z coordinates.",
     },
     {
       id: "sub1-page2",
       title: "Slide 2",
       type: "text",
       contents:
-        "Place your cursor over each gem to reveal the location of the centre of that gem. The first number is the x coordinate (distance along the x-axis), followed by the y coordinate (distance along the y-axis). The last number is the z coordinate (height above the ground).",
+        "To complete the subsystem, you have to collect all of the floating gems by moving the gem collector through each of their locations.",
     },
     {
       id: "sub1-page3",
       title: "Slide 3",
       type: "text",
       contents:
-        "You can program the robotic arm to move to a specific location by placing a <span style=\"font-weight: 700;\">Move Motor</span> block into the workspace and entering the target coordinates.",
+        "Place your cursor over each gem to reveal the location of the centre of that gem. The first number is the x coordinate (distance along the <span style=\"font-weight: 700; color: red;\">x-axis</span>), followed by the y coordinate (distance along the <span style=\"font-weight: 700; color: green;\">y-axis</span>). The last number is the z coordinate (distance along the <span style=\"font-weight: 700; color: blue;\">z-axis</span>).",
     },
     {
       id: "sub1-page4",
       title: "Slide 4",
       type: "text",
       contents:
-        "To run your code, you will need to make sure that all of your blocks are connected together with a single path, including the start and end blocks. Connecting blocks together is as simple as dragging from the output handle of one block to the input handle of another.",
+        "You can program the robotic arm to move to a specific location by placing a <span style=\"font-weight: 700;\">Move Motor</span> block into the workspace and entering the target coordinates.",
     },
     {
       id: "sub1-page5",
       title: "Slide 5",
       type: "text",
       contents:
-        "Once all of your blocks in the workspace are connected via a single path, press the <span style=\"font-weight: 700; color: #18dbac;\">Play</span> button to reset the simulation and run your code.",
+        "To run your code, you will need to make sure that all of your blocks are connected together with a single path, including the start and end blocks. Connecting blocks together is as simple as dragging from the output handle of one block to the input handle of another.",
     },
     {
       id: "sub1-page6",
       title: "Slide 6",
       type: "text",
       contents:
-        "To make the end of the robotic arm travel to multiple locations, you will need to place a sequence of <span style=\"font-weight: 700;\">Move Motor</span> blocks into the workspace and connect them together in your desired order.",
+        "Once all of your blocks in the workspace are connected via a single path, press the <span style=\"font-weight: 700; color: #18dbac;\">Play</span> button to reset the simulation and run your code.",
     },
     {
       id: "sub1-page7",
       title: "Slide 7",
+      type: "text",
+      contents:
+        "To make the end of the robotic arm travel to multiple locations, you will need to place a sequence of <span style=\"font-weight: 700;\">Move Motor</span> blocks into the workspace and connect them together in your desired order.",
+    },
+    {
+      id: "sub1-page8",
+      title: "Slide 8",
       type: "text",
       contents:
         "Once you have connected each of your blocks in the correct order (don’t forget to connect to the start and end blocks), hit <span style=\"font-weight: 700; color: #9063f1;\">Verify my code!</span> on the next slide to check your code answer.",
@@ -111,21 +118,21 @@ const DUMMY_DATA = [
       title: "Slide 2",
       type: "text",
       contents:
-        "Place your cursor over each rubbish bag or bin to reveal the location of the centre of that object. The first number is the x coordinate (distance along the x-axis), followed by the y coordinate (distance along the y-axis). The last number is the z coordinate (height above the ground).",
+        "Place your cursor over each rubbish bag or bin to reveal the location of the centre of that object. The first number is the x coordinate, followed by the y coordinate. The last number is the z coordinate.",
     },
     {
       id: "sub1-page3",
       title: "Slide 3",
       type: "text",
       contents:
-        "When you use the Move Motor block, the coordinates that you enter will be where the centre of the claw attachment will end up once the block has finished running.",
+        "When using the <span style=\"font-weight: 700;\">Move Motor</span> block, the coordinates that you enter will be the location of the centre of the claw attachment when the block has finished running.",
     },
     {
       id: "sub1-page4",
       title: "Slide 4",
       type: "text",
       contents:
-        "Trying to move the arm straight between the items of rubbish and the bin may result in the arm crashing into objects that you don’t intend to hit. You will need to split each motion into multiple movements (by using multiple Move Motor blocks).",
+        "Trying to move the arm straight between the items of rubbish and the bin may result in the arm crashing into objects that you don’t intend to hit. You will need to split each motion into multiple movements (by using multiple <span style=\"font-weight: 700;\">Move Motor</span> blocks).",
     },
     {
       id: "sub1-page5",
