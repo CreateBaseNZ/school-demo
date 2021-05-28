@@ -24,7 +24,7 @@ export const StopButton = (props) => {
     <button
       id="stop-button"
       className={`${classes.button} ${classes.stop}`}
-      onClick={props.stopHandler}
+      onClick={props.stopPlayHandler}
       style={props.style}
     >
       <StopRoundedIcon />
@@ -41,7 +41,7 @@ const PlayButtons = (props) => {
         style={{ display: props.isPlaying && "none" }}
       />
       <StopButton
-        onClick={props.stopHandler}
+        stopPlayHandler={props.stopPlayHandler}
         style={{ display: !props.isPlaying && "none" }}
       />
     </div>

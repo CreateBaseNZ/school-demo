@@ -110,7 +110,7 @@ const Workspace = (props) => {
       <ClientOnlyPortal selector="#play-portal">
         <PlayButtons
           playHandler={playHandler}
-          stopHandler={props.stopHandler}
+          stopPlayHandler={props.stopPlayHandler}
           isPlaying={props.isPlaying}
           style={{ display: props.isVerifying && "none" }}
         />

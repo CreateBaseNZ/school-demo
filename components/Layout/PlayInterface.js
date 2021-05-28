@@ -79,7 +79,8 @@ const PlayInterface = (props) => {
     setIsPlaying(true);
   };
 
-  const stopHandler = () => {
+  const stopPlayHandler = () => {
+    console.log("hello");
     setIsPlaying(false);
     unityContext.send("SceneController", "ResetScene");
   };
@@ -136,7 +137,7 @@ const PlayInterface = (props) => {
             isPlaying={isPlaying}
             isVerifying={isVerifying}
             playHandler={playHandler}
-            stopHandler={stopHandler}
+            stopPlayHandler={stopPlayHandler}
             verifyHandler={verifyHandler}
             cancelVerifyHandler={cancelVerifyHandler}
             restartHandler={restartHandler}
