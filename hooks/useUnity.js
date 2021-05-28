@@ -22,6 +22,9 @@ const useUnity = (subsystem) => {
     unityContext.on("GetSensorData", (sensorData) => {
       setSensorData(sensorData);
     });
+  }, []);
+
+  useEffect(() => {
     unityContext.on("GetGameState", (gameState) => {
       setGameState(gameState);
     });
@@ -41,13 +44,7 @@ const useUnity = (subsystem) => {
     }, 4000);
   });
 
-  return [
-    unityContext,
-    sensorData,
-    setSensorDataWrapper,
-    gameState,
-    setGameStateWrapper,
-  ];
+  return [unityContext, sensorData, gameState];
 };
 
 export default useUnity;

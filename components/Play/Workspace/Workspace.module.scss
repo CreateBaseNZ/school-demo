@@ -39,6 +39,12 @@
       }
     }
   }
+  .verifyingWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .cancelBtn {
     background: $hover-bg-light;
     font-size: 14px;
@@ -57,5 +63,6 @@
     opacity: 0.75;
     letter-spacing: 0.1em;
     font-weight: 600;
+    display: block;
   }
 }

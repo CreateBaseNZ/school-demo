@@ -55,10 +55,11 @@ const PlayInterface = (props) => {
   const navCtx = useContext(NavContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
-  const [unityContext, sensorData, gameState, setGameState] = useUnity(
+  const [unityContext, sensorData, gameState] = useUnity(
     getSubsystemScene(props.subsystem)
   );
 
+  // setting the nav
   const { asPath } = router;
   useEffect(() => {
     const strArr = asPath.split("/");
@@ -69,23 +70,44 @@ const PlayInterface = (props) => {
     }
   }, [asPath]);
 
-  const clickHandler = () => {
-    setIsPlaying((current) => !current);
+  useEffect(() => {
+    console.log(isVerifying);
+    console.log(gameState);
+  }, [isVerifying, gameState]);
+
+  const playHandler = () => {
+    setIsPlaying(true);
   };
 
+  const stopHandler = () => {
+    setIsPlaying(false);
+    unityContext.send("SceneController", "ResetScene");
+  };
+
+  // called in the verify handler
   const verifyHandler = () => {
-    unityContext.on("GetGameState", (gameState) => {
-      setGameState(gameState);
-    });
     setIsVerifying(true);
   };
 
+  // called in the cancel verify handler
   const cancelVerifyHandler = () => {
+    // TODO: terminate code
+    // id: '#cancel-verify-button'
     setIsVerifying(false);
-    unityContext.send("SceneController", "ResetScene"); // TODO: fix
+    unityContext.send("SceneController", "ResetScene");
   };
 
-  const tempHandler = () => {
+  // called in the restart subsystem handler
+  const restartHandler = () => {
+    // TODO: terminate code
+    // id: '#restart-button'
+    setIsVerifying(false);
+    unityContext.send("SceneController", "ResetScene");
+  };
+
+  const closeSuccessHandler = () => {
+    // TODO: terminate code
+    // id: '#close-success-button'
     setIsVerifying(false);
   };
 
@@ -116,15 +138,24 @@ const PlayInterface = (props) => {
             gameState={gameState}
             isPlaying={isPlaying}
             isVerifying={isVerifying}
-            clickHandler={clickHandler}
+            playHandler={playHandler}
+            stopHandler={stopHandler}
             verifyHandler={verifyHandler}
             cancelVerifyHandler={cancelVerifyHandler}
+            restartHandler={restartHandler}
           />
         </SplitPane>
         <Simulation unityContext={unityContext} sensorData={sensorData} />
       </SplitPane>
-      <div id="play-buttons-portal"></div>
-      {isVerifying && <SuccessModal tempHandler={tempHandler} />}
+      <div id="play-portal"></div>
+      <SuccessModal
+        style={{
+          display:
+            (!isVerifying || gameState.toLowerCase() !== "win") && "none",
+        }}
+        restartHandler={restartHandler}
+        closeSuccessHandler={closeSuccessHandler}
+      />
     </>
   );
 };

@@ -1,5 +1,4 @@
-import { useRef, useEffect, useState, forwardRef } from "react";
-import { createPortal } from "react-dom";
+import { useRef, useState, forwardRef } from "react";
 import dynamic from "next/dynamic";
 import MonacoEditor from "./MonacoEditor/MonacoEditor";
 import Console from "./Console/Console";
@@ -9,6 +8,7 @@ import TabBar from "./TabBar";
 import SlowMotionVideoIcon from "@material-ui/icons/SlowMotionVideo";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
 import EllipsesLoading from "/components/UI/EllipsesLoading";
+import ClientOnlyPortal from "/utils/ClientOnlyPortal";
 
 import { ServoMotors } from "./ServoMotors.ts";
 import { Actuation } from "./Actuation.ts";
@@ -25,18 +25,6 @@ const FlowEditorRender = dynamic(() => import("./FlowEditor/FlowEditor"), {
 const FlowEditor = forwardRef((props, ref) => (
   <FlowEditorRender {...props} forwardedRef={ref} />
 ));
-
-const ClientOnlyPortal = ({ children, selector }) => {
-  const ref = useRef();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    ref.current = document.querySelector(selector);
-    setMounted(true);
-  }, [selector]);
-
-  return mounted ? createPortal(children, ref.current) : null;
-};
 
 const codeGen = new CodeGenerator();
 
@@ -61,11 +49,11 @@ const Workspace = (props) => {
     setActiveTab(option);
   };
 
-  // Declarations for playHandler
+  // Declarations for executeCode
   let sensorData;
   let communication;
   let interval;
-  const playHandler = async () => {
+  const executeCode = async () => {
     const newCode = codeGen.build(flowRef.current.getBlockConfig());
     // Declare header functions and configurations
     let someVar = props.unityContext;
@@ -93,15 +81,14 @@ const Workspace = (props) => {
     // monacoRef.current.editor.setTheme("customTheme");
   };
 
-  const verifyHandler = () => {
-    playHandler();
-    console.log(props.gameState);
-
-    props.verifyHandler();
+  const playHandler = () => {
+    executeCode();
+    props.playHandler();
   };
 
-  const cancelHandler = () => {
-    props.cancelVerifyHandler();
+  const verifyHandler = () => {
+    executeCode();
+    props.verifyHandler();
   };
 
   return (
@@ -120,10 +107,10 @@ const Workspace = (props) => {
       />
       <Console hide={activeTab !== "console"} />
       <TabBar active={activeTab} onChange={changeTabHandler} />
-      <ClientOnlyPortal selector="#play-buttons-portal">
+      <ClientOnlyPortal selector="#play-portal">
         <PlayButtons
-          clickHandler={props.clickHandler}
           playHandler={playHandler}
+          stopHandler={props.stopHandler}
           isPlaying={props.isPlaying}
           style={{ display: props.isVerifying && "none" }}
         />
@@ -141,11 +128,9 @@ const Workspace = (props) => {
             Verify my code!
           </button>
           <div
+            className={classes.verifyingWrapper}
             style={{
-              display: props.isVerifying ? "flex" : "none",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
+              display: !props.isVerifying && "none",
             }}
           >
             <span>VERIFYING</span>
@@ -153,7 +138,7 @@ const Workspace = (props) => {
             <button
               id="cancel-verify-button"
               className={classes.cancelBtn}
-              onClick={cancelHandler}
+              onClick={props.cancelVerifyHandler}
             >
               <CloseRoundedIcon fontSize="small" />
               Cancel

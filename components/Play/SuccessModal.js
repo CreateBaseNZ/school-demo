@@ -2,6 +2,7 @@ import { Fragment, useContext } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
+import ClientOnlyPortal from "/utils/ClientOnlyPortal";
 
 import ReplayRoundedIcon from "@material-ui/icons/ReplayRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
@@ -10,12 +11,12 @@ import SendRoundedIcon from "@material-ui/icons/SendRounded";
 import classes from "./SuccessModal.module.scss";
 
 const Backdrop = (props) => {
-  return <div className={classes.backdrop} />;
+  return <div className={classes.backdrop} style={props.style} />;
 };
 
 const ModalOverlay = (props) => {
   return (
-    <div className={classes.card}>
+    <div className={classes.card} style={props.style}>
       <Image
         src="/success.png"
         alt="Congratulations!"
@@ -24,24 +25,29 @@ const ModalOverlay = (props) => {
         objectPosition="right center"
       />
       <CloseRoundedIcon
+        id="close-success-button"
         style={{ fontSize: 36 }}
         className={classes.closeIcon}
-        onClick={props.tempHandler}
+        onClick={props.closeSuccessHandler}
       />
       <div className={classes.wrapper}>
         <h2>Good work!</h2>
         <p>You have finished this subsystem</p>
         <Link href="/menu/create">
-          <button className={classes.continue}>
+          <button id="continue-button" className={classes.continue}>
             Continue
             <SendRoundedIcon style={{ fontSize: 28 }} />
           </button>
         </Link>
-        <button className={classes.restart}>
+        <button
+          id="restart-button"
+          className={classes.restart}
+          onClick={props.restartHandler}
+        >
           Restart
           <ReplayRoundedIcon style={{ fontSize: 28 }} />
         </button>
-        <button className={classes.close} onClick={props.tempHandler}>
+        <button className={classes.close} onClick={props.closeSuccessHandler}>
           <CloseRoundedIcon style={{ fontSize: 28 }} />
           Close
         </button>
@@ -53,11 +59,16 @@ const ModalOverlay = (props) => {
 const SuccessModal = (props) => {
   return (
     <Fragment>
-      {createPortal(<Backdrop />, document.getElementById("backdrop-root"))}
-      {createPortal(
-        <ModalOverlay tempHandler={props.tempHandler} />,
-        document.getElementById("overlay-root")
-      )}
+      <ClientOnlyPortal selector="#backdrop-root">
+        <Backdrop style={props.style} />
+      </ClientOnlyPortal>
+      <ClientOnlyPortal selector="#overlay-root">
+        <ModalOverlay
+          style={props.style}
+          restartHandler={props.restartHandler}
+          closeSuccessHandler={props.closeSuccessHandler}
+        />
+      </ClientOnlyPortal>
     </Fragment>
   );
 };

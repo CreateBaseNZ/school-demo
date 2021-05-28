@@ -45,8 +45,10 @@ const Nav = ({ showStep, showSubsystem }) => {
           path="/menu"
         />
       )}
-      {showSubsystem && <ChevronRightIcon fontSize="small" />}
-      {showSubsystem && (
+      {showSubsystem && ctx.activeSubsystem && (
+        <ChevronRightIcon fontSize="small" />
+      )}
+      {showSubsystem && ctx.activeSubsystem && (
         <NavItem
           title={formatSubsystemName(ctx.activeSubsystem)}
           items={DUMMY_SUBSYSTEMS}
