@@ -103,7 +103,7 @@ export class Block {
 
 
     /*This function takes either 3 or 4 inputs. The first 3 inputs are the location x,y and z*/
-    InverseKinematics(x_t, y_t, z_t, theta_deg = 0) {
+    InverseKinematics_restricted(x_t, y_t, z_t, theta_deg = 0) {
         let x_inter, y_inter, z_inter;
         y_inter = -x_t;
         z_inter = y_t;
@@ -154,6 +154,10 @@ export class Block {
                     angles[1] = pi / 4;
                     angles[2] = pi / 4;
                 } else {
+                    targetJoint--;
+                    if (targetJoint < 1) {
+                        targetJoint = 2;
+                    }
                     repNo++;
                 }
                 continue;
@@ -207,7 +211,7 @@ export class Block {
     }
 
 
-    InverseKinematics_2(x_t, y_t, z_t) {
+    InverseKinematics(x_t, y_t, z_t) {
         let x_inter, y_inter, z_inter;
         y_inter = -x_t;
         z_inter = y_t;
@@ -250,7 +254,6 @@ export class Block {
                 endeffector_jointVector[i] = lastJointLoc.subset(math.index(i)) - jointLoc.subset(math.index(i));
                 target_jointVector[i] = targetPoint[i] - jointLoc.subset(math.index(i));
             }
-
             let angleChange = this._FindAngle(endeffector_jointVector, target_jointVector);
             if (abs(angleChange) < 0.1 * Math.PI / 180) {
                 if (repNo == 0) {
@@ -258,6 +261,10 @@ export class Block {
                     angles[2] = pi / 4;
                     angles[3] = pi / 4;
                 } else {
+                    targetJoint--;
+                    if (targetJoint < 1) {
+                        targetJoint = 3;
+                    }
                     repNo++;
                 }
                 continue;
