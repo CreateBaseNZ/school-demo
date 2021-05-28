@@ -2,6 +2,7 @@ import { useRef, useEffect, useState, forwardRef } from "react";
 import { createPortal } from "react-dom";
 import dynamic from "next/dynamic";
 import MonacoEditor from "./MonacoEditor/MonacoEditor";
+import Console from "./Console/Console";
 import EditorToggleButton from "/components/Header/EditorToggleButton";
 import PlayButtons from "../PlayButtons";
 import TabBar from "./TabBar";
@@ -117,13 +118,14 @@ const Workspace = (props) => {
         isPlaying={props.isPlaying}
         clickHandler={props.clickHandler}
       />
+      <Console hide={activeTab !== "console"} />
       <TabBar active={activeTab} onChange={changeTabHandler} />
       <ClientOnlyPortal selector="#play-buttons-portal">
         <PlayButtons
           clickHandler={props.clickHandler}
           playHandler={playHandler}
           isPlaying={props.isPlaying}
-          style={{ display: props.isVerifying ? "none" : "flex" }}
+          style={{ display: props.isVerifying && "none" }}
         />
       </ClientOnlyPortal>
       <ClientOnlyPortal selector="#last-slide">
@@ -132,7 +134,7 @@ const Workspace = (props) => {
             className={classes.verifyBtn}
             onClick={verifyHandler}
             style={{
-              display: props.isVerifying || props.isPlaying ? "none" : "flex",
+              display: (props.isVerifying || props.isPlaying) && "none",
             }}
           >
             <SlowMotionVideoIcon fontSize="large" />
