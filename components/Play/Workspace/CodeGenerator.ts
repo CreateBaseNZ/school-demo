@@ -100,18 +100,30 @@ export class CodeGenerator {
     // Reset Values
     this.content = "";
     this.executes = [
-      `document.querySelector("#play-button").addEventListener('click', function handler() {
+      `// Terminate previous operations of the robotic system.
+      document.querySelector("#play-button").addEventListener('click', function handler() {
         clearInterval(communication);
         clearInterval(interval);
-        console.log("Interval Clear");
         this.removeEventListener('click', handler);
       });`,
-      `document.querySelector("#cancel-verify-button").addEventListener('click', function handler() {
+      `// Terminate operations of the robotic system.
+      document.querySelector("#cancel-verify-button").addEventListener('click', function handler() {
         clearInterval(communication);
         clearInterval(interval);
-        console.log("Interval Clear");
         this.removeEventListener('click', handler);
       });`,
+      `// Terminate operations of the robotic system.
+      document.querySelector("#restart-button").addEventListener('click', function handler() {
+        clearInterval(communication);
+        clearInterval(interval);
+        this.removeEventListener('click', handler);
+      });`,
+      `// Terminate operations of the robotic system.
+      document.querySelector("#close-success-button").addEventListener('click', function handler() {
+        clearInterval(communication);
+        clearInterval(interval);
+        this.removeEventListener('click', handler);
+      });`
     ];
     this.execute = "";
     this.increment = 1;

@@ -91,7 +91,6 @@ const PlayInterface = (props) => {
 
   // called in the cancel verify handler
   const cancelVerifyHandler = () => {
-    // TODO: terminate code
     // id: '#cancel-verify-button'
     setIsVerifying(false);
     unityContext.send("SceneController", "ResetScene");
@@ -99,14 +98,12 @@ const PlayInterface = (props) => {
 
   // called in the restart subsystem handler
   const restartHandler = () => {
-    // TODO: terminate code
     // id: '#restart-button'
     setIsVerifying(false);
     unityContext.send("SceneController", "ResetScene");
   };
 
   const closeSuccessHandler = () => {
-    // TODO: terminate code
     // id: '#close-success-button'
     setIsVerifying(false);
   };
