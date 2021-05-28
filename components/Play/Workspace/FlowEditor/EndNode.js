@@ -24,17 +24,6 @@ const EndNode = ({ data }) => {
         <PinDropOutlinedIcon />
         End
       </h5>
-      <Handle
-        type="source"
-        position="left"
-        style={{
-          height: "8px",
-          width: "8px",
-          visibility: "hidden",
-        }}
-        isValidConnection={isValidConnection}
-        className={`${classes.handle} ${classes.source}`}
-      />
     </div>
   );
 };

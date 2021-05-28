@@ -11,16 +11,6 @@ const isValidConnection = (connection) => {
 const StartNode = ({ data }) => {
   return (
     <div className={`${classes.node} ${classes.start}`}>
-      <Handle
-        type="target"
-        position="right"
-        style={{
-          height: "8px",
-          width: "8px",
-        }}
-        isValidConnection={isValidConnection}
-        className={`${classes.handle} ${classes.target}`}
-      />
       <h5>
         <OutlinedFlagIcon />
         Start
