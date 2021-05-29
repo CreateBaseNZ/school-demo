@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react";
 
-const FeedbackContext = createContext({
+const MessageContext = createContext({
   formVisible: false,
   confirmVisible: false,
   showForm: () => {},
@@ -9,7 +9,7 @@ const FeedbackContext = createContext({
   hideConfirm: () => {},
 });
 
-export const FeedbackContextProvider = (props) => {
+export const MessageContextProvider = (props) => {
   const [formVisible, setFormVisible] = useState(false);
   const [confirmVisible, setConfirmVisible] = useState(false);
 
@@ -30,7 +30,7 @@ export const FeedbackContextProvider = (props) => {
   };
 
   return (
-    <FeedbackContext.Provider
+    <MessageContext.Provider
       value={{
         formVisible: formVisible,
         confirmVisible: confirmVisible,
@@ -41,8 +41,8 @@ export const FeedbackContextProvider = (props) => {
       }}
     >
       {props.children}
-    </FeedbackContext.Provider>
+    </MessageContext.Provider>
   );
 };
 
-export default FeedbackContext;
+export default MessageContext;

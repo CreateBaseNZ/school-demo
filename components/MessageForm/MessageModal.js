@@ -1,22 +1,22 @@
 import { Fragment, useContext } from "react";
 import ReactDOM from "react-dom";
-import feedbackForm from "./feedbackForm";
+import messageForm from "./MessageForm";
 import useForm from "/hooks/useForm";
 
 import SendIcon from "@material-ui/icons/Send";
 import CloseIcon from "@material-ui/icons/Close";
 import WhiteLogo from "/components/UI/Icons/WhiteLogo";
-import FaceBookIcon from "../../UI/Icons/FacebookIcon";
-import InstagramIcon from "../../UI/Icons/InstagramIcon";
-import TwitterIcon from "../../UI/Icons/TwitterIcon";
+import FaceBookIcon from "../UI/Icons/FacebookIcon";
+import InstagramIcon from "../UI/Icons/InstagramIcon";
+import TwitterIcon from "../UI/Icons/TwitterIcon";
 import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 
-import FeedbackContext from "../../../store/feedback-context";
+import MessageContext from "../../store/message-context";
 
-import classes from "./FeedbackModal.module.scss";
+import classes from "./MessageModal.module.scss";
 
 const Backdrop = (props) => {
-  const ctx = useContext(FeedbackContext);
+  const ctx = useContext(MessageContext);
 
   const closeButtonHandler = () => {
     if (props.hasInput()) {
@@ -30,7 +30,7 @@ const Backdrop = (props) => {
 };
 
 const ConfirmMessage = () => {
-  const ctx = useContext(FeedbackContext);
+  const ctx = useContext(MessageContext);
 
   return (
     <div
@@ -58,7 +58,7 @@ const ConfirmMessage = () => {
 };
 
 const ModalOverlay = (props) => {
-  const ctx = useContext(FeedbackContext);
+  const ctx = useContext(MessageContext);
 
   const closeButtonHandler = () => {
     if (props.hasInput()) {
@@ -80,12 +80,12 @@ const ModalOverlay = (props) => {
         onClick={closeButtonHandler}
       />
       <section>
-        <h1>Have your say in shaping the future of STEAM education</h1>
+        <h1>Send us a message!</h1>
         <p>
           Your feedback will help us deliver the best experience to creators
-          like yourself. Whether you’ve found a bug, got some suggestions, just
-          want to have a chat, or anything else - get in touch! We’d love to
-          hear your thoughts.
+          like yourself. Whether you’ve found a bug, got some message, just want
+          to have a chat, or anything else - get in touch! We’d love to hear
+          your thoughts.
         </p>
       </section>
       <form>
@@ -107,8 +107,8 @@ const ModalOverlay = (props) => {
   );
 };
 
-const FeedbackModal = (props) => {
-  const { renderFormInputs, isFormValid, formHasInput } = useForm(feedbackForm);
+const MessageModal = (props) => {
+  const { renderFormInputs, isFormValid, formHasInput } = useForm(messageForm);
 
   return (
     <Fragment>
@@ -132,4 +132,4 @@ const FeedbackModal = (props) => {
   );
 };
 
-export default FeedbackModal;
+export default MessageModal;

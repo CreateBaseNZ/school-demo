@@ -10,9 +10,9 @@ import {
   minLengthRule,
   maxLengthRule,
   validEmailRule,
-} from "../../../utils/inputValidationRules";
+} from "../../utils/inputValidationRules";
 
-const feedbackForm = {
+const messageForm = {
   name: {
     ...createFormFieldConfig(
       <AccountCircleIcon />,
@@ -57,4 +57,4 @@ const feedbackForm = {
   },
 };
 
-export default feedbackForm;
+export default messageForm;
