@@ -101,7 +101,7 @@ export class CodeGenerator {
     this.content = "";
     this.executes = [
       `// Terminate previous operations of the robotic system.
-      document.querySelector("#play-button").addEventListener('click', function handler() {
+      document.querySelector("#stop-button").addEventListener('click', function handler() {
         clearInterval(communication);
         clearInterval(interval);
         this.removeEventListener('click', handler);

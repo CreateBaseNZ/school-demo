@@ -42,7 +42,7 @@ let MoveArmRestricted = (x, y, z, restriction) => {
   return new Promise((resolve, reject) => {
     // The function below is made to move the arm to a new location. First, we will find the angles each of the joints should have to reach this point. We will send these positions to the motors, which will try to reach them. Next, we will wait untill the arm has actually reached by checking if each of the joints has reached to the correct angle.
     //Use inverse kinematics to find the angles required by each joint. This would return false if position is unreachable and angles if it is.
-    const TargetAngles = actions.InverseKinematics_restricted (x, y, z);
+    const TargetAngles = actions.InverseKinematics_restricted(x, y, z);
     //If TargetAngles is an array then we will change the target angle of each servo
     if (TargetAngles) {
       for (let i = 0; i < noOfJoints; i++) {
@@ -111,16 +111,15 @@ let ToggleClaw = (inOpen) => {
   });
 };
 
-
 /* ================================ Delay ================================ */
 
 let Delay = (time, unit) => {
   return new Promise((resolve, reject) => {
     let repeated, rate;
-    if (unit == 'ms') {
+    if (unit == "ms") {
       rate = 100;
       repeated = Math.ceil(time / 100);
-    } else if (unit = 's') {
+    } else if ((unit = "s")) {
       rate = 1000;
       repeated = Math.ceil(time);
     } else {
@@ -134,6 +133,6 @@ let Delay = (time, unit) => {
         clearInterval(interval);
         resolve();
       }
-    },rate)
-  })
-}
+    }, rate);
+  });
+};
