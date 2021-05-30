@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import BugReportIcon from "@material-ui/icons/BugReport";
 import WarningRoundedIcon from "@material-ui/icons/WarningRounded";
 
@@ -141,11 +142,11 @@ const DUMMY_DATA = [
   },
 ];
 
-const Log = (props) => {
+export const Log = (props) => {
   return <span>{props.message}</span>;
 };
 
-const Error = (props) => {
+export const Error = (props) => {
   return (
     <span className={classes.error}>
       <BugReportIcon style={{ fontSize: 16 }} />
@@ -154,7 +155,7 @@ const Error = (props) => {
   );
 };
 
-const Warning = (props) => {
+export const Warning = (props) => {
   return (
     <span className={classes.warning}>
       <WarningRoundedIcon style={{ fontSize: 16 }} />
@@ -169,17 +170,7 @@ const Console = (props) => {
       id="console"
       className={classes.console}
       style={{ display: props.hide && "none" }}
-    >
-      {DUMMY_DATA.map((data) => {
-        if (data.type === "error") {
-          return <Error key={data.id} message={data.message} />;
-        } else if (data.type === "warning") {
-          return <Warning key={data.id} message={data.message} />;
-        } else {
-          return <Log key={data.id} message={data.message} />;
-        }
-      })}
-    </div>
+    ></div>
   );
 };
 

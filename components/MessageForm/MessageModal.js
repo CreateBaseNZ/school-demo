@@ -2,6 +2,7 @@ import { Fragment, useContext } from "react";
 import ReactDOM from "react-dom";
 import messageForm from "./MessageForm";
 import useForm from "/hooks/useForm";
+import Image from "next/image";
 
 import SendIcon from "@material-ui/icons/Send";
 import CloseIcon from "@material-ui/icons/Close";
@@ -74,6 +75,15 @@ const ModalOverlay = (props) => {
         ctx.confirmVisible ? classes.confirming : ""
       }`}
     >
+      <div className={classes.img}>
+        <Image
+          src="/message.png"
+          alt="Magic wand"
+          layout="fill"
+          objectFit="contain"
+          objectPosition="bottom left"
+        />
+      </div>
       <CloseIcon
         style={{ fontSize: 36 }}
         className={classes.close}

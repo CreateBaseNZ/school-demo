@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import NavContext from "../../../store/nav-context";
-import { formatSubsystemName } from "../../../utils/capitaliseString";
+import NavContext from "/store/nav-context";
+import { formatSubsystemName } from "/utils/capitaliseString";
 
 import NavItem from "./NavItem";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
