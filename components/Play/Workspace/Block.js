@@ -114,6 +114,7 @@ export class Block {
         const angles = [0, 0, 0, 0];
         let distance = 5000;
         const tolerence = 0.01;
+        const large_tolerence=0.5
         const maxRep = 50;
         const maxLoop = maxRep * (this._noOfJoints - 2);
         let repNo = 0;
@@ -132,7 +133,8 @@ export class Block {
         const z = z_t - this._jointLengths[3] * Math.sin(theta);
         const totalDistance = math.sqrt(math.square(x) + math.square(y) + math.square(z - this._jointLengths[0]));
         if ((totalDistance - totaljointLengths) > 0.1) {
-            console.log("Can't Reach 1");
+            // TODO
+            console.log("Position is out of reach. Try another location");
             return false;
         }
         const targetPoint = [x, y, z];
@@ -206,7 +208,10 @@ export class Block {
         for (let i = 0; i < this._noOfJoints; i++) {
             angles[i] *= 180 / pi;
         }
-       
+        if (distance > large_tolerence) {
+            // TODO
+            console.log("Position can not be reached. Closet position chosen")
+        }
         return angles; //angles.map((val) => val * 180 / pi);
     }
 
@@ -222,6 +227,7 @@ export class Block {
         const angles = [0, 0, 0, 0];
         let distance = 5000;
         const tolerence = 0.01;
+        const large_tolerence = 0.5;
         const maxRep = 50;
         const maxLoop = maxRep * (this._noOfJoints - 1);
         let repNo = 0;
@@ -239,7 +245,8 @@ export class Block {
         const z = z_t;
         const totalDistance = math.sqrt(math.square(x) + math.square(y) + math.square(z - this._jointLengths[0]));
         if ((totalDistance - totaljointLengths) > 0.1) {
-            console.log("Can't Reach 1");
+            // TODO
+            console.log("Position is out of reach. Try another location");
             return false;
         }
         const targetPoint = [x, y, z];
@@ -302,6 +309,10 @@ export class Block {
         }
         for (let i = 0; i < this._noOfJoints; i++) {
             angles[i] *= 180 / pi;
+        }
+        if (distance > large_tolerence) {
+            // TODO
+            console.log("Position can not be reached. Closet position chosen")
         }
        
         return angles; //angles.map((val) => val * 180 / pi);
