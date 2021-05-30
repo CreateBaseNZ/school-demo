@@ -19,7 +19,7 @@ const DUMMY_DATA = [
       title: "Slide 1",
       type: "text",
       contents:
-        "In this subsystem, you will learn how to use the <span style=\"font-weight: 700;\">Move Motor</span> code block to move the end of a robotic arm to specific x, y, z coordinates.",
+        'In this subsystem, you will learn how to use the <span style="font-weight: 700;">Move Motor</span> code block to move the end of a robotic arm to specific x, y, z coordinates.',
     },
     {
       id: "sub1-page2",
@@ -33,14 +33,14 @@ const DUMMY_DATA = [
       title: "Slide 3",
       type: "text",
       contents:
-        "Place your cursor over each gem to reveal the location of the centre of that gem. The first number is the x coordinate (distance along the <span style=\"font-weight: 700; color: red;\">x-axis</span>), followed by the y coordinate (distance along the <span style=\"font-weight: 700; color: green;\">y-axis</span>). The last number is the z coordinate (distance along the <span style=\"font-weight: 700; color: blue;\">z-axis</span>).",
+        'Place your cursor over each gem to reveal the location of the centre of that gem. The first number is the x coordinate (distance along the <span style="font-weight: 700; color: red;">x-axis</span>), followed by the y coordinate (distance along the <span style="font-weight: 700; color: green;">y-axis</span>). The last number is the z coordinate (distance along the <span style="font-weight: 700; color: blue;">z-axis</span>).',
     },
     {
       id: "sub1-page4",
       title: "Slide 4",
       type: "text",
       contents:
-        "You can program the robotic arm to move to a specific location by placing a <span style=\"font-weight: 700;\">Move Motor</span> block into the workspace and entering the target coordinates.",
+        'You can program the robotic arm to move to a specific location by placing a <span style="font-weight: 700;">Move Motor</span> block into the workspace and entering the target coordinates.',
     },
     {
       id: "sub1-page5",
@@ -54,21 +54,21 @@ const DUMMY_DATA = [
       title: "Slide 6",
       type: "text",
       contents:
-        "Once all of your blocks in the workspace are connected via a single path, press the <span style=\"font-weight: 700; color: #18dbac;\">Play</span> button to reset the simulation and run your code.",
+        'Once all of your blocks in the workspace are connected via a single path, press the <span style="font-weight: 700; color: #18dbac;">Play</span> button to reset the simulation and run your code.',
     },
     {
       id: "sub1-page7",
       title: "Slide 7",
       type: "text",
       contents:
-        "To make the end of the robotic arm travel to multiple locations, you will need to place a sequence of <span style=\"font-weight: 700;\">Move Motor</span> blocks into the workspace and connect them together in your desired order.",
+        'To make the end of the robotic arm travel to multiple locations, you will need to place a sequence of <span style="font-weight: 700;">Move Motor</span> blocks into the workspace and connect them together in your desired order.',
     },
     {
       id: "sub1-page8",
       title: "Slide 8",
       type: "text",
       contents:
-        "Once you have connected each of your blocks in the correct order (don’t forget to connect to the start and end blocks), hit <span style=\"font-weight: 700; color: #9063f1;\">Verify my code!</span> on the next slide to check your code answer.",
+        'Once you have connected each of your blocks in the correct order (don’t forget to connect to the start and end blocks), hit <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer.',
     },
   ],
 
@@ -123,14 +123,14 @@ const DUMMY_DATA = [
       title: "Slide 3",
       type: "text",
       contents:
-        "When using the <span style=\"font-weight: 700;\">Move Motor</span> block, the coordinates that you enter will be the location of the centre of the claw attachment when the block has finished running.",
+        'When using the <span style="font-weight: 700;">Move Motor</span> block, the coordinates that you enter will be the location of the centre of the claw attachment when the block has finished running.',
     },
     {
       id: "sub1-page4",
       title: "Slide 4",
       type: "text",
       contents:
-        "Trying to move the arm straight between the items of rubbish and the bin may result in the arm crashing into objects that you don’t intend to hit. You will need to split each motion into multiple movements (by using multiple <span style=\"font-weight: 700;\">Move Motor</span> blocks).",
+        'Trying to move the arm straight between the items of rubbish and the bin may result in the arm crashing into objects that you don’t intend to hit. You will need to split each motion into multiple movements (by using multiple <span style="font-weight: 700;">Move Motor</span> blocks).',
     },
     {
       id: "sub1-page5",
@@ -173,37 +173,39 @@ const swiperOptions = {
 
 const Contents = (props) => {
   return (
-    <Swiper {...swiperOptions} className={classes.swiperContainer}>
+    <div className={classes.contentsWrapper}>
       <div
         className={classes.swiperPrev}
         style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
       >
         <KeyboardArrowLeftIcon style={{ fontSize: 48, padding: 0 }} />
       </div>
+      <Swiper {...swiperOptions} className={classes.swiperContainer}>
+        {DUMMY_DATA[props.subsystemIndex].map((slide) => (
+          <SwiperSlide
+            key={slide.id}
+            className={classes.swiperSlide}
+            dangerouslySetInnerHTML={{ __html: slide.contents }}
+          ></SwiperSlide>
+        ))}
+        <SwiperSlide
+          id="last-slide"
+          className={`${classes.swiperSlide} ${
+            props.isVerifying && classes.verifying
+          }`}
+        ></SwiperSlide>
+        <div
+          className={classes.pagination}
+          style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
+        ></div>
+      </Swiper>
       <div
         className={classes.swiperNext}
         style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
       >
         <KeyboardArrowRightIcon style={{ fontSize: 48 }} />
       </div>
-      {DUMMY_DATA[props.subsystemIndex].map((slide) => (
-        <SwiperSlide
-          key={slide.id}
-          className={classes.swiperSlide}
-          dangerouslySetInnerHTML={{ __html: slide.contents }}
-        ></SwiperSlide>
-      ))}
-      <SwiperSlide
-        id="last-slide"
-        className={`${classes.swiperSlide} ${
-          props.isVerifying && classes.verifying
-        }`}
-      ></SwiperSlide>
-      <div
-        className={classes.pagination}
-        style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
-      ></div>
-    </Swiper>
+    </div>
   );
 };
 
