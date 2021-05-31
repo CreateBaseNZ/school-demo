@@ -47,7 +47,7 @@
 }
 
 .swiperSlide {
-  padding: 2vh 2rem;
+  padding: 2vh 2rem 0 2rem;
   height: calc(100% - 2vh - 2rem);
   font-size: 1rem;
   line-height: 175%;
@@ -56,9 +56,6 @@
   overflow: hidden;
   &.verifying {
     border: thin solid $logo-mid;
-  }
-  &.activeSlide {
-    background: red;
   }
 }
 
@@ -96,5 +93,53 @@
         background: $lightest;
       }
     }
+  }
+}
+
+.overflowArrow {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.overflowArrowOne {
+  animation: arrow-movement 1.6s ease-out infinite;
+}
+.overflowArrowTwo {
+  animation: arrow-movement 1.6s ease-out 0.8s infinite;
+}
+
+.overflowArrow:before,
+.overflowArrow:after {
+  background: rgba(255, 255, 255, 0.25);
+  content: "";
+  display: block;
+  height: 1px;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 10px;
+}
+
+.overflowArrow:before {
+  transform: rotate(45deg) translateX(-23%);
+  transform-origin: top left;
+}
+
+.overflowArrow:after {
+  transform: rotate(-45deg) translateX(23%);
+  transform-origin: top right;
+}
+
+@keyframes arrow-movement {
+  0% {
+    opacity: 0;
+    bottom: calc(1rem + 8px);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

@@ -16,12 +16,12 @@ const DUMMY_PROJECT_STEPS = [
   { title: "Improve", path: "/menu/improve", query: "improve" },
 ];
 const DUMMY_SUBSYSTEMS = [
-  { title: "Moving the Arm", path: "/play/moving-the-arm", query: "" },
   {
     title: "The Gravity Wand",
     path: "/play/the-gravity-wand",
     query: "",
   },
+  { title: "Moving the Arm", path: "/play/moving-the-arm", query: "" },
   {
     title: "Collecting the Items",
     path: "/play/collecting-the-items",

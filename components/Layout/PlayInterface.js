@@ -58,6 +58,7 @@ const PlayInterface = (props) => {
   const [unityContext, sensorData, gameState] = useUnity(
     getSubsystemScene(props.subsystem)
   );
+  const [swiperHeight, setSwiperHeight] = useState();
 
   // setting the nav
   const { asPath } = router;
@@ -123,12 +124,14 @@ const PlayInterface = (props) => {
           className={classes.splitHorizontal}
           defaultSize={"20%"}
           onDragStarted={horizontalDragHandler}
+          onChange={(size) => setSwiperHeight(size)}
           onDragFinished={dragReleaseHandler}
         >
           <Contents
             subsystemIndex={getSubsystemIndex(props.subsystem)}
             isPlaying={isPlaying}
             isVerifying={isVerifying}
+            height={swiperHeight}
           />
           <Workspace
             unityContext={unityContext}

@@ -1,4 +1,4 @@
-import { useState, createRef, memo, useEffect } from "react";
+import { useState, createRef, memo, useEffect, useCallback } from "react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
@@ -171,15 +171,26 @@ const swiperOptions = {
 };
 
 const Contents = (props) => {
-  const slideChangeHandler = () => {
-    const el = document.querySelector("." + classes.activeSlide);
+  const [swiper, setSwiper] = useState({});
+  const [isOverflowing, setIsOverflowing] = useState(false);
+
+  const checkOverflow = useCallback(() => {
+    const el = document.querySelectorAll(".swiper-slide")[swiper.realIndex + 1];
     if (el) {
       if (el.scrollHeight > el.clientHeight) {
-        console.log("is overflowing");
+        setIsOverflowing(true);
       } else {
-        console.log("not overflowing");
+        setIsOverflowing(false);
       }
     }
+  }, [swiper]);
+
+  useEffect(() => {
+    checkOverflow();
+  }, [props.height]);
+
+  const slideChangeHandler = () => {
+    checkOverflow();
   };
 
   return (
@@ -192,9 +203,9 @@ const Contents = (props) => {
       </div>
       <Swiper
         {...swiperOptions}
-        className={classes.swiperContainer}
-        onSlideChange={slideChangeHandler}
-        slideActiveClass={classes.activeSlide}
+        className={`${classes.swiperContainer} swiper-slide`}
+        onSwiper={(swiper) => setSwiper(swiper)}
+        onTransitionEnd={slideChangeHandler}
       >
         {DUMMY_DATA[props.subsystemIndex].map((slide) => {
           return (
@@ -215,6 +226,16 @@ const Contents = (props) => {
           className={classes.pagination}
           style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
         ></div>
+        {isOverflowing && (
+          <>
+            <div
+              className={`${classes.overflowArrow} ${classes.overflowArrowOne}`}
+            ></div>
+            <div
+              className={`${classes.overflowArrow} ${classes.overflowArrowTwo}`}
+            ></div>
+          </>
+        )}
       </Swiper>
       <div
         className={classes.swiperNext}
