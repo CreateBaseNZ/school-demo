@@ -69,6 +69,44 @@ const ModalOverlay = (props) => {
     }
   };
 
+  const submitMessage = async (event) => {
+    // Prevent form's default behaviour of redirecting
+    event.preventDefault();
+    // Construct the object that will be sent to the backend
+    let object = {
+      name: event.target[0].value,
+      email: event.target[1].value,
+      subject: event.target[2].value,
+      message: event.target[3].value,
+    };
+    // Submit the object to the backend
+    let data;
+    try {
+      data = await fetch("https://createbase.co.nz/alpha/message/submit", {
+        method: "POST",
+        body: JSON.stringify(object),
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (error) {
+      data = { status: "error", content: error };
+    }
+    console.log(data);
+    // Handlers
+    switch (data.status) {
+      case "succeeded":
+        // TODO: Success handling
+        break;
+      case "failed":
+        // TODO: Fail handling
+        break;
+      case "error":
+        // TODO: Error Handling
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div
       className={`${classes.card} ${
@@ -98,7 +136,7 @@ const ModalOverlay = (props) => {
           your thoughts.
         </p>
       </section>
-      <form>
+      <form onSubmit={submitMessage}>
         {props.render()}
         <button type="submit" disabled={!props.isFormValid()}>
           Submit <SendIcon />
