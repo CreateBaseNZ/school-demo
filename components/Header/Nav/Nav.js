@@ -18,8 +18,8 @@ const DUMMY_PROJECT_STEPS = [
 const DUMMY_SUBSYSTEMS = [
   { title: "Moving the Arm", path: "/play/moving-the-arm", query: "" },
   {
-    title: "Operating the Claw",
-    path: "/play/operating-the-claw",
+    title: "The Gravity Wand",
+    path: "/play/the-gravity-wand",
     query: "",
   },
   {

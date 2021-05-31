@@ -29,7 +29,7 @@ const Play = (props) => {
       <Head>
         <title>Play | CreateBase</title>
       </Head>
-      <PlayInterface subsystem={"operating-the-claw"} />
+      <PlayInterface subsystem={"the-gravity-wand"} />
     </Layout>
   );
 };

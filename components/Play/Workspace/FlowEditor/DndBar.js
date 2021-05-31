@@ -1,4 +1,5 @@
 import SettingsEthernetRoundedIcon from "@material-ui/icons/SettingsEthernetRounded";
+import FilterTiltShiftIcon from "@material-ui/icons/FilterTiltShift";
 import OpenWithRoundedIcon from "@material-ui/icons/OpenWithRounded";
 import MemoryIcon from "@material-ui/icons/Memory";
 import SettingsInputHdmiOutlinedIcon from "@material-ui/icons/SettingsInputHdmiOutlined";
@@ -49,22 +50,22 @@ const DndBar = () => {
           </div>
         </div>
         <div
-          className={`${classes.dndNode} ${classes.move} ${classes.claw}`}
-          onDragStart={(event) => onDragStart(event, "claw")}
+          className={`${classes.dndNode} ${classes.move} ${classes.gravity}`}
+          onDragStart={(event) => onDragStart(event, "gravity")}
           draggable
         >
           <h5>
-            <SettingsEthernetRoundedIcon />
-            Toggle Claw
+            <FilterTiltShiftIcon />
+            Gravity Switch
           </h5>
           <div className={classes.radioContainer}>
             <div className={classes.radioWrapper}>
               <span className={classes.customRadio}></span>
-              <label>Open</label>
+              <label>On</label>
             </div>
             <div className={classes.radioWrapper}>
               <span className={classes.customRadio}></span>
-              <label>Close</label>
+              <label>Off</label>
             </div>
           </div>
         </div>

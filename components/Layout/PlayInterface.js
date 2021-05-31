@@ -26,9 +26,9 @@ const dragReleaseHandler = () => {
 
 const getSubsystemIndex = (subsystem) => {
   switch (subsystem) {
-    case "moving-the-arm":
+    case "the-gravity-wand":
       return 0;
-    case "operating-the-claw":
+    case "moving-the-arm":
       return 1;
     case "collecting-the-items":
       return 2;
@@ -39,14 +39,14 @@ const getSubsystemIndex = (subsystem) => {
 
 const getSubsystemScene = (subsystem) => {
   switch (subsystem) {
+    case "the-gravity-wand":
+      return "Training_Arm_1";
     case "moving-the-arm":
       return "Training_Arm_0";
-    case "operating-the-claw":
-      return "Training_Arm_1";
     case "collecting-the-items":
-      return "Project_Industrial_0";
+      return "Project_Industrial_1";
     default:
-      return "Project_Industrial_0";
+      return "Project_Industrial_1";
   }
 };
 

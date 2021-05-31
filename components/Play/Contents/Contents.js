@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { useState, createRef, memo, useEffect } from "react";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import KeyboardArrowLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
@@ -13,6 +13,36 @@ import classes from "./Contents.module.scss";
 SwiperCore.use([Pagination, Navigation]);
 
 const DUMMY_DATA = [
+  [
+    {
+      id: "sub1-page1",
+      title: "Slide 1",
+      type: "text",
+      contents:
+        "In this subsystem, the claw attachment is holding another gem! You will need to drop it into the collection bin by opening the claw when it moves into position. Be careful though, the bin won’t stay in the same place for long.",
+    },
+    {
+      id: "sub1-page2",
+      title: "Slide 2",
+      type: "text",
+      contents:
+        'The arm will automatically move into the correct position above the bin, you only need to control the claw. By default, if you add a <span style="font-weight: 700;">Toggle Claw</span> block to the workspace and then click <span style="font-weight: 700; color: #18dbac;">Play</span>, the claw will open as soon as the code is run. This will cause it to drop the rubbish too early.',
+    },
+    {
+      id: "sub1-page3",
+      title: "Slide 3",
+      type: "text",
+      contents:
+        'You will need to use a <span style="font-weight: 700;">Delay</span> block followed by a <span style="font-weight: 700;">Toggle Claw</span> block to make the claw open only once it is in the correct position. Using trial-and-error, you will need to find the correct time to wait.',
+    },
+    {
+      id: "sub1-page4",
+      title: "Slide 4",
+      type: "text",
+      contents:
+        'When you have connected each of your blocks together in the correct order, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer. Note: If you want to run some code you are testing without having your answer checked, then use the <span style="font-weight: 700; color: #18dbac;">Play</span> button instead.',
+    },
+  ],
   [
     {
       id: "sub1-page1",
@@ -69,37 +99,6 @@ const DUMMY_DATA = [
       type: "text",
       contents:
         'Once you have connected each of your blocks in the correct order (don’t forget to connect to the start and end blocks), hit <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer.',
-    },
-  ],
-
-  [
-    {
-      id: "sub1-page1",
-      title: "Slide 1",
-      type: "text",
-      contents:
-        "In this subsystem, the claw attachment is holding another gem! You will need to drop it into the collection bin by opening the claw when it moves into position. Be careful though, the bin won’t stay in the same place for long.",
-    },
-    {
-      id: "sub1-page2",
-      title: "Slide 2",
-      type: "text",
-      contents:
-        'The arm will automatically move into the correct position above the bin, you only need to control the claw. By default, if you add a <span style="font-weight: 700;">Toggle Claw</span> block to the workspace and then click <span style="font-weight: 700; color: #18dbac;">Play</span>, the claw will open as soon as the code is run. This will cause it to drop the rubbish too early.',
-    },
-    {
-      id: "sub1-page3",
-      title: "Slide 3",
-      type: "text",
-      contents:
-        'You will need to use a <span style="font-weight: 700;">Delay</span> block followed by a <span style="font-weight: 700;">Toggle Claw</span> block to make the claw open only once it is in the correct position. Using trial-and-error, you will need to find the correct time to wait.',
-    },
-    {
-      id: "sub1-page4",
-      title: "Slide 4",
-      type: "text",
-      contents:
-        'When you have connected each of your blocks together in the correct order, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer. Note: If you want to run some code you are testing without having your answer checked, then use the <span style="font-weight: 700; color: #18dbac;">Play</span> button instead.',
     },
   ],
 
@@ -172,6 +171,17 @@ const swiperOptions = {
 };
 
 const Contents = (props) => {
+  const slideChangeHandler = () => {
+    const el = document.querySelector("." + classes.activeSlide);
+    if (el) {
+      if (el.scrollHeight > el.clientHeight) {
+        console.log("is overflowing");
+      } else {
+        console.log("not overflowing");
+      }
+    }
+  };
+
   return (
     <div className={classes.contentsWrapper}>
       <div
@@ -180,14 +190,21 @@ const Contents = (props) => {
       >
         <KeyboardArrowLeftIcon style={{ fontSize: 48, padding: 0 }} />
       </div>
-      <Swiper {...swiperOptions} className={classes.swiperContainer}>
-        {DUMMY_DATA[props.subsystemIndex].map((slide) => (
-          <SwiperSlide
-            key={slide.id}
-            className={classes.swiperSlide}
-            dangerouslySetInnerHTML={{ __html: slide.contents }}
-          ></SwiperSlide>
-        ))}
+      <Swiper
+        {...swiperOptions}
+        className={classes.swiperContainer}
+        onSlideChange={slideChangeHandler}
+        slideActiveClass={classes.activeSlide}
+      >
+        {DUMMY_DATA[props.subsystemIndex].map((slide) => {
+          return (
+            <SwiperSlide
+              key={slide.id}
+              className={classes.swiperSlide}
+              dangerouslySetInnerHTML={{ __html: slide.contents }}
+            ></SwiperSlide>
+          );
+        })}
         <SwiperSlide
           id="last-slide"
           className={`${classes.swiperSlide} ${

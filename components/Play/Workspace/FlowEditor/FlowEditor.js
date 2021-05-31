@@ -56,10 +56,10 @@ const FlowEditor = (props) => {
               name: "MoveArm",
             };
             break;
-          case "claw":
+          case "gravity":
             block = {
               ...block,
-              name: "ToggleClaw",
+              name: "GravitySwitch",
             };
             block.type = "move";
             break;
@@ -140,8 +140,8 @@ const FlowEditor = (props) => {
     });
     const id = getId();
     let defaultValues = null;
-    if (type === "claw") {
-      defaultValues = { isOpen: true };
+    if (type === "gravity") {
+      defaultValues = { isOn: true };
     } else if (type === "move") {
       defaultValues = { x: 0, y: 0, z: 0 };
     }

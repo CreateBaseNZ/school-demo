@@ -23,7 +23,6 @@
   width: 3rem;
   height: 4rem;
   opacity: 0.75;
-  margin: 0 1rem;
   border-radius: 0.25rem;
   border: thin solid $border-color;
   transition: background-color 0.1s ease-out, border-color 0.1s ease-out,
@@ -40,15 +39,26 @@
     border-color: transparent;
   }
 }
+.swiperPrev {
+  margin-left: 1rem;
+}
+.swiperNext {
+  margin-right: 1rem;
+}
 
 .swiperSlide {
-  padding: 2vh 0;
+  padding: 2vh 2rem;
+  height: calc(100% - 2vh - 2rem);
   font-size: 1rem;
   line-height: 175%;
   font-weight: 300;
   width: 100% !important;
+  overflow: hidden;
   &.verifying {
     border: thin solid $logo-mid;
+  }
+  &.activeSlide {
+    background: red;
   }
 }
 

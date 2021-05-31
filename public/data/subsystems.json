@@ -2,16 +2,16 @@
   {
     "id": "0001",
     "code": "Arm_1",
-    "name": "Moving the Arm",
-    "description": "Collect a sequence of floating gems by touching them with the end of the robotic arm.",
-    "learningOutcome": "You will learn how to use the move end-effector code block in order to move the end of a robotic arm to specific coordinates."
+    "name": "The Gravity Wand",
+    "description": "",
+    "learningOutcome": "You will learn how to use the open/close claw code block in order to open and close a claw attachment for a robotic arm."
   },
   {
     "id": "0002",
     "code": "Arm_2",
-    "name": "Operating the Claw",
-    "description": "",
-    "learningOutcome": "You will learn how to use the open/close claw code block in order to open and close a claw attachment for a robotic arm."
+    "name": "Moving the Arm",
+    "description": "Collect a sequence of floating gems by touching them with the end of the robotic arm.",
+    "learningOutcome": "You will learn how to use the move end-effector code block in order to move the end of a robotic arm to specific coordinates."
   },
   {
     "id": "0003",

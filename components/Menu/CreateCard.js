@@ -10,9 +10,9 @@ const DUMMY_DATA = [
       "Collect a sequence of floating gems by touching them with the end of the robotic arm. ",
   },
   {
-    title: "Operating the Claw",
-    href: "/play/operating-the-claw",
-    src: "/operating-the-claw.png",
+    title: "The Gravity Wand",
+    href: "/play/the-gravity-wand",
+    src: "/the-gravity-wand.png",
     description:
       "Find the right timing to catch and release an object with a robotic claw attachment.",
   },
