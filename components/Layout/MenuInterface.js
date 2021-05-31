@@ -56,8 +56,11 @@ const MenuInterface = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState();
   const navCtx = useContext(NavContext);
-  const [unityContext, sensorData, setSensorData, gameState, setGameState] =
-    useUnity("Project_Industrial_0");
+  const [unityContext, sensorData, gameState] = useUnity(
+    "Project_Industrial_0"
+  );
+
+  console.log(activeStep);
 
   const { asPath } = router;
   useEffect(() => {
@@ -72,9 +75,7 @@ const MenuInterface = () => {
   }, [asPath]);
 
   const cardClickHandler = (step) => {
-    router.push("/menu", "/menu/" + step, { shallow: true });
-    navCtx.setActiveStep(capitalise(step));
-    setActiveStep(step);
+    router.push("/menu/" + step, "/menu/" + step, { shallow: true });
   };
 
   return (
