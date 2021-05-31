@@ -17,7 +17,7 @@ const verticalDragHandler = () => {
 };
 
 const horizontalDragHandler = () => {
-  document.body.style.cursor = "ew-resize";
+  document.body.style.cursor = "ns-resize";
 };
 
 const dragReleaseHandler = () => {
