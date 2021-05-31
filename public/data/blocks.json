@@ -22,18 +22,16 @@
   {
     "robot": "Arm",
     "type": "move",
-    "name": "Toggle Claw",
+    "name": "Gravity Switch",
     "function": {
-      "name": "ToggleClaw",
-      "inputs": [
-        { "variable": "isOpen", "type": "boolean", "value": true }
-      ],
+      "name": "GravitySwitch",
+      "inputs": [{ "variable": "isOn", "type": "boolean", "value": true }],
       "logic": "//Within this function, we will first check whether the claw is to be opened or closed. If we wanted to open the claw then we will need the motors of the claw to open to 20 degrees. If we want to close them, we send 0 degrees to the motor. We will then wait until we reached that targeted angles.\n//First, we will check is open and if it is true the value after the question mark is set to TargetAngles, otherwise it takes the values after the colon\nconst TargetAngles = isOpen ? [-40, 40] : [-0, 0];\n// We will set the angle values in TargetAngles to the claw motors.\nfor (let i = noOfJoints; i < noOfMotors; i++) {\n\tJoints[i].SetAngle(TargetAngles[i - noOfJoints]);\n}\n// set the interval to run every 1000 seconds (1s)\nlet timer = 0;\nconst rate = 1000;\n//Every second we will check if the motors of the claw have reached their required angle and once we reach we will advance to next step\ninterval = setInterval(() => {\n\t//Create a variable with the name Reached. We will assume that the arm has reached its location unless we find otherwise in the loop following\n\tlet Reached = true;\n\t//Now, we will go through each of the joints and check the difference between the angle we want to reach to and the actual angle of each joint. If the difference is more than 3 degrees the value of Reached is set to false and the loop is broken \n\tfor (let i = 0; i < noOfMotors - noOfJoints; i++) {\n\t\tconst error = Math.abs(TargetAngles[i] - sensorData.jointData[i + noOfJoints].angle);\n\t\tif (error > 3) {\n\t\t\tReached = false;\n\t\t\tbreak;\n\t\t}\n\t}\n\t// If the error in each of the joints is less than 3, then value of Reached will stay as positive and the interval is deleted and the code is allowed to progress to the next function. Another situation to leave the function is to wait 5 seconds\n\ntimer++;\n\tif (Reached||(timer>=5)) {\n\t\tclearInterval(interval);\n\t\tresolve();\n\t}\n}, rate);\n"
     }
   },
   {
     "robot": "Arm",
     "type": "end",
-    "executes": [  ]
+    "executes": []
   }
 ]
