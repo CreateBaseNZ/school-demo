@@ -28,10 +28,12 @@ $padding-side: min(8vw, 8rem);
   background: #1a1a1a;
   border-radius: 1rem;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
   z-index: 100;
   section {
     width: 25vw;
-    margin-right: min(8vw, 8rem);
+    padding-left: 6vw;
+    margin-right: min(6vw, 6rem);
     display: flex;
     flex-direction: column;
     h1 {
@@ -44,7 +46,7 @@ $padding-side: min(8vw, 8rem);
       font-size: 14px;
       color: $light;
       line-height: 1.5em;
-      width: 65%;
+      width: 100%;
     }
   }
   form {
@@ -240,7 +242,7 @@ $padding-side: min(8vw, 8rem);
 .logo {
   position: absolute;
   bottom: $padding-bottom;
-  left: $padding-side;
+  left: calc(#{$padding-side} + 6vw);
   opacity: 0.5;
   transition: opacity 0.1s ease-out;
   &:hover {
@@ -333,7 +335,7 @@ $padding-side: min(8vw, 8rem);
 .img {
   position: absolute;
   bottom: 0;
-  left: 30%;
+  left: -5%;
   height: 65%;
   width: 50%;
   z-index: -1;
