@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import messageForm from "./MessageForm";
 import useForm from "/hooks/useForm";
 import Image from "next/image";
+import axios from "axios";
 
 import SendIcon from "@material-ui/icons/Send";
 import CloseIcon from "@material-ui/icons/Close";
@@ -82,11 +83,7 @@ const ModalOverlay = (props) => {
     // Submit the object to the backend
     let data;
     try {
-      data = await fetch("https://createbase.co.nz/alpha/message/submit", {
-        method: "POST",
-        body: JSON.stringify(object),
-        headers: { "Content-Type": "application/json" },
-      });
+      data = (await axios.post("https://createbase.co.nz/alpha/message/submit", object))["data"];
     } catch (error) {
       data = { status: "error", content: error };
     }
