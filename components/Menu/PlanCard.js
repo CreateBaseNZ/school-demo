@@ -28,14 +28,14 @@ const PlanCard = () => {
       <p style={{ fontWeight: 600 }}>
           <br/>
           To pick up and transport items of rubbish into the bins, we will need to
-          implement the following functionalities with our robotic arm:
+          implement the following functionalities with our H.E.R.&#216; robotic arm:
         </p>
         <ol>
           <li>
-          <b>Subsystem 1</b>: Moving the end of the arm between points in space (x, y, z). 
+          <b>Subsystem 1</b>: Turning the gravity sphere on and off. 
           </li>
           <li>
-          <b>Subsystem 2</b>: Opening and closing the claw attachment.
+          <b>Subsystem 2</b>: Moving the end of the arm between points in space (x, y, z).
           </li>
         </ol>
       </section>
