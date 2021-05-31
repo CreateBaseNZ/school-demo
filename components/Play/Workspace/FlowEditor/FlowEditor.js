@@ -93,7 +93,6 @@ const FlowEditor = (props) => {
   }, []);
 
   const onConnect = useCallback((params) => {
-    console.log(params);
     setElements((els) => {
       return addEdge(
         {

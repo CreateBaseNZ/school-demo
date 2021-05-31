@@ -1,9 +1,6 @@
-import { useState, useEffect, useContext } from "react";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import SplitPane from "react-split-pane";
 import useUnity from "../../hooks/useUnity";
-import NavContext from "../../store/nav-context";
-import capitalise from "../../utils/capitaliseString";
 
 import Contents from "../Play/Contents/Contents";
 import Simulation from "../Play/Simulation/Simulation";
@@ -51,8 +48,6 @@ const getSubsystemScene = (subsystem) => {
 };
 
 const PlayInterface = (props) => {
-  const router = useRouter();
-  const navCtx = useContext(NavContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
   const [unityContext, sensorData, gameState] = useUnity(
@@ -60,28 +55,19 @@ const PlayInterface = (props) => {
   );
   const [swiperHeight, setSwiperHeight] = useState();
 
-  // setting the nav
-  const { asPath } = router;
   useEffect(() => {
-    const strArr = asPath.split("/");
-    if (strArr.length > 2) {
-      navCtx.setActiveSubsystem(capitalise(strArr[2]));
-    } else {
-      navCtx.setActiveSubsystem("");
-    }
-  }, [asPath]);
-
-  useEffect(() => {
-    console.log(isVerifying);
-    console.log(gameState);
-  }, [isVerifying, gameState]);
+    unityContext.send(
+      "SceneController",
+      "LoadScene",
+      getSubsystemScene(props.subsystem)
+    );
+  }, [props.subsystem]);
 
   const playHandler = () => {
     setIsPlaying(true);
   };
 
   const stopPlayHandler = () => {
-    console.log("hello");
     setIsPlaying(false);
     unityContext.send("SceneController", "ResetScene");
   };

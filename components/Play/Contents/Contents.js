@@ -194,7 +194,11 @@ const Contents = (props) => {
   };
 
   return (
-    <div className={classes.contentsWrapper}>
+    <div
+      className={`${classes.contentsWrapper} ${
+        props.isVerifying && classes.verifying
+      }`}
+    >
       <div
         className={classes.swiperPrev}
         style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
@@ -218,9 +222,8 @@ const Contents = (props) => {
         })}
         <SwiperSlide
           id="last-slide"
-          className={`${classes.swiperSlide} ${
-            props.isVerifying && classes.verifying
-          }`}
+          className={classes.swiperSlide}
+          style={{ padding: 0, overflow: "visible" }}
         ></SwiperSlide>
         <div
           className={classes.pagination}
