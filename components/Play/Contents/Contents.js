@@ -108,7 +108,7 @@ const DUMMY_DATA = [
       title: "Slide 1",
       type: "text",
       contents:
-        "In this subsystem, the aim is to grab a rubbish bag with the claw, pick it up, carry it to the rubbish bin, and then drop it inside. This process will be repeated for each item of rubbish. You will need to use the functions that you have learnt in the first two subsystems to accomplish this task.",
+        "In this final system, the aim is to pick up a rubbish bag with the gravity sphere, carry it to the rubbish bin, and then drop it inside. This process will be repeated for each item of rubbish. You will need to use the functions that you have learnt in the first two subsystems to complete this task.",
     },
     {
       id: "sub1-page2",
@@ -122,21 +122,28 @@ const DUMMY_DATA = [
       title: "Slide 3",
       type: "text",
       contents:
-        'When using the <span style="font-weight: 700;">Move Motor</span> block, the coordinates that you enter will be the location of the centre of the claw attachment when the block has finished running.',
+        'When using the <span style="font-weight: 700;">Move Motor</span> block, the coordinates that you enter will be the location of the centre of the gravity sphere attachment when the block has finished running.',
     },
     {
       id: "sub1-page4",
       title: "Slide 4",
       type: "text",
       contents:
-        'Trying to move the arm straight between the items of rubbish and the bin may result in the arm crashing into objects that you don’t intend to hit. You will need to split each motion into multiple movements (by using multiple <span style="font-weight: 700;">Move Motor</span> blocks).',
+        'Trying to move the arm directly between the items of rubbish and the bin may result in the arm crashing into objects that you don’t intend to hit. You will need to split each motion into multiple movements (by using multiple <span style="font-weight: 700;">Move Motor</span> blocks).',
     },
     {
       id: "sub1-page5",
       title: "Slide 5",
       type: "text",
       contents:
-        "Make sure when you approach a piece of rubbish that the claw is already open. You may also have the most success positioning the arm so that it approaches the rubbish bags either from directly above or directly in front.",
+        "For example, you may have to lift each captured rubbish bag vertically before moving it to the rubbish bin to make sure that you do not hit the side of the bin or other rubbish bags.",
+    },
+    {
+      id: "sub1-page5",
+      title: "Slide 5",
+      type: "text",
+      contents:
+        'To keep it simple, try adding blocks to deposit a single rubbish bag into the bin, then use the <span style="font-weight: 700; color: #18dbac;">Play</span> button to test your code. If successful, keep adding more blocks until you can deposit every bag in one run.',
     },
     {
       id: "sub1-page6",
