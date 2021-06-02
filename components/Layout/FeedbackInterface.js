@@ -1,4 +1,5 @@
 import { useState } from "react";
+import axios from "axios";
 import DesignFeedback from "/components/Feedback/DesignFeedback";
 import CodingFeedback from "/components/Feedback/CodingFeedback";
 import ExperienceFeedback from "/components/Feedback/ExperienceFeedback";
@@ -50,7 +51,7 @@ const FeedbackInterface = () => {
     setStep((step) => (step -= 1));
   };
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     for (const response in allStates[step]) {
       console.log(allStates[step]);
       if (!allStates[step][response]) {
@@ -60,6 +61,27 @@ const FeedbackInterface = () => {
     }
     setIsValid(true);
     setStep((step) => (step += 1));
+    // Store feedback on backend
+    let data;
+    try {
+      data = (await axios.post("https://createbase.co.nz/alpha/feedback/version-1/submit", { items: allStates }))["data"];
+    } catch (error) {
+      data = { status: "error", content: error };
+    }
+    switch (data.status) {
+      case "succeeded":
+        // TODO: Success handling
+        break;
+      case "failed":
+        // TODO: Fail handling
+        break;
+      case "error":
+        // TODO: Error Handling
+        break;
+      default:
+        break;
+    }
+    return;
   };
 
   return (

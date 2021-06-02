@@ -87,7 +87,6 @@ const ModalOverlay = (props) => {
     } catch (error) {
       data = { status: "error", content: error };
     }
-    console.log(data);
     // Handlers
     switch (data.status) {
       case "succeeded":
@@ -102,6 +101,7 @@ const ModalOverlay = (props) => {
       default:
         break;
     }
+    return;
   };
 
   return (
