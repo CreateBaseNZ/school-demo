@@ -10,10 +10,10 @@ const DefineCard = () => {
         </p>
         <p>
         After watching the cutscene, we can see that a self-driving vehicle has 
-        spilt bags of rubbish all over a factory floor! Luckily, there are a pair 
+        spilt bags of rubbish all over a factory floor! 🙀 Luckily, there are a pair 
         of bins at the edge of the room that we can deposit the rubbish into. 
         However, rather than cleaning it up ourselves, what if we program the 
-        H.E.R.&#216; robotic arm to do it for us?
+        H.E.R.&#216; robotic arm to do it for us? 🤔
         </p>
       </section>
       <section>
@@ -26,17 +26,17 @@ const DefineCard = () => {
           <li>
             There is a gravity wand attachment on the end of the arm (don't ask us 
             how it works) that can be activated and deactivated. It could be turned on 
-            to attract the items of rubbish and turned off to drop them into a bin.
+            to attract the items of rubbish and turned off to drop them into a bin. 🧙‍♂️ ♻
           </li>
           <li>
             The arm has four motors to move it around in 3D space. We could control 
             each motor individually or, instead, use a pre-made function to move them 
-            together.
+            together. 🦾⛓
           </li>
           <li>
             The H.E.R.&#216; robot can only be programmed to perform one task at a 
             time. This means that we can’t move the robotic arm and activate/deactivate 
-            the gravity wand at the same time. We will have to do one after the other.
+            the gravity wand at the same time. We will have to do one after the other. 1️⃣➡2️⃣
           </li>
         </ol>
       </section>
