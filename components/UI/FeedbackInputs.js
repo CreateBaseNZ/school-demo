@@ -41,7 +41,7 @@ const ScaleQuestion = ({ id, question, system }) => {
       <div className={classes.question}>{question}</div>
       <div className={`${classes.scaleContainer} ${classes[system]}`}>
         {items.map((item) => (
-          <ScaleInput key={id + item} label={item} name={id} />
+          <ScaleInput key={id + "_" + item} label={item} name={id} />
         ))}
       </div>
     </div>
@@ -102,6 +102,7 @@ const generateFeedbackForm = (form) => {
     if (item.type === "scale") {
       return (
         <ScaleQuestion
+          key={item.id}
           id={item.id}
           question={item.question}
           system={item.system}
@@ -110,15 +111,16 @@ const generateFeedbackForm = (form) => {
     } else if (item.type === "list") {
       return (
         <ListQuestion
+          key={item.id}
           id={item.id}
           question={item.question}
           options={item.options}
         />
       );
     } else if (item.type === "age") {
-      return <AgeQuestion question={item.question} />;
+      return <AgeQuestion key={item.id} question={item.question} />;
     } else {
-      return <TextQuestion question={item.question} />;
+      return <TextQuestion key={item.id} question={item.question} />;
     }
   });
 };
