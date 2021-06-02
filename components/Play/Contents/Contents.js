@@ -137,14 +137,14 @@ const DUMMY_DATA = [
       title: "Slide 0",
       type: "text",
       contents:
-        "In this final system, you will a combination of the blocks that you have learnt in the first two subsystems to solve our original problem.",
+        "In this final system, you will need to use a combination of the blocks that you learnt in the first two subsystems to figure out a solution to our original problem!",
     },
     {
       id: "sub1-page1",
       title: "Slide 1",
       type: "text",
       contents:
-        "The aim is to pick up a rubbish bag with the gravity wand, carry it to the rubbish bin, and then drop it inside. This process will be repeated for each item of rubbish until they have all been collected.",
+        "The aim is to pick up a rubbish bag with the gravity wand, carry it to the rubbish bin, and then drop it inside. You will need to repeat this process for each item of rubbish until they have all been collected.",
     },
     {
       id: "sub1-page2",
