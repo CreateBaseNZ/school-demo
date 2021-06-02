@@ -6,7 +6,7 @@ import classes from "./FeedbackButtons.module.scss";
 const PreviousButton = () => {
   return (
     <button className={`${classes.button} ${classes.previous}`}>
-      <NavigateBeforeIcon />
+      <NavigateBeforeIcon fontSize="large" />
       Previous
     </button>
   );
@@ -16,7 +16,7 @@ const NextButton = () => {
   return (
     <button className={`${classes.button} ${classes.next}`}>
       Next
-      <NavigateNextIcon />
+      <NavigateNextIcon fontSize="large" />
     </button>
   );
 };
@@ -25,7 +25,7 @@ const SubmitButton = () => {
   return (
     <button className={`${classes.button} ${classes.submit}`}>
       Submit
-      <NavigateNextIcon />
+      <NavigateNextIcon fontSize="large" />
     </button>
   );
 };
