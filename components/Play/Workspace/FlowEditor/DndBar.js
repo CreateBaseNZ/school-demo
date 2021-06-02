@@ -32,7 +32,7 @@ const DndBar = () => {
         >
           <h5>
             <OpenWithRoundedIcon />
-            Move Motor
+            Move Arm
           </h5>
           <div className={classes.inputContainer}>
             <div className={classes.inputWrapper}>

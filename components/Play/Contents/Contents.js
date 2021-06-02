@@ -59,7 +59,7 @@ const DUMMY_DATA = [
       title: "Slide 6",
       type: "text",
       contents:
-        'When you have connected each of your blocks together in the correct order and think that you have a correct solution, then press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer.',
+        'When you have connected each of your blocks together and think that you have a correct solution, then press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer. If successful, this will complete the task!',
     },
   ],
 
