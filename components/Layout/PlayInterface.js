@@ -55,6 +55,8 @@ const PlayInterface = (props) => {
   );
   const [swiperHeight, setSwiperHeight] = useState();
 
+  let resetSwiper = false;
+
   useEffect(() => {
     unityContext.send(
       "SceneController",

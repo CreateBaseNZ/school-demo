@@ -195,7 +195,8 @@ const DUMMY_DATA = [
       id: "sb-page1",
       title: "Slide 1",
       type: "text",
-      contents: "Welcome to the sandbox! Don't worry about verifying your code in this simulation. With no objectives in sight, the sandbox gives you a chance to experiment with all of the blocks that you have learnt so far.",
+      contents:
+        "Welcome to the sandbox! Don't worry about verifying your code in this simulation. With no objectives in sight, the sandbox gives you a chance to experiment with all of the blocks that you have learnt so far.",
     },
   ],
 ];
@@ -240,6 +241,10 @@ const Contents = (props) => {
   useEffect(() => {
     checkOverflow();
   }, [props.height]);
+
+  useEffect(() => {
+    swiper.activeIndex = 0;
+  }, [props.subsystemIndex]);
 
   const slideChangeHandler = () => {
     checkOverflow();

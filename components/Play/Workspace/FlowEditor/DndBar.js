@@ -36,11 +36,15 @@ const DndBar = () => {
           </h5>
           <div className={classes.inputContainer}>
             <div className={classes.inputWrapper}>
-              <label htmlFor="move-x">X</label>
+              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
+                X
+              </label>
               <input type="number" id="move-x" />
             </div>
             <div className={classes.inputWrapper}>
-              <label htmlFor="move-y">Y</label>
+              <label htmlFor="move-y" style={{ color: "#1ECC30" }}>
+                Y
+              </label>
               <input type="number" id="move-y" />
             </div>
             <div className={classes.inputWrapper}>
