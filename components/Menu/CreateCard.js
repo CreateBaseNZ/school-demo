@@ -3,18 +3,18 @@ import classes from "./ContentWrapper.module.scss";
 
 const DUMMY_DATA = [
   {
-    title: "Moving the Arm",
-    href: "/play/moving-the-arm",
-    src: "/moving-the-arm.png",
-    description:
-      "Collect a sequence of floating gems by touching them with the end of the robotic arm. ",
-  },
-  {
     title: "The Gravity Wand",
     href: "/play/the-gravity-wand",
     src: "/the-gravity-wand.png",
     description:
       "Find the right timing to catch and release an object with a robotic claw attachment.",
+  },
+  {
+    title: "Moving the Arm",
+    href: "/play/moving-the-arm",
+    src: "/moving-the-arm.png",
+    description:
+      "Collect a sequence of floating gems by touching them with the end of the robotic arm. ",
   },
   {
     title: "Collecting the Items",
