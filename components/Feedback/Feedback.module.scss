@@ -1,0 +1,254 @@
+@import "/styles/variables";
+
+.formContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+}
+
+.form {
+  margin: 2rem 0;
+  width: 100%;
+  background: #1a1a1a;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem calc(5vw + 5rem);
+  .questionWrapper {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .question {
+    font-size: 20px;
+    margin: 0.5em 0;
+    line-height: 1.5em;
+  }
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
+  .question {
+    width: 75%;
+    text-align: center;
+  }
+}
+
+.textWrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+  position: relative;
+  input {
+    padding: 1rem;
+    width: 100%;
+    padding-left: 3rem;
+    font-size: 18px;
+  }
+  svg {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0.5rem;
+    opacity: 0.5;
+    transition: opacity 0.1s ease-out;
+    path {
+      transition: fill 0.1s ease-out;
+    }
+  }
+  .underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background: $lightest;
+    opacity: 0.5;
+    transition: opacity 0.1s ease-out, background-color 0.1s ease-out;
+  }
+  &:hover {
+    svg,
+    .underline {
+      opacity: 1;
+    }
+  }
+  input:focus {
+    & ~ svg {
+      opacity: 1;
+      path {
+        fill: $green;
+      }
+    }
+    & ~ .underline {
+      opacity: 1;
+      background: $green;
+    }
+  }
+}
+
+.radioContainer {
+  margin: 2rem 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.radioWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(2rem + 5vw);
+  cursor: pointer;
+  transition: opacity 0.1s ease-out;
+  input {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+  }
+  .customRadio {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 2rem;
+    border: medium solid $lightest;
+    opacity: 0.5;
+    position: relative;
+    transition: border-color 0.1s ease-out, opacity 0.1s ease-out;
+    &::after {
+      content: "";
+      position: absolute;
+      border-radius: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 0;
+      width: 0;
+      transition: height 0.2s ease-out, width 0.2s ease-out;
+    }
+  }
+  span {
+    margin-top: 0.5rem;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0.5;
+    transition: opacity 0.1s ease-out;
+  }
+  &:hover {
+    .customRadio,
+    span {
+      opacity: 1;
+    }
+  }
+  input:checked {
+    & ~ .customRadio {
+      opacity: 1;
+      &::after {
+        height: calc(100% - 8px);
+        width: calc(100% - 8px);
+      }
+    }
+    & ~ span {
+      opacity: 1;
+    }
+  }
+}
+
+.five {
+  .radioWrapper {
+    &:nth-child(1) {
+      .customRadio::after {
+        background: $red;
+      }
+      &:hover .customRadio {
+        border-color: $red;
+      }
+      input:checked ~ .customRadio {
+        border-color: $red;
+      }
+      input:checked ~ span {
+        color: $red;
+      }
+    }
+    &:nth-child(2) {
+      .customRadio::after {
+        background: $amber;
+      }
+      &:hover .customRadio {
+        border-color: $amber;
+      }
+      input:checked ~ .customRadio {
+        border-color: $amber;
+      }
+      input:checked ~ span {
+        color: $amber;
+      }
+    }
+    &:nth-child(3) {
+      .customRadio::after {
+        background: $gold;
+      }
+      &:hover .customRadio {
+        border-color: $gold;
+      }
+      input:checked ~ .customRadio {
+        border-color: $gold;
+      }
+      input:checked ~ span {
+        color: $gold;
+      }
+    }
+    &:nth-child(4) {
+      .customRadio::after {
+        background: $highlight;
+      }
+      &:hover .customRadio {
+        border-color: $highlight;
+      }
+      input:checked ~ .customRadio {
+        border-color: $highlight;
+      }
+      input:checked ~ span {
+        color: $highlight;
+      }
+    }
+    &:nth-child(5) {
+      .customRadio::after {
+        background: $green;
+      }
+      &:hover .customRadio {
+        border-color: $green;
+      }
+      input:checked ~ .customRadio {
+        border-color: $green;
+      }
+      input:checked ~ span {
+        color: $green;
+      }
+    }
+  }
+}

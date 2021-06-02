@@ -13,7 +13,7 @@ const Play = (props) => {
 
   useEffect(() => {
     window.addEventListener("resize", resizeHandler);
-    navCtx.setActiveStep("Create");
+    navCtx.setActiveStep("Sandbox");
 
     return () => {
       window.removeEventListener("resize", resizeHandler);
