@@ -1,4 +1,4 @@
-import NotesIcon from "@material-ui/icons/Notes";
+import generateFeedbackForm from "/components/UI/FeedbackInputs";
 
 import classes from "./Feedback.module.scss";
 
@@ -35,92 +35,16 @@ const DESIGN_QUESTIONS = [
   },
 ];
 
-const RadioInput = ({ label, clickHandler, name }) => {
-  return (
-    <label className={classes.radioWrapper} onClick={clickHandler}>
-      <input type="radio" id="design-q1-0" name={name} checked={true} />
-      <div className={classes.customRadio}></div>
-      <span>{label}</span>
-    </label>
-  );
-};
-
-const getScale = (type) => {
-  switch (type) {
-    case "five":
-      return [
-        "Strongly Disagree",
-        "Disagree",
-        "Neutral",
-        "Agree",
-        "Strongly Agree",
-      ];
-    default:
-      return [
-        "Strongly Disagree",
-        "Disagree",
-        "Neutral",
-        "Agree",
-        "Strongly Agree",
-      ];
-  }
-};
-
-const LikertScale = ({ id, question, system, clickHandler }) => {
-  const items = getScale(system);
-
-  return (
-    <div className={classes.questionWrapper}>
-      <div className={classes.question}>{question}</div>
-      <div className={`${classes.radioContainer} ${classes[system]}`}>
-        {items.map((item) => (
-          <RadioInput
-            key={id + item}
-            label={item}
-            name={id}
-            clickHandler={clickHandler}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const TextQuestion = ({ question }) => {
-  return (
-    <div className={classes.textContainer}>
-      <div className={classes.question}>{question}</div>
-      <div className={classes.textWrapper}>
-        <input type="text" />
-        <NotesIcon />
-        <span className={classes.underline}></span>
-      </div>
-    </div>
-  );
-};
-
 const DesignFeedback = (props) => {
   return (
-    <div className={classes.formContainer}>
+    <div className={classes.formContainer} style={props.style}>
       <h1>Have your say - Design 🎨</h1>
       <h2>
         Please rate your experience when using this platform by indicating how
         much you agree with each of the following statements:
       </h2>
       <form className={classes.form}>
-        {DESIGN_QUESTIONS.map((item) => {
-          if (item.type === "scale") {
-            return (
-              <LikertScale
-                id={item.id}
-                question={item.question}
-                system={item.system}
-              />
-            );
-          } else {
-            return <TextQuestion question={item.question} />;
-          }
-        })}
+        {generateFeedbackForm(DESIGN_QUESTIONS)}
       </form>
     </div>
   );
