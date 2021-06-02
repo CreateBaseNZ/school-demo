@@ -16,7 +16,7 @@ const FeedbackInterface = () => {
   const [generalState, setGeneralState] = useState({});
   const [step, setStep] = useState(0);
 
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(true);
 
   const allStates = [
     designState,

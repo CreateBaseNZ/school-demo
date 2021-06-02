@@ -48,11 +48,12 @@ const FormNavButtons = ({
   prevHandler,
   nextHandler,
   submitHandler,
+  style,
 }) => {
   return (
     <div
       className={`${classes.buttonContainer} ${!isValid && classes.invalid}`}
-      style={props.style}
+      style={style}
     >
       <PreviousButton
         prevHandler={prevHandler}
