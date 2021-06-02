@@ -186,7 +186,7 @@ const DUMMY_DATA = [
       title: "Slide 7",
       type: "text",
       contents:
-        'When you have connected each of your blocks together in the correct order, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check if your final solution solves our problem! ',
+        'When you think that you can deposit every bag in one run, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check if your final solution solves our problem! ',
     },
   ],
 ];
