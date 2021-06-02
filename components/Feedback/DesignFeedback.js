@@ -44,7 +44,7 @@ const DesignFeedback = (props) => {
         much you agree with each of the following statements:
       </h2>
       <form className={classes.form}>
-        {generateFeedbackForm(DESIGN_QUESTIONS)}
+        {generateFeedbackForm(DESIGN_QUESTIONS, props.state, props.setState)}
       </form>
     </div>
   );

@@ -26,20 +26,27 @@ const getScale = (type) => {
 const ScaleInput = ({ label, name }) => {
   return (
     <label className={classes.scaleWrapper}>
-      <input type="radio" name={name} />
+      <input type="radio" name={name} value={label} />
       <div className={classes.customRadio}></div>
       <span>{label}</span>
     </label>
   );
 };
 
-const ScaleQuestion = ({ id, question, system }) => {
+const ScaleQuestion = ({ id, question, system, state }) => {
   const items = getScale(system);
+
+  const changeHandler = (e) => {
+    console.log(e.target.value);
+  };
 
   return (
     <div className={`${classes.questionContainer} ${classes.scaleQuestion}`}>
       <div className={classes.question}>{question}</div>
-      <div className={`${classes.scaleContainer} ${classes[system]}`}>
+      <div
+        className={`${classes.scaleContainer} ${classes[system]}`}
+        onChange={changeHandler}
+      >
         {items.map((item) => (
           <ScaleInput key={id + "_" + item} label={item} name={id} />
         ))}
@@ -51,7 +58,7 @@ const ScaleQuestion = ({ id, question, system }) => {
 const ListInput = ({ label, name }) => {
   return (
     <label className={classes.listWrapper}>
-      <input type="radio" name={name} />
+      <input type="radio" name={name} value={label} />
       <div className={classes.customRadio}></div>
       <span>{label}</span>
     </label>
@@ -97,7 +104,8 @@ const TextQuestion = ({ question }) => {
   );
 };
 
-const generateFeedbackForm = (form) => {
+const generateFeedbackForm = (form, state, setState) => {
+  console.log(state);
   return form.map((item) => {
     if (item.type === "scale") {
       return (

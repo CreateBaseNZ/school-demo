@@ -9,7 +9,10 @@ import FormNavButtons from "/components/UI/FeedbackButtons";
 import classes from "./FeedbackInterface.module.scss";
 
 const FeedbackInterface = () => {
+  const [designState, setDesignState] = useState(["", "", "", "", ""]);
   const [step, setStep] = useState(0);
+
+  console.log(designState);
 
   const nextHandler = () => {
     setStep((step) => (step += 1));
@@ -23,7 +26,11 @@ const FeedbackInterface = () => {
 
   return (
     <div className={`${classes.interface}`}>
-      <DesignFeedback style={{ display: step !== 0 && "none" }} />
+      <DesignFeedback
+        style={{ display: step !== 0 && "none" }}
+        state={designState}
+        setState={setDesignState}
+      />
       <CodingFeedback style={{ display: step !== 1 && "none" }} />
       <ExperienceFeedback style={{ display: step !== 2 && "none" }} />
       <PracticalityFeedback style={{ display: step !== 3 && "none" }} />
