@@ -45,6 +45,7 @@ const FormNavButtons = ({
   submit = false,
   prevHandler,
   nextHandler,
+  submitHandler,
 }) => {
   return (
     <div className={classes.buttonContainer}>

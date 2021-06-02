@@ -30,8 +30,8 @@ const FeedbackInterface = () => {
       <GeneralFeedback style={{ display: step !== 4 && "none" }} />
       <FormNavButtons
         prev={step > 0}
-        next={step < 5}
-        submit={step === 5}
+        next={step < 4}
+        submit={step === 4}
         prevHandler={prevHandler}
         nextHandler={nextHandler}
         submitHandler={submitHandler}
