@@ -61,6 +61,8 @@ const PlayInterface = (props) => {
       "LoadScene",
       getSubsystemScene(props.subsystem)
     );
+    setIsPlaying(false);
+    setIsVerifying(false);
   }, [props.subsystem]);
 
   const playHandler = () => {
