@@ -32,7 +32,7 @@ const PlanCard = () => {
         </p>
         <ol>
           <li>
-          <b>Subsystem 1</b>: Turning the gravity sphere on and off. 
+          <b>Subsystem 1</b>: Turning the gravity wand on and off. 
           </li>
           <li>
           <b>Subsystem 2</b>: Moving the end of the arm between points in space (x, y, z).

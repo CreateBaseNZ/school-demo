@@ -24,7 +24,7 @@ const DefineCard = () => {
         </p>
         <ol>
           <li>
-            There is a gravity sphere attachment on the end of the arm (don't ask us 
+            There is a gravity wand attachment on the end of the arm (don't ask us 
             how it works) that can be activated and deactivated. It could be turned on 
             to attract the items of rubbish and turned off to drop them into a bin.
           </li>
@@ -34,9 +34,9 @@ const DefineCard = () => {
             together.
           </li>
           <li>
-            Because of the way it needs to be programmed, we can’t move this robotic 
-            arm and activate/deactivate its gravity sphere at the same time. We will 
-            have to do one after the other.
+            The H.E.R.&#216; robot can only be programmed to perform one task at a 
+            time. This means that we can’t move the robotic arm and activate/deactivate 
+            the gravity wand at the same time. We will have to do one after the other.
           </li>
         </ol>
       </section>
