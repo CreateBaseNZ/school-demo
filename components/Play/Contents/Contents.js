@@ -189,6 +189,7 @@ const DUMMY_DATA = [
         'When you think that you can deposit every bag in one run, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check if your final solution solves our problem! 👩‍🎓🙌👨‍🎓',
     },
   ],
+
   [
     {
       id: "sb-page1",
@@ -274,7 +275,11 @@ const Contents = (props) => {
         <SwiperSlide
           id="last-slide"
           className={classes.swiperSlide}
-          style={{ padding: 0, overflow: "visible" }}
+          style={{
+            padding: 0,
+            overflow: "visible",
+            display: props.subsystemIndex === 3 && "none",
+          }}
         ></SwiperSlide>
         <div
           className={classes.pagination}
