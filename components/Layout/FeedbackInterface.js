@@ -100,37 +100,37 @@ const FeedbackInterface = () => {
         state={designState}
         setState={setDesignState}
       />
-      <CodingFeedback
+      {/* <CodingFeedback
         style={{ display: step !== 1 && "none" }}
         state={codingState}
         setState={setCodingState}
-      />
+      /> */}
       <ExperienceFeedback
-        style={{ display: step !== 2 && "none" }}
+        style={{ display: step !== 1 && "none" }}
         state={experienceState}
         setState={setExperienceState}
       />
       <PracticalityFeedback
-        style={{ display: step !== 3 && "none" }}
+        style={{ display: step !== 2 && "none" }}
         state={practicalityState}
         setState={setPracticalityState}
       />
       <GeneralFeedback
-        style={{ display: step !== 4 && "none" }}
+        style={{ display: step !== 3 && "none" }}
         state={generalState}
         setState={setGeneralState}
       />
       <FormNavButtons
-        style={{ display: step > 4 && "none" }}
+        style={{ display: step > 3 && "none" }}
         prev={step > 0}
-        next={step < 4}
-        submit={step === 4}
+        next={step < 3}
+        submit={step === 3}
         isValid={isValid}
         prevHandler={prevHandler}
         nextHandler={nextHandler}
         submitHandler={submitHandler}
       />
-      <Finished style={{ display: step < 5 && "none" }} />
+      <Finished style={{ display: step < 4 && "none" }} />
     </div>
   );
 };
