@@ -1,5 +1,4 @@
 import generateFeedbackForm from "/components/UI/FeedbackInputs";
-import FormNavButtons from "/components/UI/FeedbackButtons";
 
 import classes from "./Feedback.module.scss";
 
@@ -38,7 +37,7 @@ const DESIGN_QUESTIONS = [
 
 const DesignFeedback = (props) => {
   return (
-    <div className={classes.formContainer}>
+    <div className={classes.formContainer} style={props.style}>
       <h1>Have your say - Design 🎨</h1>
       <h2>
         Please rate your experience when using this platform by indicating how
@@ -46,7 +45,6 @@ const DesignFeedback = (props) => {
       </h2>
       <form className={classes.form}>
         {generateFeedbackForm(DESIGN_QUESTIONS)}
-        <FormNavButtons prev={false} />
       </form>
     </div>
   );

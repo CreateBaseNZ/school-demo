@@ -1,5 +1,4 @@
 import generateFeedbackForm from "/components/UI/FeedbackInputs";
-import FormNavButtons from "/components/UI/FeedbackButtons";
 
 import classes from "./Feedback.module.scss";
 
@@ -38,14 +37,13 @@ const PRACTICALITY_QUESTIONS = [
   },
 ];
 
-const PracticalityFeedback = () => {
+const PracticalityFeedback = (props) => {
   return (
-    <div className={classes.formContainer}>
+    <div className={classes.formContainer} style={props.style}>
       <h1>Have your say - Practicality 🧰</h1>
       <h2>Please indicate where you feel you would best use the platform</h2>
       <form className={classes.form}>
         {generateFeedbackForm(PRACTICALITY_QUESTIONS)}
-        <FormNavButtons />
       </form>
     </div>
   );

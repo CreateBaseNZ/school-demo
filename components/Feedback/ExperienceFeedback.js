@@ -1,5 +1,4 @@
 import generateFeedbackForm from "/components/UI/FeedbackInputs";
-import FormNavButtons from "/components/UI/FeedbackButtons";
 
 import classes from "./Feedback.module.scss";
 
@@ -31,9 +30,9 @@ const EXPERIENCE_QUESTIONS = [
   },
 ];
 
-const DesignFeedback = () => {
+const DesignFeedback = (props) => {
   return (
-    <div className={classes.formContainer}>
+    <div className={classes.formContainer} style={props.style}>
       <h1>Have your say - Experience 😀</h1>
       <h2>
         Please indicate how you most commonly used the “reveal code answer”
@@ -41,7 +40,6 @@ const DesignFeedback = () => {
       </h2>
       <form className={classes.form}>
         {generateFeedbackForm(EXPERIENCE_QUESTIONS)}
-        <FormNavButtons />
       </form>
     </div>
   );

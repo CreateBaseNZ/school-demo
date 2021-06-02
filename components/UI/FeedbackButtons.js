@@ -3,39 +3,54 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 
 import classes from "./FeedbackButtons.module.scss";
 
-const PreviousButton = () => {
+const PreviousButton = (props) => {
   return (
-    <button className={`${classes.button} ${classes.previous}`}>
-      <NavigateBeforeIcon fontSize="large" />
+    <button
+      className={`${classes.button} ${classes.previous}`}
+      onClick={props.prevHandler}
+    >
+      <NavigateBeforeIcon />
       Previous
     </button>
   );
 };
 
-const NextButton = () => {
+const NextButton = (props) => {
   return (
-    <button className={`${classes.button} ${classes.next}`}>
+    <button
+      className={`${classes.button} ${classes.next}`}
+      onClick={props.nextHandler}
+    >
       Next
-      <NavigateNextIcon fontSize="large" />
+      <NavigateNextIcon />
     </button>
   );
 };
 
-const SubmitButton = () => {
+const SubmitButton = (props) => {
   return (
-    <button className={`${classes.button} ${classes.submit}`}>
+    <button
+      className={`${classes.button} ${classes.submit}`}
+      onClick={props.submitHandler}
+    >
       Submit
-      <NavigateNextIcon fontSize="large" />
+      <NavigateNextIcon />
     </button>
   );
 };
 
-const FormNavButtons = ({ next = true, prev = true, submit = false }) => {
+const FormNavButtons = ({
+  next = true,
+  prev = true,
+  submit = false,
+  prevHandler,
+  nextHandler,
+}) => {
   return (
     <div className={classes.buttonContainer}>
-      {prev ? <PreviousButton /> : <div />}
-      {next && <NextButton />}
-      {submit && <SubmitButton />}
+      {prev ? <PreviousButton prevHandler={prevHandler} /> : <div />}
+      {next && <NextButton nextHandler={nextHandler} />}
+      {submit && <SubmitButton submitHandler={submitHandler} />}
     </div>
   );
 };

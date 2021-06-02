@@ -1,5 +1,4 @@
 import generateFeedbackForm from "/components/UI/FeedbackInputs";
-import FormNavButtons from "/components/UI/FeedbackButtons";
 
 import classes from "./Feedback.module.scss";
 
@@ -17,14 +16,13 @@ const GENERAL_QUESTIONS = [
   },
 ];
 
-const GeneralFeedback = () => {
+const GeneralFeedback = (props) => {
   return (
-    <div className={classes.formContainer}>
+    <div className={classes.formContainer} style={props.style}>
       <h1>Have your say - General ✍️</h1>
       <h2>Please answer some basic questions about yourself</h2>
       <form className={classes.form}>
         {generateFeedbackForm(GENERAL_QUESTIONS)}
-        <FormNavButtons next={false} submit={true} />
       </form>
     </div>
   );

@@ -1,5 +1,4 @@
 import generateFeedbackForm from "/components/UI/FeedbackInputs";
-import FormNavButtons from "/components/UI/FeedbackButtons";
 
 import classes from "./Feedback.module.scss";
 
@@ -43,7 +42,7 @@ const CODING_QUESTIONS = [
 
 const CodingFeedback = (props) => {
   return (
-    <div className={classes.formContainer}>
+    <div className={classes.formContainer} style={props.style}>
       <h1>Have your say - Coding 💻</h1>
       <h2>
         Please rate your experience when writing code on this platform by
@@ -51,7 +50,6 @@ const CodingFeedback = (props) => {
       </h2>
       <form className={classes.form}>
         {generateFeedbackForm(CODING_QUESTIONS)}
-        <FormNavButtons />
       </form>
     </div>
   );
