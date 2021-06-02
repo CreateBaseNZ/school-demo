@@ -1,3 +1,4 @@
+import { useEffect, memo } from "react";
 import generateFeedbackForm from "/components/UI/FeedbackInputs";
 
 import classes from "./Feedback.module.scss";
@@ -36,6 +37,14 @@ const DESIGN_QUESTIONS = [
 ];
 
 const DesignFeedback = (props) => {
+  useEffect(() => {
+    const state = DESIGN_QUESTIONS.reduce(
+      (o, question) => ({ ...o, [question.id]: "" }),
+      {}
+    );
+    props.setState(state);
+  }, []);
+
   return (
     <div className={classes.formContainer} style={props.style}>
       <h1>Have your say - Design 🎨</h1>
@@ -50,4 +59,4 @@ const DesignFeedback = (props) => {
   );
 };
 
-export default DesignFeedback;
+export default memo(DesignFeedback);

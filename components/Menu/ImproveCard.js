@@ -16,6 +16,13 @@ const DUMMY_DATA = [
       },
     ],
   },
+  {
+    title: "We want to hear from you!",
+    href: "/have-your-say",
+    src: "/team.jpg",
+    description:
+      "Our team at CreateBase would love to hear your thoughts, feedback, and suggestions to make this platform even better for you and your friends. It won't take long, we promise!",
+  },
 ];
 
 const ImproveCard = () => {

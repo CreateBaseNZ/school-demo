@@ -33,11 +33,11 @@ const ScaleInput = ({ label, name }) => {
   );
 };
 
-const ScaleQuestion = ({ id, question, system, state }) => {
+const ScaleQuestion = ({ id, question, system, setState }) => {
   const items = getScale(system);
 
   const changeHandler = (e) => {
-    console.log(e.target.value);
+    setState((current) => ({ ...current, [id]: e.target.value }));
   };
 
   return (
@@ -65,11 +65,15 @@ const ListInput = ({ label, name }) => {
   );
 };
 
-const ListQuestion = ({ id, question, options }) => {
+const ListQuestion = ({ id, question, options, setState }) => {
+  const changeHandler = (e) => {
+    setState((current) => ({ ...current, [id]: e.target.value }));
+  };
+
   return (
     <div className={`${classes.questionContainer} ${classes.listQuestion}`}>
       <div className={classes.question}>{question}</div>
-      <div className={`${classes.listContainer}`}>
+      <div className={`${classes.listContainer}`} onChange={changeHandler}>
         {options.map((option, index) => (
           <ListInput key={id + "_" + index} name={id} label={option} />
         ))}
@@ -78,12 +82,16 @@ const ListQuestion = ({ id, question, options }) => {
   );
 };
 
-const AgeQuestion = ({ question }) => {
+const AgeQuestion = ({ id, question, setState }) => {
+  const changeHandler = (e) => {
+    setState((current) => ({ ...current, [id]: e.target.value }));
+  };
+
   return (
     <div className={`${classes.questionContainer} ${classes.ageQuestion}`}>
       <div className={classes.question}>{question}</div>
       <div className={classes.ageWrapper}>
-        <input type="number" />
+        <input type="number" onChange={changeHandler} />
         <EventIcon />
         <span className={classes.underline}></span>
       </div>
@@ -91,12 +99,16 @@ const AgeQuestion = ({ question }) => {
   );
 };
 
-const TextQuestion = ({ question }) => {
+const TextQuestion = ({ id, question, setState }) => {
+  const changeHandler = (e) => {
+    setState((current) => ({ ...current, [id]: e.target.value }));
+  };
+
   return (
     <div className={`${classes.questionContainer} ${classes.textQuestion}`}>
       <div className={classes.question}>{question}</div>
       <div className={classes.textWrapper}>
-        <input type="text" />
+        <input type="text" onChange={changeHandler} />
         <NotesIcon />
         <span className={classes.underline}></span>
       </div>
@@ -105,7 +117,6 @@ const TextQuestion = ({ question }) => {
 };
 
 const generateFeedbackForm = (form, state, setState) => {
-  console.log(state);
   return form.map((item) => {
     if (item.type === "scale") {
       return (
@@ -114,6 +125,7 @@ const generateFeedbackForm = (form, state, setState) => {
           id={item.id}
           question={item.question}
           system={item.system}
+          setState={setState}
         />
       );
     } else if (item.type === "list") {
@@ -123,12 +135,27 @@ const generateFeedbackForm = (form, state, setState) => {
           id={item.id}
           question={item.question}
           options={item.options}
+          setState={setState}
         />
       );
     } else if (item.type === "age") {
-      return <AgeQuestion key={item.id} question={item.question} />;
+      return (
+        <AgeQuestion
+          key={item.id}
+          id={item.id}
+          question={item.question}
+          setState={setState}
+        />
+      );
     } else {
-      return <TextQuestion key={item.id} question={item.question} />;
+      return (
+        <TextQuestion
+          key={item.id}
+          id={item.id}
+          question={item.question}
+          setState={setState}
+        />
+      );
     }
   });
 };

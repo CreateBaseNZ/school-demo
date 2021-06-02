@@ -1,3 +1,4 @@
+import { useEffect, memo } from "react";
 import generateFeedbackForm from "/components/UI/FeedbackInputs";
 
 import classes from "./Feedback.module.scss";
@@ -17,15 +18,23 @@ const GENERAL_QUESTIONS = [
 ];
 
 const GeneralFeedback = (props) => {
+  useEffect(() => {
+    const state = GENERAL_QUESTIONS.reduce(
+      (o, question) => ({ ...o, [question.id]: "" }),
+      {}
+    );
+    props.setState(state);
+  }, []);
+
   return (
     <div className={classes.formContainer} style={props.style}>
       <h1>Have your say - General ✍️</h1>
       <h2>Please answer some basic questions about yourself</h2>
       <form className={classes.form}>
-        {generateFeedbackForm(GENERAL_QUESTIONS)}
+        {generateFeedbackForm(GENERAL_QUESTIONS, props.state, props.setState)}
       </form>
     </div>
   );
 };
 
-export default GeneralFeedback;
+export default memo(GeneralFeedback);

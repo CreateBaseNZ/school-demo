@@ -8,6 +8,7 @@ const PreviousButton = (props) => {
     <button
       className={`${classes.button} ${classes.previous}`}
       onClick={props.prevHandler}
+      style={props.style}
     >
       <NavigateBeforeIcon />
       Previous
@@ -43,13 +44,25 @@ const FormNavButtons = ({
   next = true,
   prev = true,
   submit = false,
+  isValid,
   prevHandler,
   nextHandler,
   submitHandler,
 }) => {
   return (
-    <div className={classes.buttonContainer}>
-      {prev ? <PreviousButton prevHandler={prevHandler} /> : <div />}
+    <div
+      className={`${classes.buttonContainer} ${!isValid && classes.invalid}`}
+      style={props.style}
+    >
+      <PreviousButton
+        prevHandler={prevHandler}
+        style={{ visibility: !prev && "hidden" }}
+      />
+      {!isValid && (
+        <span className={classes.errorMessage}>
+          Please answer all the questions ("None" is also an acceptable answer)
+        </span>
+      )}
       {next && <NextButton nextHandler={nextHandler} />}
       {submit && <SubmitButton submitHandler={submitHandler} />}
     </div>

@@ -6,6 +6,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: opacity 0.1s ease-out;
+  .invalid {
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
 .button {
@@ -52,4 +58,8 @@
       fill: $green;
     }
   }
+}
+
+.errorMessage {
+  color: $red;
 }

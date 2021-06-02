@@ -1,3 +1,4 @@
+import { useEffect, memo } from "react";
 import generateFeedbackForm from "/components/UI/FeedbackInputs";
 
 import classes from "./Feedback.module.scss";
@@ -41,6 +42,14 @@ const CODING_QUESTIONS = [
 ];
 
 const CodingFeedback = (props) => {
+  useEffect(() => {
+    const state = CODING_QUESTIONS.reduce(
+      (o, question) => ({ ...o, [question.id]: "" }),
+      {}
+    );
+    props.setState(state);
+  }, []);
+
   return (
     <div className={classes.formContainer} style={props.style}>
       <h1>Have your say - Coding 💻</h1>
@@ -49,10 +58,10 @@ const CodingFeedback = (props) => {
         indicating how much you agree with each of the following statements:
       </h2>
       <form className={classes.form}>
-        {generateFeedbackForm(CODING_QUESTIONS)}
+        {generateFeedbackForm(CODING_QUESTIONS, props.state, props.setState)}
       </form>
     </div>
   );
 };
 
-export default CodingFeedback;
+export default memo(CodingFeedback);

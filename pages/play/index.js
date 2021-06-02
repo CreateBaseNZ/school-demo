@@ -27,7 +27,7 @@ const Play = (props) => {
   return (
     <Layout>
       <Head>
-        <title>Play | CreateBase</title>
+        <title>Sandbox | CreateBase</title>
       </Head>
       <PlayInterface />
     </Layout>
