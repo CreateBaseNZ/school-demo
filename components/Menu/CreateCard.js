@@ -24,11 +24,11 @@ const DUMMY_DATA = [
       "Combine your learnings from the first two subsystems to use the claw and the robotic arm to pick up pieces of rubbish at specific locations, before transporting and dropping them into a collection bin.",
     recommended: [
       {
-        title: "Moving the Arm",
+        title: "The Gravity Wand",
         href: "/menu/create",
       },
       {
-        title: "Collecting the Items",
+        title: "Moving the Arm",
         href: "/menu/create",
       },
     ],
