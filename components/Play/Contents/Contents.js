@@ -243,7 +243,9 @@ const Contents = (props) => {
   }, [props.height]);
 
   useEffect(() => {
-    swiper.activeIndex = 0;
+    if (swiper.slideTo) {
+      swiper.slideTo(0);
+    }
   }, [props.subsystemIndex]);
 
   const slideChangeHandler = () => {
