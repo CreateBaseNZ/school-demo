@@ -18,7 +18,8 @@
 .scaleQuestion {
 }
 
-.listQuestion {
+.ageWrapper {
+  width: 50%;
 }
 
 .textQuestion {
@@ -28,8 +29,8 @@
   }
 }
 
+.ageWrapper,
 .textWrapper {
-  width: 100%;
   display: flex;
   align-items: center;
   margin: 2rem 0;
@@ -80,6 +81,25 @@
       background: $green;
     }
   }
+}
+
+.ageWrapper {
+  width: 6rem;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  input {
+    text-align: right;
+  }
+}
+
+.textWrapper {
+  width: 100%;
 }
 
 .scaleContainer,

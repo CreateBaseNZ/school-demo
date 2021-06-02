@@ -1,6 +1,7 @@
 import DesignFeedback from "/components/Feedback/DesignFeedback";
 import CodingFeedback from "/components/Feedback/CodingFeedback";
 import ExperienceFeedback from "/components/Feedback/ExperienceFeedback";
+import GeneralFeedback from "/components/Feedback/GeneralFeedback";
 
 import classes from "./FeedbackInterface.module.scss";
 
@@ -11,9 +12,10 @@ const FeedbackInterface = () => {
 
   return (
     <div className={`${classes.interface}`}>
-      {/* <DesignFeedback clickHandler={test} /> */}
-      {/* <CodingFeedback clickHandler={test} /> */}
-      <ExperienceFeedback clickHandler={test} />
+      {/* <DesignFeedback /> */}
+      {/* <CodingFeedback /> */}
+      {/* <ExperienceFeedback /> */}
+      <GeneralFeedback />
     </div>
   );
 };

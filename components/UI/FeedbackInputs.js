@@ -1,4 +1,5 @@
 import NotesIcon from "@material-ui/icons/Notes";
+import EventIcon from "@material-ui/icons/Event";
 import classes from "./FeedbackInputs.module.scss";
 
 const getScale = (type) => {
@@ -70,6 +71,19 @@ const ListQuestion = ({ id, question, options }) => {
   );
 };
 
+const AgeQuestion = ({ question }) => {
+  return (
+    <div className={`${classes.questionContainer} ${classes.ageQuestion}`}>
+      <div className={classes.question}>{question}</div>
+      <div className={classes.ageWrapper}>
+        <input type="number" />
+        <EventIcon />
+        <span className={classes.underline}></span>
+      </div>
+    </div>
+  );
+};
+
 const TextQuestion = ({ question }) => {
   return (
     <div className={`${classes.questionContainer} ${classes.textQuestion}`}>
@@ -101,6 +115,8 @@ const generateFeedbackForm = (form) => {
           options={item.options}
         />
       );
+    } else if (item.type === "age") {
+      return <AgeQuestion question={item.question} />;
     } else {
       return <TextQuestion question={item.question} />;
     }
