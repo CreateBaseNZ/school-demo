@@ -6,6 +6,7 @@ import ExperienceFeedback from "/components/Feedback/ExperienceFeedback";
 import GeneralFeedback from "/components/Feedback/GeneralFeedback";
 import PracticalityFeedback from "/components/Feedback/PracticalityFeedback";
 import FormNavButtons from "/components/UI/FeedbackButtons";
+import Finished from "/components/Feedback/Finished";
 
 import classes from "./FeedbackInterface.module.scss";
 
@@ -18,6 +19,7 @@ const FeedbackInterface = () => {
   const [step, setStep] = useState(0);
 
   const [isValid, setIsValid] = useState(true);
+  const [awaitingResponse, setAwaitingResponse] = useState(false);
 
   const allStates = [
     designState,
@@ -60,17 +62,24 @@ const FeedbackInterface = () => {
       }
     }
     setIsValid(true);
-    setStep((step) => (step += 1));
     // Store feedback on backend
     let data;
     try {
-      data = (await axios.post("https://createbase.co.nz/alpha/feedback/version-1/submit", { items: allStates }))["data"];
+      setAwaitingResponse(true);
+      data = (
+        await axios.post(
+          "https://createbase.co.nz/alpha/feedback/version-1/submit",
+          { items: allStates }
+        )
+      )["data"];
     } catch (error) {
       data = { status: "error", content: error };
     }
+    setAwaitingResponse(false);
     switch (data.status) {
       case "succeeded":
         // TODO: Success handling
+        setStep((step) => (step += 1));
         break;
       case "failed":
         // TODO: Fail handling
@@ -121,6 +130,7 @@ const FeedbackInterface = () => {
         nextHandler={nextHandler}
         submitHandler={submitHandler}
       />
+      <Finished style={{ display: step < 5 && "none" }} />
     </div>
   );
 };
