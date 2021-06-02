@@ -30,7 +30,7 @@ const getSubsystemIndex = (subsystem) => {
     case "collecting-the-items":
       return 2;
     default:
-      return 0;
+      return 3;
   }
 };
 

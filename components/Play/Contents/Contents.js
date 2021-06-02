@@ -18,13 +18,15 @@ const DUMMY_DATA = [
       id: "sub1-page0",
       title: "Slide 0",
       type: "text",
-      contents:'In this subsystem, you will learn how to use the <span style="font-weight: 700;">Gravity Switch</span> code block to control the gravity wand attachment for the H.E.R.&#216; robotic arm. 🤖',
+      contents:
+        'In this subsystem, you will learn how to use the <span style="font-weight: 700;">Gravity Switch</span> code block to control the gravity wand attachment for the H.E.R.&#216; robotic arm. 🤖',
     },
     {
       id: "sub1-page1",
       title: "Slide 1",
       type: "text",
-      contents:'You can see in the simulation on the right that the gravity wand is activated and is holding a valuable gem! 💎 To complete this subsystem, you will need to safely drop the gem into the collection bin by deactivating the gravity wand when it moves into position. Be careful though, the bin won’t stay in the same place for long! 🙀',
+      contents:
+        "You can see in the simulation on the right that the gravity wand is activated and is holding a valuable gem! 💎 To complete this subsystem, you will need to safely drop the gem into the collection bin by deactivating the gravity wand when it moves into position. Be careful though, the bin won’t stay in the same place for long! 🙀",
     },
     {
       id: "sub1-page2",
@@ -45,7 +47,7 @@ const DUMMY_DATA = [
       title: "Slide 4",
       type: "text",
       contents:
-        'If a block is connected with multiple tracks, you may get unexpected behaviour when you run your code. To delete a track, select it by clicking on the arrow head and then press the backspace key on your keyboard. 🔙',
+        "If a block is connected with multiple tracks, you may get unexpected behaviour when you run your code. To delete a track, select it by clicking on the arrow head and then press the backspace key on your keyboard. 🔙",
     },
     {
       id: "sub1-page5",
@@ -62,7 +64,6 @@ const DUMMY_DATA = [
         'When you have connected each of your blocks together and think that you have a correct solution, then press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer. If successful, this will complete the task! 🚀',
     },
   ],
-
 
   [
     {
@@ -98,7 +99,7 @@ const DUMMY_DATA = [
       title: "Slide 5",
       type: "text",
       contents:
-        'For example, lets imagine an item at the coordinates (-1, 2, 3). Using the same camera orientation in the previous slide, that object is 1 metre to the left, 2 metres up and 3 metres into the screen compared to the base of the arm at (0,0,0)',
+        "For example, lets imagine an item at the coordinates (-1, 2, 3). Using the same camera orientation in the previous slide, that object is 1 metre to the left, 2 metres up and 3 metres into the screen compared to the base of the arm at (0,0,0)",
     },
     {
       id: "sub1-page6",
@@ -129,7 +130,6 @@ const DUMMY_DATA = [
         'When you think that you have the correct code, press the <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> button on the next slide to confirm your answer and complete the task! 🎓',
     },
   ],
-
 
   [
     {
@@ -187,6 +187,14 @@ const DUMMY_DATA = [
       type: "text",
       contents:
         'When you think that you can deposit every bag in one run, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check if your final solution solves our problem! 👩‍🎓🙌👨‍🎓',
+    },
+  ],
+  [
+    {
+      id: "sb-page1",
+      title: "Slide 1",
+      type: "text",
+      contents: "This is a sandbox",
     },
   ],
 ];
