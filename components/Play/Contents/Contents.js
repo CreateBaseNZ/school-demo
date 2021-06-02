@@ -45,7 +45,7 @@ const DUMMY_DATA = [
       title: "Slide 4",
       type: "text",
       contents:
-        'If a block is connected with multiple tracks, you may get unexpected behaviour when you run your code. 😯 To delete a track, select it by clicking on the arrow head and then press the backspace key on your keyboard. 🔙',
+        'If a block is connected with multiple tracks, you may get unexpected behaviour when you run your code. To delete a track, select it by clicking on the arrow head and then press the backspace key on your keyboard. 🔙',
     },
     {
       id: "sub1-page5",

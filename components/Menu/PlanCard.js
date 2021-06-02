@@ -12,7 +12,7 @@ const PlanCard = () => {
         <p>
           It is crucial to plan how we will build our solution before we begin as 
           it helps us identify potential problems at an early stage, saving us time 
-          and headaches in the future.
+          and headaches in the future. 🤕
           </p>
           </section>
           <section>
@@ -32,17 +32,18 @@ const PlanCard = () => {
         </p>
         <ol>
           <li>
-          <i>Subsystem 1</i>: Turning the gravity wand on and off. 
+          <i>Subsystem 1</i>: Turning the gravity wand on and off. 🧙‍♂🔛
+
           </li>
           <li>
-          <i>Subsystem 2</i>: Moving the end of the arm between points in space (x, y, z).
+          <i>Subsystem 2</i>: Moving the end of the arm between points in space (x, y, z). 🦾📈
           </li>
         </ol>
       </section>
       <section>
         <p>
           After implementing each of these subsystems individually, we will then
-          combine them into one solution that we will use to solve our problem.
+          combine them into one solution that we will use to solve our problem. 🚀
         </p>
       </section>
       {/* <section>
