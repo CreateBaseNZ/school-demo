@@ -29,7 +29,7 @@
     }
     li:not(:last-child) {
       margin-bottom: 0.5rem;
-  }
+    }
   }
   ol > li {
     padding-left: 0.25rem;
@@ -47,12 +47,13 @@
 
 .createWrapper {
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
   grid-auto-rows: max(250px, min(35vh, 400px));
   grid-column-gap: 2vw;
   grid-row-gap: 4vh;
   justify-content: flex-start;
   align-items: flex-start;
+  padding-bottom: 2rem;
 }
 
 .improveWrapper {
