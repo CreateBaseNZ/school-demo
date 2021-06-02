@@ -15,18 +15,23 @@ SwiperCore.use([Pagination, Navigation]);
 const DUMMY_DATA = [
   [
     {
+      id: "sub1-page0",
+      title: "Slide 0",
+      type: "text",
+      contents:'In this subsystem, you will learn how to use the <span style="font-weight: 700;">Gravity Switch</span> code block to control the gravity wand attachment for the H.E.R.&#216; robotic arm.',
+    },
+    {
       id: "sub1-page1",
       title: "Slide 1",
       type: "text",
-      contents:
-        "In this subsystem, the gravity sphere is activated and is holding a valuable gem! You will need to safely drop it into the collection bin by deactivating the gravity sphere when it moves into position. Be careful though, the bin won’t stay in the same place for long!",
+      contents:'You can see in the simulation on the right that the gravity wand is activated and is holding a valuable gem! To complete this subsystem, you will need to safely drop the gem into the collection bin by deactivating the gravity wand when it moves into position. Be careful though, the bin won’t stay in the same place for long!',
     },
     {
       id: "sub1-page2",
       title: "Slide 2",
       type: "text",
       contents:
-        'The arm will automatically move into the correct position above the bin at the start of each simulation. You need to deactivate the gravity sphere by adding a <span style="font-weight: 700;">Gravity Switch</span> block to the workspace. Select the Off option on the block to turn off the gravity sphere and release the gem.',
+        'The arm will automatically move into the correct position above the bin at the start of each simulation. You need to deactivate the gravity wand by dragging a <span style="font-weight: 700;">Gravity Switch</span> block into the workspace and selecting the correct option.',
     },
     {
       id: "sub1-page3",
@@ -40,21 +45,21 @@ const DUMMY_DATA = [
       title: "Slide 4",
       type: "text",
       contents:
-        'If a block is connected with multiple tracks, you may get unexpected behaviour when you run your code. To delete a track, select it by clicking on the arrow head and then press the backspace key.',
+        'If a block is connected with multiple tracks, you may get unexpected behaviour when you run your code. To delete a track, select it by clicking on the arrow head and then press the backspace key on your keyboard.',
     },
     {
       id: "sub1-page5",
       title: "Slide 5",
       type: "text",
       contents:
-        'When you have connected each of your blocks together in the correct order, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer. <span style="font-style: italic;">Note: If you want to run some code you are testing without having your answer checked, then use the</span> <span style="font-weight: 700; color: #18dbac;">Play</span> <span style="font-style: italic;">button instead.</span>',
+        'If you want to test some code without having your answer checked, then press the <span style="font-weight: 700; color: #18dbac;">Play</span> button in the bottom right corner of your screen to upload your current code to H.E.R.&#216;.',
     },
     {
       id: "sub1-page6",
       title: "Slide 6",
       type: "text",
       contents:
-        'When you have connected each of your blocks together in the correct order, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer. <span style="font-style: italic;">Note: If you want to run some code you are testing without having your answer checked, then use the</span> <span style="font-weight: 700; color: #18dbac;">Play</span> <span style="font-style: italic;">button instead.</span>',
+        'When you have connected each of your blocks together in the correct order and think that you have a correct solution, then press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your code answer.',
     },
   ],
 
@@ -72,7 +77,7 @@ const DUMMY_DATA = [
       title: "Slide 2",
       type: "text",
       contents:
-        "To complete this subsystem, you will need to collect all of the floating gems by moving the gravity sphere through each of their locations.",
+        "To complete this subsystem, you will need to collect all of the floating gems by moving the gravity wand through each of their locations.",
     },
     {
       id: "sub1-page3",
@@ -93,7 +98,7 @@ const DUMMY_DATA = [
       title: "Slide 5",
       type: "text",
       contents:
-        'For example, lets imagine an item at the coordinates (-1, 2, 3). Using the same camera orientation in the previous slide, that object is 1 meter to the left, 2 meters up and 3 meters into the screen compared to the base of the arm at (0,0,0)',
+        'For example, lets imagine an item at the coordinates (-1, 2, 3). Using the same camera orientation in the previous slide, that object is 1 metre to the left, 2 metres up and 3 metres into the screen compared to the base of the arm at (0,0,0)',
     },
     {
       id: "sub1-page6",
@@ -107,7 +112,7 @@ const DUMMY_DATA = [
       title: "Slide 7",
       type: "text",
       contents:
-        'When using the <span style="font-weight: 700;">Move Arm</span> block, the coordinates that you enter will be the location of the centre of the gravity sphere when the arm has finished moving.',
+        'When using the <span style="font-weight: 700;">Move Arm</span> block, the coordinates that you enter will be the location of the centre of the gravity wand when the arm has finished moving.',
     },
     {
       id: "sub1-page8",
@@ -128,11 +133,18 @@ const DUMMY_DATA = [
 
   [
     {
+      id: "sub1-page0",
+      title: "Slide 0",
+      type: "text",
+      contents:
+        "In this final system, you will a combination of the blocks that you have learnt in the first two subsystems to solve our original problem.",
+    },
+    {
       id: "sub1-page1",
       title: "Slide 1",
       type: "text",
       contents:
-        "In this final system, the aim is to pick up a rubbish bag with the gravity sphere, carry it to the rubbish bin, and then drop it inside. This process will be repeated for each item of rubbish. You will need to use the functions that you have learnt in the first two subsystems to complete this task.",
+        "The aim is to pick up a rubbish bag with the gravity wand, carry it to the rubbish bin, and then drop it inside. This process will be repeated for each item of rubbish until they have all been collected.",
     },
     {
       id: "sub1-page2",
@@ -146,35 +158,35 @@ const DUMMY_DATA = [
       title: "Slide 3",
       type: "text",
       contents:
-        'To make the end of the robotic arm travel to multiple locations, you will need to place a sequence of <span style="font-weight: 700;">Move Motor</span> blocks into the workspace and connect them together in your desired order.',
+        'To make the end of the robotic arm travel to multiple locations, you will need to place a sequence of <span style="font-weight: 700;">Move Arm</span> blocks into the workspace and connect them together in your desired order.',
     },
     {
       id: "sub1-page4",
       title: "Slide 4",
       type: "text",
       contents:
-        'Trying to move the arm directly between the items of rubbish and the bin may result in the arm crashing into objects that you don’t intend to hit. You will need to split each motion into multiple movements (by using multiple <span style="font-weight: 700;">Move Motor</span> blocks).',
+        'Trying to move the arm directly between the items of rubbish and the bin may result in the arm crashing into objects that you don’t intend to hit. You will need to split each motion into multiple movements (by using multiple <span style="font-weight: 700;">Move Arm</span> blocks).',
     },
     {
       id: "sub1-page5",
       title: "Slide 5",
       type: "text",
       contents:
-        "For example, you may have to lift each captured rubbish bag vertically before moving it to the rubbish bin to make sure that you do not hit the side of the bin or other rubbish bags.",
+        "For example, you may have to lift each rubbish bag vertically before moving it to the rubbish bin to make sure that you do not hit the side of the bin or other bags.",
     },
     {
       id: "sub1-page6",
       title: "Slide 6",
       type: "text",
       contents:
-        'To keep it simple, try adding blocks to deposit a single rubbish bag into the bin, then use the <span style="font-weight: 700; color: #18dbac;">Play</span> button to test your code. If successful, keep adding more blocks until you can deposit every bag in one run.',
+        'To keep it simple, try writing code to deposit a single rubbish bag into the bin, then use the <span style="font-weight: 700; color: #18dbac;">Play</span> button to test your code. If successful, keep adding more blocks until you can deposit every bag in one run.',
     },
     {
       id: "sub1-page7",
       title: "Slide 7",
       type: "text",
       contents:
-        'When you have connected each of your blocks together in the correct order, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check your final answer. ',
+        'When you have connected each of your blocks together in the correct order, press <span style="font-weight: 700; color: #9063f1;">Verify my code!</span> on the next slide to check if your final solution solves our problem! ',
     },
   ],
 ];
