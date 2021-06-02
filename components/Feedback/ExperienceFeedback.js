@@ -1,4 +1,5 @@
 import generateFeedbackForm from "/components/UI/FeedbackInputs";
+import FormNavButtons from "/components/UI/FeedbackButtons";
 
 import classes from "./Feedback.module.scss";
 
@@ -40,6 +41,7 @@ const DesignFeedback = () => {
       </h2>
       <form className={classes.form}>
         {generateFeedbackForm(EXPERIENCE_QUESTIONS)}
+        <FormNavButtons />
       </form>
     </div>
   );
