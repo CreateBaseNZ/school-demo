@@ -1,38 +1,35 @@
-import SubsystemCard from "../UI/SubsystemCard";
+import SubsystemCard from "/components/UI/SubsystemCard";
 import classes from "./ContentWrapper.module.scss";
 
 const DUMMY_DATA = [
   {
-    title: "Subsystem A",
-    href: "/",
-    src: "/subsystem.jpg",
+    title: "The Gravity Wand",
+    href: "/play/the-gravity-wand",
+    src: "/the-gravity-wand.png",
     description:
-      "In the metaphysics of identity, the ship of Theseus is a thought experiment that raises the question of whether an object that has had all of its components replaced remains fundamentally the same object. The concept is one of the oldest in Western philosophy, having been discussed by the likes of Heraclitus and Plato by c. 500–400 BC.",
-    recommended: [
-      {
-        title: "Subsystem A",
-        href: "/",
-      },
-      {
-        title: "Subsystem B",
-        href: "/",
-      },
-    ],
+      "Find the right timing to catch and release an object with a robotic claw attachment.",
   },
   {
-    title: "Subsystem B",
-    href: "/",
-    src: "/subsystem.jpg",
+    title: "Moving the Arm",
+    href: "/play/moving-the-arm",
+    src: "/moving-the-arm.png",
     description:
-      "In the metaphysics of identity, the ship of Theseus is a thought experiment that raises the question of whether an object that has had all of its components replaced remains fundamentally the same object. The concept is one of the oldest in Western philosophy, having been discussed by the likes of Heraclitus and Plato by c. 500–400 BC.",
+      "Collect a sequence of floating gems by touching them with the end of the robotic arm. ",
+  },
+  {
+    title: "Collecting the Items",
+    href: "/play/collecting-the-items",
+    src: "/collecting-the-items.png",
+    description:
+      "Combine your learnings from the first two subsystems to use the claw and the robotic arm to pick up pieces of rubbish at specific locations, before transporting and dropping them into a collection bin.",
     recommended: [
       {
-        title: "Subsystem A",
-        href: "/",
+        title: "The Gravity Wand",
+        href: "/menu/create",
       },
       {
-        title: "Subsystem B",
-        href: "/",
+        title: "Moving the Arm",
+        href: "/menu/create",
       },
     ],
   },

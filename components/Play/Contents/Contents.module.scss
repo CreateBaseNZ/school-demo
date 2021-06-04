@@ -1,0 +1,145 @@
+@import "/styles/variables";
+
+.contentsWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  &.verifying {
+    border: thin solid $logo-mid;
+  }
+}
+
+.swiperContainer {
+  height: 100%;
+  flex: 1 1 0;
+}
+
+.swiperPrev,
+.swiperNext {
+  z-index: 2;
+  flex: 0 0 auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 4rem;
+  opacity: 0.75;
+  border-radius: 0.25rem;
+  border: thin solid $border-color;
+  transition: background-color 0.1s ease-out, border-color 0.1s ease-out,
+    opacity 0.1s ease-out;
+  &:hover {
+    background: $hover-bg-light;
+    opacity: 1;
+    border-color: transparent;
+  }
+  &.swiperDisabled {
+    background: none;
+    opacity: 0.25;
+    cursor: default;
+    border-color: transparent;
+  }
+}
+.swiperPrev {
+  margin-left: 1rem;
+}
+.swiperNext {
+  margin-right: 1rem;
+}
+
+.swiperSlide {
+  padding: 2vh 2rem 0 2rem;
+  height: calc(100% - 2vh - 2rem);
+  font-size: 1rem;
+  line-height: 175%;
+  font-weight: 300;
+  width: 100% !important;
+  overflow: hidden;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 2vh !important;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  .bullet {
+    padding: 0 0.25rem;
+    opacity: 0.25;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.1s ease-out;
+    &::after {
+      content: "";
+      height: 0.5rem;
+      width: 0.5rem;
+      border-radius: 50%;
+      border: 2px solid $lightest;
+      transition: background-color 0.1s ease-out;
+    }
+    &:hover {
+      opacity: 0.75;
+    }
+    &.bulletActive {
+      opacity: 0.75;
+      &::after {
+        background: $lightest;
+      }
+    }
+  }
+}
+
+.overflowArrow {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.overflowArrowOne {
+  animation: arrow-movement 1.6s ease-out infinite;
+}
+.overflowArrowTwo {
+  animation: arrow-movement 1.6s ease-out 0.8s infinite;
+}
+
+.overflowArrow:before,
+.overflowArrow:after {
+  background: rgba(255, 255, 255, 0.25);
+  content: "";
+  display: block;
+  height: 1px;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 10px;
+}
+
+.overflowArrow:before {
+  transform: rotate(45deg) translateX(-23%);
+  transform-origin: top left;
+}
+
+.overflowArrow:after {
+  transform: rotate(-45deg) translateX(23%);
+  transform-origin: top right;
+}
+
+@keyframes arrow-movement {
+  0% {
+    opacity: 0;
+    bottom: calc(1rem + 8px);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

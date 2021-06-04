@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
 
-import Layout from "../components/Layout/Layout";
+import Layout from "/components/Layout/Layout";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
 import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
-import WhiteLogo from "../components/UI/WhiteLogo";
+import WhiteLogo from "/components/UI/Icons/WhiteLogo";
 
-import classes from "../styles/Index.module.scss";
+import classes from "/styles/Index.module.scss";
 
 const Index = () => {
   const [showHelper, setShowhelper] = useState(false);

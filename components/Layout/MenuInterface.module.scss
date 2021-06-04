@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "/styles/variables.scss";
 
 $trans-dur: 0.6s;
 $padding-left: 6vw;
@@ -6,12 +6,13 @@ $padding-left: 6vw;
 .interface {
   width: 100%;
   display: flex;
-  padding: 4vh 0;
+  padding: 4vh 0 6vh 0;
   flex: 1;
+  min-height: 0;
 }
 
 .leftArea {
-  width: 35vw;
+  width: 25vw;
   height: 100%;
   margin-left: $padding-left;
   position: relative;
@@ -68,22 +69,17 @@ $padding-left: 6vw;
         opacity $trans-dur ease-out, margin 0.2s ease-out;
     }
     h2 {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       margin: 0.25rem 1rem;
     }
     p {
-      font-size: 14px;
-      font-weight: 500;
+      font-size: 13px;
+      font-weight: 300;
       width: 50%;
       text-align: right;
       opacity: 0;
       transform: translateX(8px);
       transition: opacity 0.6s ease-out, transform 0.8s ease-out;
-    }
-    &:hover > p {
-      opacity: 1;
-      transform: translateX(0);
-      transition: opacity 0.2s ease-out, transform 0.4s ease-out;
     }
     h3 {
       position: absolute;
@@ -94,14 +90,47 @@ $padding-left: 6vw;
       opacity: 0;
       transition: right 0.2s ease-out, opacity 0.2s ease-out;
     }
+    img {
+      z-index: -1;
+      transition: filter 0.2s ease-out;
+    }
+    &:hover {
+      p {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 0.2s ease-out, transform 0.4s ease-out;
+      }
+      img {
+        filter: brightness(0.5);
+      }
+    }
   }
 }
 
 .contentContainer {
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
+  padding-right: 20px;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.25);
+    transition: background-color 0.2s ease-out;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  &::-webkit-scrollbar-thumb:active {
+    background: $logo-dark;
+  }
   & > div {
-    height: 100%;
+    max-height: 100%;
     width: 100%;
   }
 }
@@ -111,17 +140,11 @@ $padding-left: 6vw;
   flex: 1 1 0;
   border-radius: 1rem;
   overflow: hidden;
-  margin: 0 4vw;
+  margin-right: 4vw;
   position: relative;
-  transition: width $trans-dur ease-out;
-
-  .simulationContainer {
-    width: 100%;
-    left: 0;
-    & > div {
-      width: 100%;
-      left: 0;
-    }
+  transition: width $trans-dur ease-out, margin-left $trans-dur ease-out;
+  video {
+    background: black;
   }
 }
 
@@ -137,21 +160,15 @@ $padding-left: 6vw;
       transform: translateX(calc(-#{$padding-left} + 3rem));
       &:hover {
         opacity: 1;
-        &:nth-of-type(1) {
+        &:nth-of-type(1),
+        &:nth-of-type(2),
+        &:nth-of-type(3),
+        &:nth-of-type(4) {
           transition: transform $trans-dur ease-out, opacity 0.1s ease-out,
             margin 0.2s ease-out;
         }
-        &:nth-of-type(2) {
-          transition: transform $trans-dur ease-out 0.05s, opacity 0.1s ease-out,
-            margin 0.2s ease-out;
-        }
-        &:nth-of-type(3) {
-          transition: transform $trans-dur ease-out 0.1s, opacity 0.1s ease-out,
-            margin 0.2s ease-out;
-        }
-        &:nth-of-type(4) {
-          transition: transform $trans-dur ease-out 0.15s, opacity 0.1s ease-out,
-            margin 0.2s ease-out;
+        img {
+          filter: brightness(0.75);
         }
       }
       p {
@@ -191,4 +208,8 @@ $padding-left: 6vw;
       }
     }
   }
+}
+
+.contentActive > .rightArea {
+  margin-left: 2vw;
 }

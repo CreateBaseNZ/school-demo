@@ -3,47 +3,56 @@ import classes from "./ContentWrapper.module.scss";
 const PlanCard = () => {
   return (
     <div className={classes.contentWrapper}>
-      <h2>Project Name</h2>
+      <h2>H.E.R.&#216;</h2>
       <section>
+        <p style={{ fontWeight: 600 }}>
+          Now that we have defined the problem and our available tools, we
+          need to plan our solution:
+        </p>
         <p>
-          Once we understand what should be done, a good practice is to
-          implement a divide and conquer approach. Through this approach, we
-          will divide our solution into different parts that we could solve on
-          its own, then we could combine it at the end.
+          It is crucial to plan how we will build our solution before we begin as 
+          it helps us identify potential problems at an early stage, saving us time 
+          and headaches in the future. 🤕
+          </p>
+          </section>
+          <section>
+          <p>
+          A good practice when building a complex solution is to break it down
+          into a series of simpler problems. In our situation, we will split our
+          solution into different parts, called <i>subsystems</i>, that we can implement
+          individually and then combine at the end. It makes sense that each of
+          our <i>subsystems</i> represents a different functionality.
         </p>
       </section>
       <section>
-        <p>From the define stage, we would then need</p>
+      <p style={{ fontWeight: 600 }}>
+          <br/>
+          To pick up and transport items of rubbish into the bins, we will need to
+          implement the following functionalities with our H.E.R.&#216; robotic arm:
+        </p>
         <ol>
           <li>
-            Moving the arm between points
-            <ul>
-              <li>
-                Learn the functions to move the arm from one location to another
-              </li>
-            </ul>
+          <i>Subsystem 1</i>: Turning the gravity wand on and off. 🧙‍♂🔛
+
           </li>
           <li>
-            Familiarize with the claw
-            <ul>
-              <li>
-                Learn how to operate the claw to be able to pick up the rubbish
-              </li>
-            </ul>
+          <i>Subsystem 2</i>: Moving the end of the arm between points in space (x, y, z). 🦾📈
           </li>
         </ol>
-        <p>
-          After being able to work these two subsystems we will be able to
-          combine the work into one system solving our problem.
-        </p>
       </section>
       <section>
+        <p>
+          After implementing each of these subsystems individually, we will then
+          combine them into one solution that we will use to solve our problem. 🚀
+        </p>
+      </section>
+      {/* <section>
         <ul className={classes.subsystemList}>
           <li>Subsystem 1</li>
           <li>Subsystem 2</li>
           <li>Subsystem 3</li>
         </ul>
-      </section>
+      </section> */}
     </div>
   );
 };

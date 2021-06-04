@@ -1,0 +1,28 @@
+[
+  {
+    "robot": "RoboticArm",
+    "type": "start"
+  },
+  {
+    "robot": "RoboticArm",
+    "name": "MoveArm",
+    "type": "move",
+    "value": { "x": 1, "y": 0, "z": 1.05 }
+  },
+  {
+    "robot": "RoboticArm",
+    "name": "MoveArm",
+    "type": "move",
+    "value": { "x": 0, "y": 1, "z": 1.05 }
+  },
+  {
+    "robot": "RoboticArm",
+    "name": "MoveArm",
+    "type": "move",
+    "value": { "x": -1, "y": 0, "z": 1.05 }
+  },
+  {
+    "robot": "RoboticArm",
+    "type": "end"
+  }
+]

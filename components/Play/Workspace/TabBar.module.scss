@@ -1,0 +1,73 @@
+@import "/styles/variables";
+
+.tabBar {
+  width: 100%;
+  flex: 0 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 -6px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.tab {
+  flex: 1 1 auto;
+  min-width: 3rem;
+  max-width: 8rem;
+  position: relative;
+  padding: 6px;
+  transition: background-color 0.1s ease-out;
+  input {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+  }
+  label {
+    font-size: 14px;
+    margin-left: 1rem;
+    opacity: 0.5;
+    transition: opacity 0.1s ease-out, font-weight 0.1s ease-out;
+  }
+  input:checked ~ label {
+    opacity: 1;
+    font-weight: 600;
+  }
+  input:checked ~ .divider {
+    display: none;
+  }
+  &:hover {
+    background: rgba(104, 84, 217, 0.1);
+    label {
+      opacity: 1;
+    }
+  }
+}
+
+.divider {
+  width: 1px;
+  height: 65%;
+  background: $lightest;
+  transition: opacity 0.2s ease-out;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 33.33333%;
+  min-width: 3rem;
+  max-width: 8rem;
+  height: 100%;
+  background: $logo-mid;
+  transition: transform 0.2s ease-out;
+  &.text {
+    transform: translateX(100%);
+  }
+  &.console {
+    transform: translateX(200%);
+  }
+}

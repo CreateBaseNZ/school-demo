@@ -2,10 +2,10 @@ import { useCallback, useEffect, useState } from "react";
 import { UnityContext } from "react-unity-webgl";
 
 const unityContext = new UnityContext({
-  loaderUrl: "simulation/build.loader.js",
-  dataUrl: "simulation/build.data",
-  frameworkUrl: "simulation/build.framework.js",
-  codeUrl: "simulation/build.wasm",
+  loaderUrl: "/simulation/build.loader.js",
+  dataUrl: "/simulation/build.data",
+  frameworkUrl: "/simulation/build.framework.js",
+  codeUrl: "/simulation/build.wasm",
   productName: "Simulation",
   productVersion: "0.1",
   companyName: "CreateBase",
@@ -14,8 +14,9 @@ const unityContext = new UnityContext({
   // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
 });
 
-const useUnity = () => {
+const useUnity = (subsystem) => {
   const [sensorData, setSensorData] = useState();
+  const [gameState, setGameState] = useState();
 
   useEffect(() => {
     unityContext.on("GetSensorData", (sensorData) => {
@@ -23,11 +24,27 @@ const useUnity = () => {
     });
   }, []);
 
+  useEffect(() => {
+    unityContext.on("GetGameState", (gameState) => {
+      setGameState(gameState);
+    });
+  }, []);
+
   const setSensorDataWrapper = useCallback((data) => {
     setSensorData(data);
   }, []);
 
-  return [unityContext, sensorData, setSensorDataWrapper];
+  const setGameStateWrapper = useCallback((data) => {
+    setGameState(data);
+  });
+
+  unityContext.on("loaded", () => {
+    setTimeout(() => {
+      unityContext.send("SceneController", "LoadScene", subsystem);
+    }, 4000);
+  });
+
+  return [unityContext, sensorData, gameState];
 };
 
 export default useUnity;

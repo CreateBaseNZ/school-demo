@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import NavContext from "../../../store/nav-context";
+import NavContext from "/store/nav-context";
+import { formatSubsystemName } from "/utils/capitaliseString";
 
 import NavItem from "./NavItem";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -9,25 +10,26 @@ import classes from "./Nav.module.scss";
 import Link from "next/link";
 
 const DUMMY_PROJECT_STEPS = [
-  { title: "Define" },
-  { title: "Plan" },
-  { title: "Create" },
-  { title: "Improve" },
+  { title: "Define", path: "/menu/define", query: "define" },
+  { title: "Plan", path: "/menu/plan", query: "plan" },
+  { title: "Create", path: "/menu/create", query: "create" },
+  { title: "Improve", path: "/menu/improve", query: "improve" },
 ];
 const DUMMY_SUBSYSTEMS = [
-  { key: "101", title: "Subsystem 1" },
-  { key: "010", title: "Subsystem 2" },
-  { key: "111", title: "Subsystem 3" },
-];
-const DUMMY_TASKS = [
-  { key: "999", title: "Task 1" },
-  { key: "888", title: "Task 2" },
-  { key: "777", title: "Task 3" },
-  { key: "666", title: "Task 4" },
-  { key: "555", title: "Task 5" },
+  {
+    title: "The Gravity Wand",
+    path: "/play/the-gravity-wand",
+    query: "",
+  },
+  { title: "Moving the Arm", path: "/play/moving-the-arm", query: "" },
+  {
+    title: "Collecting the Items",
+    path: "/play/collecting-the-items",
+    query: "",
+  },
 ];
 
-const Nav = (props) => {
+const Nav = ({ showStep, showSubsystem }) => {
   const ctx = useContext(NavContext);
 
   return (
@@ -35,26 +37,24 @@ const Nav = (props) => {
       <Link href="/">
         <HomeRoundedIcon className={classes.home} fontSize="small" />
       </Link>
-      {props.showStage && (
+      {showStep && (
         <NavItem
-          title="Project Step 1"
+          title={ctx.activeStep}
           items={DUMMY_PROJECT_STEPS}
           type="Project Steps"
-          step="1"
+          path="/menu"
         />
       )}
-      {props.showStage && <ChevronRightIcon fontSize="small" />}
-      {props.showStage && (
+      {showSubsystem && ctx.activeSubsystem && (
+        <ChevronRightIcon fontSize="small" />
+      )}
+      {showSubsystem && ctx.activeSubsystem && (
         <NavItem
-          title="Subsystem 1"
+          title={formatSubsystemName(ctx.activeSubsystem)}
           items={DUMMY_SUBSYSTEMS}
           type="Subsystems"
-          step="3"
+          path="/menu"
         />
-      )}
-      {props.showStage && <ChevronRightIcon fontSize="small" />}
-      {props.showStage && (
-        <NavItem title="Task 1" items={DUMMY_TASKS} type="Tasks" />
       )}
     </nav>
   );

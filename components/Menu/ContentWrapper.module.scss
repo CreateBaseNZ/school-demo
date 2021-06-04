@@ -1,4 +1,4 @@
-@import "../../styles/variables";
+@import "/styles/variables";
 
 .contentWrapper {
   background: #141414;
@@ -14,16 +14,21 @@
     margin: 1rem 0;
   }
   p {
-    font-size: 14px;
-    line-height: 1.75em;
+    font-size: 15px;
+    line-height: 1.7em;
+    font-weight: 300;
   }
   ul,
   ol {
     margin: 0.25rem 0 0.25rem 2rem;
-    line-height: 1.5em;
-    font-size: 14px;
+    font-size: 15px;
     li {
       font-size: inherit;
+      font-weight: 300;
+      line-height: 1.55em;
+    }
+    li:not(:last-child) {
+      margin-bottom: 0.5rem;
     }
   }
   ol > li {
@@ -33,11 +38,22 @@
     margin: 2rem 0 2rem 2rem;
     font-size: 1rem;
   }
+  b {
+    font-size: inherit;
+    font-weight: 600;
+    font-size: inherit;
+  }
 }
 
 .createWrapper {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: max(250px, min(35vh, 400px));
+  grid-column-gap: 2vw;
+  grid-row-gap: 4vh;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-bottom: 2rem;
 }
 
 .improveWrapper {

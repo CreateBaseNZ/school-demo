@@ -1,0 +1,65 @@
+@import "/styles/variables";
+
+.buttonContainer {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: opacity 0.1s ease-out;
+  .invalid {
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  line-height: 1.5em;
+  border-radius: 0.25rem;
+  font-size: 1.25rem;
+  transition: background-color 0.1s ease-out;
+  &:hover {
+    background: $hover-bg-light;
+  }
+}
+
+.previous {
+  padding-right: 1rem;
+}
+
+.next {
+  padding-left: 1rem;
+}
+
+.submit {
+  padding-left: 1rem;
+  border: thin solid $light;
+  transition: background-color 0.1s ease-out, color 0.1s ease-out,
+    border-color 0.1s ease-out;
+  svg {
+    transition: transform 0.1s ease-out;
+  }
+  path {
+    transition: fill 0.1s ease-out;
+  }
+  &:hover {
+    color: $green;
+    border-color: $green;
+    background: #111111;
+    svg {
+      transform: translateX(2px);
+    }
+    svg path {
+      fill: $green;
+    }
+  }
+}
+
+.errorMessage {
+  color: $red;
+}
