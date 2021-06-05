@@ -170,6 +170,7 @@ const Console = (props) => {
       id="console"
       className={classes.console}
       style={{ display: props.hide && "none" }}
+      onChange={() => console.log("this changed")}
     ></div>
   );
 };

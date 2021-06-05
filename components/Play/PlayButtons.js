@@ -5,16 +5,16 @@ import StopRoundedIcon from "@material-ui/icons/StopRounded";
 
 import classes from "./PlayButtons.module.scss";
 
-export const PlayButton = (props) => {
+export const TestButton = (props) => {
   return (
     <button
-      id="play-button"
-      className={`${classes.button} ${classes.play}`}
+      id="test-button"
+      className={`${classes.button} ${classes.test}`}
       onClick={props.playHandler}
       style={props.style}
     >
       <PlayCircleFilledRoundedIcon />
-      Play
+      Test
     </button>
   );
 };
@@ -36,13 +36,13 @@ export const StopButton = (props) => {
 const PlayButtons = (props) => {
   return (
     <div className={classes.container} style={props.style}>
-      <PlayButton
+      <TestButton
         playHandler={props.playHandler}
-        style={{ display: props.isPlaying && "none" }}
+        style={{ display: props.isTesting && "none" }}
       />
       <StopButton
         stopPlayHandler={props.stopPlayHandler}
-        style={{ display: !props.isPlaying && "none" }}
+        style={{ display: !props.isTesting && "none" }}
       />
     </div>
   );

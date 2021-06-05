@@ -32,7 +32,11 @@ const MonacoEditor = (props) => {
   return (
     <div
       className={classes.editorContainer}
-      style={{ display: props.hide && "none" }}
+      style={{
+        display: props.hide && "none",
+        pointerEvents: props.isBusy && "none",
+        opacity: props.isBusy && "0.5",
+      }}
     >
       <Editor
         defaultLanguage="javascript"

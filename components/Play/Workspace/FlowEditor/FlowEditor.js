@@ -116,8 +116,6 @@ const FlowEditor = (props) => {
     console.log("flow loaded:", _reactFlowInstance);
 
     _reactFlowInstance.fitView();
-    _reactFlowInstance.zoomOut();
-    _reactFlowInstance.zoomOut();
     setReactFlowInstance(_reactFlowInstance);
   }, []);
 
@@ -175,7 +173,11 @@ const FlowEditor = (props) => {
   return (
     <div
       className={classes.editorContainer}
-      style={{ display: props.hide && "none" }}
+      style={{
+        display: props.hide && "none",
+        pointerEvents: props.isBusy && "none",
+        opacity: props.isBusy && "0.5",
+      }}
     >
       <ReactFlowProvider>
         <DndBar />
