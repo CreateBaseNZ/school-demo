@@ -38,7 +38,7 @@ const SubmitButton = (props) => {
       className={`${classes.button} ${classes.submit}  ${
         !props.isValid && classes.invalid
       }`}
-      onClick={props.submitHandler}
+      type="submit"
     >
       Submit
       <SendRoundedIcon />

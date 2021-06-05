@@ -85,35 +85,45 @@ const FeedbackInterface = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    // Construct the feedback
+    let items = new Object();
+    for (let i = 0; i < e.target.length; i++) {
+      const element = e.target[i];
+      if (element.type === "radio" && element.checked) {
+        items[element.name] = element.value;
+      } else if (element.type === "text" || element.type === "number") {
+        items[element.name] = element.value;
+      }
+    }
     // Store feedback on backend
-    // let data;
-    // try {
-    //   setAwaitingResponse(true);
-    //   data = (
-    //     await axios.post(
-    //       "https://createbase.co.nz/alpha/feedback/version-1/submit",
-    //       { items: allStates }
-    //     )
-    //   )["data"];
-    // } catch (error) {
-    //   data = { status: "error", content: error };
-    // }
-    // setAwaitingResponse(false);
-    // switch (data.status) {
-    //   case "succeeded":
-    //     // TODO: Success handling
-    //     setStep((step) => (step += 1));
-    //     break;
-    //   case "failed":
-    //     // TODO: Fail handling
-    //     break;
-    //   case "error":
-    //     // TODO: Error Handling
-    //     break;
-    //   default:
-    //     break;
-    // }
-    // return;
+    let data;
+    try {
+      setAwaitingResponse(true);
+      data = (
+        await axios.post(
+          "https://createbase.co.nz/alpha/feedback/version-2/submit",
+          { items }
+        )
+      )["data"];
+    } catch (error) {
+      data = { status: "error", content: error };
+    }
+    setAwaitingResponse(false);
+    switch (data.status) {
+      case "succeeded":
+        // TODO: Success handling
+        setStep((step) => (step += 1));
+        break;
+      case "failed":
+        // TODO: Fail handling
+        break;
+      case "error":
+        // TODO: Error Handling
+        break;
+      default:
+        break;
+    }
+    return;
   };
 
   return (
@@ -123,6 +133,7 @@ const FeedbackInterface = () => {
       <form
         className={classes.form}
         style={{ display: step >= surveyLength && "none" }}
+        onSubmit={submitHandler}
       >
         <DesignForm
           style={{ display: step !== 0 && "none" }}
@@ -152,7 +163,7 @@ const FeedbackInterface = () => {
           isValid={isFormValid[step]}
           prevHandler={prevHandler}
           nextHandler={nextHandler}
-          submitHandler={submitHandler}
+          submitHandler
         />
       </form>
       <Finished style={{ display: step !== surveyLength && "none" }} />
