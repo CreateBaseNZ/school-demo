@@ -1,36 +1,306 @@
 @import "/styles/variables";
 
-.formContainer {
-  flex: 1 1 0;
-  min-height: 0;
+.input {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+  max-width: 60rem;
   width: 100%;
+  transition: opacity 0.1s ease-out;
+  p {
+    text-align: center;
+    line-height: 1.5em;
+  }
+  input {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    width: 100%;
+    padding-left: 3rem;
+    border-bottom: thin solid rgba(255, 255, 255, 0.5);
+    transition: border-color 0.1s ease-out;
+  }
+  label {
+    pointer-events: none;
+    position: absolute;
+    bottom: 1.75rem;
+    left: 0.5rem;
+    opacity: 0.5;
+    transition: opacity 0.1s ease-out;
+    path {
+      transition: fill 0.1s ease-out;
+    }
+  }
+  span {
+    align-self: flex-start;
+    height: 1rem;
+    font-size: 12px;
+    color: $red;
+  }
+  input:hover {
+    border-bottom: thin solid $lightest;
+    & ~ label {
+      opacity: 1;
+      path {
+        fill: $green;
+      }
+    }
+  }
+  input:focus {
+    border-bottom: thin solid $green;
+    & ~ label {
+      opacity: 1;
+      path {
+        fill: $green;
+      }
+    }
+  }
+  input:not(:placeholder-shown) ~ label {
+    opacity: 1;
+    path {
+      fill: $green;
+    }
+  }
+  &[status="error"] {
+    input {
+      border-color: $red;
+    }
+    label {
+      opacity: 1;
+      path {
+        fill: $red !important;
+      }
+    }
+  }
+}
+.input.number {
+  width: 10rem;
+  input {
+    width: 4rem;
+    padding-left: 2rem;
+  }
+  label {
+    left: 3rem;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+  input {
+    text-align: right;
+  }
+  span {
+    align-self: center;
+  }
+}
+
+.scale,
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 60rem;
+  transition: opacity 0.1s ease-out;
+  p {
+    text-align: center;
+    line-height: 1.5em;
+  }
+  & > div {
+    width: 100%;
+    margin-top: 1rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    label {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      cursor: pointer;
+      input {
+        visibility: hidden;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      & > div {
+        height: 1.5rem;
+        width: 1.5rem;
+        border-radius: 100%;
+        border: 2px solid $lightest;
+        opacity: 0.5;
+        position: relative;
+        transition: border-color 0.1s ease-out, opacity 0.1s ease-out;
+        &::after {
+          content: "";
+          position: absolute;
+          border-radius: 100%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 0;
+          width: 0;
+          transition: height 0.2s ease-out, width 0.2s ease-out;
+        }
+      }
+      span {
+        font-size: 14px;
+        opacity: 0.5;
+        text-align: center;
+        transition: opacity 0.1s ease-out, color 0.1s ease-out;
+      }
+      &:hover {
+        & > div,
+        span {
+          opacity: 1;
+        }
+      }
+      input:checked {
+        & ~ div {
+          opacity: 1;
+          &::after {
+            height: calc(100% - 8px);
+            width: calc(100% - 8px);
+          }
+        }
+        & ~ span {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  & > span {
+    height: 1rem;
+    font-size: 12px;
+    color: $red;
+  }
+}
+
+.scale {
+  & > div {
+    flex-direction: row;
+    label {
+      width: calc(5rem + 5vw);
+      flex-direction: column;
+      span {
+        margin-top: 0.5rem;
+      }
+      &:nth-child(1) {
+        & > div::after {
+          background: $red;
+        }
+        &:hover > div,
+        input:checked ~ div {
+          border-color: $red;
+        }
+        input:checked ~ span {
+          color: $red;
+        }
+      }
+      &:nth-child(2) {
+        & > div::after {
+          background: $amber;
+        }
+        &:hover > div,
+        input:checked ~ div {
+          border-color: $amber;
+        }
+        input:checked ~ span {
+          color: $amber;
+        }
+      }
+      &:nth-child(3) {
+        & > div::after {
+          background: $gold;
+        }
+        &:hover > div,
+        input:checked ~ div {
+          border-color: $gold;
+        }
+        input:checked ~ span {
+          color: $gold;
+        }
+      }
+      &:nth-child(4) {
+        & > div::after {
+          background: $highlight;
+        }
+        &:hover > div,
+        input:checked ~ div {
+          border-color: $highlight;
+        }
+        input:checked ~ span {
+          color: $highlight;
+        }
+      }
+      &:nth-child(5) {
+        & > div::after {
+          background: $green;
+        }
+        &:hover > div,
+        input:checked ~ div {
+          border-color: $green;
+        }
+        input:checked ~ span {
+          color: $green;
+        }
+      }
+    }
+  }
+}
+
+.list {
+  & > div {
+    flex-direction: column;
+    label {
+      width: 100%;
+      padding: 0.5rem 0;
+      span {
+        margin-left: 1rem;
+        font-size: 15px;
+      }
+      input:hover ~ div {
+        border-color: $green;
+      }
+      input:checked ~ div::after {
+        background: $green;
+      }
+      input:checked ~ div {
+        border-color: $green;
+      }
+      input:checked ~ span {
+        color: $green;
+      }
+    }
+  }
+  & > span {
+    align-self: flex-start;
+  }
+}
+
+.finishedWrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-  h2 {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-}
-
-.form {
-  margin: 2rem 0;
-  width: 100%;
   background: #1a1a1a;
   border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 2rem calc(5vw + 5rem);
-  height: 100%;
-  overflow: auto;
+  margin: 2rem 0;
+  width: 100%;
+  min-height: 0;
+  flex: 1 1 0;
+  padding: 2rem 8vw;
+  overflow-y: auto;
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -48,49 +318,57 @@
   &::-webkit-scrollbar-thumb:active {
     background: $logo-dark;
   }
-}
-
-.finishedContainer {
-  .finishedWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    background: #1a1a1a;
-    border-radius: 1rem;
-    margin: 2rem 0;
-    width: 100%;
-    padding: 2rem calc(4rem + 4vw);
-  }
   p {
     margin: 1rem 0;
     font-weight: 300;
     line-height: 1.5em;
+    a {
+      color: $highlight;
+      margin-left: 0.25em;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
   span {
     font-weight: 500;
   }
-  a {
-    color: $highlight;
-    margin-left: 0.25em;
-    &:hover {
-      text-decoration: underline;
+  .buttonContainer {
+    margin-top: auto;
+    margin-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 0 0 calc(1rem + 48px);
+    padding-top: 1rem;
+    button,
+    a {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+      padding: 0 1.5rem;
+      margin: 0 0.5rem;
+      font-weight: 500;
+      svg {
+        margin-right: 0.5rem;
+      }
     }
-  }
-  button {
-    align-self: flex-end;
-    border: thin solid $lightest;
-    border-radius: 0.5rem;
-    padding: 0.5rem 3rem;
-    transition: background-color 0.1s ease-out, border-color 0.1s ease-out;
-    path {
-      transition: fill 0.1s ease-out;
+    button {
+      border: thin solid $lightest;
+      opacity: 0.75;
+      transition: opacity 0.1s ease-out;
+      &:hover {
+        opacity: 1;
+      }
     }
-    &:hover {
-      background: black;
-      border-color: $logo-mid;
-      path {
-        fill: $logo-mid;
+    a {
+      background: linear-gradient(to right, $logo-dark, $blue-dark);
+      transition: transform 0.1s ease-out;
+      &:hover {
+        transform: translateY(-2px);
       }
     }
   }
