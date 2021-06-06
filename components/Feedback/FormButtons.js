@@ -1,17 +1,19 @@
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import SendRoundedIcon from "@material-ui/icons/SendRounded";
 
-import classes from "./FeedbackButtons.module.scss";
+import classes from "./FormButtons.module.scss";
+import { useState } from "react";
 
-const PreviousButton = (props) => {
+const BackButton = (props) => {
   return (
     <button
-      className={`${classes.button} ${classes.previous}`}
+      className={`${classes.button} ${classes.back}`}
       onClick={props.prevHandler}
       style={props.style}
     >
       <NavigateBeforeIcon />
-      Previous
+      Back
     </button>
   );
 };
@@ -19,7 +21,9 @@ const PreviousButton = (props) => {
 const NextButton = (props) => {
   return (
     <button
-      className={`${classes.button} ${classes.next}`}
+      className={`${classes.button} ${classes.next} ${
+        !props.isValid && classes.invalid
+      }`}
       onClick={props.nextHandler}
     >
       Next
@@ -31,16 +35,18 @@ const NextButton = (props) => {
 const SubmitButton = (props) => {
   return (
     <button
-      className={`${classes.button} ${classes.submit}`}
-      onClick={props.submitHandler}
+      className={`${classes.button} ${classes.submit}  ${
+        !props.isValid && classes.invalid
+      }`}
+      type="submit"
     >
       Submit
-      <NavigateNextIcon />
+      <SendRoundedIcon />
     </button>
   );
 };
 
-const FormNavButtons = ({
+const FormButtons = ({
   next = true,
   prev = true,
   submit = false,
@@ -51,23 +57,22 @@ const FormNavButtons = ({
   style,
 }) => {
   return (
-    <div
-      className={`${classes.buttonContainer} ${!isValid && classes.invalid}`}
-      style={style}
-    >
-      <PreviousButton
+    <div className={classes.buttonContainer} style={style}>
+      <BackButton
         prevHandler={prevHandler}
         style={{ visibility: !prev && "hidden" }}
       />
-      {!isValid && (
+      {/* {!isValid && (
         <span className={classes.errorMessage}>
           Please answer all the questions ("None" is also an acceptable answer)
         </span>
+      )} */}
+      {next && <NextButton nextHandler={nextHandler} isValid={isValid} />}
+      {submit && (
+        <SubmitButton submitHandler={submitHandler} isValid={isValid} />
       )}
-      {next && <NextButton nextHandler={nextHandler} />}
-      {submit && <SubmitButton submitHandler={submitHandler} />}
     </div>
   );
 };
 
-export default FormNavButtons;
+export default FormButtons;

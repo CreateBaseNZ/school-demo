@@ -1,75 +1,108 @@
 import { useState } from "react";
+import useForm from "/hooks/useForm";
+
 import axios from "axios";
-import DesignFeedback from "/components/Feedback/DesignFeedback";
-import CodingFeedback from "/components/Feedback/CodingFeedback";
-import ExperienceFeedback from "/components/Feedback/ExperienceFeedback";
-import GeneralFeedback from "/components/Feedback/GeneralFeedback";
-import PracticalityFeedback from "/components/Feedback/PracticalityFeedback";
-import FormNavButtons from "/components/UI/FeedbackButtons";
+import DesignForm, { designForm } from "/components/Feedback/DesignForm";
+import CodingForm, { codingForm } from "/components/Feedback/CodingForm";
+import ExperienceForm, {
+  experienceForm,
+} from "/components/Feedback/ExperienceForm";
+import PracticalityForm, {
+  practicalityForm,
+} from "/components/Feedback/PracticalityForm";
+import GeneralForm, { generalForm } from "/components/Feedback/GeneralForm";
+import FormButtons from "/components/Feedback/FormButtons";
 import Finished from "/components/Feedback/Finished";
 
 import classes from "./FeedbackInterface.module.scss";
 
+const title = [
+  {
+    h1: "Have your say - Design 🎨",
+    h2: "Please rate your experience when using this platform by indicating how much you agree with each of the following statements:",
+  },
+  {
+    h1: "Have your say - Coding 💻",
+    h2: "Please rate your experience when writing code on this platform by indicating how much you agree with each of the following statements:",
+  },
+  {
+    h1: "Have your say - Experience 😀",
+    h2: 'Please indicate how you most commonly used the "reveal code answer" functionality',
+  },
+  {
+    h1: "Have your say - Practicality 🧰",
+    h2: "Please indicate where you feel you would best use the platform",
+  },
+  {
+    h1: "Have your say - General ✍️",
+    h2: "Please answer some basic questions about yourself",
+  },
+  {
+    h1: "Have your say - Finished! 🥳🎉",
+  },
+];
+
+const surveyLength = 5;
+
 const FeedbackInterface = () => {
-  const [designState, setDesignState] = useState({});
-  const [codingState, setCodingState] = useState({});
-  const [experienceState, setExperienceState] = useState({});
-  const [practicalityState, setPracticalityState] = useState({});
-  const [generalState, setGeneralState] = useState({});
   const [step, setStep] = useState(0);
+  const { renderFormInputs: renderDesignForm, isFormValid: isDesignFormValid } =
+    useForm(designForm);
+  const { renderFormInputs: renderCodingForm, isFormValid: isCodingFormValid } =
+    useForm(codingForm);
+  const {
+    renderFormInputs: renderExperienceForm,
+    isFormValid: isExperienceFormValid,
+  } = useForm(experienceForm);
+  const {
+    renderFormInputs: renderPracticalityForm,
+    isFormValid: isPracticalityFormValid,
+  } = useForm(practicalityForm);
+  const {
+    renderFormInputs: renderGeneralForm,
+    isFormValid: isGeneralFormValid,
+  } = useForm(generalForm);
 
-  const [isValid, setIsValid] = useState(true);
-  const [awaitingResponse, setAwaitingResponse] = useState(false);
-
-  const allStates = [
-    designState,
-    codingState,
-    experienceState,
-    practicalityState,
-    generalState,
+  const isFormValid = [
+    isDesignFormValid(),
+    isCodingFormValid(),
+    isExperienceFormValid(),
+    isPracticalityFormValid(),
+    isGeneralFormValid(),
   ];
 
-  const nextHandler = () => {
-    for (const response in allStates[step]) {
-      console.log(allStates[step]);
-      if (!allStates[step][response]) {
-        setIsValid(false);
-        return;
-      }
-    }
-    setIsValid(true);
+  const [awaitingResponse, setAwaitingResponse] = useState(false);
+
+  const nextHandler = (e) => {
+    e.preventDefault();
     setStep((step) => (step += 1));
   };
 
-  const prevHandler = () => {
-    for (const response in allStates[step]) {
-      console.log(allStates[step]);
-      if (!allStates[step][response]) {
-        setIsValid(false);
-        return;
-      }
-    }
-    setIsValid(true);
+  const prevHandler = (e) => {
+    e.preventDefault();
     setStep((step) => (step -= 1));
   };
 
-  const submitHandler = async () => {
-    for (const response in allStates[step]) {
-      console.log(allStates[step]);
-      if (!allStates[step][response]) {
-        setIsValid(false);
-        return;
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    // Construct the feedback
+    let items = new Object();
+    for (let i = 0; i < e.target.length; i++) {
+      const element = e.target[i];
+      if (element.type === "radio" && element.checked) {
+        items[element.name] = element.value;
+      } else if (element.type === "text" || element.type === "number") {
+        items[element.name] = element.value;
       }
     }
-    setIsValid(true);
     // Store feedback on backend
     let data;
     try {
       setAwaitingResponse(true);
       data = (
         await axios.post(
-          "https://createbase.co.nz/alpha/feedback/version-1/submit",
-          { items: allStates }
+          "https://createbase.co.nz/alpha/feedback/version-2/submit",
+          { items }
         )
       )["data"];
     } catch (error) {
@@ -95,42 +128,52 @@ const FeedbackInterface = () => {
 
   return (
     <div className={`${classes.interface}`}>
-      <DesignFeedback
-        style={{ display: step !== 0 && "none" }}
-        state={designState}
-        setState={setDesignState}
+      <h1>{title[step].h1}</h1>
+      <h2>{title[step].h2}</h2>
+      <form
+        className={classes.form}
+        style={{ display: step >= surveyLength && "none" }}
+        onSubmit={submitHandler}
+      >
+        <DesignForm
+          style={{ display: step !== 0 && "none" }}
+          render={renderDesignForm}
+        />
+        <CodingForm
+          style={{ display: step !== 1 && "none" }}
+          render={renderCodingForm}
+        />
+        <ExperienceForm
+          style={{ display: step !== 2 && "none" }}
+          render={renderExperienceForm}
+        />
+        <PracticalityForm
+          style={{ display: step !== 3 && "none" }}
+          render={renderPracticalityForm}
+        />
+        <GeneralForm
+          style={{ display: step !== 4 && "none" }}
+          render={renderGeneralForm}
+        />
+        <FormButtons
+          style={{ display: step > surveyLength - 1 && "none" }}
+          prev={step > 0}
+          next={step < surveyLength - 1}
+          submit={step === surveyLength - 1}
+          isValid={isFormValid[step]}
+          prevHandler={prevHandler}
+          nextHandler={nextHandler}
+          submitHandler
+        />
+      </form>
+      <Finished style={{ display: step !== surveyLength && "none" }} />
+      <div
+        className={classes.progressBar}
+        style={{
+          display: step >= surveyLength && "none",
+          width: `${((step + 1) / surveyLength) * 100}%`,
+        }}
       />
-      {/* <CodingFeedback
-        style={{ display: step !== 1 && "none" }}
-        state={codingState}
-        setState={setCodingState}
-      /> */}
-      <ExperienceFeedback
-        style={{ display: step !== 1 && "none" }}
-        state={experienceState}
-        setState={setExperienceState}
-      />
-      <PracticalityFeedback
-        style={{ display: step !== 2 && "none" }}
-        state={practicalityState}
-        setState={setPracticalityState}
-      />
-      <GeneralFeedback
-        style={{ display: step !== 3 && "none" }}
-        state={generalState}
-        setState={setGeneralState}
-      />
-      <FormNavButtons
-        style={{ display: step > 3 && "none" }}
-        prev={step > 0}
-        next={step < 3}
-        submit={step === 3}
-        isValid={isValid}
-        prevHandler={prevHandler}
-        nextHandler={nextHandler}
-        submitHandler={submitHandler}
-      />
-      <Finished style={{ display: step < 4 && "none" }} />
     </div>
   );
 };

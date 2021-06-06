@@ -48,31 +48,31 @@ const getSubsystemScene = (subsystem) => {
 };
 
 const PlayInterface = (props) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isTesting, setIsTesting] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
   const [unityContext, sensorData, gameState] = useUnity(
     getSubsystemScene(props.subsystem)
   );
   const [swiperHeight, setSwiperHeight] = useState();
 
-  let resetSwiper = false;
-
   useEffect(() => {
+    console.log(props.subsystem);
     unityContext.send(
       "SceneController",
       "LoadScene",
       getSubsystemScene(props.subsystem)
     );
-    setIsPlaying(false);
+    setIsTesting(false);
     setIsVerifying(false);
   }, [props.subsystem]);
 
-  const playHandler = () => {
-    setIsPlaying(true);
+  const testHandler = () => {
+    setRender((current) => !current);
+    // setIsTesting(true);
   };
 
-  const stopPlayHandler = () => {
-    setIsPlaying(false);
+  const stopTestHandler = () => {
+    setIsTesting(false);
     unityContext.send("SceneController", "ResetScene");
   };
 
@@ -119,7 +119,7 @@ const PlayInterface = (props) => {
         >
           <Contents
             subsystemIndex={getSubsystemIndex(props.subsystem)}
-            isPlaying={isPlaying}
+            isTesting={isTesting}
             isVerifying={isVerifying}
             height={swiperHeight}
           />
@@ -127,16 +127,16 @@ const PlayInterface = (props) => {
             unityContext={unityContext}
             sensorData={sensorData}
             gameState={gameState}
-            isPlaying={isPlaying}
+            isTesting={isTesting}
             isVerifying={isVerifying}
-            playHandler={playHandler}
-            stopPlayHandler={stopPlayHandler}
+            testHandler={testHandler}
+            stopTestHandler={stopTestHandler}
             verifyHandler={verifyHandler}
             cancelVerifyHandler={cancelVerifyHandler}
             restartHandler={restartHandler}
           />
         </SplitPane>
-        <Simulation unityContext={unityContext} sensorData={sensorData} />
+        <Simulation unityContext={unityContext} />
       </SplitPane>
       <div id="play-portal"></div>
       <SuccessModal

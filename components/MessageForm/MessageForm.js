@@ -1,4 +1,4 @@
-import createFormFieldConfig from "/utils/formConfig";
+import generateFormField from "/utils/generateFormField";
 
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import EmailRoundedIcon from "@material-ui/icons/EmailRounded";
@@ -14,45 +14,45 @@ import {
 
 const messageForm = {
   name: {
-    ...createFormFieldConfig(
-      <AccountCircleIcon />,
-      "name",
-      "text",
-      "Name (optional)",
-      "input",
-      true
-    ),
+    ...generateFormField({
+      element: "input",
+      label: <AccountCircleIcon />,
+      name: "name",
+      type: "text",
+      placeholder: "Name (optional)",
+      defaultValid: true,
+    }),
     validationRules: [minLengthRule("Name", 3), maxLengthRule("Name", 25)],
   },
   email: {
-    ...createFormFieldConfig(
-      <EmailRoundedIcon />,
-      "email",
-      "email",
-      "Email (optional)",
-      "input",
-      true
-    ),
+    ...generateFormField({
+      element: "input",
+      label: <EmailRoundedIcon />,
+      name: "email",
+      type: "email",
+      placeholder: "Email (optional)",
+      defaultValid: true,
+    }),
     validationRules: [validEmailRule(), maxLengthRule("Email", 320)],
   },
   subject: {
-    ...createFormFieldConfig(
-      <TitleIcon />,
-      "subject",
-      "text",
-      "Subject",
-      "input"
-    ),
+    ...generateFormField({
+      element: "input",
+      label: <TitleIcon />,
+      name: "subject",
+      type: "text",
+      placeholder: "Subject",
+    }),
     validationRules: [requiredRule("Subject"), maxLengthRule("Subject", 50)],
   },
   message: {
-    ...createFormFieldConfig(
-      <NotesIcon />,
-      "message",
-      "text",
-      "Message",
-      "textarea"
-    ),
+    ...generateFormField({
+      element: "textarea",
+      label: <NotesIcon />,
+      name: "message",
+      type: "text",
+      placeholder: "Message",
+    }),
     validationRules: [requiredRule("Message"), maxLengthRule("Message", 500)],
   },
 };

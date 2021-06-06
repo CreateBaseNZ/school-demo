@@ -1,10 +1,78 @@
+@import "/styles/variables";
+
 .interface {
   width: 100%;
-  padding: 4vh 5vw 4vh 5vw;
+  padding: 4vh 10vw 4vh 10vw;
   min-height: 0;
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    flex: 0 0 auto;
+  }
+  h2 {
+    font-size: 1rem;
+    font-weight: 400;
+    flex: 0 0 auto;
+  }
+}
+
+.form {
+  margin: 2rem 0;
+  width: 100%;
+  background: #161616;
+  border-radius: 1rem;
+  padding: 2rem calc(5vw + 2rem);
+  flex: 1 1 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  & > div:not(:last-child) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.25);
+    transition: background-color 0.2s ease-out;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  &::-webkit-scrollbar-thumb:active {
+    background: $logo-dark;
+  }
+}
+
+.progressBar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 0;
+  overflow: hidden;
+  display: flex;
+  transition: width 0.4s ease-out;
+  &::after {
+    content: "";
+    height: 100%;
+    width: 100vw;
+    background: linear-gradient(to right, $logo-dark, $green);
+  }
 }

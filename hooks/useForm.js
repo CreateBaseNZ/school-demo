@@ -3,6 +3,8 @@ import { useState, useCallback } from "react";
 const useForm = (formObj) => {
   const [form, setForm] = useState(formObj);
 
+  console.log(form);
+
   const renderFormInputs = () => {
     return Object.values(form).map((inputObj) => {
       const { value, errorMessage, valid, renderInput } = inputObj;

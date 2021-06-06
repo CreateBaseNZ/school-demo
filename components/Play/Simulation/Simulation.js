@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import Unity from "react-unity-webgl";
 
 import classes from "./Simulation.module.scss";
@@ -14,7 +13,7 @@ const Simulation = (props) => {
 
   return (
     <div
-      className={`${props.className} ${classes.simulationContainer}`}
+      className={classes.simulationContainer}
       onFocus={focusHandler}
       onBlur={blurHandler}
       tabIndex={1}

@@ -33,6 +33,8 @@ const Workspace = (props) => {
   const [textCode, setTextCode] = useState("console.log('Hi');");
   const flowRef = useRef();
 
+  const isBusy = props.isTesting || props.isVerifying;
+
   const toggleHandler = () => {
     if (activeTab) {
       const newCode = codeGen.build(flowRef.current.getBlockConfig());
@@ -81,9 +83,9 @@ const Workspace = (props) => {
     // monacoRef.current.editor.setTheme("customTheme");
   };
 
-  const playHandler = () => {
+  const testHandler = () => {
     executeCode();
-    props.playHandler();
+    props.testHandler();
   };
 
   const verifyHandler = () => {
@@ -96,22 +98,22 @@ const Workspace = (props) => {
       {/* <ClientOnlyPortal selector="#editor-toggle-portal">
         <EditorToggleButton onChange={toggleHandler} />
       </ClientOnlyPortal> */}
-      <FlowEditor hide={activeTab !== "flow"} ref={flowRef} />
+      <FlowEditor isBusy={isBusy} hide={activeTab !== "flow"} ref={flowRef} />
       <MonacoEditor
         unityContext={props.unityContext}
         sensorData={props.sensorData}
         code={textCode}
         hide={activeTab !== "text"}
-        isPlaying={props.isPlaying}
+        isBusy={isBusy}
         clickHandler={props.clickHandler}
       />
       <Console hide={activeTab !== "console"} />
       <TabBar active={activeTab} onChange={changeTabHandler} />
       <ClientOnlyPortal selector="#play-portal">
         <PlayButtons
-          playHandler={playHandler}
-          stopPlayHandler={props.stopPlayHandler}
-          isPlaying={props.isPlaying}
+          testHandler={testHandler}
+          stopTestHandler={props.stopTestHandler}
+          isTesting={props.isTesting}
           style={{ display: props.isVerifying && "none" }}
         />
       </ClientOnlyPortal>
@@ -121,7 +123,7 @@ const Workspace = (props) => {
             className={classes.verifyBtn}
             onClick={verifyHandler}
             style={{
-              display: (props.isVerifying || props.isPlaying) && "none",
+              display: (props.isVerifying || props.isTesting) && "none",
             }}
           >
             <SlowMotionVideoIcon fontSize="large" />
@@ -144,7 +146,7 @@ const Workspace = (props) => {
               Cancel
             </button>
           </div>
-          {props.isPlaying && (
+          {props.isTesting && (
             <div style={{ opacity: 0.75 }}>Simulation in progress...</div>
           )}
         </div>

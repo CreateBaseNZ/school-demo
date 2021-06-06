@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Head from "next/head";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import NavContext from "../../store/nav-context";
 import FullscreenContext from "../../store/fullscreen-context";
 

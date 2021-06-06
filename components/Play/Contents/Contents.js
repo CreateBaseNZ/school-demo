@@ -230,7 +230,7 @@ const Contents = (props) => {
   const checkOverflow = useCallback(() => {
     const el = document.querySelectorAll(".swiper-slide")[swiper.realIndex + 1];
     if (el) {
-      if (el.scrollHeight > el.clientHeight) {
+      if (el.scrollHeight - 10 > el.clientHeight) {
         setIsOverflowing(true);
       } else {
         setIsOverflowing(false);
