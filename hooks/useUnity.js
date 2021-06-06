@@ -38,11 +38,14 @@ const useUnity = (subsystem) => {
     setGameState(data);
   });
 
-  unityContext.on("loaded", () => {
-    setTimeout(() => {
-      unityContext.send("SceneController", "LoadScene", subsystem);
-    }, 4000);
-  });
+  useEffect(() => {
+    unityContext.on("loaded", () => {
+      console.log();
+      setTimeout(() => {
+        unityContext.send("SceneController", "LoadScene", subsystem);
+      }, 4000);
+    });
+  }, [subsystem]);
 
   return [unityContext, sensorData, gameState];
 };

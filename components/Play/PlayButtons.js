@@ -10,7 +10,7 @@ export const TestButton = (props) => {
     <button
       id="test-button"
       className={`${classes.button} ${classes.test}`}
-      onClick={props.playHandler}
+      onClick={props.testHandler}
       style={props.style}
     >
       <PlayCircleFilledRoundedIcon />
@@ -24,7 +24,7 @@ export const StopButton = (props) => {
     <button
       id="stop-button"
       className={`${classes.button} ${classes.stop}`}
-      onClick={props.stopPlayHandler}
+      onClick={props.stopTestHandler}
       style={props.style}
     >
       <StopRoundedIcon />
@@ -37,11 +37,11 @@ const PlayButtons = (props) => {
   return (
     <div className={classes.container} style={props.style}>
       <TestButton
-        playHandler={props.playHandler}
+        testHandler={props.testHandler}
         style={{ display: props.isTesting && "none" }}
       />
       <StopButton
-        stopPlayHandler={props.stopPlayHandler}
+        stopTestHandler={props.stopTestHandler}
         style={{ display: !props.isTesting && "none" }}
       />
     </div>

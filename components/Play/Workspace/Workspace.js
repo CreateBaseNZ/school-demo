@@ -83,9 +83,9 @@ const Workspace = (props) => {
     // monacoRef.current.editor.setTheme("customTheme");
   };
 
-  const playHandler = () => {
+  const testHandler = () => {
     executeCode();
-    props.playHandler();
+    props.testHandler();
   };
 
   const verifyHandler = () => {
@@ -111,8 +111,8 @@ const Workspace = (props) => {
       <TabBar active={activeTab} onChange={changeTabHandler} />
       <ClientOnlyPortal selector="#play-portal">
         <PlayButtons
-          playHandler={playHandler}
-          stopPlayHandler={props.stopPlayHandler}
+          testHandler={testHandler}
+          stopTestHandler={props.stopTestHandler}
           isTesting={props.isTesting}
           style={{ display: props.isVerifying && "none" }}
         />

@@ -55,9 +55,8 @@ const PlayInterface = (props) => {
   );
   const [swiperHeight, setSwiperHeight] = useState();
 
-  let resetSwiper = false;
-
   useEffect(() => {
+    console.log(props.subsystem);
     unityContext.send(
       "SceneController",
       "LoadScene",
@@ -67,11 +66,12 @@ const PlayInterface = (props) => {
     setIsVerifying(false);
   }, [props.subsystem]);
 
-  const playHandler = () => {
-    setIsTesting(true);
+  const testHandler = () => {
+    setRender((current) => !current);
+    // setIsTesting(true);
   };
 
-  const stopPlayHandler = () => {
+  const stopTestHandler = () => {
     setIsTesting(false);
     unityContext.send("SceneController", "ResetScene");
   };
@@ -129,14 +129,14 @@ const PlayInterface = (props) => {
             gameState={gameState}
             isTesting={isTesting}
             isVerifying={isVerifying}
-            playHandler={playHandler}
-            stopPlayHandler={stopPlayHandler}
+            testHandler={testHandler}
+            stopTestHandler={stopTestHandler}
             verifyHandler={verifyHandler}
             cancelVerifyHandler={cancelVerifyHandler}
             restartHandler={restartHandler}
           />
         </SplitPane>
-        <Simulation unityContext={unityContext} sensorData={sensorData} />
+        <Simulation unityContext={unityContext} />
       </SplitPane>
       <div id="play-portal"></div>
       <SuccessModal
