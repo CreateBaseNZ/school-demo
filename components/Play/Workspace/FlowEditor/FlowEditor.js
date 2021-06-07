@@ -170,16 +170,16 @@ const FlowEditor = (props) => {
   //   console.log(edge);
   // };
 
+  console.log(props);
+
   return (
     <div
-      className={classes.editorContainer}
-      style={{
-        display: props.hide && "none",
-        pointerEvents:
-          props.mode === "testing" || (props.mode === "verifying" && "none"),
-        opacity:
-          props.mode === "testing" || (props.mode === "verifying" && "0.5"),
-      }}
+      className={`${classes.editorContainer} ${
+        props.mode === "testing" || props.mode === "verifying"
+          ? classes.disable
+          : ""
+      }`}
+      style={{ display: props.hide && "none" }}
     >
       <ReactFlowProvider>
         <DndBar />

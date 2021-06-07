@@ -10,6 +10,13 @@
   svg {
     display: block;
   }
+  &.disable {
+    pointer-events: none;
+    opacity: 0.5;
+    * {
+      pointer-events: none !important;
+    }
+  }
 }
 
 .editorWrapper {

@@ -8,4 +8,11 @@
     font-family: $jetbrains;
     font-size: 14px;
   }
+  &.disable {
+    pointer-events: none;
+    opacity: 0.5;
+    * {
+      pointer-events: none !important;
+    }
+  }
 }
