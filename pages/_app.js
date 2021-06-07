@@ -11,8 +11,9 @@ function MyApp({ Component, pageProps }) {
     (async () => {
       let data;
       // Set Cookie
+      const date = new Date().toString();
       try {
-        data = (await axios.post("/api/cookie/set"))["data"];
+        data = (await axios.post("/api/cookie/set", { date }))["data"];
       } catch (error) {
         data = { status: "error", content: error };
       }
