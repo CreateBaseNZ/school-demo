@@ -75,6 +75,10 @@ const FlowEditor = (props) => {
           break;
         }
       }
+      console.log(blocksConfig);
+      if (blocksConfig[blocksConfig.length - 1].type !== "end") {
+        return "disconnected";
+      }
       return blocksConfig;
     },
   }));
@@ -170,8 +174,6 @@ const FlowEditor = (props) => {
   //   console.log(edge);
   // };
 
-  console.log(props);
-
   return (
     <div
       className={`${classes.editorContainer} ${
@@ -200,6 +202,7 @@ const FlowEditor = (props) => {
             snapGrid={[16, 16]}
             connectionLineComponent={CustomConnectionLine}
             arrowHeadColor="#ffffff"
+            deleteKeyCode="Delete"
           >
             <MiniMap
               nodeStrokeColor={miniMapStrokeColoriser}

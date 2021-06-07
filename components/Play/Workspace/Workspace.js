@@ -1,5 +1,6 @@
 import { useRef, useState, forwardRef } from "react";
 import dynamic from "next/dynamic";
+import consoleLog from "/utils/consoleLog";
 import MonacoEditor from "./MonacoEditor/MonacoEditor";
 import Console from "./Console/Console";
 import PlayButtons from "../PlayButtons";
@@ -27,11 +28,14 @@ const codeGen = new CodeGenerator();
 
 const Workspace = (props) => {
   const [activeTab, setActiveTab] = useState("flow");
-  const [textCode, setTextCode] = useState("console.log('Hi');");
+  const [textCode, setTextCode] = useState(
+    "// Start coding! \n console.log('Hello, world');"
+  );
+  const [blockValidity, setBlockValidity] = useState("disconnected");
   const flowRef = useRef();
 
   const changeTabHandler = (option) => {
-    if (activeTab === "flow" && option === "text") {
+    if (option === "text") {
       const newCode = codeGen.build(flowRef.current.getBlockConfig());
       setTextCode(newCode);
     }
@@ -43,7 +47,12 @@ const Workspace = (props) => {
   let communication;
   let interval;
   const executeCode = async () => {
-    const newCode = codeGen.build(flowRef.current.getBlockConfig());
+    const blockConfig = flowRef.current.getBlockConfig();
+    if (blockConfig === "disconnected") {
+      setBlockValidity("disconnected");
+      consoleLog("Oops! The Start and End blocks are not connected", "error");
+    }
+    const newCode = codeGen.build(blockConfig);
     // Declare header functions and configurations
     let someVar = props.unityContext;
     let RoboticSystemName = "Arm";
