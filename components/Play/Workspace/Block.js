@@ -1,7 +1,6 @@
-import ReactDOM from "react-dom";
+import consoleLog from "/utils/consoleLog";
 import { PictureAsPdfSharp } from "@material-ui/icons";
 import { create, all, pi, abs } from "mathjs";
-import { Log, Error, Warning } from "./Console/Console";
 
 import classes from "./TabBar.module.scss";
 
@@ -154,12 +153,7 @@ export class Block {
       math.square(x) + math.square(y) + math.square(z - this._jointLengths[0])
     );
     if (totalDistance - totaljointLengths > 0.1) {
-      // TODO
-      ReactDOM.render(
-        <Warning message={"Position is out of reach. Try another location"} />,
-        document.querySelector("#console")
-      );
-      document.querySelector("#console-tab").classList.add(classes.tabWarning);
+      consoleLog("Position is out of reach. Try another location", "warning");
       return false;
     }
     const targetPoint = [x, y, z];
@@ -254,14 +248,10 @@ export class Block {
       angles[i] *= 180 / pi;
     }
     if (distance > large_tolerence) {
-      // TODO
-      ReactDOM.render(
-        <Warning
-          message={"Position can not be reached. Closest position chosen"}
-        />,
-        document.querySelector("#console")
+      consoleLog(
+        "Position can not be reached. Closest position chosen",
+        "warning"
       );
-      document.querySelector("#console-tab").classList.add(classes.tabWarning);
     }
     return angles; //angles.map((val) => val * 180 / pi);
   }
@@ -299,12 +289,7 @@ export class Block {
       math.square(x) + math.square(y) + math.square(z - this._jointLengths[0])
     );
     if (totalDistance - totaljointLengths > 0.1) {
-      // TODO
-      ReactDOM.render(
-        <Warning message={"Position is out of reach. Try another location"} />,
-        document.querySelector("#console")
-      );
-      document.querySelector("#console-tab").classList.add(classes.tabWarning);
+      consoleLog("Position is out of reach. Try another location", "warning");
       return false;
     }
     const targetPoint = [x, y, z];
@@ -389,14 +374,10 @@ export class Block {
       angles[i] *= 180 / pi;
     }
     if (distance > large_tolerence) {
-      // TODO
-      ReactDOM.render(
-        <Warning
-          message={"Position can not be reached. Closest position chosen"}
-        />,
-        document.querySelector("#console")
+      consoleLog(
+        "Position can not be reached. Closest position chosen",
+        "warning"
       );
-      document.querySelector("#console-tab").classList.add(classes.tabWarning);
     }
 
     return angles; //angles.map((val) => val * 180 / pi);

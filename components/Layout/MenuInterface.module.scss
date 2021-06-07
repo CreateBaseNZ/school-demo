@@ -146,6 +146,12 @@ $padding-left: 6vw;
   video {
     background: black;
   }
+  video::-webkit-media-controls-volume-slider {
+    display: none;
+  }
+  video::-webkit-media-controls-mute-button {
+    display: none;
+  }
 }
 
 .contentActive > .leftArea {

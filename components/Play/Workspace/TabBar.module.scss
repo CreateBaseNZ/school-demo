@@ -109,3 +109,16 @@
     background: $red;
   }
 }
+
+.tabNew {
+  animation: new 0.5s ease-out infinite alternate;
+}
+
+@keyframes new {
+  from {
+    background: transparent;
+  }
+  to {
+    background: rgb(255, 255, 255, 0.25);
+  }
+}
