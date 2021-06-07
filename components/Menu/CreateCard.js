@@ -6,7 +6,7 @@ import classes from "./ContentWrapper.module.scss";
 
 const DUMMY_DATA = [
   {
-    title: "Subsystem 0: Intro to Create",
+    title: "Intro to Create",
     href: "/menu/create",
     src: "/tutorial_edited.png",
     description: "Watch this quick tutorial to learn how to create like a pro!",
