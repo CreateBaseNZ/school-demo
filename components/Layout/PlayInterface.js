@@ -40,34 +40,16 @@ const getSubsystemIndex = (subsystem) => {
   }
 };
 
-const getSubsystemScene = (subsystem) => {
-  switch (subsystem) {
-    case "the-gravity-wand":
-      return "Training_Arm_1";
-    case "moving-the-arm":
-      return "Training_Arm_0";
-    case "collecting-the-items":
-      return "Project_Industrial_1";
-    default:
-      return "Project_Industrial_1";
-  }
-};
-
 const PlayInterface = (props) => {
   const [mode, setMode] = useState("ready");
-  const [unityContext, sensorData, gameState, progressState] = useUnity(
-    getSubsystemScene(props.subsystem)
-  );
+  const [unityContext, sensorData, gameState, changeScene, resetScene, progressState] =
+    useUnity(props.subsystem);
   const [swiperHeight, setSwiperHeight] = useState();
   const [simulationWidth, setSimulationWidth] = useState();
 
   // subsystem change
   useEffect(() => {
-    unityContext.send(
-      "SceneController",
-      "LoadScene",
-      getSubsystemScene(props.subsystem)
-    );
+    changeScene(props.subsystem);
     setMode("loading");
     setTimeout(() => setMode("ready"), 3500);
   }, [props.subsystem]);
@@ -114,7 +96,7 @@ const PlayInterface = (props) => {
     // Run Handlers
     setMode("loading");
     setTimeout(() => setMode("ready"), 3500);
-    unityContext.send("SceneController", "ResetScene");
+    resetScene();
   };
 
   // called in the verify handler
@@ -147,14 +129,14 @@ const PlayInterface = (props) => {
     // Run Handlers
     setMode("loading");
     setTimeout(() => setMode("ready"), 3500);
-    unityContext.send("SceneController", "ResetScene");
+    resetScene();
   };
 
   // called in the restart subsystem handler
   const restartHandler = () => {
     setMode("loading");
     setTimeout(() => setMode("ready"), 3500);
-    unityContext.send("SceneController", "ResetScene");
+    resetScene();
   };
 
   const closeSuccessHandler = () => {
@@ -204,7 +186,7 @@ const PlayInterface = (props) => {
       <SuccessModal
         style={{
           display:
-            (props.mode !== "verifying" || gameState.toLowerCase() !== "win") &&
+            (mode !== "verifying" || gameState.toLowerCase() !== "win") &&
             "none",
         }}
         restartHandler={restartHandler}

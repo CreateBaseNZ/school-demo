@@ -28,7 +28,6 @@ const Play = (props) => {
 
   useEffect(() => {
     window.addEventListener("resize", resizeHandler);
-    navCtx.setActiveStep("Create");
 
     return () => {
       window.removeEventListener("resize", resizeHandler);

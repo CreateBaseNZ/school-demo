@@ -4,9 +4,15 @@ import Link from "next/link";
 import classes from "./SubsystemCard.module.scss";
 
 const SubsystemCard = (props) => {
+  const clickHandler = () => {
+    if (props.showTutorial) {
+      props.clickHandler();
+    }
+  };
+
   return (
     <Link href={props.href}>
-      <div className={classes.subsystemCard}>
+      <div className={classes.subsystemCard} onClick={clickHandler}>
         <div className={classes.imgWrapper}>
           <Image
             src={props.src}

@@ -1,4 +1,5 @@
-import React, { useState, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
+import { useRouter } from "next/router";
 
 const NavContext = createContext({
   navIsActive: false,
@@ -14,10 +15,28 @@ const NavContext = createContext({
 });
 
 export const NavContextProvider = (props) => {
+  const router = useRouter();
+
   const [navIsActive, setNavIsActive] = useState(false);
   const [activeType, setActiveType] = useState();
   const [activeStep, setActiveStep] = useState();
   const [activeSubsystem, setActiveSubsystem] = useState();
+
+  const { asPath } = router;
+  useEffect(() => {
+    const strArr = asPath.split("/");
+    if (strArr.length > 1) {
+      if (strArr[1] === "play") {
+        setActiveStep("Create");
+      } else if (strArr[1] === "menu") {
+        setActiveStep("Overview");
+      } else {
+        setActiveStep(strArr[1]);
+      }
+    } else {
+      setActiveStep("");
+    }
+  }, [asPath]);
 
   let timer = null;
 

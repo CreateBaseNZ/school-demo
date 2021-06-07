@@ -31,7 +31,7 @@ const NavItem = (props) => {
         onClick={ctx.onClick}
         onMouseOver={mouseOverHandler}
       >
-        {formatSubsystemName(ctx.activeSubsystem)}
+        {formatSubsystemName(props.title)}
       </button>
       <div
         className={classes.dropdown}

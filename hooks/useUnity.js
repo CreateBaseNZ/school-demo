@@ -14,6 +14,19 @@ const unityContext = new UnityContext({
   // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
 });
 
+const getSubsystemScene = (subsystem) => {
+  switch (subsystem) {
+    case "the-gravity-wand":
+      return "Training_Arm_1";
+    case "moving-the-arm":
+      return "Training_Arm_0";
+    case "collecting-the-items":
+      return "Project_Industrial_1";
+    default:
+      return "Project_Industrial_1";
+  }
+};
+
 const useUnity = (subsystem) => {
   const [sensorData, setSensorData] = useState();
   const [gameState, setGameState] = useState();
@@ -30,31 +43,39 @@ const useUnity = (subsystem) => {
       setGameState(gameState);
     });
   }, []);
-
+  
   useEffect(() => {
     unityContext.on("GetProgressState", (progressState) => {
       setProgressState(progressState);
     });
   }, []);
 
-  const setSensorDataWrapper = useCallback((data) => {
-    setSensorData(data);
-  }, []);
-
-  const setGameStateWrapper = useCallback((data) => {
-    setGameState(data);
-  });
-
   useEffect(() => {
     unityContext.on("loaded", () => {
       console.log();
       setTimeout(() => {
-        unityContext.send("SceneController", "LoadScene", subsystem);
+        unityContext.send(
+          "SceneController",
+          "LoadScene",
+          getSubsystemScene(subsystem)
+        );
       }, 4000);
     });
   }, [subsystem]);
 
-  return [unityContext, sensorData, gameState, progressState];
+  const changeScene = (subsystem) => {
+    unityContext.send(
+      "SceneController",
+      "LoadScene",
+      getSubsystemScene(subsystem)
+    );
+  };
+
+  const resetScene = () => {
+    unityContext.send("SceneController", "ResetScene");
+  };
+
+  return [unityContext, sensorData, gameState, changeScene, resetScene, progressState];
 };
 
 export default useUnity;
