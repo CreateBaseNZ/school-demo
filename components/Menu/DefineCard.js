@@ -10,7 +10,12 @@ const DefineCard = () => {
         </p>
         <p>
         After watching the cutscene, we can see that a self-driving vehicle has 
-        spilt bags of rubbish all over a factory floor! 🙀 Luckily, there are a pair 
+        spilt bags of rubbish all over a factory floor! 🙀
+        </p>
+        <section>
+        </section>
+        <p>
+        Luckily, there are a pair 
         of bins at the edge of the room that we can deposit the rubbish into. 
         However, rather than cleaning it up ourselves, what if we program the 
         H.E.R.&#216; robotic arm to do it for us? 🤔
@@ -19,14 +24,13 @@ const DefineCard = () => {
       <section>
       <p style={{ fontWeight: 600 }}>
       <br/>
-          If we are going to solve our problem with the H.E.R.&#216; robotic arm,
-          we will first need to understand its capabilities:
+          Let's start by defining the capabilities of the H.E.R.&#216; robotic arm:
         </p>
         <ol>
           <li>
-            There is a gravity wand attachment on the end of the arm (don't ask us 
-            how it works) that can be activated and deactivated. It could be turned on 
-            to attract the items of rubbish and turned off to drop them into a bin. 🧙‍♂️ ♻
+            There is a gravity wand attached to the end of the arm (don't ask us 
+            how it works) that we can turn on and off. It could be turned <b>on</b> to 
+            attract the items of rubbish and turned <b>off</b> to drop them into a bin. 🧙‍♂️ ♻
           </li>
           <li>
             The arm has four motors to move it around in 3D space. We could control 
@@ -35,8 +39,8 @@ const DefineCard = () => {
           </li>
           <li>
             The H.E.R.&#216; robot can only be programmed to perform one task at a 
-            time. This means that we can’t move the robotic arm and activate/deactivate 
-            the gravity wand at the same time. We will have to do one after the other. 1️⃣➡2️⃣
+            time. This means that we need to first move the gravity wand into position, 
+            and then turn the gravity wand on/off. 1️⃣➡2️⃣
           </li>
         </ol>
       </section>

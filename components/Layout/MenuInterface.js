@@ -22,6 +22,7 @@ const DUMMY_DATA = [
       src: "/define.jpg",
       alt: "Define",
     },
+    number: "1",
   },
   {
     title: "Plan",
@@ -31,6 +32,7 @@ const DUMMY_DATA = [
       src: "/plan.jpg",
       alt: "Define",
     },
+    number: "2",
   },
   {
     title: "Create",
@@ -40,6 +42,7 @@ const DUMMY_DATA = [
       src: "/create.jpg",
       alt: "Define",
     },
+    number: "3",
   },
   {
     title: "Improve",
@@ -49,6 +52,7 @@ const DUMMY_DATA = [
       src: "/improve.jpg",
       alt: "Define",
     },
+    number: "4",
   },
 ];
 
@@ -95,7 +99,7 @@ const MenuInterface = () => {
                     ? classes.activeStep
                     : ""
                 }`}
-                step={step.title}
+                step={"Step " + step.number + ": " + step.title}
                 description={step.description}
                 key={step.title}
                 img={step.img}

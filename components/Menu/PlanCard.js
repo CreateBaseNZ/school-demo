@@ -9,19 +9,19 @@ const PlanCard = () => {
           Now that we have defined the problem and our available tools, we
           need to plan our solution:
         </p>
-        <p>
+        {/* <p>
           It is crucial to plan how we will build our solution before we begin as 
           it helps us identify potential problems at an early stage, saving us time 
           and headaches in the future. 🤕
           </p>
           </section>
-          <section>
+          <section> */}
           <p>
           A good practice when building a complex solution is to break it down
           into a series of simpler problems. In our situation, we will split our
           solution into different parts, called <i>subsystems</i>, that we can implement
           individually and then combine at the end. It makes sense that each of
-          our <i>subsystems</i> represents a different functionality.
+          our <i>subsystems</i> represents a different functionality. 🛠
         </p>
       </section>
       <section>

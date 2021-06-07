@@ -32,11 +32,11 @@ const ImproveCard = () => {
         <h2>H.E.R.&#216;</h2>
         <section>
           <p style={{ fontWeight: 600 }}>
-            With our final solution successfully tested, our next step is to work out how we could improve it
+            With our final solution successfully tested, our next step is to work out how we could improve it:
           </p>
           <p>
             There is very rarely such thing as a perfect solution. With the introduction of more time, money and resources, almost anything can be improved upon. On the other hand, sometimes changes or additions to the original problem can result in the need for a (sometimes greatly) 
-            adapted solution. This is what the improve step is all about, pushing a solution to the limits in the face of changing requirements.
+            adapted solution. This is what the improve step is all about, pushing a solution to the limits in the face of changing requirements and resources.
           </p>
           </section>
           <section>
