@@ -26,8 +26,7 @@ const LastSlide = (props) => {
         <span>VERIFYING</span>
         <EllipsesLoading />
         <button
-          id="cancel-verify-button"
-          className={classes.cancelBtn}
+          className={`${classes.cancelBtn} terminate-code`}
           onClick={props.cancelVerifyHandler}
         >
           <CloseRoundedIcon fontSize="small" />

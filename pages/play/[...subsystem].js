@@ -4,8 +4,6 @@ import Router, { useRouter } from "next/router";
 import NavContext from "../../store/nav-context";
 import FullscreenContext from "../../store/fullscreen-context";
 
-import capitalise from "../../utils/capitaliseString";
-
 import Layout from "../../components/Layout/Layout";
 import PlayInterface from "../../components/Layout/PlayInterface";
 
@@ -20,7 +18,7 @@ const Play = (props) => {
   useEffect(() => {
     const strArr = asPath.split("/");
     if (strArr.length > 2) {
-      navCtx.setActiveSubsystem(capitalise(strArr[2]));
+      navCtx.setActiveSubsystem(strArr[2]);
       setActiveSubsystem(strArr[2]);
     } else {
       navCtx.setActiveSubsystem("");

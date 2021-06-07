@@ -1,9 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import useUnity from "/hooks/useUnity";
 import NavContext from "/store/nav-context";
-import capitalise from "/utils/capitaliseString";
-import Simulation from "/components/Play/Simulation/Simulation";
 
 import StepCard from "/components/Menu/StepCard";
 import DefineCard from "/components/Menu/DefineCard";
@@ -60,18 +57,13 @@ const MenuInterface = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState();
   const navCtx = useContext(NavContext);
-  const [unityContext, sensorData, gameState] = useUnity(
-    "Project_Industrial_0"
-  );
-
-  console.log(activeStep);
 
   const { asPath } = router;
   useEffect(() => {
     const strArr = asPath.split("/");
     if (strArr.length > 2) {
       setActiveStep(strArr[2]);
-      navCtx.setActiveStep(capitalise(strArr[2]));
+      navCtx.setActiveStep(strArr[2]);
     } else {
       setActiveStep("");
       navCtx.setActiveStep("");

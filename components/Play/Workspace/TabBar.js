@@ -2,8 +2,13 @@ import classes from "./TabBar.module.scss";
 
 const TabBar = (props) => {
   const onChangeHandler = (event) => {
-    console.log(event.target.value);
     props.onChange(event.target.value);
+  };
+
+  const consoleClickHandler = () => {
+    document
+      .querySelector("#console-tab")
+      .classList.remove(classes.tabWarning, classes.tabError);
   };
 
   return (
@@ -45,7 +50,7 @@ const TabBar = (props) => {
             props.active === "text" || props.active === "console" ? 0 : 0.25,
         }}
       />
-      <div className={classes.tab}>
+      <div id="console-tab" className={classes.tab}>
         <input
           type="radio"
           id="console-tab"
@@ -53,6 +58,7 @@ const TabBar = (props) => {
           value="console"
           checked={props.active === "console"}
           onChange={onChangeHandler}
+          onClick={consoleClickHandler}
         />
         <label htmlFor="console-tab">Console</label>
       </div>

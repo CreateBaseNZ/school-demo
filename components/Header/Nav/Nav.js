@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import NavContext from "/store/nav-context";
-import { formatSubsystemName } from "/utils/capitaliseString";
 
 import NavItem from "./NavItem";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -20,12 +19,19 @@ const DUMMY_SUBSYSTEMS = [
     title: "The Gravity Wand",
     path: "/play/the-gravity-wand",
     query: "",
+    id: "the-gravity-wand",
   },
-  { title: "Moving the Arm", path: "/play/moving-the-arm", query: "" },
+  {
+    title: "Moving the Arm",
+    path: "/play/moving-the-arm",
+    query: "",
+    id: "moving-the-arm",
+  },
   {
     title: "Collecting the Items",
     path: "/play/collecting-the-items",
     query: "",
+    id: "collecting-the-items",
   },
 ];
 
@@ -50,10 +56,10 @@ const Nav = ({ showStep, showSubsystem }) => {
       )}
       {showSubsystem && ctx.activeSubsystem && (
         <NavItem
-          title={formatSubsystemName(ctx.activeSubsystem)}
           items={DUMMY_SUBSYSTEMS}
           type="Subsystems"
           path="/menu"
+          itemClassName="terminate-code"
         />
       )}
     </nav>

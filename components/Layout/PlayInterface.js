@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import debounce from "lodash.debounce";
 import SplitPane from "react-split-pane";
 import useUnity from "../../hooks/useUnity";
 
@@ -8,6 +9,7 @@ import Workspace from "../Play/Workspace/Workspace";
 import SuccessModal from "../Play/SuccessModal";
 
 import classes from "./PlayInterface.module.scss";
+import { useMediaQuery } from "@material-ui/core";
 
 const verticalDragHandler = () => {
   document.body.style.cursor = "ew-resize";
@@ -49,12 +51,11 @@ const getSubsystemScene = (subsystem) => {
 
 const PlayInterface = (props) => {
   const [mode, setMode] = useState("ready");
-  // const [isTesting, setIsTesting] = useState(false);
-  // const [isVerifying, setIsVerifying] = useState(false);
   const [unityContext, sensorData, gameState] = useUnity(
     getSubsystemScene(props.subsystem)
   );
   const [swiperHeight, setSwiperHeight] = useState();
+  const [simulationWidth, setSimulationWidth] = useState();
 
   // subsystem change
   useEffect(() => {
@@ -64,52 +65,54 @@ const PlayInterface = (props) => {
       getSubsystemScene(props.subsystem)
     );
     setMode("loading");
-    setTimeout(() => setMode("ready"), 5000);
-    // setIsTesting(false);
-    // setIsVerifying(false);
+    setTimeout(() => setMode("ready"), 3500);
   }, [props.subsystem]);
 
+  const simulationResizeHandler = (arg) => {
+    setSimulationWidth(window.innerWidth - arg);
+  };
+
+  const debouncedResizeHandler = useMemo(
+    () => debounce(simulationResizeHandler, 300),
+    []
+  );
+
+  useEffect(() => {
+    return () => debouncedResizeHandler.cancel();
+  }, []);
+
   const testHandler = () => {
-    // setIsTesting(true);
     setMode("testing");
   };
 
   const stopTestHandler = () => {
-    // setIsTesting(false);
     setMode("loading");
-    setTimeout(() => setMode("ready"), 5000);
+    setTimeout(() => setMode("ready"), 3500);
     unityContext.send("SceneController", "ResetScene");
   };
 
   // called in the verify handler
   const verifyHandler = () => {
-    // setIsVerifying(true);
     setMode("verifying");
   };
 
   // called in the cancel verify handler
   const cancelVerifyHandler = () => {
-    // id: '#cancel-verify-button'
-    // setIsVerifying(false);
     setMode("loading");
-    setTimeout(() => setMode("ready"), 5000);
+    setTimeout(() => setMode("ready"), 3500);
     unityContext.send("SceneController", "ResetScene");
   };
 
   // called in the restart subsystem handler
   const restartHandler = () => {
-    // id: '#restart-button'
-    // setIsVerifying(false);
     setMode("loading");
-    setTimeout(() => setMode("ready"), 5000);
+    setTimeout(() => setMode("ready"), 3500);
     unityContext.send("SceneController", "ResetScene");
   };
 
   const closeSuccessHandler = () => {
-    // id: '#close-success-button'
-    // setIsVerifying(false);
     setMode("loading");
-    setTimeout(() => setMode("ready"), 5000);
+    setTimeout(() => setMode("ready"), 3500);
   };
 
   return (
@@ -119,6 +122,7 @@ const PlayInterface = (props) => {
         split="vertical"
         defaultSize={"50%"}
         onDragStarted={verticalDragHandler}
+        onChange={debouncedResizeHandler}
         onDragFinished={dragReleaseHandler}
       >
         <SplitPane
@@ -131,8 +135,6 @@ const PlayInterface = (props) => {
         >
           <Contents
             subsystemIndex={getSubsystemIndex(props.subsystem)}
-            // isTesting={isTesting}
-            // isVerifying={isVerifying}
             mode={mode}
             height={swiperHeight}
           />
@@ -140,8 +142,6 @@ const PlayInterface = (props) => {
             unityContext={unityContext}
             sensorData={sensorData}
             gameState={gameState}
-            // isTesting={isTesting}
-            // isVerifying={isVerifying}
             mode={mode}
             testHandler={testHandler}
             stopTestHandler={stopTestHandler}
@@ -150,7 +150,7 @@ const PlayInterface = (props) => {
             restartHandler={restartHandler}
           />
         </SplitPane>
-        <Simulation unityContext={unityContext} />
+        <Simulation unityContext={unityContext} width={simulationWidth} />
       </SplitPane>
       <div id="play-portal"></div>
       <SuccessModal

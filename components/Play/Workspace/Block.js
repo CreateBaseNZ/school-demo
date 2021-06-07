@@ -3,6 +3,8 @@ import { PictureAsPdfSharp } from "@material-ui/icons";
 import { create, all, pi, abs } from "mathjs";
 import { Log, Error, Warning } from "./Console/Console";
 
+import classes from "./TabBar.module.scss";
+
 const config = {};
 const math = create(all, config);
 
@@ -157,6 +159,7 @@ export class Block {
         <Warning message={"Position is out of reach. Try another location"} />,
         document.querySelector("#console")
       );
+      document.querySelector("#console-tab").classList.add(classes.tabWarning);
       return false;
     }
     const targetPoint = [x, y, z];
@@ -258,6 +261,7 @@ export class Block {
         />,
         document.querySelector("#console")
       );
+      document.querySelector("#console-tab").classList.add(classes.tabWarning);
     }
     return angles; //angles.map((val) => val * 180 / pi);
   }
@@ -268,7 +272,7 @@ export class Block {
     x_inter = -y_t;
     x_t = x_inter;
     y_t = y_inter;
-   
+
     const angles = [0, 0, 0, 0];
     let distance = 5000;
     const tolerence = 0.01;
@@ -300,6 +304,7 @@ export class Block {
         <Warning message={"Position is out of reach. Try another location"} />,
         document.querySelector("#console")
       );
+      document.querySelector("#console-tab").classList.add(classes.tabWarning);
       return false;
     }
     const targetPoint = [x, y, z];
@@ -391,6 +396,7 @@ export class Block {
         />,
         document.querySelector("#console")
       );
+      document.querySelector("#console-tab").classList.add(classes.tabWarning);
     }
 
     return angles; //angles.map((val) => val * 180 / pi);
