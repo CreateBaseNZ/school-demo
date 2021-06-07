@@ -56,17 +56,14 @@ const DUMMY_DATA = [
 const MenuInterface = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState();
-  const navCtx = useContext(NavContext);
 
   const { asPath } = router;
   useEffect(() => {
     const strArr = asPath.split("/");
     if (strArr.length > 2) {
       setActiveStep(strArr[2]);
-      navCtx.setActiveStep(strArr[2]);
     } else {
       setActiveStep("");
-      navCtx.setActiveStep("");
     }
   }, [asPath]);
 
@@ -91,7 +88,7 @@ const MenuInterface = () => {
                     ? classes.activeStep
                     : ""
                 }`}
-                step={"Step " + step.number + ": " + step.title}
+                step={step.number + ": " + step.title}
                 description={step.description}
                 key={step.title}
                 img={step.img}
@@ -108,7 +105,7 @@ const MenuInterface = () => {
         </div>
       </div>
       <div className={classes.rightArea}>
-        <video width="100%" height="100%" controls>
+        <video width="100%" height="100%" controls autoPlay>
           <source src="/situation.mp4" type="video/mp4" />
           <source src="/situation.ogg" type="video/ogg" />
         </video>

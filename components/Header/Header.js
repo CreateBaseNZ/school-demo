@@ -22,7 +22,7 @@ const Header = () => {
   return (
     <header
       className={classes.header}
-      style={{ display: showHeader ? "flex" : "none" }}
+      style={{ display: !showHeader && "none" }}
     >
       <Nav showStep={showStep} showSubsystem={showSubsystem} />
       <div id="editor-toggle-portal" className={classes.switch}></div>

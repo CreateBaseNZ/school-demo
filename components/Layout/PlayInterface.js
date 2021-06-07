@@ -2,6 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import debounce from "lodash.debounce";
 import SplitPane from "react-split-pane";
 import useUnity from "../../hooks/useUnity";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import consoleLog from "/utils/consoleLog";
 
 import Contents from "../Play/Contents/Contents";
 import Simulation from "../Play/Simulation/Simulation";
@@ -36,34 +39,32 @@ const getSubsystemIndex = (subsystem) => {
   }
 };
 
-const getSubsystemScene = (subsystem) => {
-  switch (subsystem) {
-    case "the-gravity-wand":
-      return "Training_Arm_1";
-    case "moving-the-arm":
-      return "Training_Arm_0";
-    case "collecting-the-items":
-      return "Project_Industrial_1";
-    default:
-      return "Project_Industrial_1";
-  }
-};
-
 const PlayInterface = (props) => {
   const [mode, setMode] = useState("ready");
-  const [unityContext, sensorData, gameState] = useUnity(
-    getSubsystemScene(props.subsystem)
-  );
+  const [
+    unityContext,
+    sensorData,
+    gameState,
+    changeScene,
+    resetScene,
+    progressState,
+  ] = useUnity(props.subsystem);
   const [swiperHeight, setSwiperHeight] = useState();
   const [simulationWidth, setSimulationWidth] = useState();
 
+  useEffect(() => {
+    if (
+      gameState &&
+      mode === "verifying" &&
+      gameState.toLowerCase() === "win"
+    ) {
+      localStorage.setItem(props.subsystem, "completed");
+    }
+  }, [gameState]);
+
   // subsystem change
   useEffect(() => {
-    unityContext.send(
-      "SceneController",
-      "LoadScene",
-      getSubsystemScene(props.subsystem)
-    );
+    changeScene(props.subsystem);
     setMode("loading");
     setTimeout(() => setMode("ready"), 3500);
   }, [props.subsystem]);
@@ -82,32 +83,129 @@ const PlayInterface = (props) => {
   }, []);
 
   const testHandler = () => {
+    const date = new Date().toString();
+    // Create Cookie for Clicking Test
+    const cookieTest = {
+      date,
+      name: "Testing simulation",
+      subsystem: props.subsystem,
+    };
+    // Create cookies
+    const behaviours = [cookieTest];
+    axios
+      .post("/api/cookie/set", { date, behaviours })
+      .then((response) => {
+        if (response.data === "failed" || response.data === "error")
+          console.log(response.data);
+      })
+      .catch((error) => console.log({ status: "error", content: error }));
+    // Run Handlers
     setMode("testing");
+    consoleLog("Starting test ...");
   };
 
   const stopTestHandler = () => {
+    const date = new Date().toString();
+    const progress = progressState
+      ? Math.round(progressState * 10000) / 100
+      : 0;
+    const pair = uuidv4();
+    // Create Cookie for Tracking Progress
+    const cookieProgress = {
+      date,
+      progress,
+      name: "Progress when stopped",
+      pair,
+      subsystem: props.subsystem,
+    };
+    // Create Cookie for Clicking Stop
+    const cookieStop = {
+      date,
+      name: "Stopped simulation",
+      pair,
+      subsystem: props.subsystem,
+    };
+    // Create cookies
+    const behaviours = [cookieProgress, cookieStop];
+    axios
+      .post("/api/cookie/set", { date, behaviours })
+      .then((response) => {
+        if (response.data === "failed" || response.data === "error")
+          console.log(response.data);
+      })
+      .catch((error) => console.log({ status: "error", content: error }));
+    // Run Handlers
     setMode("loading");
     setTimeout(() => setMode("ready"), 3500);
-    unityContext.send("SceneController", "ResetScene");
+    resetScene();
+    consoleLog("Testing complete");
   };
 
   // called in the verify handler
   const verifyHandler = () => {
+    const date = new Date().toString();
+    // Create Cookie for Clicking Verifify
+    const cookieVerify = {
+      date,
+      name: "Verifying simulation",
+      subsystem: props.subsystem,
+    };
+    // Create cookies
+    const behaviours = [cookieVerify];
+    axios
+      .post("/api/cookie/set", { date, behaviours })
+      .then((response) => {
+        if (response.data === "failed" || response.data === "error")
+          console.log(response.data);
+      })
+      .catch((error) => console.log({ status: "error", content: error }));
     setMode("verifying");
+    consoleLog("Verifying ...");
   };
 
   // called in the cancel verify handler
   const cancelVerifyHandler = () => {
+    const date = new Date().toString();
+    const progress = progressState
+      ? Math.round(progressState * 10000) / 100
+      : 0;
+    const pair = uuidv4();
+    // Create Cookie for Tracking Progress
+    const cookieProgress = {
+      date,
+      progress,
+      name: "Progress when cancelled verification",
+      pair,
+      subsystem: props.subsystem,
+    };
+    // Create Cookie for Cancelling Verification
+    const cookieCancelVerify = {
+      date,
+      name: "Cancelled verification",
+      pair,
+      subsystem: props.subsystem,
+    };
+    // Create cookies
+    const behaviours = [cookieProgress, cookieCancelVerify];
+    axios
+      .post("/api/cookie/set", { date, behaviours })
+      .then((response) => {
+        if (response.data === "failed" || response.data === "error")
+          console.log(response.data);
+      })
+      .catch((error) => console.log({ status: "error", content: error }));
+    // Run Handlers
     setMode("loading");
+    consoleLog("Verification cancelled");
     setTimeout(() => setMode("ready"), 3500);
-    unityContext.send("SceneController", "ResetScene");
+    resetScene();
   };
 
   // called in the restart subsystem handler
   const restartHandler = () => {
     setMode("loading");
     setTimeout(() => setMode("ready"), 3500);
-    unityContext.send("SceneController", "ResetScene");
+    resetScene();
   };
 
   const closeSuccessHandler = () => {
@@ -142,6 +240,7 @@ const PlayInterface = (props) => {
             unityContext={unityContext}
             sensorData={sensorData}
             gameState={gameState}
+            progressState={progressState}
             mode={mode}
             testHandler={testHandler}
             stopTestHandler={stopTestHandler}
@@ -156,7 +255,7 @@ const PlayInterface = (props) => {
       <SuccessModal
         style={{
           display:
-            (props.mode !== "verifying" || gameState.toLowerCase() !== "win") &&
+            (mode !== "verifying" || gameState.toLowerCase() !== "win") &&
             "none",
         }}
         restartHandler={restartHandler}

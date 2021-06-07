@@ -75,6 +75,9 @@ const FlowEditor = (props) => {
           break;
         }
       }
+      if (blocksConfig[blocksConfig.length - 1].type !== "end") {
+        return "disconnected";
+      }
       return blocksConfig;
     },
   }));
@@ -172,14 +175,12 @@ const FlowEditor = (props) => {
 
   return (
     <div
-      className={classes.editorContainer}
-      style={{
-        display: props.hide && "none",
-        pointerEvents:
-          props.mode === "testing" || (props.mode === "verifying" && "none"),
-        opacity:
-          props.mode === "testing" || (props.mode === "verifying" && "0.5"),
-      }}
+      className={`${classes.editorContainer} ${
+        props.mode === "testing" || props.mode === "verifying"
+          ? classes.disable
+          : ""
+      }`}
+      style={{ display: props.hide && "none" }}
     >
       <ReactFlowProvider>
         <DndBar />
@@ -200,6 +201,7 @@ const FlowEditor = (props) => {
             snapGrid={[16, 16]}
             connectionLineComponent={CustomConnectionLine}
             arrowHeadColor="#ffffff"
+            deleteKeyCode={46}
           >
             <MiniMap
               nodeStrokeColor={miniMapStrokeColoriser}

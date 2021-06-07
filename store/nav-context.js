@@ -1,4 +1,5 @@
-import React, { useState, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
+import { useRouter } from "next/router";
 
 const NavContext = createContext({
   navIsActive: false,
@@ -14,10 +15,47 @@ const NavContext = createContext({
 });
 
 export const NavContextProvider = (props) => {
+  const router = useRouter();
+
   const [navIsActive, setNavIsActive] = useState(false);
   const [activeType, setActiveType] = useState();
   const [activeStep, setActiveStep] = useState();
   const [activeSubsystem, setActiveSubsystem] = useState();
+
+  const { asPath } = router;
+  useEffect(() => {
+    console.log(asPath);
+    switch (asPath) {
+      case "/menu":
+        setActiveStep("Overview");
+        setActiveSubsystem("");
+        break;
+      case "/play":
+        setActiveStep("improve");
+        setActiveSubsystem("sandbox");
+        break;
+      case "/play/the-gravity-wand":
+        setActiveStep("create");
+        setActiveSubsystem("the-gravity-wand");
+        break;
+      case "/play/the-gravity-wand":
+        setActiveStep("create");
+        setActiveSubsystem("the-gravity-wand");
+        break;
+      case "/play/moving-the-arm":
+        setActiveStep("create");
+        setActiveSubsystem("moving-the-arm");
+        break;
+      case "/play/collecting-the-items":
+        setActiveStep("create");
+        setActiveSubsystem("collecting-the-items");
+        break;
+      default:
+        setActiveStep("");
+        setActiveSubsystem("");
+        break;
+    }
+  }, [asPath]);
 
   let timer = null;
 

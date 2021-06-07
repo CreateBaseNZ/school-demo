@@ -47,7 +47,7 @@ const DUMMY_DATA = [
       title: "Slide 4",
       type: "text",
       contents:
-        "If a block is connected with multiple tracks, you may get unexpected behaviour when you run your code. To delete a track, select it by clicking towards the start or end of the track and then press the backspace key on your keyboard. 🔙",
+        "If a block is connected with multiple tracks, you may get unexpected behaviour when you run your code. To delete a track, select it by clicking towards the start or end of the track and then press the delete key on your keyboard. 🔙",
     },
     {
       id: "sub1-page5",
@@ -99,7 +99,7 @@ const DUMMY_DATA = [
       title: "Slide 5",
       type: "text",
       contents:
-        "The base of the robotic arm is at the coordinates (0, 0, 0). For example, lets imagine an item at the coordinates (-1, 2, 3). That object is 1 metre along the negative x-axis direction, 2 metres along the positive z-axis direction and 3 metres up compared to the base of the arm at (0,0,0)",
+        "The base of the robotic arm is at the coordinates (0, 0, 1.3). For example, lets imagine an item at the coordinates (-1, 2, 2.3). That object is 1 metre along the negative x-axis direction, 2 metres along the positive z-axis direction and 1 metre up compared to the base of the arm at (0, 0, 1.3)",
     },
     {
       id: "sub1-page6",
@@ -197,6 +197,13 @@ const DUMMY_DATA = [
       type: "text",
       contents:
         "Welcome to the sandbox! Don't worry about verifying your code in this simulation. With no objectives in sight, the sandbox gives you a chance to experiment with all of the blocks that you have learnt so far.",
+    },
+    {
+      id: "sb-page2",
+      title: "Slide 2",
+      type: "text",
+      contents:
+        "If you want to set yourself a bit of a challenge, see how many objects in the environment you can stack on top of each other (our personal best is seven)! Alternatively, see how far you can throw or bounce one of the spheres.",
     },
   ],
 ];

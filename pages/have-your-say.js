@@ -9,10 +9,6 @@ import FeedbackInterface from "/components/Layout/FeedbackInterface";
 const HaveYourSay = () => {
   const navCtx = useContext(NavContext);
 
-  useEffect(() => {
-    navCtx.setActiveStep("Have Your Say");
-  }, []);
-
   return (
     <Layout>
       <Head>

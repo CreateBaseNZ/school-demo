@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Head from "next/head";
-import Router, { useRouter } from "next/router";
-import NavContext from "../../store/nav-context";
+import { useRouter } from "next/router";
 import FullscreenContext from "../../store/fullscreen-context";
 
 import Layout from "../../components/Layout/Layout";
@@ -9,7 +8,6 @@ import PlayInterface from "../../components/Layout/PlayInterface";
 
 const Play = (props) => {
   const router = useRouter();
-  const navCtx = useContext(NavContext);
   const FullscreenCtx = useContext(FullscreenContext);
   const [activeSubsystem, setActiveSubsystem] = useState("");
 
@@ -18,17 +16,14 @@ const Play = (props) => {
   useEffect(() => {
     const strArr = asPath.split("/");
     if (strArr.length > 2) {
-      navCtx.setActiveSubsystem(strArr[2]);
       setActiveSubsystem(strArr[2]);
     } else {
-      navCtx.setActiveSubsystem("");
       setActiveSubsystem("");
     }
   }, [asPath]);
 
   useEffect(() => {
     window.addEventListener("resize", resizeHandler);
-    navCtx.setActiveStep("Create");
 
     return () => {
       window.removeEventListener("resize", resizeHandler);

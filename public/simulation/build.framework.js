@@ -3319,6 +3319,11 @@ function _GetGameState(state) {
   ReactUnityWebGL.GetGameState(Pointer_stringify(state));
  } catch (err) {}
 }
+function _GetProgressState(progress) {
+ try {
+  ReactUnityWebGL.GetProgressState(progress);
+ } catch (err) {}
+}
 function _GetSensorData(sensorData) {
  try {
   ReactUnityWebGL.GetSensorData(Pointer_stringify(sensorData));
@@ -19991,6 +19996,7 @@ Module.asmLibraryArg = {
  "invoke_vjji": invoke_vjji,
  "JS_ScreenOrientation_eventHandler": JS_ScreenOrientation_eventHandler,
  "_GetGameState": _GetGameState,
+ "_GetProgressState": _GetProgressState,
  "_GetSensorData": _GetSensorData,
  "_JS_Cursor_SetImage": _JS_Cursor_SetImage,
  "_JS_Cursor_SetShow": _JS_Cursor_SetShow,

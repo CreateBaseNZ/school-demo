@@ -1,5 +1,4 @@
-import { Fragment, useContext } from "react";
-import { createPortal } from "react-dom";
+import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ClientOnlyPortal from "/utils/ClientOnlyPortal";
