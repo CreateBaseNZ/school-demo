@@ -99,7 +99,7 @@ const DUMMY_DATA = [
       title: "Slide 5",
       type: "text",
       contents:
-        "The base of the robotic arm is at the coordinates (0, 0, 0). For example, lets imagine an item at the coordinates (-1, 2, 3). That object is 1 metre along the negative x-axis direction, 2 metres up and 3 metres along the positive z-axis direction compared to the base of the arm at (0,0,0)",
+        "The base of the robotic arm is at the coordinates (0, 0, 0). For example, lets imagine an item at the coordinates (-1, 2, 3). That object is 1 metre along the negative x-axis direction, 2 metres along the positive z-axis direction and 3 metres up compared to the base of the arm at (0,0,0)",
     },
     {
       id: "sub1-page6",
@@ -151,7 +151,7 @@ const DUMMY_DATA = [
       title: "Slide 2",
       type: "text",
       contents:
-        "Place your cursor over each rubbish bag or bin to reveal the location of the centre of that object. The first number is the x coordinate, followed by the y coordinate. The last number is the z coordinate.",
+        "Place your cursor over each rubbish bag or bin to reveal the location of the centre of that object. The first number is the x coordinate, followed by the y coordinate. The last number is the z coordinate (height above the ground).",
     },
     {
       id: "sub1-page3",
@@ -179,7 +179,7 @@ const DUMMY_DATA = [
       title: "Slide 6",
       type: "text",
       contents:
-        'To keep it simple, try writing code to deposit a single rubbish bag into the bin, then use the <span style="font-weight: 700; color: #18dbac;">Test</span> button to test your code. If successful, keep adding more blocks until you can deposit every bag in one run. 🧱👷‍♀️',
+        'Tip: <i>You don\'t need to move the gravity sphere to the exact location of each rubbish bag/bin. If you try to, you may get stuck on the ground or the sides of a bin. Instead, try moving the gravity sphere a metre or two above their location (increase the <span style="font-weight: 700; color: #007eff;">z-axis</span> coordinate).</i>',
     },
     {
       id: "sub1-page7",
