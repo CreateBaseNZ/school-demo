@@ -101,30 +101,19 @@ export class CodeGenerator {
     this.content = "";
     this.executes = [
       `// Terminate previous operations of the robotic system.
-      document.querySelector("#stop-button").addEventListener('click', function handler() {
+      const handler = () => {
+        console.log('terminating')
         clearInterval(communication);
         clearInterval(interval);
-        this.removeEventListener('click', handler);
+        document.querySelectorAll(".terminate-code").forEach((el) => {
+          el.removeEventListener("click", handler);
+        });
+      };
+      document.querySelectorAll(".terminate-code").forEach((el) => {
+        el.addEventListener("click", handler);
       });`,
-      `// Terminate operations of the robotic system.
-      document.querySelector("#cancel-verify-button").addEventListener('click', function handler() {
-        clearInterval(communication);
-        clearInterval(interval);
-        this.removeEventListener('click', handler);
-      });`,
-      `// Terminate operations of the robotic system.
-      document.querySelector("#restart-button").addEventListener('click', function handler() {
-        clearInterval(communication);
-        clearInterval(interval);
-        this.removeEventListener('click', handler);
-      });`,
-      `// Terminate operations of the robotic system.
-      document.querySelector("#close-success-button").addEventListener('click', function handler() {
-        clearInterval(communication);
-        clearInterval(interval);
-        this.removeEventListener('click', handler);
-      });`
     ];
+
     this.execute = "";
     this.increment = 1;
     this.code = "";

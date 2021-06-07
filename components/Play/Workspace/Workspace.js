@@ -2,13 +2,10 @@ import { useRef, useState, forwardRef } from "react";
 import dynamic from "next/dynamic";
 import MonacoEditor from "./MonacoEditor/MonacoEditor";
 import Console from "./Console/Console";
-import EditorToggleButton from "/components/Header/EditorToggleButton";
 import PlayButtons from "../PlayButtons";
 import TabBar from "./TabBar";
-import SlowMotionVideoIcon from "@material-ui/icons/SlowMotionVideo";
-import CloseRoundedIcon from "@material-ui/icons/CloseRounded";
-import EllipsesLoading from "/components/UI/EllipsesLoading";
 import ClientOnlyPortal from "/utils/ClientOnlyPortal";
+import LastSlide from "../Contents/LastSlide";
 
 import { ServoMotors } from "./ServoMotors.ts";
 import { Actuation } from "./Actuation.ts";
@@ -32,16 +29,6 @@ const Workspace = (props) => {
   const [activeTab, setActiveTab] = useState("flow");
   const [textCode, setTextCode] = useState("console.log('Hi');");
   const flowRef = useRef();
-
-  const isBusy = props.isTesting || props.isVerifying;
-
-  const toggleHandler = () => {
-    if (activeTab) {
-      const newCode = codeGen.build(flowRef.current.getBlockConfig());
-      setTextCode(newCode);
-    }
-    setActiveTab((state) => !state);
-  };
 
   const changeTabHandler = (option) => {
     if (activeTab === "flow" && option === "text") {
@@ -95,16 +82,13 @@ const Workspace = (props) => {
 
   return (
     <div className={classes.workspace}>
-      {/* <ClientOnlyPortal selector="#editor-toggle-portal">
-        <EditorToggleButton onChange={toggleHandler} />
-      </ClientOnlyPortal> */}
-      <FlowEditor isBusy={isBusy} hide={activeTab !== "flow"} ref={flowRef} />
+      <FlowEditor mode={props.mode} hide={activeTab !== "flow"} ref={flowRef} />
       <MonacoEditor
         unityContext={props.unityContext}
         sensorData={props.sensorData}
         code={textCode}
         hide={activeTab !== "text"}
-        isBusy={isBusy}
+        mode={props.mode}
         clickHandler={props.clickHandler}
       />
       <Console hide={activeTab !== "console"} />
@@ -113,43 +97,15 @@ const Workspace = (props) => {
         <PlayButtons
           testHandler={testHandler}
           stopTestHandler={props.stopTestHandler}
-          isTesting={props.isTesting}
-          style={{ display: props.isVerifying && "none" }}
+          mode={props.mode}
         />
       </ClientOnlyPortal>
       <ClientOnlyPortal selector="#last-slide">
-        <div className={classes.lastSlideWrapper}>
-          <button
-            className={classes.verifyBtn}
-            onClick={verifyHandler}
-            style={{
-              display: (props.isVerifying || props.isTesting) && "none",
-            }}
-          >
-            <SlowMotionVideoIcon fontSize="large" />
-            Verify my code!
-          </button>
-          <div
-            className={classes.verifyingWrapper}
-            style={{
-              display: !props.isVerifying && "none",
-            }}
-          >
-            <span>VERIFYING</span>
-            <EllipsesLoading />
-            <button
-              id="cancel-verify-button"
-              className={classes.cancelBtn}
-              onClick={props.cancelVerifyHandler}
-            >
-              <CloseRoundedIcon fontSize="small" />
-              Cancel
-            </button>
-          </div>
-          {props.isTesting && (
-            <div style={{ opacity: 0.75 }}>Simulation in progress...</div>
-          )}
-        </div>
+        <LastSlide
+          mode={props.mode}
+          verifyHandler={verifyHandler}
+          cancelVerifyHandler={props.cancelVerifyHandler}
+        />
       </ClientOnlyPortal>
     </div>
   );

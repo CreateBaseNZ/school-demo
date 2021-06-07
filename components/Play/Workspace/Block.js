@@ -1,7 +1,8 @@
-import ReactDOM from "react-dom";
+import consoleLog from "/utils/consoleLog";
 import { PictureAsPdfSharp } from "@material-ui/icons";
 import { create, all, pi, abs } from "mathjs";
-import { Log, Error, Warning } from "./Console/Console";
+
+import classes from "./TabBar.module.scss";
 
 const config = {};
 const math = create(all, config);
@@ -116,13 +117,11 @@ export class Block {
 
   /*This function takes either 3 or 4 inputs. The first 3 inputs are the location x,y and z*/
   InverseKinematics_restricted(x_t, y_t, z_t, theta_deg = 0) {
-    let x_inter, y_inter, z_inter;
+    let x_inter, y_inter;
     y_inter = -x_t;
-    z_inter = y_t;
-    x_inter = -z_t;
+    x_inter = -y_t;
     x_t = x_inter;
     y_t = y_inter;
-    z_t = z_inter;
     const angles = [0, 0, 0, 0];
     let distance = 5000;
     const tolerence = 0.01;
@@ -154,11 +153,7 @@ export class Block {
       math.square(x) + math.square(y) + math.square(z - this._jointLengths[0])
     );
     if (totalDistance - totaljointLengths > 0.1) {
-      // TODO
-      ReactDOM.render(
-        <Warning message={"Position is out of reach. Try another location"} />,
-        document.querySelector("#console")
-      );
+      consoleLog("Position is out of reach. Try another location", "warning");
       return false;
     }
     const targetPoint = [x, y, z];
@@ -253,25 +248,21 @@ export class Block {
       angles[i] *= 180 / pi;
     }
     if (distance > large_tolerence) {
-      // TODO
-      ReactDOM.render(
-        <Warning
-          message={"Position can not be reached. Closest position chosen"}
-        />,
-        document.querySelector("#console")
+      consoleLog(
+        "Position can not be reached. Closest position chosen",
+        "warning"
       );
     }
     return angles; //angles.map((val) => val * 180 / pi);
   }
 
   InverseKinematics(x_t, y_t, z_t) {
-    let x_inter, y_inter, z_inter;
+    let x_inter, y_inter;
     y_inter = -x_t;
-    z_inter = y_t;
-    x_inter = -z_t;
+    x_inter = -y_t;
     x_t = x_inter;
     y_t = y_inter;
-    z_t = z_inter;
+
     const angles = [0, 0, 0, 0];
     let distance = 5000;
     const tolerence = 0.01;
@@ -298,11 +289,7 @@ export class Block {
       math.square(x) + math.square(y) + math.square(z - this._jointLengths[0])
     );
     if (totalDistance - totaljointLengths > 0.1) {
-      // TODO
-      ReactDOM.render(
-        <Warning message={"Position is out of reach. Try another location"} />,
-        document.querySelector("#console")
-      );
+      consoleLog("Position is out of reach. Try another location", "warning");
       return false;
     }
     const targetPoint = [x, y, z];
@@ -387,12 +374,9 @@ export class Block {
       angles[i] *= 180 / pi;
     }
     if (distance > large_tolerence) {
-      // TODO
-      ReactDOM.render(
-        <Warning
-          message={"Position can not be reached. Closest position chosen"}
-        />,
-        document.querySelector("#console")
+      consoleLog(
+        "Position can not be reached. Closest position chosen",
+        "warning"
       );
     }
 

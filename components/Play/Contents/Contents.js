@@ -26,7 +26,7 @@ const DUMMY_DATA = [
       title: "Slide 1",
       type: "text",
       contents:
-        "You can see in the simulation on the right that the gravity wand is activated and is holding a valuable gem! 💎 To complete this subsystem, you will need to safely drop the gem into the collection bin by deactivating the gravity wand when it moves into position. Be careful though, the bin won’t stay in the same place for long! 🙀",
+        "You can see in the simulation on the right that the gravity wand is activated and is holding a valuable gem! 💎 To complete this subsystem, you will need to safely drop the gem into the collection bin by deactivating the gravity wand when it moves into position.",
     },
     {
       id: "sub1-page2",
@@ -47,14 +47,14 @@ const DUMMY_DATA = [
       title: "Slide 4",
       type: "text",
       contents:
-        "If a block is connected with multiple tracks, you may get unexpected behaviour when you run your code. To delete a track, select it by clicking on the arrow head and then press the backspace key on your keyboard. 🔙",
+        "If a block is connected with multiple tracks, you may get unexpected behaviour when you run your code. To delete a track, select it by clicking towards the start or end of the track and then press the backspace key on your keyboard. 🔙",
     },
     {
       id: "sub1-page5",
       title: "Slide 5",
       type: "text",
       contents:
-        'If you want to test some code without having your answer checked, then press the <span style="font-weight: 700; color: #18dbac;">Play</span> button in the bottom right corner of your screen to upload your current code to H.E.R.&#216;.',
+        'If you want to test some code without having your answer checked, then press the <span style="font-weight: 700; color: #18dbac;">Test</span> button in the bottom right corner of your screen to upload your current code to H.E.R.&#216;.',
     },
     {
       id: "sub1-page6",
@@ -87,19 +87,19 @@ const DUMMY_DATA = [
       contents:
         'Place your cursor over each gem to reveal the location of the centre of that gem. The first number is the x coordinate (distance along the <span style="font-weight: 700; color: #ff2f00;">x-axis</span>), followed by the y coordinate (distance along the <span style="font-weight: 700; color: #00dc00;">y-axis</span>). The last number is the z coordinate (distance along the <span style="font-weight: 700; color: #007eff;">z-axis</span>).',
     },
-    {
+/*     {
       id: "sub1-page4",
       title: "Slide 4",
       type: "text",
       contents:
         'For reference, the base of the robotic arm is at the coordinates (0, 0, 0). When the camera is rotated so that the arm is facing the right: <span style="font-weight: 700; color: #ff2f00;">positive x</span> is right and <span style="font-weight: 700; color: #ff2f00;">negative x</span> is left, <span style="font-weight: 700; color: #00dc00;">positive y</span> is up and <span style="font-weight: 700; color: #00dc00;">negative y</span> is down, <span style="font-weight: 700; color: #007eff;">positive z</span> is into the screen, <span style="font-weight: 700; color: #007eff;">negative z</span> is out of the screen.',
-    },
+    }, */
     {
       id: "sub1-page5",
       title: "Slide 5",
       type: "text",
       contents:
-        "For example, lets imagine an item at the coordinates (-1, 2, 3). Using the same camera orientation in the previous slide, that object is 1 metre to the left, 2 metres up and 3 metres into the screen compared to the base of the arm at (0,0,0)",
+        "The base of the robotic arm is at the coordinates (0, 0, 0). For example, lets imagine an item at the coordinates (-1, 2, 3). That object is 1 metre along the negative x-axis direction, 2 metres along the positive z-axis direction and 3 metres up compared to the base of the arm at (0,0,0)",
     },
     {
       id: "sub1-page6",
@@ -120,7 +120,7 @@ const DUMMY_DATA = [
       title: "Slide 8",
       type: "text",
       contents:
-        'Once all of your blocks in the workspace are connected via a single track (don’t forget to connect to the <span style="font-weight: 700; color: #18dbac;">start</span> and <span style="font-weight: 700; color: #fa6f6f;">end</span> blocks), press the <span style="font-weight: 700; color: #18dbac;">Play</span> button to reset the simulation and test your current code. 🧪',
+        'Once all of your blocks in the workspace are connected via a single track (don’t forget to connect to the <span style="font-weight: 700; color: #18dbac;">start</span> and <span style="font-weight: 700; color: #fa6f6f;">end</span> blocks), press the <span style="font-weight: 700; color: #18dbac;">Test</span> button to reset the simulation and test your current code. 🧪',
     },
     {
       id: "sub1-page9",
@@ -151,7 +151,7 @@ const DUMMY_DATA = [
       title: "Slide 2",
       type: "text",
       contents:
-        "Place your cursor over each rubbish bag or bin to reveal the location of the centre of that object. The first number is the x coordinate, followed by the y coordinate. The last number is the z coordinate.",
+        "Place your cursor over each rubbish bag or bin to reveal the location of the centre of that object. The first number is the x coordinate, followed by the y coordinate. The last number is the z coordinate (height above the ground).",
     },
     {
       id: "sub1-page3",
@@ -179,7 +179,7 @@ const DUMMY_DATA = [
       title: "Slide 6",
       type: "text",
       contents:
-        'To keep it simple, try writing code to deposit a single rubbish bag into the bin, then use the <span style="font-weight: 700; color: #18dbac;">Play</span> button to test your code. If successful, keep adding more blocks until you can deposit every bag in one run. 🧱👷‍♀️',
+        'Tip: <i>You don\'t need to move the gravity sphere to the exact location of each rubbish bag/bin. If you try to, you may get stuck on the ground or the sides of a bin. Instead, try moving the gravity sphere a metre or two above their location (increase the <span style="font-weight: 700; color: #007eff;">z-axis</span> coordinate).</i>',
     },
     {
       id: "sub1-page7",
@@ -255,12 +255,12 @@ const Contents = (props) => {
   return (
     <div
       className={`${classes.contentsWrapper} ${
-        props.isVerifying && classes.verifying
+        props.mode === "verifying" && classes.verifying
       }`}
     >
       <div
         className={classes.swiperPrev}
-        style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
+        style={{ visibility: props.mode === "verifying" && "hidden" }}
       >
         <KeyboardArrowLeftIcon style={{ fontSize: 48, padding: 0 }} />
       </div>
@@ -290,7 +290,7 @@ const Contents = (props) => {
         ></SwiperSlide>
         <div
           className={classes.pagination}
-          style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
+          style={{ visibility: props.mode === "verifying" && "hidden" }}
         ></div>
         {isOverflowing && (
           <>
@@ -305,7 +305,7 @@ const Contents = (props) => {
       </Swiper>
       <div
         className={classes.swiperNext}
-        style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
+        style={{ visibility: props.mode === "verifying" && "hidden" }}
       >
         <KeyboardArrowRightIcon style={{ fontSize: 48 }} />
       </div>

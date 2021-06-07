@@ -22,8 +22,7 @@ export const TestButton = (props) => {
 export const StopButton = (props) => {
   return (
     <button
-      id="stop-button"
-      className={`${classes.button} ${classes.stop}`}
+      className={`${classes.button} ${classes.stop} terminate-code`}
       onClick={props.stopTestHandler}
       style={props.style}
     >
@@ -35,14 +34,17 @@ export const StopButton = (props) => {
 
 const PlayButtons = (props) => {
   return (
-    <div className={classes.container} style={props.style}>
+    <div
+      className={classes.container}
+      style={{ display: props.mode === "verifying" && "none" }}
+    >
       <TestButton
         testHandler={props.testHandler}
-        style={{ display: props.isTesting && "none" }}
+        style={{ display: props.mode !== "ready" && "none" }}
       />
       <StopButton
         stopTestHandler={props.stopTestHandler}
-        style={{ display: !props.isTesting && "none" }}
+        style={{ display: props.mode !== "testing" && "none" }}
       />
     </div>
   );

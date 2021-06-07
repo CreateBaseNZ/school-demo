@@ -25,7 +25,6 @@ const ModalOverlay = (props) => {
         objectPosition="right center"
       />
       <CloseRoundedIcon
-        id="close-success-button"
         style={{ fontSize: 36 }}
         className={classes.closeIcon}
         onClick={props.closeSuccessHandler}
@@ -34,14 +33,13 @@ const ModalOverlay = (props) => {
         <h2>Good work!</h2>
         <p>You have finished this subsystem</p>
         <Link href="/menu/create">
-          <button id="continue-button" className={classes.continue}>
+          <button className={`${classes.continue} terminate-code`}>
             Continue
             <SendRoundedIcon style={{ fontSize: 28 }} />
           </button>
         </Link>
         <button
-          id="restart-button"
-          className={classes.restart}
+          className={`${classes.restart} terminate-code`}
           onClick={props.restartHandler}
         >
           Restart

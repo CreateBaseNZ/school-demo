@@ -3,25 +3,25 @@ import classes from "./ContentWrapper.module.scss";
 
 const DUMMY_DATA = [
   {
-    title: "The Gravity Wand",
+    title: "Subsystem 1: The Gravity Wand",
     href: "/play/the-gravity-wand",
     src: "/the-gravity-wand.png",
     description:
-      "Find the right timing to catch and release an object with a robotic claw attachment.",
+      "Learn how to grab/release an object with the gravity wand.",
   },
   {
-    title: "Moving the Arm",
+    title: "Subsystem 2: Moving the Arm",
     href: "/play/moving-the-arm",
     src: "/moving-the-arm.png",
     description:
-      "Collect a sequence of floating gems by touching them with the end of the robotic arm. ",
+      "Learn how to move the gravity wand to collect a sequence of floating gems. ",
   },
   {
-    title: "Collecting the Items",
+    title: "Final System: Collecting the Items",
     href: "/play/collecting-the-items",
     src: "/collecting-the-items.png",
     description:
-      "Combine your learnings from the first two subsystems to use the claw and the robotic arm to pick up pieces of rubbish at specific locations, before transporting and dropping them into a collection bin.",
+      "Using the gravity wand and the robotic arm, pick up pieces of rubbish before transporting and dropping them into one of two collection bins.",
     recommended: [
       {
         title: "The Gravity Wand",
