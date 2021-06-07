@@ -105,7 +105,7 @@ const MenuInterface = () => {
         </div>
       </div>
       <div className={classes.rightArea}>
-        <video width="100%" height="100%" controls>
+        <video width="100%" height="100%" controls autoPlay>
           <source src="/situation.mp4" type="video/mp4" />
           <source src="/situation.ogg" type="video/ogg" />
         </video>
