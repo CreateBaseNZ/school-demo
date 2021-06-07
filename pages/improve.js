@@ -9,10 +9,6 @@ import Layout from "/components/Layout/Layout";
 const Improve = (props) => {
   const navCtx = useContext(NavContext);
 
-  useEffect(() => {
-    navCtx.setActiveStep("Improve");
-  }, []);
-
   return (
     <Layout>
       <Head>

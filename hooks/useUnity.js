@@ -23,7 +23,7 @@ const getSubsystemScene = (subsystem) => {
     case "collecting-the-items":
       return "Project_Industrial_1";
     default:
-      return "Project_Industrial_1";
+      return "Sandbox_Industrial_1";
   }
 };
 
