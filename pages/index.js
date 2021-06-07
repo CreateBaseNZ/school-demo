@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Head from "next/head";
-import axios from "axios";
 
 import Layout from "/components/Layout/Layout";
 import PlayArrowRoundedIcon from "@material-ui/icons/PlayArrowRounded";
@@ -22,17 +21,6 @@ const Index = () => {
   const helperClickHandler = () => {
     setShowhelper((state) => !state);
   };
-
-  (async () => {
-    console.log("Retrieving Cookie");
-    let data2;
-    try {
-      data2 = (await axios.get("/api/cookie"))["data"];
-    } catch (error) {
-      data2 = { status: "error", content: error };
-    }
-    console.log(data2);
-  })();
 
   return (
     <Layout className={classes.index}>
