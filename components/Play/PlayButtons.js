@@ -22,8 +22,7 @@ export const TestButton = (props) => {
 export const StopButton = (props) => {
   return (
     <button
-      id="stop-button"
-      className={`${classes.button} ${classes.stop}`}
+      className={`${classes.button} ${classes.stop} terminate-code`}
       onClick={props.stopTestHandler}
       style={props.style}
     >

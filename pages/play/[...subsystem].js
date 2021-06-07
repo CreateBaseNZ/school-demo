@@ -20,7 +20,7 @@ const Play = (props) => {
   useEffect(() => {
     const strArr = asPath.split("/");
     if (strArr.length > 2) {
-      navCtx.setActiveSubsystem(capitalise(strArr[2]));
+      navCtx.setActiveSubsystem(strArr[2]);
       setActiveSubsystem(strArr[2]);
     } else {
       navCtx.setActiveSubsystem("");

@@ -67,7 +67,7 @@ const MenuInterface = () => {
     const strArr = asPath.split("/");
     if (strArr.length > 2) {
       setActiveStep(strArr[2]);
-      navCtx.setActiveStep(capitalise(strArr[2]));
+      navCtx.setActiveStep(strArr[2]);
     } else {
       setActiveStep("");
       navCtx.setActiveStep("");

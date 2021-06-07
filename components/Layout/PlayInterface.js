@@ -49,8 +49,6 @@ const getSubsystemScene = (subsystem) => {
 
 const PlayInterface = (props) => {
   const [mode, setMode] = useState("ready");
-  // const [isTesting, setIsTesting] = useState(false);
-  // const [isVerifying, setIsVerifying] = useState(false);
   const [unityContext, sensorData, gameState] = useUnity(
     getSubsystemScene(props.subsystem)
   );
@@ -65,17 +63,13 @@ const PlayInterface = (props) => {
     );
     setMode("loading");
     setTimeout(() => setMode("ready"), 5000);
-    // setIsTesting(false);
-    // setIsVerifying(false);
   }, [props.subsystem]);
 
   const testHandler = () => {
-    // setIsTesting(true);
     setMode("testing");
   };
 
   const stopTestHandler = () => {
-    // setIsTesting(false);
     setMode("loading");
     setTimeout(() => setMode("ready"), 5000);
     unityContext.send("SceneController", "ResetScene");
@@ -83,14 +77,11 @@ const PlayInterface = (props) => {
 
   // called in the verify handler
   const verifyHandler = () => {
-    // setIsVerifying(true);
     setMode("verifying");
   };
 
   // called in the cancel verify handler
   const cancelVerifyHandler = () => {
-    // id: '#cancel-verify-button'
-    // setIsVerifying(false);
     setMode("loading");
     setTimeout(() => setMode("ready"), 5000);
     unityContext.send("SceneController", "ResetScene");
@@ -98,16 +89,12 @@ const PlayInterface = (props) => {
 
   // called in the restart subsystem handler
   const restartHandler = () => {
-    // id: '#restart-button'
-    // setIsVerifying(false);
     setMode("loading");
     setTimeout(() => setMode("ready"), 5000);
     unityContext.send("SceneController", "ResetScene");
   };
 
   const closeSuccessHandler = () => {
-    // id: '#close-success-button'
-    // setIsVerifying(false);
     setMode("loading");
     setTimeout(() => setMode("ready"), 5000);
   };
@@ -131,8 +118,6 @@ const PlayInterface = (props) => {
         >
           <Contents
             subsystemIndex={getSubsystemIndex(props.subsystem)}
-            // isTesting={isTesting}
-            // isVerifying={isVerifying}
             mode={mode}
             height={swiperHeight}
           />
@@ -140,8 +125,6 @@ const PlayInterface = (props) => {
             unityContext={unityContext}
             sensorData={sensorData}
             gameState={gameState}
-            // isTesting={isTesting}
-            // isVerifying={isVerifying}
             mode={mode}
             testHandler={testHandler}
             stopTestHandler={stopTestHandler}
