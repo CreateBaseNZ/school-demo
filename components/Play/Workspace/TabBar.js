@@ -45,7 +45,7 @@ const TabBar = (props) => {
             props.active === "text" || props.active === "console" ? 0 : 0.25,
         }}
       />
-      <div className={classes.tab}>
+      <div id="console-tab" className={classes.tab}>
         <input
           type="radio"
           id="console-tab"

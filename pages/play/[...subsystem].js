@@ -4,8 +4,6 @@ import Router, { useRouter } from "next/router";
 import NavContext from "../../store/nav-context";
 import FullscreenContext from "../../store/fullscreen-context";
 
-import capitalise from "../../utils/capitaliseString";
-
 import Layout from "../../components/Layout/Layout";
 import PlayInterface from "../../components/Layout/PlayInterface";
 
