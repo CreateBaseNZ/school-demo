@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import debounce from "lodash.debounce";
 import SplitPane from "react-split-pane";
 import useUnity from "../../hooks/useUnity";
 
@@ -8,6 +9,7 @@ import Workspace from "../Play/Workspace/Workspace";
 import SuccessModal from "../Play/SuccessModal";
 
 import classes from "./PlayInterface.module.scss";
+import { useMediaQuery } from "@material-ui/core";
 
 const verticalDragHandler = () => {
   document.body.style.cursor = "ew-resize";
@@ -53,6 +55,7 @@ const PlayInterface = (props) => {
     getSubsystemScene(props.subsystem)
   );
   const [swiperHeight, setSwiperHeight] = useState();
+  const [simulationWidth, setSimulationWidth] = useState();
 
   // subsystem change
   useEffect(() => {
@@ -64,6 +67,19 @@ const PlayInterface = (props) => {
     setMode("loading");
     setTimeout(() => setMode("ready"), 5000);
   }, [props.subsystem]);
+
+  const simulationResizeHandler = (arg) => {
+    setSimulationWidth(window.innerWidth - arg);
+  };
+
+  const debouncedResizeHandler = useMemo(
+    () => debounce(simulationResizeHandler, 300),
+    []
+  );
+
+  useEffect(() => {
+    return () => debouncedResizeHandler.cancel();
+  }, []);
 
   const testHandler = () => {
     setMode("testing");
@@ -106,6 +122,7 @@ const PlayInterface = (props) => {
         split="vertical"
         defaultSize={"50%"}
         onDragStarted={verticalDragHandler}
+        onChange={debouncedResizeHandler}
         onDragFinished={dragReleaseHandler}
       >
         <SplitPane
@@ -133,7 +150,7 @@ const PlayInterface = (props) => {
             restartHandler={restartHandler}
           />
         </SplitPane>
-        <Simulation unityContext={unityContext} />
+        <Simulation unityContext={unityContext} width={simulationWidth} />
       </SplitPane>
       <div id="play-portal"></div>
       <SuccessModal

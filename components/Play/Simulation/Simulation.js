@@ -21,7 +21,7 @@ const Simulation = (props) => {
       <div className={classes.simulationWrapper}>
         <Unity
           unityContext={props.unityContext}
-          style={{ height: "100%", width: "100%" }}
+          style={{ height: "100%", width: props.width || "100%" }}
         />
       </div>
     </div>
