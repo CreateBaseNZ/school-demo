@@ -153,7 +153,7 @@ export class Block {
       math.square(x) + math.square(y) + math.square(z - this._jointLengths[0])
     );
     if (totalDistance - totaljointLengths > 0.1) {
-      consoleLog("Position is out of reach. Try another location", "warning");
+      consoleLog("Position is out of reach. Try another location", "error");
       return false;
     }
     const targetPoint = [x, y, z];
@@ -289,7 +289,7 @@ export class Block {
       math.square(x) + math.square(y) + math.square(z - this._jointLengths[0])
     );
     if (totalDistance - totaljointLengths > 0.1) {
-      consoleLog("Position is out of reach. Try another location", "warning");
+      consoleLog("Position is out of reach. Try another location", "error");
       return false;
     }
     const targetPoint = [x, y, z];

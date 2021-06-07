@@ -3,11 +3,16 @@ import classes from "./ContentWrapper.module.scss";
 
 const DUMMY_DATA = [
   {
+    title: "Subsystem 0: Tutorial",
+    href: "/",
+    src: "/the-gravity-wand.png",
+    description: "Watch this quick tutorial to learn how to create like a pro!",
+  },
+  {
     title: "Subsystem 1: The Gravity Wand",
     href: "/play/the-gravity-wand",
     src: "/the-gravity-wand.png",
-    description:
-      "Learn how to grab/release an object with the gravity wand.",
+    description: "Learn how to grab/release an object with the gravity wand.",
   },
   {
     title: "Subsystem 2: Moving the Arm",
