@@ -80,13 +80,13 @@ const Workspace = (props) => {
   };
 
   const testHandler = () => {
-    executeCode();
     props.testHandler();
+    executeCode();
   };
 
   const verifyHandler = () => {
-    executeCode();
     props.verifyHandler();
+    executeCode();
   };
 
   return (

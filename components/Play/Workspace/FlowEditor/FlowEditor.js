@@ -75,7 +75,6 @@ const FlowEditor = (props) => {
           break;
         }
       }
-      console.log(blocksConfig);
       if (blocksConfig[blocksConfig.length - 1].type !== "end") {
         return "disconnected";
       }

@@ -14,10 +14,11 @@ const getIndex = () => {
 };
 
 const consoleLog = (message, type) => {
-  console.log(type);
   const tab = document.querySelector("#console-tab");
   const logEl = document.createElement("div");
-  document.querySelector("#console").appendChild(logEl);
+  logEl.classList.add("console-log");
+  const console = document.querySelector("#console");
+  console.appendChild(logEl);
   switch (type) {
     case "warning":
       ReactDOM.render(<Warning message={message} />, logEl);
@@ -33,11 +34,12 @@ const consoleLog = (message, type) => {
       break;
     default:
       ReactDOM.render(<Log message={message} />, logEl);
-      if (!tab.querySelector("input").checked) {
-        tab.classList.add(classes.tabNew);
-      }
+      // if (!tab.querySelector("input").checked) {
+      //   tab.classList.add(classes.tabNew);
+      // }
       break;
   }
+  console.scrollTop = console.scrollHeight;
 };
 
 export default consoleLog;

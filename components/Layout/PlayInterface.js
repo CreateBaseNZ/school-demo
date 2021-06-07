@@ -3,7 +3,8 @@ import debounce from "lodash.debounce";
 import SplitPane from "react-split-pane";
 import useUnity from "../../hooks/useUnity";
 import axios from "axios";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import consoleLog from "/utils/consoleLog";
 
 import Contents from "../Play/Contents/Contents";
 import Simulation from "../Play/Simulation/Simulation";
@@ -12,8 +13,6 @@ import SuccessModal from "../Play/SuccessModal";
 
 import classes from "./PlayInterface.module.scss";
 import { useMediaQuery } from "@material-ui/core";
-
-
 
 const verticalDragHandler = () => {
   document.body.style.cursor = "ew-resize";
@@ -42,8 +41,14 @@ const getSubsystemIndex = (subsystem) => {
 
 const PlayInterface = (props) => {
   const [mode, setMode] = useState("ready");
-  const [unityContext, sensorData, gameState, changeScene, resetScene, progressState] =
-    useUnity(props.subsystem);
+  const [
+    unityContext,
+    sensorData,
+    gameState,
+    changeScene,
+    resetScene,
+    progressState,
+  ] = useUnity(props.subsystem);
   const [swiperHeight, setSwiperHeight] = useState();
   const [simulationWidth, setSimulationWidth] = useState();
 
@@ -70,64 +75,118 @@ const PlayInterface = (props) => {
   const testHandler = () => {
     const date = new Date().toString();
     // Create Cookie for Clicking Test
-    const cookieTest = { date, name: "Testing simulation", subsystem: props.subsystem }
+    const cookieTest = {
+      date,
+      name: "Testing simulation",
+      subsystem: props.subsystem,
+    };
     // Create cookies
-    const behaviours = [ cookieTest ];
-    axios.post("/api/cookie/set", { date, behaviours }).then(response => {
-      if (response.data === "failed" || response.data === "error") console.log(response.data);
-    }).catch(error => console.log({ status: "error", content: error }));
+    const behaviours = [cookieTest];
+    axios
+      .post("/api/cookie/set", { date, behaviours })
+      .then((response) => {
+        if (response.data === "failed" || response.data === "error")
+          console.log(response.data);
+      })
+      .catch((error) => console.log({ status: "error", content: error }));
     // Run Handlers
     setMode("testing");
+    consoleLog("Starting test ...");
   };
 
   const stopTestHandler = () => {
     const date = new Date().toString();
-    const progress = progressState ? (Math.round(progressState * 10000) / 100) : 0;
+    const progress = progressState
+      ? Math.round(progressState * 10000) / 100
+      : 0;
     const pair = uuidv4();
     // Create Cookie for Tracking Progress
-    const cookieProgress = { date, progress, name: "Progress when stopped", pair, subsystem: props.subsystem };
+    const cookieProgress = {
+      date,
+      progress,
+      name: "Progress when stopped",
+      pair,
+      subsystem: props.subsystem,
+    };
     // Create Cookie for Clicking Stop
-    const cookieStop = { date, name: "Stopped simulation", pair, subsystem: props.subsystem }
+    const cookieStop = {
+      date,
+      name: "Stopped simulation",
+      pair,
+      subsystem: props.subsystem,
+    };
     // Create cookies
-    const behaviours = [ cookieProgress, cookieStop ];
-    axios.post("/api/cookie/set", { date, behaviours }).then(response => {
-      if (response.data === "failed" || response.data === "error") console.log(response.data);
-    }).catch(error => console.log({ status: "error", content: error }));
+    const behaviours = [cookieProgress, cookieStop];
+    axios
+      .post("/api/cookie/set", { date, behaviours })
+      .then((response) => {
+        if (response.data === "failed" || response.data === "error")
+          console.log(response.data);
+      })
+      .catch((error) => console.log({ status: "error", content: error }));
     // Run Handlers
     setMode("loading");
     setTimeout(() => setMode("ready"), 3500);
     resetScene();
+    consoleLog("Testing complete");
   };
 
   // called in the verify handler
   const verifyHandler = () => {
     const date = new Date().toString();
     // Create Cookie for Clicking Verifify
-    const cookieVerify = { date, name: "Verifying simulation", subsystem: props.subsystem };
+    const cookieVerify = {
+      date,
+      name: "Verifying simulation",
+      subsystem: props.subsystem,
+    };
     // Create cookies
-    const behaviours = [ cookieVerify ];
-    axios.post("/api/cookie/set", { date, behaviours }).then(response => {
-      if (response.data === "failed" || response.data === "error") console.log(response.data);
-    }).catch(error => console.log({ status: "error", content: error }));
+    const behaviours = [cookieVerify];
+    axios
+      .post("/api/cookie/set", { date, behaviours })
+      .then((response) => {
+        if (response.data === "failed" || response.data === "error")
+          console.log(response.data);
+      })
+      .catch((error) => console.log({ status: "error", content: error }));
     setMode("verifying");
+    consoleLog("Verifying ...");
   };
 
   // called in the cancel verify handler
   const cancelVerifyHandler = () => {
     const date = new Date().toString();
-    const progress = progressState ? (Math.round(progressState * 10000) / 100) : 0;
+    const progress = progressState
+      ? Math.round(progressState * 10000) / 100
+      : 0;
     const pair = uuidv4();
     // Create Cookie for Tracking Progress
-    const cookieProgress = { date, progress, name: "Progress when cancelled verification", pair, subsystem: props.subsystem };
+    const cookieProgress = {
+      date,
+      progress,
+      name: "Progress when cancelled verification",
+      pair,
+      subsystem: props.subsystem,
+    };
     // Create Cookie for Cancelling Verification
-    const cookieCancelVerify = { date, name: "Cancelled verification", pair, subsystem: props.subsystem }
+    const cookieCancelVerify = {
+      date,
+      name: "Cancelled verification",
+      pair,
+      subsystem: props.subsystem,
+    };
     // Create cookies
-    const behaviours = [ cookieProgress, cookieCancelVerify ];
-    axios.post("/api/cookie/set", { date, behaviours }).then(response => {
-      if (response.data === "failed" || response.data === "error") console.log(response.data);
-    }).catch(error => console.log({ status: "error", content: error }));
+    const behaviours = [cookieProgress, cookieCancelVerify];
+    axios
+      .post("/api/cookie/set", { date, behaviours })
+      .then((response) => {
+        if (response.data === "failed" || response.data === "error")
+          console.log(response.data);
+      })
+      .catch((error) => console.log({ status: "error", content: error }));
     // Run Handlers
     setMode("loading");
+    consoleLog("Verification cancelled");
     setTimeout(() => setMode("ready"), 3500);
     resetScene();
   };
