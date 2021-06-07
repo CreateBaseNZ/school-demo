@@ -1,12 +1,16 @@
+import { useState } from "react";
 import SubsystemCard from "/components/UI/SubsystemCard";
+import TutorialModal from "/components/Menu/TutorialModal";
+
 import classes from "./ContentWrapper.module.scss";
 
 const DUMMY_DATA = [
   {
     title: "Subsystem 0: Tutorial",
-    href: "/",
+    href: "/menu/create",
     src: "/the-gravity-wand.png",
     description: "Watch this quick tutorial to learn how to create like a pro!",
+    showTutorial: true,
   },
   {
     title: "Subsystem 1: The Gravity Wand",
@@ -41,11 +45,29 @@ const DUMMY_DATA = [
 ];
 
 const CreateCard = () => {
+  const [showTutorial, setShowTutorial] = useState(false);
+
+  const clickHandler = () => {
+    setShowTutorial(true);
+  };
+
+  const closeHandler = () => {
+    setShowTutorial(false);
+  };
+
   return (
     <div className={classes.createWrapper}>
       {DUMMY_DATA.map((subsystem) => {
-        return <SubsystemCard {...subsystem} key={subsystem.title} />;
+        return (
+          <SubsystemCard
+            {...subsystem}
+            key={subsystem.title}
+            clickHandler={clickHandler}
+            closeHandler={closeHandler}
+          />
+        );
       })}
+      {showTutorial && <TutorialModal closeHandler={closeHandler} />}
     </div>
   );
 };

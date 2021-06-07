@@ -30,14 +30,6 @@ const useUnity = (subsystem) => {
     });
   }, []);
 
-  const setSensorDataWrapper = useCallback((data) => {
-    setSensorData(data);
-  }, []);
-
-  const setGameStateWrapper = useCallback((data) => {
-    setGameState(data);
-  });
-
   useEffect(() => {
     unityContext.on("loaded", () => {
       console.log();
