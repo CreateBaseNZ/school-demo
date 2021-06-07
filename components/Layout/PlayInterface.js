@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import debounce from "lodash.debounce";
 import SplitPane from "react-split-pane";
 import useUnity from "../../hooks/useUnity";
+import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
 
 import Contents from "../Play/Contents/Contents";
 import Simulation from "../Play/Simulation/Simulation";
@@ -10,6 +12,8 @@ import SuccessModal from "../Play/SuccessModal";
 
 import classes from "./PlayInterface.module.scss";
 import { useMediaQuery } from "@material-ui/core";
+
+
 
 const verticalDragHandler = () => {
   document.body.style.cursor = "ew-resize";
@@ -38,7 +42,7 @@ const getSubsystemIndex = (subsystem) => {
 
 const PlayInterface = (props) => {
   const [mode, setMode] = useState("ready");
-  const [unityContext, sensorData, gameState, changeScene, resetScene] =
+  const [unityContext, sensorData, gameState, changeScene, resetScene, progressState] =
     useUnity(props.subsystem);
   const [swiperHeight, setSwiperHeight] = useState();
   const [simulationWidth, setSimulationWidth] = useState();
@@ -64,10 +68,32 @@ const PlayInterface = (props) => {
   }, []);
 
   const testHandler = () => {
+    const date = new Date().toString();
+    // Create Cookie for Clicking Test
+    const cookieTest = { date, name: "Testing simulation" }
+    // Create cookies
+    const behaviours = [ cookieTest ];
+    axios.post("/api/cookie/set", { date, behaviours }).then(response => {
+      if (response.data === "failed" || response.data === "error") console.log(response.data);
+    }).catch(error => console.log({ status: "error", content: error }));
+    // Run Handlers
     setMode("testing");
   };
 
   const stopTestHandler = () => {
+    const date = new Date().toString();
+    const progress = progressState ? (Math.round(progressState * 10000) / 100) : 0;
+    const pair = uuidv4();
+    // Create Cookie for Tracking Progress
+    const cookieProgress = { date, progress, name: "Progress when stopped", pair };
+    // Create Cookie for Clicking Stop
+    const cookieStop = { date, name: "Stopped simulation", pair }
+    // Create cookies
+    const behaviours = [ cookieProgress, cookieStop ];
+    axios.post("/api/cookie/set", { date, behaviours }).then(response => {
+      if (response.data === "failed" || response.data === "error") console.log(response.data);
+    }).catch(error => console.log({ status: "error", content: error }));
+    // Run Handlers
     setMode("loading");
     setTimeout(() => setMode("ready"), 3500);
     resetScene();
@@ -75,11 +101,32 @@ const PlayInterface = (props) => {
 
   // called in the verify handler
   const verifyHandler = () => {
+    const date = new Date().toString();
+    // Create Cookie for Clicking Verifify
+    const cookieVerify = { date, name: "Verifying simulation" };
+    // Create cookies
+    const behaviours = [ cookieVerify ];
+    axios.post("/api/cookie/set", { date, behaviours }).then(response => {
+      if (response.data === "failed" || response.data === "error") console.log(response.data);
+    }).catch(error => console.log({ status: "error", content: error }));
     setMode("verifying");
   };
 
   // called in the cancel verify handler
   const cancelVerifyHandler = () => {
+    const date = new Date().toString();
+    const progress = progressState ? (Math.round(progressState * 10000) / 100) : 0;
+    const pair = uuidv4();
+    // Create Cookie for Tracking Progress
+    const cookieProgress = { date, progress, name: "Progress when cancelled verification", pair };
+    // Create Cookie for Cancelling Verification
+    const cookieCancelVerify = { date, name: "Cancelled verification", pair }
+    // Create cookies
+    const behaviours = [ cookieProgress, cookieCancelVerify ];
+    axios.post("/api/cookie/set", { date, behaviours }).then(response => {
+      if (response.data === "failed" || response.data === "error") console.log(response.data);
+    }).catch(error => console.log({ status: "error", content: error }));
+    // Run Handlers
     setMode("loading");
     setTimeout(() => setMode("ready"), 3500);
     resetScene();
@@ -124,6 +171,7 @@ const PlayInterface = (props) => {
             unityContext={unityContext}
             sensorData={sensorData}
             gameState={gameState}
+            progressState={progressState}
             mode={mode}
             testHandler={testHandler}
             stopTestHandler={stopTestHandler}
