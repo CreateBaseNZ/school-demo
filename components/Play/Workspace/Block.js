@@ -116,13 +116,11 @@ export class Block {
 
   /*This function takes either 3 or 4 inputs. The first 3 inputs are the location x,y and z*/
   InverseKinematics_restricted(x_t, y_t, z_t, theta_deg = 0) {
-    let x_inter, y_inter, z_inter;
+    let x_inter, y_inter;
     y_inter = -x_t;
-    z_inter = y_t;
-    x_inter = -z_t;
+    x_inter = -y_t;
     x_t = x_inter;
     y_t = y_inter;
-    z_t = z_inter;
     const angles = [0, 0, 0, 0];
     let distance = 5000;
     const tolerence = 0.01;
@@ -265,13 +263,12 @@ export class Block {
   }
 
   InverseKinematics(x_t, y_t, z_t) {
-    let x_inter, y_inter, z_inter;
+    let x_inter, y_inter;
     y_inter = -x_t;
-    z_inter = y_t;
-    x_inter = -z_t;
+    x_inter = -y_t;
     x_t = x_inter;
     y_t = y_inter;
-    z_t = z_inter;
+   
     const angles = [0, 0, 0, 0];
     let distance = 5000;
     const tolerence = 0.01;
