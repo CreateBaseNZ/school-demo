@@ -159,7 +159,7 @@ export class Block {
         <Warning message={"Position is out of reach. Try another location"} />,
         document.querySelector("#console")
       );
-      document.querySelector("#console-tab").classList.add(classes.tabNotif);
+      document.querySelector("#console-tab").classList.add(classes.tabWarning);
       return false;
     }
     const targetPoint = [x, y, z];
@@ -261,7 +261,7 @@ export class Block {
         />,
         document.querySelector("#console")
       );
-      document.querySelector("#console-tab").classList.add(classes.tabNotif);
+      document.querySelector("#console-tab").classList.add(classes.tabWarning);
     }
     return angles; //angles.map((val) => val * 180 / pi);
   }
@@ -304,7 +304,7 @@ export class Block {
         <Warning message={"Position is out of reach. Try another location"} />,
         document.querySelector("#console")
       );
-      document.querySelector("#console-tab").classList.add(classes.tabNotif);
+      document.querySelector("#console-tab").classList.add(classes.tabWarning);
       return false;
     }
     const targetPoint = [x, y, z];
@@ -396,7 +396,7 @@ export class Block {
         />,
         document.querySelector("#console")
       );
-      document.querySelector("#console-tab").classList.add(classes.tabNotif);
+      document.querySelector("#console-tab").classList.add(classes.tabWarning);
     }
 
     return angles; //angles.map((val) => val * 180 / pi);

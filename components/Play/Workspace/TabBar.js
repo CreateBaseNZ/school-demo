@@ -2,8 +2,13 @@ import classes from "./TabBar.module.scss";
 
 const TabBar = (props) => {
   const onChangeHandler = (event) => {
-    console.log(event.target.value);
     props.onChange(event.target.value);
+  };
+
+  const consoleClickHandler = () => {
+    document
+      .querySelector("#console-tab")
+      .classList.remove(classes.tabWarning, classes.tabError);
   };
 
   return (
@@ -53,6 +58,7 @@ const TabBar = (props) => {
           value="console"
           checked={props.active === "console"}
           onChange={onChangeHandler}
+          onClick={consoleClickHandler}
         />
         <label htmlFor="console-tab">Console</label>
       </div>
