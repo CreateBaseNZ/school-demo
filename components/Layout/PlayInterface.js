@@ -65,7 +65,7 @@ const PlayInterface = (props) => {
       getSubsystemScene(props.subsystem)
     );
     setMode("loading");
-    setTimeout(() => setMode("ready"), 5000);
+    setTimeout(() => setMode("ready"), 3500);
   }, [props.subsystem]);
 
   const simulationResizeHandler = (arg) => {
@@ -87,7 +87,7 @@ const PlayInterface = (props) => {
 
   const stopTestHandler = () => {
     setMode("loading");
-    setTimeout(() => setMode("ready"), 5000);
+    setTimeout(() => setMode("ready"), 3500);
     unityContext.send("SceneController", "ResetScene");
   };
 
@@ -99,20 +99,20 @@ const PlayInterface = (props) => {
   // called in the cancel verify handler
   const cancelVerifyHandler = () => {
     setMode("loading");
-    setTimeout(() => setMode("ready"), 5000);
+    setTimeout(() => setMode("ready"), 3500);
     unityContext.send("SceneController", "ResetScene");
   };
 
   // called in the restart subsystem handler
   const restartHandler = () => {
     setMode("loading");
-    setTimeout(() => setMode("ready"), 5000);
+    setTimeout(() => setMode("ready"), 3500);
     unityContext.send("SceneController", "ResetScene");
   };
 
   const closeSuccessHandler = () => {
     setMode("loading");
-    setTimeout(() => setMode("ready"), 5000);
+    setTimeout(() => setMode("ready"), 3500);
   };
 
   return (
