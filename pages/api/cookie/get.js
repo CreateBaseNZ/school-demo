@@ -8,11 +8,13 @@ export default (req, res) => {
   let id = uuidv4();
   let type = process.env.NODE_ENV;
   let behaviours = [];
+  let date = req.body.date;
   let data = new Object();
   // Preset cookie values
   if (!req.cookies.data) {
     data.id = id;
     data.type = type;
+    data.date = date;
     data.behaviours = behaviours;
     // Set Cookies
     res.setHeader("Set-Cookie", cookie.serialize("data", JSON.stringify(data),
