@@ -202,7 +202,7 @@ const FlowEditor = (props) => {
             snapGrid={[16, 16]}
             connectionLineComponent={CustomConnectionLine}
             arrowHeadColor="#ffffff"
-            deleteKeyCode="Delete"
+            deleteKeyCode={46}
           >
             <MiniMap
               nodeStrokeColor={miniMapStrokeColoriser}
