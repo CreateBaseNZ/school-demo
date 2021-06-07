@@ -4,15 +4,31 @@ import Link from "next/link";
 import classes from "./SubsystemCard.module.scss";
 
 const SubsystemCard = (props) => {
+  const getStatus = (id) => {
+    console.log(id);
+    const status = localStorage.getItem(id);
+    if (status === "completed") {
+      return classes.completed;
+    }
+    if (status === "in-progress") {
+      return classes.completed;
+    }
+    return "";
+  };
+
   const clickHandler = () => {
     if (props.showTutorial) {
       props.clickHandler();
+      localStorage.setItem(props.id, "completed");
     }
   };
 
   return (
     <Link href={props.href}>
-      <div className={classes.subsystemCard} onClick={clickHandler}>
+      <div
+        className={`${classes.subsystemCard} ${getStatus(props.id)}`}
+        onClick={clickHandler}
+      >
         <div className={classes.imgWrapper}>
           <Image
             src={props.src}
@@ -34,7 +50,10 @@ const SubsystemCard = (props) => {
                   <ul>
                     {props.recommended.map((recom) => {
                       return (
-                        <li key={props.title + "-" + recom.title}>
+                        <li
+                          key={props.title + "-" + recom.title}
+                          className={getStatus(recom.id)}
+                        >
                           <Link href={recom.href}>{recom.title}</Link>
                         </li>
                       );

@@ -82,6 +82,10 @@
                 width: 100%;
               }
             }
+            &.completed::marker,
+            &.completed a {
+              color: $green;
+            }
           }
         }
       }
@@ -98,6 +102,16 @@
     }
     &::-webkit-scrollbar-thumb:hover {
       background: rgba(255, 255, 255, 0.5);
+    }
+  }
+  &.completed {
+    border: thin solid $green;
+    box-shadow: 0 1rem 1.5rem -1rem rgba(0, 124, 37, 0.5);
+    &:hover {
+      box-shadow: 0 1rem 2.5rem -1.25rem rgba(0, 255, 76, 0.25);
+    }
+    .mainContainer h3 {
+      color: $green;
     }
   }
 }

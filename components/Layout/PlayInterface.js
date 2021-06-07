@@ -52,6 +52,16 @@ const PlayInterface = (props) => {
   const [swiperHeight, setSwiperHeight] = useState();
   const [simulationWidth, setSimulationWidth] = useState();
 
+  useEffect(() => {
+    if (
+      gameState &&
+      mode === "verifying" &&
+      gameState.toLowerCase() === "win"
+    ) {
+      localStorage.setItem(props.subsystem, "completed");
+    }
+  }, [gameState]);
+
   // subsystem change
   useEffect(() => {
     changeScene(props.subsystem);
