@@ -56,17 +56,14 @@ const DUMMY_DATA = [
 const MenuInterface = () => {
   const router = useRouter();
   const [activeStep, setActiveStep] = useState();
-  const navCtx = useContext(NavContext);
 
   const { asPath } = router;
   useEffect(() => {
     const strArr = asPath.split("/");
     if (strArr.length > 2) {
       setActiveStep(strArr[2]);
-      navCtx.setActiveStep(strArr[2]);
     } else {
       setActiveStep("");
-      navCtx.setActiveStep("");
     }
   }, [asPath]);
 

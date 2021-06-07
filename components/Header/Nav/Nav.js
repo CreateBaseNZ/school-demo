@@ -45,7 +45,7 @@ const Nav = ({ showStep, showSubsystem }) => {
       </Link>
       {showStep && (
         <NavItem
-          title={decodeURI(ctx.activeStep)}
+          title={ctx.activeStep}
           items={DUMMY_PROJECT_STEPS}
           type="Project Steps"
           path="/menu"
@@ -56,6 +56,7 @@ const Nav = ({ showStep, showSubsystem }) => {
       )}
       {showSubsystem && ctx.activeSubsystem && (
         <NavItem
+          title={ctx.activeSubsystem}
           items={DUMMY_SUBSYSTEMS}
           type="Subsystems"
           path="/menu"
