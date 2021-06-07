@@ -175,8 +175,10 @@ const FlowEditor = (props) => {
       className={classes.editorContainer}
       style={{
         display: props.hide && "none",
-        pointerEvents: props.isBusy && "none",
-        opacity: props.isBusy && "0.5",
+        pointerEvents:
+          props.mode === "testing" || (props.mode === "verifying" && "none"),
+        opacity:
+          props.mode === "testing" || (props.mode === "verifying" && "0.5"),
       }}
     >
       <ReactFlowProvider>

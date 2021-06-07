@@ -48,56 +48,68 @@ const getSubsystemScene = (subsystem) => {
 };
 
 const PlayInterface = (props) => {
-  const [isTesting, setIsTesting] = useState(false);
-  const [isVerifying, setIsVerifying] = useState(false);
+  const [mode, setMode] = useState("ready");
+  // const [isTesting, setIsTesting] = useState(false);
+  // const [isVerifying, setIsVerifying] = useState(false);
   const [unityContext, sensorData, gameState] = useUnity(
     getSubsystemScene(props.subsystem)
   );
   const [swiperHeight, setSwiperHeight] = useState();
 
+  // subsystem change
   useEffect(() => {
-    console.log(props.subsystem);
     unityContext.send(
       "SceneController",
       "LoadScene",
       getSubsystemScene(props.subsystem)
     );
-    setIsTesting(false);
-    setIsVerifying(false);
+    setMode("loading");
+    setTimeout(() => setMode("ready"), 5000);
+    // setIsTesting(false);
+    // setIsVerifying(false);
   }, [props.subsystem]);
 
   const testHandler = () => {
-    setRender((current) => !current);
     // setIsTesting(true);
+    setMode("testing");
   };
 
   const stopTestHandler = () => {
-    setIsTesting(false);
+    // setIsTesting(false);
+    setMode("loading");
+    setTimeout(() => setMode("ready"), 5000);
     unityContext.send("SceneController", "ResetScene");
   };
 
   // called in the verify handler
   const verifyHandler = () => {
-    setIsVerifying(true);
+    // setIsVerifying(true);
+    setMode("verifying");
   };
 
   // called in the cancel verify handler
   const cancelVerifyHandler = () => {
     // id: '#cancel-verify-button'
-    setIsVerifying(false);
+    // setIsVerifying(false);
+    setMode("loading");
+    setTimeout(() => setMode("ready"), 5000);
     unityContext.send("SceneController", "ResetScene");
   };
 
   // called in the restart subsystem handler
   const restartHandler = () => {
     // id: '#restart-button'
-    setIsVerifying(false);
+    // setIsVerifying(false);
+    setMode("loading");
+    setTimeout(() => setMode("ready"), 5000);
     unityContext.send("SceneController", "ResetScene");
   };
 
   const closeSuccessHandler = () => {
     // id: '#close-success-button'
-    setIsVerifying(false);
+    // setIsVerifying(false);
+    setMode("loading");
+    setTimeout(() => setMode("ready"), 5000);
   };
 
   return (
@@ -119,16 +131,18 @@ const PlayInterface = (props) => {
         >
           <Contents
             subsystemIndex={getSubsystemIndex(props.subsystem)}
-            isTesting={isTesting}
-            isVerifying={isVerifying}
+            // isTesting={isTesting}
+            // isVerifying={isVerifying}
+            mode={mode}
             height={swiperHeight}
           />
           <Workspace
             unityContext={unityContext}
             sensorData={sensorData}
             gameState={gameState}
-            isTesting={isTesting}
-            isVerifying={isVerifying}
+            // isTesting={isTesting}
+            // isVerifying={isVerifying}
+            mode={mode}
             testHandler={testHandler}
             stopTestHandler={stopTestHandler}
             verifyHandler={verifyHandler}
@@ -142,7 +156,8 @@ const PlayInterface = (props) => {
       <SuccessModal
         style={{
           display:
-            (!isVerifying || gameState.toLowerCase() !== "win") && "none",
+            (props.mode !== "verifying" || gameState.toLowerCase() !== "win") &&
+            "none",
         }}
         restartHandler={restartHandler}
         closeSuccessHandler={closeSuccessHandler}

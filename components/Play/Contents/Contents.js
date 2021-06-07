@@ -255,12 +255,12 @@ const Contents = (props) => {
   return (
     <div
       className={`${classes.contentsWrapper} ${
-        props.isVerifying && classes.verifying
+        props.mode === "verifying" && classes.verifying
       }`}
     >
       <div
         className={classes.swiperPrev}
-        style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
+        style={{ visibility: props.mode === "verifying" && "hidden" }}
       >
         <KeyboardArrowLeftIcon style={{ fontSize: 48, padding: 0 }} />
       </div>
@@ -290,7 +290,7 @@ const Contents = (props) => {
         ></SwiperSlide>
         <div
           className={classes.pagination}
-          style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
+          style={{ visibility: props.mode === "verifying" && "hidden" }}
         ></div>
         {isOverflowing && (
           <>
@@ -305,7 +305,7 @@ const Contents = (props) => {
       </Swiper>
       <div
         className={classes.swiperNext}
-        style={{ visibility: props.isVerifying ? "hidden" : "visible" }}
+        style={{ visibility: props.mode === "verifying" && "hidden" }}
       >
         <KeyboardArrowRightIcon style={{ fontSize: 48 }} />
       </div>

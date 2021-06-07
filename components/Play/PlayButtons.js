@@ -35,14 +35,17 @@ export const StopButton = (props) => {
 
 const PlayButtons = (props) => {
   return (
-    <div className={classes.container} style={props.style}>
+    <div
+      className={classes.container}
+      style={{ display: props.mode === "verifying" && "none" }}
+    >
       <TestButton
         testHandler={props.testHandler}
-        style={{ display: props.isTesting && "none" }}
+        style={{ display: props.mode !== "ready" && "none" }}
       />
       <StopButton
         stopTestHandler={props.stopTestHandler}
-        style={{ display: !props.isTesting && "none" }}
+        style={{ display: props.mode !== "testing" && "none" }}
       />
     </div>
   );
