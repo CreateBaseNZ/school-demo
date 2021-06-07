@@ -9,7 +9,7 @@ const DefineCard = () => {
           When designing a solution, the first step is to understand the problem:
         </p>
         <p>
-        After watching the cutscene, we can see that a self-driving vehicle has 
+        After watching the video on the right, we can see that a self-driving vehicle has 
         spilt bags of rubbish all over a factory floor! 🙀
         </p>
         <section>
