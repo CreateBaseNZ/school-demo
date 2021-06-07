@@ -70,7 +70,7 @@ const PlayInterface = (props) => {
   const testHandler = () => {
     const date = new Date().toString();
     // Create Cookie for Clicking Test
-    const cookieTest = { date, name: "Testing simulation" }
+    const cookieTest = { date, name: "Testing simulation", subsystem: props.subsystem }
     // Create cookies
     const behaviours = [ cookieTest ];
     axios.post("/api/cookie/set", { date, behaviours }).then(response => {
@@ -85,9 +85,9 @@ const PlayInterface = (props) => {
     const progress = progressState ? (Math.round(progressState * 10000) / 100) : 0;
     const pair = uuidv4();
     // Create Cookie for Tracking Progress
-    const cookieProgress = { date, progress, name: "Progress when stopped", pair };
+    const cookieProgress = { date, progress, name: "Progress when stopped", pair, subsystem: props.subsystem };
     // Create Cookie for Clicking Stop
-    const cookieStop = { date, name: "Stopped simulation", pair }
+    const cookieStop = { date, name: "Stopped simulation", pair, subsystem: props.subsystem }
     // Create cookies
     const behaviours = [ cookieProgress, cookieStop ];
     axios.post("/api/cookie/set", { date, behaviours }).then(response => {
@@ -103,7 +103,7 @@ const PlayInterface = (props) => {
   const verifyHandler = () => {
     const date = new Date().toString();
     // Create Cookie for Clicking Verifify
-    const cookieVerify = { date, name: "Verifying simulation" };
+    const cookieVerify = { date, name: "Verifying simulation", subsystem: props.subsystem };
     // Create cookies
     const behaviours = [ cookieVerify ];
     axios.post("/api/cookie/set", { date, behaviours }).then(response => {
@@ -118,9 +118,9 @@ const PlayInterface = (props) => {
     const progress = progressState ? (Math.round(progressState * 10000) / 100) : 0;
     const pair = uuidv4();
     // Create Cookie for Tracking Progress
-    const cookieProgress = { date, progress, name: "Progress when cancelled verification", pair };
+    const cookieProgress = { date, progress, name: "Progress when cancelled verification", pair, subsystem: props.subsystem };
     // Create Cookie for Cancelling Verification
-    const cookieCancelVerify = { date, name: "Cancelled verification", pair }
+    const cookieCancelVerify = { date, name: "Cancelled verification", pair, subsystem: props.subsystem }
     // Create cookies
     const behaviours = [ cookieProgress, cookieCancelVerify ];
     axios.post("/api/cookie/set", { date, behaviours }).then(response => {
