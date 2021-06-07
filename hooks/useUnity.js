@@ -17,6 +17,7 @@ const unityContext = new UnityContext({
 const useUnity = (subsystem) => {
   const [sensorData, setSensorData] = useState();
   const [gameState, setGameState] = useState();
+  const [progressState, setProgressState] = useState();
 
   useEffect(() => {
     unityContext.on("GetSensorData", (sensorData) => {
@@ -27,6 +28,12 @@ const useUnity = (subsystem) => {
   useEffect(() => {
     unityContext.on("GetGameState", (gameState) => {
       setGameState(gameState);
+    });
+  }, []);
+
+  useEffect(() => {
+    unityContext.on("GetProgressState", (progressState) => {
+      setProgressState(progressState);
     });
   }, []);
 
@@ -47,7 +54,7 @@ const useUnity = (subsystem) => {
     });
   }, [subsystem]);
 
-  return [unityContext, sensorData, gameState];
+  return [unityContext, sensorData, gameState, progressState];
 };
 
 export default useUnity;
