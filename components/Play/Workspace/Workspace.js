@@ -2,7 +2,6 @@ import { useRef, useState, forwardRef } from "react";
 import dynamic from "next/dynamic";
 import MonacoEditor from "./MonacoEditor/MonacoEditor";
 import Console from "./Console/Console";
-import EditorToggleButton from "/components/Header/EditorToggleButton";
 import PlayButtons from "../PlayButtons";
 import TabBar from "./TabBar";
 import ClientOnlyPortal from "/utils/ClientOnlyPortal";
@@ -30,16 +29,6 @@ const Workspace = (props) => {
   const [activeTab, setActiveTab] = useState("flow");
   const [textCode, setTextCode] = useState("console.log('Hi');");
   const flowRef = useRef();
-
-  const isBusy = props.isTesting || props.isVerifying;
-
-  const toggleHandler = () => {
-    if (activeTab) {
-      const newCode = codeGen.build(flowRef.current.getBlockConfig());
-      setTextCode(newCode);
-    }
-    setActiveTab((state) => !state);
-  };
 
   const changeTabHandler = (option) => {
     if (activeTab === "flow" && option === "text") {
@@ -93,9 +82,6 @@ const Workspace = (props) => {
 
   return (
     <div className={classes.workspace}>
-      {/* <ClientOnlyPortal selector="#editor-toggle-portal">
-        <EditorToggleButton onChange={toggleHandler} />
-      </ClientOnlyPortal> */}
       <FlowEditor mode={props.mode} hide={activeTab !== "flow"} ref={flowRef} />
       <MonacoEditor
         unityContext={props.unityContext}
