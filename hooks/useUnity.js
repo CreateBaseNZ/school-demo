@@ -38,10 +38,6 @@ const useUnity = (subsystem) => {
   }, []);
 
   useEffect(() => {
-    return () => unityContext.removeEventAllListeners();
-  }, []);
-
-  useEffect(() => {
     unityContext.on("GetGameState", (gameState) => {
       setGameState(gameState);
     });
