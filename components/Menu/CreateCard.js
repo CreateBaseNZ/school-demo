@@ -6,9 +6,9 @@ import classes from "./ContentWrapper.module.scss";
 
 const DUMMY_DATA = [
   {
-    title: "Subsystem 0: Tutorial",
+    title: "Subsystem 0: Intro to Create",
     href: "/menu/create",
-    src: "/the-gravity-wand.png",
+    src: "/tutorial_edited.png",
     description: "Watch this quick tutorial to learn how to create like a pro!",
     showTutorial: true,
   },
@@ -17,6 +17,12 @@ const DUMMY_DATA = [
     href: "/play/the-gravity-wand",
     src: "/the-gravity-wand.png",
     description: "Learn how to grab/release an object with the gravity wand.",
+      recommended: [
+        {
+          title: "Intro to Create",
+          href: "/menu/create",
+        },
+      ],
   },
   {
     title: "Subsystem 2: Moving the Arm",
@@ -24,9 +30,15 @@ const DUMMY_DATA = [
     src: "/moving-the-arm.png",
     description:
       "Learn how to move the gravity wand to collect a sequence of floating gems. ",
+      recommended: [
+        {
+          title: "Intro to Create",
+          href: "/menu/create",
+        },
+      ],
   },
   {
-    title: "Final System: Collecting the Items",
+    title: "Collecting the Items",
     href: "/play/collecting-the-items",
     src: "/collecting-the-items.png",
     description:

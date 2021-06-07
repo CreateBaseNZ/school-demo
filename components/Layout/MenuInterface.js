@@ -88,7 +88,7 @@ const MenuInterface = () => {
                     ? classes.activeStep
                     : ""
                 }`}
-                step={"Step " + step.number + ": " + step.title}
+                step={step.number + ": " + step.title}
                 description={step.description}
                 key={step.title}
                 img={step.img}
