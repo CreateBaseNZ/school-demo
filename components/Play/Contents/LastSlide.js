@@ -34,7 +34,7 @@ const LastSlide = (props) => {
         </button>
       </div>
       {props.mode === "testing" && (
-        <div style={{ opacity: 0.75 }}>Simulation in progress...</div>
+        <div style={{ opacity: 0.75 }}>Simulation in progress. You must stop the current simulation before verifying.</div>
       )}
     </div>
   );

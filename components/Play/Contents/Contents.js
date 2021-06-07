@@ -99,7 +99,7 @@ const DUMMY_DATA = [
       title: "Slide 5",
       type: "text",
       contents:
-        "The base of the robotic arm is at the coordinates (0, 0, 0). For example, lets imagine an item at the coordinates (-1, 2, 3). That object is 1 metre along the negative x-axis direction, 2 metres along the positive z-axis direction and 3 metres up compared to the base of the arm at (0,0,0)",
+        "The base of the robotic arm is at the coordinates (0, 0, 1.3). For example, lets imagine an item at the coordinates (-1, 2, 2.3). That object is 1 metre along the negative x-axis direction, 2 metres along the positive z-axis direction and 1 metre up compared to the base of the arm at (0, 0, 1.3)",
     },
     {
       id: "sub1-page6",
