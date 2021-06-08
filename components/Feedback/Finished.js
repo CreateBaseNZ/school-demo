@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import HomeIcon from "@material-ui/icons/Home";
 import LanguageIcon from "@material-ui/icons/Language";
@@ -40,6 +41,16 @@ const Finished = (props) => {
           <LanguageIcon />
           Visit Us
         </a>
+        <div className={classes.boxes}>
+          <Image
+            src="/boxes.png"
+            alt="Crates"
+            layout="responsive"
+            width={769}
+            height={604}
+            objectPosition="bottom right"
+          />
+        </div>
       </div>
     </div>
   );

@@ -25,10 +25,10 @@ const title = [
     h1: "Have your say - Coding 💻",
     h2: "Please rate your experience when writing code on this platform by indicating how much you agree with each of the following statements:",
   },
-  {
-    h1: "Have your say - Experience 😀",
-    h2: 'Please indicate how you most commonly used the "reveal code answer" functionality',
-  },
+  // {
+  //   h1: "Have your say - Experience 😀",
+  //   h2: 'Please indicate how you most commonly used the "reveal code answer" functionality',
+  // },
   {
     h1: "Have your say - Practicality 🧰",
     h2: "Please indicate where you feel you would best use the platform",
@@ -66,7 +66,7 @@ const FeedbackInterface = () => {
   const isFormValid = [
     isDesignFormValid(),
     isCodingFormValid(),
-    isExperienceFormValid(),
+    // isExperienceFormValid(),
     isPracticalityFormValid(),
     isGeneralFormValid(),
   ];
@@ -143,16 +143,16 @@ const FeedbackInterface = () => {
           style={{ display: step !== 1 && "none" }}
           render={renderCodingForm}
         />
-        <ExperienceForm
+        {/* <ExperienceForm
           style={{ display: step !== 2 && "none" }}
           render={renderExperienceForm}
-        />
+        /> */}
         <PracticalityForm
-          style={{ display: step !== 3 && "none" }}
+          style={{ display: step !== 2 && "none" }}
           render={renderPracticalityForm}
         />
         <GeneralForm
-          style={{ display: step !== 4 && "none" }}
+          style={{ display: step !== 3 && "none" }}
           render={renderGeneralForm}
         />
         <FormButtons
