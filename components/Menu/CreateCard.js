@@ -67,11 +67,11 @@ const DUMMY_DATA = [
 const CreateCard = () => {
   const [showTutorial, setShowTutorial] = useState(false);
 
-  const clickHandler = () => {
+  const showTutorialHandler = () => {
     setShowTutorial(true);
   };
 
-  const closeHandler = () => {
+  const closeTutorialHandler = () => {
     setShowTutorial(false);
   };
 
@@ -82,8 +82,8 @@ const CreateCard = () => {
           <SubsystemCard
             {...subsystem}
             key={subsystem.title}
-            clickHandler={clickHandler}
-            closeHandler={closeHandler}
+            showTutorialHandler={showTutorialHandler}
+            closeTutorialHandler={closeTutorialHandler}
           />
         );
       })}

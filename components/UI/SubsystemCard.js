@@ -1,25 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import CheckCircleOutlineRoundedIcon from "@material-ui/icons/CheckCircleOutlineRounded";
+import ScheduleRoundedIcon from "@material-ui/icons/ScheduleRounded";
+
 import classes from "./SubsystemCard.module.scss";
 
 const SubsystemCard = (props) => {
+  const status = localStorage.getItem(props.id);
+
   const getStatus = (id) => {
-    console.log(id);
     const status = localStorage.getItem(id);
     if (status === "completed") {
       return classes.completed;
     }
     if (status === "in-progress") {
-      return classes.completed;
+      return classes.inProgress;
     }
     return "";
   };
 
   const clickHandler = () => {
     if (props.showTutorial) {
-      props.clickHandler();
+      props.showTutorialHandler();
       localStorage.setItem(props.id, "completed");
+    } else {
+      if (!localStorage.getItem(props.id)) {
+        localStorage.setItem(props.id, "in-progress");
+      }
     }
   };
 
@@ -29,6 +37,18 @@ const SubsystemCard = (props) => {
         className={`${classes.subsystemCard} ${getStatus(props.id)}`}
         onClick={clickHandler}
       >
+        {status === "completed" && (
+          <div className={`${classes.status} ${classes.completed}`}>
+            <CheckCircleOutlineRoundedIcon style={{ fontSize: "14" }} />
+            <span>Completed</span>
+          </div>
+        )}
+        {status === "in-progress" && (
+          <div className={`${classes.status} ${classes.inProgress}`}>
+            <ScheduleRoundedIcon style={{ fontSize: "14" }} />
+            <span>In Progress</span>
+          </div>
+        )}
         <div className={classes.imgWrapper}>
           <Image
             src={props.src}
