@@ -7,6 +7,8 @@ export class CodeGenerator {
   private execute: string;
   private increment: number;
   private code: string;
+  private variables: string[];
+
 
   constructor() {
     this.blockFunctions = blockFunctions;
@@ -15,6 +17,75 @@ export class CodeGenerator {
     this.execute = "";
     this.increment = 1;
     this.code = "";
+    this.variables = [];
+  }
+
+  private checkCorrectVar(varName: string) {
+    //Check if variable in correct system
+    const spaces = varName.includes(' ');
+    const numberStart = (varName[0] < 'A' || varName[0] > 'z');
+    if (numberStart || spaces) {
+      console.log("Invalid Variable Name");
+    }
+    //Checks if variable created
+    let found = false;
+    for (let i = 0; i < this.variables.length; i++){
+      if (this.variables[i] === varName) {
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      this.variables.push(varName);
+      varName = `let ${varName}`;
+    }
+    return varName+" = ";
+  }
+
+  private isNumber(varName: string) {
+    for (let i = 0; i < varName.length; i++){
+      if (varName[i] < '0' || varName[i] > '9') {
+        return false
+      }
+    }
+    return true;
+  }
+
+  private checkEqualitySign(varName: string) {
+    const possibility=["<",">",">=","<=","==","!=",">="]
+    for (let i = 0; i < possibility.length; i++){
+      const data = possibility[i];
+      console.log(data);
+      if (varName === data) {
+        console.log(1);
+        return true;
+      }
+    }      
+    console.log("Incorrect Sign!");
+    return false;
+  }
+  
+  private checkVariable(varName: string) {
+    //Check if variable in correct system
+    const spaces = varName.includes(' ');
+    const numberStart = (varName[0] < 'A' || varName[0] > 'z');
+    if (numberStart || spaces) {
+      console.log("Invalid Variable Name");
+      return false;
+    }
+    //Checks if variable created
+    let found = false;
+    for (let i = 0; i < this.variables.length; i++){
+      if (this.variables[i] === varName) {
+        found = true;
+        break;
+      }
+    }
+    if (!found) {
+      console.log("Unintialized Variable");
+      return false;
+    }
+    return true;
   }
 
   private start(blockDetail: any) {
@@ -53,6 +124,11 @@ export class CodeGenerator {
         inputs += String(blockDetail.value[element.variable]) + ", ";
       }
     }
+    const elementOut = blockFunction.function.output
+    let output = '';
+    if (elementOut) {
+      output =this.checkCorrectVar(String(blockDetail.value[elementOut.variable]));
+    }
     // Function name
     const functionName = blockFunction.function.name + String(this.increment);
     this.increment++;
@@ -67,12 +143,47 @@ export class CodeGenerator {
     //this.content += func;
     // Add execute
     const execute = `// ${blockFunction.name}
-    await ((${inputVariables}) => {
+    ${output}await ((${inputVariables}) => {
       return new Promise((resolve, reject) => {
         ${blockFunction.function.logic}
       });
     })(${inputs});`;
     this.executes.push(execute);
+  }
+
+
+
+  private IfStart(blockDetail: any) {
+    const blockFunction = this.blockFunctions.find((element) => {
+      if (element.type === "if") {
+        return (
+          element.function.name === blockDetail.name &&
+          element.robot === blockDetail.robot
+        );
+      } else {
+        return false;
+      }
+    });
+    console.log(blockFunction)
+    if (blockFunction) {
+      let inputs: string = "";
+      for (let i = 0; i < blockFunction.function.inputs.length; i++) {
+        const element = blockFunction.function.inputs[i];
+        const val = String(blockDetail.value[element.variable]);
+        if (i != 1) {
+          if (!this.isNumber(val)) {
+          this.checkVariable(val);
+          }
+        } else {
+          this.checkEqualitySign(val);
+        }
+        inputs += String(blockDetail.value[element.variable]);
+      }
+      const str = `if(${inputs}){
+
+      }`;
+      this.executes.push(str);
+    }
   }
 
   private end(blockDetail: any) {
@@ -86,6 +197,10 @@ export class CodeGenerator {
       this.executes.push(element);
     }
   }
+
+
+
+
 
   private run() {
     this.execute = "const run = async () => {\n";
@@ -130,6 +245,8 @@ export class CodeGenerator {
         case "end":
           this.end(element);
           break;
+        case "if":
+          this.IfStart(element);
         default:
           break;
       }

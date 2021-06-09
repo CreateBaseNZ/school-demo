@@ -43,7 +43,7 @@ const MonacoEditor = (props) => {
         value={props.code}
         onMount={handleEditorDidMount}
         className={classes.editor}
-        theme={"vs-dark"}
+        theme={"vs-light"}
         options={editorOptions}
       />
     </div>

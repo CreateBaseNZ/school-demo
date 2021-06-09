@@ -63,6 +63,12 @@ const FlowEditor = (props) => {
             };
             block.type = "move";
             break;
+          case "if":
+            block = {
+              ...block,
+              name: "if",
+            };
+          break;
           default:
             break;
         }
@@ -78,6 +84,7 @@ const FlowEditor = (props) => {
       if (blocksConfig[blocksConfig.length - 1].type !== "end") {
         return "disconnected";
       }
+      console.log(blocksConfig);
       return blocksConfig;
     },
   }));
@@ -144,6 +151,8 @@ const FlowEditor = (props) => {
       defaultValues = { isOn: true };
     } else if (type === "move") {
       defaultValues = { x: 0, y: 0, z: 0 };
+    } else if (type == "if") {
+      defaultValues = { var1: 0, sign: '<', var2: 0 };
     }
     setData((data) => ({
       ...data,
