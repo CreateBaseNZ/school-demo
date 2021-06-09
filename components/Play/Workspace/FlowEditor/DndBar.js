@@ -26,6 +26,27 @@ const DndBar = () => {
       <div className={classes.description}>Drag &amp; Drop</div>
       <div className={classes.wrapper}>
         <div
+          className={`${classes.dndNode} ${classes.move} ${classes.gravity}`}
+          onDragStart={(event) => onDragStart(event, "gravity")}
+          draggable
+        >
+          <h5>
+            <FilterTiltShiftIcon />
+            Gravity Switch
+          </h5>
+          <div className={classes.radioContainer}>
+            <div className={classes.radioWrapper}>
+              <span className={classes.customRadio}></span>
+              <label>On</label>
+            </div>
+            <div className={classes.radioWrapper}>
+              <span className={classes.customRadio}></span>
+              <label>Off</label>
+            </div>
+          </div>
+        </div>
+
+        <div
           className={`${classes.dndNode} ${classes.move}`}
           onDragStart={(event) => onDragStart(event, "move")}
           draggable
@@ -53,26 +74,7 @@ const DndBar = () => {
             </div>
           </div>
         </div>
-        <div
-          className={`${classes.dndNode} ${classes.move} ${classes.gravity}`}
-          onDragStart={(event) => onDragStart(event, "gravity")}
-          draggable
-        >
-          <h5>
-            <FilterTiltShiftIcon />
-            Gravity Switch
-          </h5>
-          <div className={classes.radioContainer}>
-            <div className={classes.radioWrapper}>
-              <span className={classes.customRadio}></span>
-              <label>On</label>
-            </div>
-            <div className={classes.radioWrapper}>
-              <span className={classes.customRadio}></span>
-              <label>Off</label>
-            </div>
-          </div>
-        </div>
+
         {/* <div
           className={`${classes.dndNode} ${classes.read}`}
           onDragStart={(event) => onDragStart(event, "read")}
