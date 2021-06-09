@@ -1,0 +1,44 @@
+[
+  {
+    "code": 1,
+    "page": "Play",
+    "element": "button",
+    "label": "Stop",
+    "listener": "click",
+    "properties": [ "project", "subsystem", "date", "pair" ],
+    "description": "The user is in the Play page doing the <subsystem> subsystem of the <porject> project. The user pressed the Stop button."
+  },
+  {
+    "code": 2,
+    "page": "Play",
+    "element": "button",
+    "label": "Test",
+    "listener": "click",
+    "properties": [ "project", "subsystem", "date" ],
+    "description": "The user is in the Play page doing the <subsystem> subsystem of the <porject> project. The user pressed the Test button."
+  },
+  {
+    "code": 3,
+    "page": "Play",
+    "element": "canvas",
+    "label": "Progress",
+    "listener": "pair",
+    "properties": [ "project", "subsystem", "date", "pair", "progress" ]
+  },
+  {
+    "code": 4,
+    "page": "Play",
+    "element": "button",
+    "label": "Verify",
+    "listener": "click",
+    "properties": [ "project", "subsystem", "date" ]
+  },
+  {
+    "code": 5,
+    "page": "Play",
+    "element": "button",
+    "label": "Cancel",
+    "listener": "click",
+    "properties": [ "project", "subsystem", "date", "pair" ]
+  }
+]
