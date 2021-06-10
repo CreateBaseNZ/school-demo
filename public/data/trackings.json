@@ -6,7 +6,7 @@
     "label": "Stop",
     "listener": "click",
     "properties": [ "project", "subsystem", "date", "pair" ],
-    "description": "The user is in the Play page doing the <subsystem> subsystem of the <porject> project. The user pressed the Stop button."
+    "description": "The user is in the Play page doing the <subsystem> subsystem of the <project> project. The user pressed the Stop button."
   },
   {
     "code": 2,
@@ -15,7 +15,7 @@
     "label": "Test",
     "listener": "click",
     "properties": [ "project", "subsystem", "date" ],
-    "description": "The user is in the Play page doing the <subsystem> subsystem of the <porject> project. The user pressed the Test button."
+    "description": "The user is in the Play page doing the <subsystem> subsystem of the <project> project. The user pressed the Test button."
   },
   {
     "code": 3,

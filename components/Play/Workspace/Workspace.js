@@ -107,6 +107,9 @@ const Workspace = (props) => {
           testHandler={testHandler}
           stopTestHandler={props.stopTestHandler}
           mode={props.mode}
+          project={"hero"}
+          subsystem={props.subsystem}
+          progressState={props.progressState}
         />
       </ClientOnlyPortal>
       <ClientOnlyPortal selector="#last-slide">
@@ -114,6 +117,9 @@ const Workspace = (props) => {
           mode={props.mode}
           verifyHandler={verifyHandler}
           cancelVerifyHandler={props.cancelVerifyHandler}
+          project={"hero"}
+          subsystem={props.subsystem}
+          progressState={props.progressState}
         />
       </ClientOnlyPortal>
     </div>

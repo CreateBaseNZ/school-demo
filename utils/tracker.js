@@ -12,7 +12,7 @@ const send = (behaviour) => {
         await axios.post("/api/cookie/add-behaviour", { date, behaviour })
       )["data"];
     } catch (error) {
-      return reject({ status: "succeeded", content: error });
+      data = { status: "error", content: error };
     }
     // Handlers
     switch (data.status) {
@@ -29,13 +29,14 @@ const send = (behaviour) => {
 const click = (code, properties) => {
   return new Promise(async (resolve, reject) => {
     // Declare variables
-    properties.date = date;
+    properties.date = new Date().toString();
     // Fetch the tracking
     const tracking = trackings.find((element) => element.code === code);
     // Validate properties and create the behaviour
     let behaviour = new Object({ code });
-    for (const property in tracking.properties) {
-      if (!properties[property]) {
+    for (let i = 0; i < tracking.properties.length; i++) {
+      const property = tracking.properties[i];
+      if (properties[property] === undefined) {
         return reject({
           status: "failed",
           content: `You are missing '${property}' property.`,
@@ -45,14 +46,24 @@ const click = (code, properties) => {
       }
     }
     // Store the behaviour
+    let data;
     try {
-      await send(behaviour);
-    } catch (data) {
-      return reject(data);
+      data = await send(behaviour);
+    } catch (error) {
+      data = { status: "error", content: error };
+    }
+    // Handlers
+    switch (data.status) {
+      case "failed":
+        return reject(data);
+      case "error":
+        return reject(data);
+      default:
+        return resolve(data.content);
     }
   });
 };
 
-export const tracker = {
-  click,
+export default {
+  click
 };
