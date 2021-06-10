@@ -67,8 +67,12 @@ const FlowEditor = (props) => {
             break;
         }
         blocksConfig.push(block);
-        const nextNode = getOutgoers(currentNode, elements)[0];
-        if (nextNode) {
+        const nextNode = getOutgoers(currentNode, elements);
+        console.log(currentNode);
+        console.log(nextNode);
+        if (nextNode.length > 1) {
+          return "multiple_tracks";
+        } else if (nextNode[0]) {
           currentNode = nextNode;
         } else {
           traverse = false;
