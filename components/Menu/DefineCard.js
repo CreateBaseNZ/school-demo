@@ -1,46 +1,14 @@
-import { useState, useEffect } from "react";
 import RecordVoiceOverRoundedIcon from "@material-ui/icons/RecordVoiceOverRounded";
 import StopRoundedIcon from "@material-ui/icons/StopRounded";
 import classes from "./ContentWrapper.module.scss";
 
-const ttsSettings = {
-  text: "When designing a solution, the first step is to understand the problem. After watching the video on the right, we can see that a self-driving vehicle has spilt bags of rubbish all over a factory floor! Luckily, there are a pair of bins at the edge of the room that we can deposit the rubbish into. However, rather than cleaning it up ourselves, what if we program the HERO robotic arm to do it for us? Let's start by defining the capabilities of the HERO robotic arm. There is a gravity wand attached to the end of the arm (don't ask us how it works) that we can turn on and off. It could be turned on to attract the items of rubbish and turned off to drop them into a bin. The arm has four motors to move it around in 3D space. We could control each motor individually or, instead, use a pre-made function to move them together. The HERO robot can only be programmed to perform one task at a time. This means that we need to first move the gravity wand into position, and then turn the gravity wand on or off.",
-  lang: "en-NZ",
-};
+import useTts from "/hooks/useTts";
+
+const ttsText =
+  "When designing a solution, the first step is to understand the problem. After watching the video on the right, we can see that a self-driving vehicle has spilt bags of rubbish all over a factory floor! Luckily, there are a pair of bins at the edge of the room that we can deposit the rubbish into. However, rather than cleaning it up ourselves, what if we program the HERO robotic arm to do it for us? Let's start by defining the capabilities of the HERO robotic arm. There is a gravity wand attached to the end of the arm (don't ask us how it works) that we can turn on and off. It could be turned on to attract the items of rubbish and turned off to drop them into a bin. The arm has four motors to move it around in 3D space. We could control each motor individually or, instead, use a pre-made function to move them together. The HERO robot can only be programmed to perform one task at a time. This means that we need to first move the gravity wand into position, and then turn the gravity wand on or off.";
 
 const DefineCard = () => {
-  const [tts, setTts] = useState({ supported: true, isSpeaking: false });
-
-  useEffect(() => {
-    if (!"speechSynthesis" in window) {
-      setTts((curr) => ({ ...curr, supported: false }));
-    }
-  }, []);
-
-  let timeout;
-  const timer = () => {
-    window.speechSynthesis.pause();
-    window.speechSynthesis.resume();
-    timeout = setTimeout(timer, 10000);
-  };
-
-  const speakHandler = () => {
-    setTts((curr) => ({ ...curr, isSpeaking: true }));
-
-    window.speechSynthesis.cancel();
-    timeout = setTimeout(timer, 10000);
-    const speech = new SpeechSynthesisUtterance(ttsSettings.text);
-    speech.onend = () => {
-      clearTimeout(timeout);
-      setTts((curr) => ({ ...curr, isSpeaking: false }));
-    };
-    window.speechSynthesis.speak(speech);
-  };
-
-  const stopHandler = () => {
-    window.speechSynthesis.cancel();
-    setTts((curr) => ({ ...curr, isSpeaking: false }));
-  };
+  const [supported, isSpeaking, speak, stopSpeak] = useTts(ttsText);
 
   return (
     <div className={classes.contentWrapper}>
@@ -54,7 +22,6 @@ const DefineCard = () => {
           After watching the video on the right, we can see that a self-driving
           vehicle has spilt bags of rubbish all over a factory floor! 🙀
         </p>
-        <section></section>
         <p>
           Luckily, there are a pair of bins at the edge of the room that we can
           deposit the rubbish into. However, rather than cleaning it up
@@ -87,16 +54,12 @@ const DefineCard = () => {
           </li>
         </ol>
       </section>
-      {!tts.isSpeaking ? (
-        <button
-          className={classes.tts}
-          title="Text-to-speech"
-          onClick={speakHandler}
-        >
+      {!isSpeaking ? (
+        <button className={classes.tts} title="Text-to-speech" onClick={speak}>
           <RecordVoiceOverRoundedIcon style={{ fontSize: "16" }} />
         </button>
       ) : (
-        <button className={classes.tts} title="Stop" onClick={stopHandler}>
+        <button className={classes.tts} title="Stop" onClick={stopSpeak}>
           <StopRoundedIcon style={{ fontSize: "16" }} />
         </button>
       )}

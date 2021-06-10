@@ -30,6 +30,26 @@ export const NavContextProvider = (props) => {
         setActiveStep("Overview");
         setActiveSubsystem("");
         break;
+      case "/menu/define":
+        setActiveStep("Define");
+        setActiveSubsystem("");
+        break;
+      case "/menu/plan":
+        setActiveStep("Plan");
+        setActiveSubsystem("");
+        break;
+      case "/menu/create":
+        setActiveStep("Create");
+        setActiveSubsystem("");
+        break;
+      case "/menu/Improve":
+        setActiveStep("Improve");
+        setActiveSubsystem("");
+        break;
+      case "/menu":
+        setActiveStep("Overview");
+        setActiveSubsystem("");
+        break;
       case "/play":
         setActiveStep("improve");
         setActiveSubsystem("sandbox");
