@@ -6,6 +6,7 @@ const WhiteLogo = (props) => {
       target="_blank"
       href="https://createbase.co.nz/"
       className={props.className}
+      title="createbase.co.nz"
     >
       <Image
         src="/header-logo.png"

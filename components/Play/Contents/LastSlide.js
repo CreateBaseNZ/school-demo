@@ -43,6 +43,7 @@ const LastSlide = (props) => {
         style={{
           display: props.mode !== "ready" && "none",
         }}
+        title="Verify"
       >
         <SlowMotionVideoIcon fontSize="large" />
         Verify my code!
@@ -58,13 +59,17 @@ const LastSlide = (props) => {
         <button
           className={`${classes.cancelBtn} terminate-code`}
           onClick={cancelHandler}
+          title="Cancel"
         >
           <CloseRoundedIcon fontSize="small" />
           Cancel
         </button>
       </div>
       {props.mode === "testing" && (
-        <div style={{ opacity: 0.75 }}>Simulation in progress. You must stop the current simulation before verifying.</div>
+        <div style={{ opacity: 0.75 }}>
+          Simulation in progress. You must stop the current simulation before
+          verifying.
+        </div>
       )}
     </div>
   );

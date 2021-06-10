@@ -301,6 +301,7 @@
   flex: 1 1 0;
   padding: 2rem 8vw;
   overflow-y: auto;
+  z-index: 1;
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -339,8 +340,9 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-end;
     flex: 0 0 calc(1rem + 48px);
+    max-height: calc(1rem + 48px);
     padding-top: 1rem;
     button,
     a {
@@ -372,4 +374,14 @@
       }
     }
   }
+}
+
+.boxes {
+  margin-left: -4rem;
+  margin-right: -4vw;
+  margin-bottom: -1rem;
+  height: auto;
+  width: 25vw;
+  z-index: -1;
+  position: relative;
 }

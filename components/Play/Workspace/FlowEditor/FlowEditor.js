@@ -3,6 +3,7 @@ import React, {
   useRef,
   useCallback,
   useImperativeHandle,
+  useEffect,
 } from "react";
 import ReactFlow, {
   ReactFlowProvider,
@@ -11,6 +12,7 @@ import ReactFlow, {
   updateEdge,
   MiniMap,
   Controls,
+  ControlButton,
   Background,
   getOutgoers,
 } from "react-flow-renderer";
@@ -24,6 +26,7 @@ import {
 import DndBar from "./DndBar";
 
 import { CustomConnectionLine } from "./CustomEdge";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 
 import initialElements from "/utils/initialElements";
 
@@ -31,6 +34,8 @@ import classes from "./FlowEditor.module.scss";
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
+
+const controlTitles = ["Zoom-in", "Zoom-out", "Fit-view", "Lock", "Info"];
 
 const FlowEditor = (props) => {
   const wrapperRef = useRef(null);
@@ -67,8 +72,10 @@ const FlowEditor = (props) => {
             break;
         }
         blocksConfig.push(block);
-        const nextNode = getOutgoers(currentNode, elements)[0];
-        if (nextNode) {
+        const nextNode = getOutgoers(currentNode, elements);
+        if (nextNode.length > 1) {
+          return "multiple_tracks";
+        } else if (nextNode[0]) {
           currentNode = nextNode;
         } else {
           traverse = false;
@@ -120,6 +127,11 @@ const FlowEditor = (props) => {
 
     _reactFlowInstance.fitView();
     setReactFlowInstance(_reactFlowInstance);
+
+    const controls = document.querySelector(".react_flow_controls").children;
+    for (let i = 0; i < controls.length; i++) {
+      controls[i].title = controlTitles[i];
+    }
   }, []);
 
   const onDragOver = (event) => {
@@ -161,6 +173,17 @@ const FlowEditor = (props) => {
       },
     };
     setElements((es) => es.concat(newNode));
+  };
+
+  const interactiveChangeHandler = () => {
+    const lock = document.querySelector(".react_flow_controls").children[3];
+    if (lock.title === "Lock") {
+      lock.title = "Unlock";
+      lock.classList.add(classes.locked);
+    } else {
+      lock.title = "Lock";
+      lock.classList.remove(classes.locked);
+    }
   };
 
   // const onEdgeUpdateStart = (event, edge) => {
@@ -216,7 +239,17 @@ const FlowEditor = (props) => {
               }}
               className={classes.miniMap}
             />
-            <Controls className={classes.controls} />
+            <Controls
+              className={`${classes.controls} react_flow_controls`}
+              onInteractiveChange={interactiveChangeHandler}
+            >
+              <ControlButton
+                className={classes.customControl}
+                onClick={() => console.log("another action")}
+              >
+                <InfoOutlinedIcon />
+              </ControlButton>
+            </Controls>
             <Background color="#aaa" gap={16} />
           </ReactFlow>
         </div>
