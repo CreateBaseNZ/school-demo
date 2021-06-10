@@ -40,9 +40,11 @@ const Nav = ({ showStep, showSubsystem }) => {
 
   return (
     <nav className={classes.nav} onBlur={ctx.onBlur} onFocus={ctx.onFocus}>
-      <Link href="/">
-        <HomeRoundedIcon className={classes.home} fontSize="small" />
-      </Link>
+      <button className={classes.home} title="Home">
+        <Link href="/" title="Home">
+          <HomeRoundedIcon fontSize="small" title="Home" />
+        </Link>
+      </button>
       {showStep && (
         <NavItem
           title={ctx.activeStep}

@@ -14,7 +14,7 @@ const TabBar = (props) => {
   return (
     <div className={classes.tabBar}>
       <span className={`${classes.slider} ${classes[`${props.active}`]}`} />
-      <div className={classes.tab}>
+      <div className={classes.tab} title="Flow">
         <input
           type="radio"
           id="flow-tab"
@@ -32,7 +32,7 @@ const TabBar = (props) => {
             props.active === "flow" || props.active === "text" ? 0 : 0.25,
         }}
       />
-      <div className={classes.tab}>
+      <div className={classes.tab} title="Text">
         <input
           type="radio"
           id="text-tab"
@@ -50,7 +50,7 @@ const TabBar = (props) => {
             props.active === "text" || props.active === "console" ? 0 : 0.25,
         }}
       />
-      <div id="console-tab" className={classes.tab}>
+      <div id="console-tab" className={classes.tab} title="Console">
         <input
           type="radio"
           id="console-tab"

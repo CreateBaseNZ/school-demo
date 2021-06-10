@@ -12,6 +12,7 @@ export const TestButton = (props) => {
       className={`${classes.button} ${classes.test}`}
       onClick={props.testHandler}
       style={props.style}
+      title="Test"
     >
       <PlayCircleFilledRoundedIcon />
       Test
@@ -25,6 +26,7 @@ export const StopButton = (props) => {
       className={`${classes.button} ${classes.stop} terminate-code`}
       onClick={props.stopTestHandler}
       style={props.style}
+      title="Stop"
     >
       <StopRoundedIcon />
       Stop

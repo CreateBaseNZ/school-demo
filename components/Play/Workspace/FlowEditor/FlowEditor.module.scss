@@ -32,7 +32,7 @@
   background: none;
   box-shadow: none !important;
   & > div {
-    margin: 0.5rem;
+    margin: 0.25rem;
     border-radius: 4px;
     background: $light;
     border: none;
@@ -40,6 +40,26 @@
     transition: opacity 0.1s ease-out;
     &:hover {
       opacity: 1;
+    }
+    &.locked {
+      opacity: 0.75;
+      background: $lightest;
+      path {
+        fill: rgb(255, 22, 22);
+      }
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+  .customControl {
+    padding: 5px;
+    svg {
+      max-height: 16px;
+      max-width: 16px;
+      path {
+        fill: black;
+      }
     }
   }
 }
