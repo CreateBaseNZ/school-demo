@@ -10,6 +10,8 @@ import WhiteLogo from "/components/UI/Icons/WhiteLogo";
 
 import classes from "/styles/Index.module.scss";
 
+import tracker from "../utils/tracker";
+
 const Index = () => {
   const [showHelper, setShowhelper] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
@@ -20,6 +22,11 @@ const Index = () => {
 
   const helperClickHandler = () => {
     setShowhelper((state) => !state);
+    if (showHelper) {
+      tracker.click(8);
+    } else {
+      tracker.click(7);
+    }
   };
 
   return (
@@ -48,10 +55,10 @@ const Index = () => {
           <span>O</span>
         </h1>
         <div style={{ position: "relative", width: "650px", height: "125px" }}>
-          <WhiteLogo layout="fill" objectFit="contain" quality={100} />
+          <WhiteLogo layout="fill" objectFit="contain" quality={100} handler={() => tracker.click(9)} />
         </div>
         <Link href="/menu">
-          <a className={classes.btn}>
+          <a className={classes.btn} onClick={() => tracker.click(6)}>
             <span>Start</span>
             <PlayArrowRoundedIcon style={{ fontSize: "24" }} />
             <div className={classes.liquid}></div>

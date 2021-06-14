@@ -115,7 +115,7 @@ const Workspace = (props) => {
           testHandler={testHandler}
           stopTestHandler={props.stopTestHandler}
           mode={props.mode}
-          project={"hero"}
+          project={"HER0"}
           subsystem={props.subsystem}
           progressState={props.progressState}
         />
@@ -125,7 +125,7 @@ const Workspace = (props) => {
           mode={props.mode}
           verifyHandler={verifyHandler}
           cancelVerifyHandler={props.cancelVerifyHandler}
-          project={"hero"}
+          project={"HER0"}
           subsystem={props.subsystem}
           progressState={props.progressState}
         />
