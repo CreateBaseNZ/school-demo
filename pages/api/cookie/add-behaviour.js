@@ -28,44 +28,50 @@ const addBehaviour = (data, behaviour) => {
   return data;
 };
 
-export default (req, res) => {
+export default async (req, res) => {
   if (req.method == "POST") {
-    // Initialise and declare variables
+    // Declare variables
     let data;
-    // Preset cookie values
+    // Retreive data
     if (!req.cookies.data) {
       data = createBase(req);
     } else if (req.cookies.data) {
       data = JSON.parse(req.cookies.data);
     }
-    if (req.body.behaviours) {
-      if (Array.isArray(req.body.behaviours)) {
-        if (req.body.behaviours.length) {
-          data.behaviours = data.behaviours.concat(req.body.behaviours);
-        }
-      } else if (typeof req.body.behaviours === "object") {
-        data.behaviours.push(req.body.behaviours);
-      }
+    // Add behaviour
+    if (req.body.behaviour) {
+      data = addBehaviour(data, req.body.behaviour);
+    } else {
+      return res.send({ status: "failed", content: "No behaviour was sent." });
     }
-    res.setHeader(
+    // Set cookie header
+    /*res.setHeader(
       "Set-Cookie",
       cookie.serialize("data", JSON.stringify(data), {
         httpOnly: true,
         sameSite: "strict",
         path: "/",
       })
-    );
-    // Save to backend
-    axios
-      .post("https://createbase.co.nz/alpha/cookie-save", data)
-      .then((response) => {
-        const data = response.data;
-        if (data.status === "error" || data.status === "failed")
-          console.log(data);
-        return;
-      })
-      .catch((error) => console.log({ status: "error", content: error }));
-    // Success handler
-    res.status(200).json({ status: "succeeded", content: "Cookie Set" });
+    );*/
+    // Update backend cookie
+    let resData;
+    try {
+      resData = (
+        await axios.post("https://createbase.co.nz/alpha/cookie-save", data)
+      )["data"];
+    } catch (error) {
+      resData = { status: "error", content: error };
+    }
+    // Handler
+    switch (resData.status) {
+      case "failed":
+        return res.status(200).json(resData);
+      case "error":
+        return res.status(200).json(resData);
+      default:
+        return res
+          .status(200)
+          .json({ status: "succeeded", content: "Behaviour has been added." });
+    }
   }
 };

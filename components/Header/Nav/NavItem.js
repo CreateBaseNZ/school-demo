@@ -22,13 +22,12 @@ const NavItem = (props) => {
   const showDropdown =
     ctx.navIsActive && ctx.activeType === props.type && isHovered;
 
-  console.log(ctx.activeSubsystem);
-
   return (
     <div className={classes.navItem}>
       <button
         className={showDropdown ? classes.active : ""}
         onClick={ctx.onClick}
+        title={formatSubsystemName(props.title)}
         onMouseOver={mouseOverHandler}
       >
         {formatSubsystemName(props.title)}
@@ -41,6 +40,7 @@ const NavItem = (props) => {
           props.items.map((item) => (
             <button
               key={item.title}
+              title={item.title}
               className={
                 ctx.activeSubsystem === item.id ? "" : props.itemClassName
               }
@@ -52,6 +52,7 @@ const NavItem = (props) => {
         <div className={classes.separator} />
         <button
           className={props.itemClassName}
+          title={`See all ${props.type}`}
           onClick={() => clickHandler({ path: props.path, query: props.query })}
         >{`See all ${props.type}`}</button>
       </div>

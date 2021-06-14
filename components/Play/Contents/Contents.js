@@ -87,7 +87,7 @@ const DUMMY_DATA = [
       contents:
         'Place your cursor over each gem to reveal the location of the centre of that gem. The first number is the x coordinate (distance along the <span style="font-weight: 700; color: #ff2f00;">x-axis</span>), followed by the y coordinate (distance along the <span style="font-weight: 700; color: #00dc00;">y-axis</span>). The last number is the z coordinate (distance along the <span style="font-weight: 700; color: #007eff;">z-axis</span>).',
     },
-/*     {
+    /*     {
       id: "sub1-page4",
       title: "Slide 4",
       type: "text",
@@ -267,6 +267,7 @@ const Contents = (props) => {
     >
       <div
         className={classes.swiperPrev}
+        title="Previous slide"
         style={{ visibility: props.mode === "verifying" && "hidden" }}
       >
         <KeyboardArrowLeftIcon style={{ fontSize: 48, padding: 0 }} />
@@ -312,6 +313,7 @@ const Contents = (props) => {
       </Swiper>
       <div
         className={classes.swiperNext}
+        title="Next slide"
         style={{ visibility: props.mode === "verifying" && "hidden" }}
       >
         <KeyboardArrowRightIcon style={{ fontSize: 48 }} />

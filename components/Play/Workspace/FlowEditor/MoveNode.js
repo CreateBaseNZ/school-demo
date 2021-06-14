@@ -9,7 +9,11 @@ const MoveNode = ({ data }) => {
   const [coords, setCoords] = useState(data.default);
 
   const changeHandler = (event) => {
-    const newCoords = { ...coords, [event.target.name]: event.target.value };
+    const newCoords = {
+      ...coords,
+      [event.target.name]:
+        event.target.value && parseInt(event.target.value).toString(),
+    };
     data.callBack(newCoords);
     setCoords(newCoords);
   };

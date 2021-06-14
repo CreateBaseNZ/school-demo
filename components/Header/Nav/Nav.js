@@ -8,6 +8,8 @@ import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import classes from "./Nav.module.scss";
 import Link from "next/link";
 
+import tracker from "/utils/tracker";
+
 const DUMMY_PROJECT_STEPS = [
   { title: "Define", path: "/menu/define", query: "define" },
   { title: "Plan", path: "/menu/plan", query: "plan" },
@@ -40,9 +42,11 @@ const Nav = ({ showStep, showSubsystem }) => {
 
   return (
     <nav className={classes.nav} onBlur={ctx.onBlur} onFocus={ctx.onFocus}>
-      <Link href="/">
-        <HomeRoundedIcon className={classes.home} fontSize="small" />
-      </Link>
+      <button className={classes.home} title="Home" onClick={() => tracker.click(14)}>
+        <Link href="/" title="Home">
+          <HomeRoundedIcon fontSize="small" title="Home" />
+        </Link>
+      </button>
       {showStep && (
         <NavItem
           title={ctx.activeStep}

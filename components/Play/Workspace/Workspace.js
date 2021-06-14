@@ -51,6 +51,14 @@ const Workspace = (props) => {
     if (blockConfig === "disconnected") {
       setBlockValidity("disconnected");
       consoleLog("Oops! The Start and End blocks are not connected", "error");
+      return;
+    } else if (blockConfig === "multiple_tracks") {
+      setBlockValidity("multiple_tracks");
+      consoleLog(
+        "Parallel tracks detected. Each block can only have one input and one output",
+        "error"
+      );
+      return;
     }
     const newCode = codeGen.build(blockConfig);
     // Declare header functions and configurations
@@ -107,6 +115,9 @@ const Workspace = (props) => {
           testHandler={testHandler}
           stopTestHandler={props.stopTestHandler}
           mode={props.mode}
+          project={"HER0"}
+          subsystem={props.subsystem}
+          progressState={props.progressState}
         />
       </ClientOnlyPortal>
       <ClientOnlyPortal selector="#last-slide">
@@ -114,6 +125,9 @@ const Workspace = (props) => {
           mode={props.mode}
           verifyHandler={verifyHandler}
           cancelVerifyHandler={props.cancelVerifyHandler}
+          project={"HER0"}
+          subsystem={props.subsystem}
+          progressState={props.progressState}
         />
       </ClientOnlyPortal>
     </div>

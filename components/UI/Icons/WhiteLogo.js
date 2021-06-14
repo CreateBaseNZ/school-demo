@@ -1,11 +1,15 @@
 import Image from "next/image";
 
+import tracker from "/utils/tracker";
+
 const WhiteLogo = (props) => {
   return (
     <a
       target="_blank"
       href="https://createbase.co.nz/"
       className={props.className}
+      title="createbase.co.nz"
+      onClick={props.handler}
     >
       <Image
         src="/header-logo.png"

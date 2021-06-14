@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
       // Set Cookie
       const date = new Date().toString();
       try {
-        data = (await axios.post("/api/cookie/set", { date }))["data"];
+        data = (await axios.post("/api/session/create", { date }))["data"];
       } catch (error) {
         data = { status: "error", content: error };
       }

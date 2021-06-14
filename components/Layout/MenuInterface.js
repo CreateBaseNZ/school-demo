@@ -8,6 +8,8 @@ import PlanCard from "/components/Menu/PlanCard";
 import CreateCard from "/components/Menu/CreateCard";
 import ImproveCard from "/components/Menu/ImproveCard";
 
+import tracker from "/utils/tracker";
+
 import classes from "./MenuInterface.module.scss";
 
 const DUMMY_DATA = [
@@ -68,6 +70,13 @@ const MenuInterface = () => {
   }, [asPath]);
 
   const cardClickHandler = (step) => {
+    switch (step) {
+      case "define": tracker.click(10); break;
+      case "plan": tracker.click(11); break;
+      case "create": tracker.click(12); break;
+      case "improve": tracker.click(13); break;
+      default: break;
+    }
     router.push("/menu/" + step, "/menu/" + step, { shallow: true });
   };
 
