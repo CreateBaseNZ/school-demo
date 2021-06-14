@@ -10,7 +10,7 @@ const createSession = () => {
     // Create the session
     let data;
     try {
-      data = (await axios.post("http://localhost/alpha/user-session/create", { object }))["data"];
+      data = (await axios.post("https://createbase.co.nz/alpha/user-session/create", { object }))["data"];
     } catch (error) {
       data = { status: "error", content: error };
     }
@@ -44,7 +44,7 @@ export default async (req, res) => {
     // Send the request to add the behaviour
     let data;
     try {
-      data = (await axios.post("http://localhost/alpha/behaviour/add", { session, object }))["data"];
+      data = (await axios.post("https://createbase.co.nz/alpha/behaviour/add", { session, object }))["data"];
     } catch (error) {
       data = { status: "error", content: error };
     }

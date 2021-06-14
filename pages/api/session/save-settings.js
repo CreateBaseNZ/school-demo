@@ -58,7 +58,7 @@ export default async (req, res) => {
     const session = { _id: cookies._id };
     let data;
     try {
-      data = (await axios.post("http://localhost/alpha/user-session/update-saves", { session, object }))["data"];
+      data = (await axios.post("https://createbase.co.nz/alpha/user-session/update-saves", { session, object }))["data"];
     } catch (error) {
       data = { status: "error", content: error };
     }
