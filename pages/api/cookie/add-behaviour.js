@@ -45,14 +45,14 @@ export default async (req, res) => {
       return res.send({ status: "failed", content: "No behaviour was sent." });
     }
     // Set cookie header
-    res.setHeader(
+    /*res.setHeader(
       "Set-Cookie",
       cookie.serialize("data", JSON.stringify(data), {
         httpOnly: true,
         sameSite: "strict",
         path: "/",
       })
-    );
+    );*/
     // Update backend cookie
     let resData;
     try {

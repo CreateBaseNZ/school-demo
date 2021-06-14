@@ -12,6 +12,9 @@ import FullscreenContext from "/store/fullscreen-context";
 import MessageContext from "/store/message-context";
 
 import classes from "./HeaderButtons.module.scss";
+import { TrackChangesRounded } from "@material-ui/icons";
+
+import tracker from "/utils/tracker";
 
 const HeaderButtons = (props) => {
   const fullscreenCtx = useContext(FullscreenContext);
@@ -73,7 +76,10 @@ const HeaderButtons = (props) => {
           key={btn.title}
           title={btn.title}
           className={btn.show ? "" : classes.hide}
-          onClick={btn.clickHandler}
+          onClick={() => {
+            btn.clickHandler();
+            if (btn.title === "Message") tracker.click(15);
+          }}
         >
           {btn.icon}
         </button>
@@ -82,6 +88,7 @@ const HeaderButtons = (props) => {
         className={showLogo ? "" : classes.hide}
         width="138"
         height="25"
+        handler={() => tracker.click(16)}
       />
       {showMessage && messageCtx.formVisible && <MessageModal />}
     </div>

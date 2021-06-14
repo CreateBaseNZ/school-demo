@@ -74,12 +74,14 @@ const PlayButtons = (props) => {
         testHandler={props.testHandler}
         style={{ display: props.mode !== "ready" && "none" }}
         subsystem={props.subsystem}
+        project={props.project}
       />
       <StopButton
         stopTestHandler={props.stopTestHandler}
         style={{ display: props.mode !== "testing" && "none" }}
         subsystem={props.subsystem}
         progressState={props.progressState}
+        project={props.project}
       />
     </div>
   );

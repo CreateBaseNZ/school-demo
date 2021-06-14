@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import tracker from "/utils/tracker";
+
 const WhiteLogo = (props) => {
   return (
     <a
@@ -7,6 +9,7 @@ const WhiteLogo = (props) => {
       href="https://createbase.co.nz/"
       className={props.className}
       title="createbase.co.nz"
+      onClick={props.handler}
     >
       <Image
         src="/header-logo.png"

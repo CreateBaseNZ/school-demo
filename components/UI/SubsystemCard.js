@@ -6,6 +6,8 @@ import ScheduleRoundedIcon from "@material-ui/icons/ScheduleRounded";
 
 import classes from "./SubsystemCard.module.scss";
 
+import tracker from "/utils/tracker";
+
 const SubsystemCard = (props) => {
   const status = localStorage.getItem(props.id);
 
@@ -21,6 +23,11 @@ const SubsystemCard = (props) => {
   };
 
   const clickHandler = () => {
+    if (props.title === "We want to hear from you!") {
+      tracker.click(18);
+    } else if (props.title === "Sandbox") {
+      tracker.click(17);
+    }
     if (props.showTutorial) {
       props.showTutorialHandler();
       localStorage.setItem(props.id, "completed");

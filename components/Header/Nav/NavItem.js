@@ -22,8 +22,6 @@ const NavItem = (props) => {
   const showDropdown =
     ctx.navIsActive && ctx.activeType === props.type && isHovered;
 
-  console.log(ctx.activeSubsystem);
-
   return (
     <div className={classes.navItem}>
       <button
