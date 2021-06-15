@@ -76,7 +76,7 @@ const FlowEditor = (props) => {
         if (nextNode.length > 1) {
           return "multiple_tracks";
         } else if (nextNode[0]) {
-          currentNode = nextNode;
+          currentNode = nextNode[0];
         } else {
           traverse = false;
           break;
