@@ -13,6 +13,7 @@ import ReactFlow, {
   Controls,
   Background,
   getOutgoers,
+  getConnectedEdges,
 } from "react-flow-renderer";
 import {
   initialData,
@@ -32,6 +33,37 @@ import classes from "./FlowEditor.module.scss";
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
+const findNextNode = (currentNode, path, elements) => {
+  const nodes = [currentNode];
+  let nodeCollection = getConnectedEdges(nodes, elements);
+  let nextNodeList = getOutgoers(currentNode, elements);
+  let nextNodeID;
+  for (let i = 0; i < nodeCollection.length; i++) {
+    if (currentNode.id == nodeCollection[i].source) {
+      if (nodeCollection[i].sourceHandle == String(path)) {
+        nextNodeID = nodeCollection[i].target;
+        break;
+      }
+    }
+  }
+  for (let i = 0; i < nextNodeList.length; i++) {
+    if (nextNodeID == nextNodeList[i].id) {
+      return nextNodeList[i];
+    }
+  }
+
+  return false;
+}
+
+const loopUntilNext = (block) => {
+  
+
+
+
+
+}
+
+
 const FlowEditor = (props) => {
   const wrapperRef = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
@@ -43,47 +75,102 @@ const FlowEditor = (props) => {
       let blocksConfig = [];
       let currentNode = elements[0];
       let traverse = true;
+      let path = [];
+      let maxPath = [];
+      let nodeContext=[];
       while (traverse) {
-        let block = {
-          robot: "Arm",
-          value: { ...data[currentNode.id] },
-          type: currentNode.type,
-        };
+        if (currentNode) {
+          let block = {
+            robot: "Arm",
+            value: { ...data[currentNode.id] },
+            type: currentNode.type,
+          };
+          switch (currentNode.type) {
+            case "move":
+              block = {
+                ...block,
+                name: "MoveArm",
+              };
+              break;
+            case "gravity":
+              block = {
+                ...block,
+                name: "GravitySwitch",
+              };
+              block.type = "move";
+              break;
+            case "if":
+              block = {
+                ...block,
+                name: "if",
+              };
+              break;
+            default:
+              break;
+          }
+          blocksConfig.push(block);
+        }
+        let nextNode;
+        let edges = [];
+        let nodes = [currentNode];
         switch (currentNode.type) {
-          case "move":
-            block = {
-              ...block,
-              name: "MoveArm",
-            };
-            break;
-          case "gravity":
-            block = {
-              ...block,
-              name: "GravitySwitch",
-            };
-            block.type = "move";
-            break;
           case "if":
-            block = {
-              ...block,
-              name: "if",
-            };
-          break;
+            maxPath.push(2);
+            path.push(0);
+            nodeContext.push(currentNode);
+            nextNode = findNextNode(currentNode, path[path.length - 1], elements);
+            break;
+          case undefined:
+            break;
           default:
+            nextNode = getOutgoers(currentNode, elements)[0];
             break;
         }
-        blocksConfig.push(block);
-        const nextNode = getOutgoers(currentNode, elements)[0];
+
         if (nextNode) {
           currentNode = nextNode;
         } else {
-          traverse = false;
-          break;
+          if (path.length == 0) {
+            traverse = false;
+            break;
+          } else {
+            currentNode = nodeContext[path.length - 1];
+            path[path.length - 1]++;
+            nextNode = findNextNode(currentNode, path[path.length - 1], elements);
+            let interBlock;
+            if (path[path.length - 1] == maxPath[path.length - 1]) {
+              path.length--;
+              path.pop();
+              maxPath.pop();
+              nodeContext.pop();
+              interBlock= {
+                robot: "Arm",
+                type: "end-condition",
+                name: "end-condition",
+              };
+            } else {
+              switch (currentNode.type) {
+                case "if":
+                  if (path[path.length - 1] == 1) {
+                    interBlock = {
+                      robot: "Arm",
+                      type: "else-condition",
+                      name: "else-condition",
+                    };
+                  }
+                  break;
+              }
+            }
+            blocksConfig.push(interBlock);
+            currentNode = nextNode;
+
+          }
+          
         }
       }
-      if (blocksConfig[blocksConfig.length - 1].type !== "end") {
-        return "disconnected";
-      }
+      // if (blocksConfig[blocksConfig.length - 1].type !== "end") {
+      //   return "disconnected";
+      // }
       console.log(blocksConfig);
       return blocksConfig;
     },

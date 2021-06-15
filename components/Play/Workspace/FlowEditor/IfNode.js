@@ -86,7 +86,7 @@ const IfNode = ({ data }) => {
       </div>
       <Handle
         type="source"
-        id="true"
+        id="0"
         position="top"
         style={{
           height: "8px",
@@ -96,7 +96,7 @@ const IfNode = ({ data }) => {
       />
       <Handle
         type="source"
-        id="false"
+        id="1"
         position="right"
         style={{
           height: "8px",
@@ -106,7 +106,7 @@ const IfNode = ({ data }) => {
       />
       <Handle
         type="source"
-        id="Continue"
+        id="2"
         position="bottom"
         style={{
           height: "8px",
