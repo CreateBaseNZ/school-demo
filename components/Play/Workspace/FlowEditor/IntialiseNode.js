@@ -71,7 +71,7 @@ const IntialiseNode = ({ data }) => {
       </div>
       <Handle
         type="source"
-        position="top"
+        position="right"
         style={{
           height: "8px",
           width: "8px",
