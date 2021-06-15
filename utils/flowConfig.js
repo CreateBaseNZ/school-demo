@@ -8,6 +8,8 @@ import SetNode from "/components/Play/Workspace/FlowEditor/SetNode";
 import PauseNode from "/components/Play/Workspace/FlowEditor/PauseNode";
 import CustomEdge from "/components/Play/Workspace/FlowEditor/CustomEdge";
 import IfNode from "../components/Play/Workspace/FlowEditor/IfNode";
+import IntialiseNode from "../components/Play/Workspace/FlowEditor/IntialiseNode";
+
 
 export const initialData = {
   start: {},
@@ -21,7 +23,8 @@ export const nodeTypes = {
   gravity: GravityNode,
   read: ReadNode,
   set: SetNode,
-  if:IfNode,
+  if: IfNode,
+  intialise: IntialiseNode,
   pause: PauseNode,
 };
 
@@ -34,7 +37,9 @@ export const miniMapStrokeColoriser = (node) => {
     case "move":
       return "#0a73dc";
     case "if":
-        return "#0a73dc";
+      return "#0a73dc";
+    case "intialise":
+      return "#0a73dc";
     case "gravity":
       return "#0a73dc";
     case "read":

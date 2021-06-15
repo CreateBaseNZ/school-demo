@@ -101,6 +101,30 @@ const DndBar = () => {
             </div>
           </div>
         </div>
+        <div
+          className={`${classes.dndNode} ${classes.intialise}`}
+          onDragStart={(event) => onDragStart(event, "intialise")}
+          draggable
+        >
+          <h5>
+            <OpenWithRoundedIcon />
+            Intialise
+          </h5>
+          <div className={classes.inputContainer}>
+            <div className={classes.inputWrapper}>
+              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
+                value
+              </label>
+              <input type="number" id="move-x" />
+            </div>
+            <div className={classes.inputWrapper}>
+              <label htmlFor="move-y" style={{ color: "#1ECC30" }}>
+                varName
+              </label>
+              <input type="number" id="move-y" />
+            </div>
+          </div>
+        </div>
         {/* <div
           className={`${classes.dndNode} ${classes.read}`}
           onDragStart={(event) => onDragStart(event, "read")}

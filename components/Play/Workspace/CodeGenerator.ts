@@ -26,7 +26,7 @@ export class CodeGenerator {
     //Check if variable in correct system
     const spaces = varName.includes(' ');
     const numberStart = (varName[0] < 'A' || varName[0] > 'z');
-    if (numberStart || spaces) {
+    if (numberStart || spaces||this.isBool(varName)) {
       console.log("Invalid Variable Name");
     }
     //Checks if variable created
@@ -226,6 +226,36 @@ export class CodeGenerator {
     this.executes.push(str);
   }
 
+
+  private intialise(blockDetail) {
+    const blockFunction = this.blockFunctions.find((element) => {
+      if (element.type === "intialise") {
+        return (
+          element.function.name === blockDetail.name &&
+          element.robot === blockDetail.robot
+        );
+      } else {
+        return false;
+      }
+    });
+    // Build input
+    const element = blockFunction.function.inputs;
+    const currentInput = String(blockDetail.value[element.variable]);
+    if (!this.isNumber(currentInput) && !this.isBool(currentInput)) {
+      if (!this.checkVariable(currentInput)) {
+        console.log("Can't be used");
+      }
+    }
+    const elementOut = blockFunction.function.output
+    let output = '';
+    if (elementOut) {
+      output = this.checkCorrectVar(String(blockDetail.value[elementOut.variable]));
+    }
+    const execute = `// Assign Variable
+    ${output} ${currentInput};`;
+    this.executes.push(execute);
+  }
+
   private endCondition() {
     let str = `}`;
     this.executes.push(str);
@@ -292,6 +322,9 @@ export class CodeGenerator {
           break;
         case "if":
           this.ifStart(element);
+          break;
+        case "intialise":
+          this.intialise(element);
           break;
         case "else-condition":
           this.elseCondition();

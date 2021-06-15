@@ -34,6 +34,16 @@
   },
   {
     "robot": "Arm",
+    "type": "intialise",
+    "name": "intialise",
+    "function": {
+      "name": "intialise",
+      "inputs": { "variable": "value", "type": "any", "value": 0 },
+      "output": { "variable": "varName", "type": "any", "value": 0 }
+    }
+  },
+  {
+    "robot": "Arm",
     "type": "move",
     "name": "Gravity Switch",
     "function": {

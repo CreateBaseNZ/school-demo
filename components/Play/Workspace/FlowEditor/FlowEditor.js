@@ -105,6 +105,12 @@ const FlowEditor = (props) => {
                 name: "if",
               };
               break;
+            case "intialise":
+              block = {
+                ...block,
+                name: "intialise",
+              };
+              break;
             default:
               break;
           }
@@ -113,6 +119,7 @@ const FlowEditor = (props) => {
         let nextNode;
         let edges = [];
         let nodes = [currentNode];
+
         switch (currentNode.type) {
           case "if":
             maxPath.push(2);
@@ -121,12 +128,12 @@ const FlowEditor = (props) => {
             nextNode = findNextNode(currentNode, path[path.length - 1], elements);
             break;
           case undefined:
+            blocksConfig.pop();
             break;
           default:
             nextNode = getOutgoers(currentNode, elements)[0];
             break;
         }
-
         if (nextNode) {
           currentNode = nextNode;
         } else {
@@ -168,9 +175,9 @@ const FlowEditor = (props) => {
           
         }
       }
-      // if (blocksConfig[blocksConfig.length - 1].type !== "end") {
-      //   return "disconnected";
-      // }
+      if (blocksConfig[blocksConfig.length - 1].type !== "end") {
+        return "disconnected";
+      }
       console.log(blocksConfig);
       return blocksConfig;
     },
@@ -240,6 +247,8 @@ const FlowEditor = (props) => {
       defaultValues = { x: 0, y: 0, z: 0 };
     } else if (type == "if") {
       defaultValues = { var1: 0, sign: '<', var2: 0 };
+    } else if (type == "intialise") {
+      defaultValues = { value: 0, varName: "varName" };
     }
     setData((data) => ({
       ...data,
