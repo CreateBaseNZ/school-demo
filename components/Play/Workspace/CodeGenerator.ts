@@ -216,6 +216,7 @@ export class CodeGenerator {
         }
         inputs += String(blockDetail.value[element.variable]);
       }
+
       const str = `if(${inputs}){`;
       this.executes.push(str);
     }
@@ -226,6 +227,40 @@ export class CodeGenerator {
     this.executes.push(str);
   }
 
+  private compare(blockDetail) {
+    const blockFunction = this.blockFunctions.find((element) => {
+      if (element.type === "compare") {
+        return (
+          element.function.name === blockDetail.name &&
+          element.robot === blockDetail.robot
+        );
+      } else {
+        return false;
+      }
+    });
+    if (blockFunction) {
+      let inputs: string = "";
+      for (let i = 0; i < blockFunction.function.inputs.length; i++) {
+        const element = blockFunction.function.inputs[i];
+        const val = String(blockDetail.value[element.variable]);
+        if (i != 1) {
+          if (!this.isNumber(val)) {
+            this.checkVariable(val);
+          }
+        } else {
+          this.checkEqualitySign(val);
+        }
+        inputs += String(blockDetail.value[element.variable]);
+      }
+      const elementOut = blockFunction.function.output
+      let output = '';
+      if (elementOut) {
+        output = this.checkCorrectVar(String(blockDetail.value[elementOut.variable]));
+      }
+      const str = `${output}(${inputs})`;
+      this.executes.push(str);
+    }
+  }
 
   private intialise(blockDetail) {
     const blockFunction = this.blockFunctions.find((element) => {
@@ -322,6 +357,9 @@ export class CodeGenerator {
           break;
         case "if":
           this.ifStart(element);
+          break;
+        case "compare":
+          this.compare(element);
           break;
         case "intialise":
           this.intialise(element);

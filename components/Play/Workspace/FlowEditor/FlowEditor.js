@@ -111,6 +111,12 @@ const FlowEditor = (props) => {
                 name: "intialise",
               };
               break;
+            case "compare":
+              block = {
+                ...block,
+                name: "compare",
+              };
+              break;
             default:
               break;
           }
@@ -249,6 +255,8 @@ const FlowEditor = (props) => {
       defaultValues = { var1: 0, sign: '<', var2: 0 };
     } else if (type == "intialise") {
       defaultValues = { value: 0, varName: "varName" };
+    } else if (type == "compare") {
+      defaultValues = { var1: "var1", sign: '<', var2: "var2" ,out:"varOut" };
     }
     setData((data) => ({
       ...data,
