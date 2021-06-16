@@ -25,11 +25,9 @@
     "name": "if",
     "function": {
       "name": "if",
-      "inputs": [
-        { "variable": "var1", "type": "any", "value": 0 },
-        { "variable": "sign", "type": "any", "value": 0 },
-        { "variable": "var2", "type": "any", "value": 0 }
-      ]
+      "inputs": 
+        { "variable": "boolVar", "type": "any", "value": 0 }
+      
     }
   },
   {

@@ -203,20 +203,12 @@ export class CodeGenerator {
       }
     });
     if (blockFunction) {
-      let inputs: string = "";
-      for (let i = 0; i < blockFunction.function.inputs.length; i++) {
-        const element = blockFunction.function.inputs[i];
-        const val = String(blockDetail.value[element.variable]);
-        if (i != 1) {
-          if (!this.isNumber(val)) {
-          this.checkVariable(val);
-          }
-        } else {
-          this.checkEqualitySign(val);
-        }
-        inputs += String(blockDetail.value[element.variable]);
+      const element = blockFunction.function.inputs;
+      const val = String(blockDetail.value[element.variable]);
+      if (!this.isBool(val)) {
+        this.checkVariable(val);
       }
-
+      let inputs = val;
       const str = `if(${inputs}){`;
       this.executes.push(str);
     }

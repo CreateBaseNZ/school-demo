@@ -40,44 +40,14 @@ const IfNode = ({ data }) => {
       <div className={classes.inputContainer}>
         <div className={classes.inputWrapper}>
           <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-            var1
+            Condition
           </label>
           <input
             type="any"
             id="if-var1"
-            name="var1"
+            name="boolVar"
             placeholder="0"
-            value={coords.var1}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-y" style={{ color: "#1ECC30" }}>
-            sign
-          </label>
-          <input
-            type="any"
-            id="if-sign"
-            name="sign"
-            placeholder=">"
-            value={coords.sign}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-z">
-            var2
-          </label>
-          <input
-            type="any"
-            id="if-var2"
-            name="var2"
-            placeholder="0"
-            value={coords.var2}
+            value={coords.boolVar}
             onChange={changeHandler}
             onFocus={focusHandler}
             onDragStart={dragHandler}

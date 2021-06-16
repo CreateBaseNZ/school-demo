@@ -252,7 +252,7 @@ const FlowEditor = (props) => {
     } else if (type === "move") {
       defaultValues = { x: 0, y: 0, z: 0 };
     } else if (type == "if") {
-      defaultValues = { var1: 0, sign: '<', var2: 0 };
+      defaultValues = { boolVar:true };
     } else if (type == "intialise") {
       defaultValues = { value: 0, varName: "varName" };
     } else if (type == "compare") {
