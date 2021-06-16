@@ -72,6 +72,24 @@ const DndBar = () => {
           </div>
         </div>
         <div
+          className={`${classes.dndNode} ${classes.while}`}
+          onDragStart={(event) => onDragStart(event, "while")}
+          draggable
+        >
+          <h5>
+            <OpenWithRoundedIcon />
+            While
+          </h5>
+          <div className={classes.inputContainer}>
+            <div className={classes.inputWrapper}>
+              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
+                Condition
+              </label>
+              <input type="number" id="move-x" />
+            </div>
+          </div>
+        </div>
+        <div
           className={`${classes.dndNode} ${classes.compare}`}
           onDragStart={(event) => onDragStart(event, "compare")}
           draggable

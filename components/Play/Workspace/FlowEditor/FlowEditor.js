@@ -117,6 +117,12 @@ const FlowEditor = (props) => {
                 name: "compare",
               };
               break;
+            case "while":
+              block = {
+                ...block,
+                name: "while",
+              };
+              break;
             default:
               break;
           }
@@ -129,6 +135,12 @@ const FlowEditor = (props) => {
         switch (currentNode.type) {
           case "if":
             maxPath.push(2);
+            path.push(0);
+            nodeContext.push(currentNode);
+            nextNode = findNextNode(currentNode, path[path.length - 1], elements);
+            break;
+          case "while":
+            maxPath.push(1);
             path.push(0);
             nodeContext.push(currentNode);
             nextNode = findNextNode(currentNode, path[path.length - 1], elements);
@@ -252,11 +264,13 @@ const FlowEditor = (props) => {
     } else if (type === "move") {
       defaultValues = { x: 0, y: 0, z: 0 };
     } else if (type == "if") {
-      defaultValues = { boolVar:true };
+      defaultValues = { boolVar: true };
     } else if (type == "intialise") {
       defaultValues = { value: 0, varName: "varName" };
     } else if (type == "compare") {
-      defaultValues = { var1: "var1", sign: '<', var2: "var2" ,out:"varOut" };
+      defaultValues = { var1: "var1", sign: '<', var2: "var2", out: "varOut" };
+    } else if (type == "while") {
+      defaultValues = { boolVar: true };
     }
     setData((data) => ({
       ...data,

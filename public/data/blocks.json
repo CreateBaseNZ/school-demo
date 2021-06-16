@@ -32,6 +32,17 @@
   },
   {
     "robot": "Arm",
+    "type": "while",
+    "name": "while",
+    "function": {
+      "name": "while",
+      "inputs": 
+        { "variable": "boolVar", "type": "any", "value": 0 }
+      
+    }
+  },
+  {
+    "robot": "Arm",
     "type": "compare",
     "name": "compare",
     "function": {

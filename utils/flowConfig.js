@@ -10,6 +10,7 @@ import CustomEdge from "/components/Play/Workspace/FlowEditor/CustomEdge";
 import IfNode from "../components/Play/Workspace/FlowEditor/IfNode";
 import IntialiseNode from "../components/Play/Workspace/FlowEditor/IntialiseNode";
 import CompareNode from "../components/Play/Workspace/FlowEditor/CompareNode";
+import WhileNode from "../components/Play/Workspace/FlowEditor/WhileNode";
 
 export const initialData = {
   start: {},
@@ -25,7 +26,8 @@ export const nodeTypes = {
   set: SetNode,
   if: IfNode,
   intialise: IntialiseNode,
-  compare:CompareNode,
+  compare: CompareNode,
+  while:WhileNode,
   pause: PauseNode,
 };
 
@@ -37,6 +39,8 @@ export const miniMapStrokeColoriser = (node) => {
   switch (node.type) {
     case "move":
       return "#0a73dc";
+    case "while":
+        return "#0a73dc";
     case "compare":
       return "#0a73dc";
     case "if":

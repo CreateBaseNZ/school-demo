@@ -213,7 +213,28 @@ export class CodeGenerator {
       this.executes.push(str);
     }
   }
-
+  private whileStart(blockDetail: any) {
+    const blockFunction = this.blockFunctions.find((element) => {
+      if (element.type === "while") {
+        return (
+          element.function.name === blockDetail.name &&
+          element.robot === blockDetail.robot
+        );
+      } else {
+        return false;
+      }
+    });
+    if (blockFunction) {
+      const element = blockFunction.function.inputs;
+      const val = String(blockDetail.value[element.variable]);
+      if (!this.isBool(val)) {
+        this.checkVariable(val);
+      }
+      let inputs = val;
+      const str = `while(${inputs}){`;
+      this.executes.push(str);
+    }
+  }
   private elseCondition() {
     let str = `}else{`;
     this.executes.push(str);
@@ -355,6 +376,9 @@ export class CodeGenerator {
           break;
         case "intialise":
           this.intialise(element);
+          break;
+        case "while":
+          this.whileStart(element);
           break;
         case "else-condition":
           this.elseCondition();
