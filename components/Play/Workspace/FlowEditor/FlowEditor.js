@@ -146,12 +146,17 @@ const FlowEditor = (props) => {
             nextNode = findNextNode(currentNode, path[path.length - 1], elements);
             break;
           case undefined:
-            blocksConfig.pop();
+            let block = blocksConfig.pop();
+            if (block.type != "else-condition") {
+              blocksConfig.push(block);
+            }
             break;
           default:
             nextNode = getOutgoers(currentNode, elements)[0];
             break;
         }
+       
+
         if (nextNode) {
           currentNode = nextNode;
         } else {
@@ -159,16 +164,17 @@ const FlowEditor = (props) => {
             traverse = false;
             break;
           } else {
+            
+
             currentNode = nodeContext[path.length - 1];
             path[path.length - 1]++;
             nextNode = findNextNode(currentNode, path[path.length - 1], elements);
             let interBlock;
             if (path[path.length - 1] == maxPath[path.length - 1]) {
-              path.length--;
               path.pop();
               maxPath.pop();
               nodeContext.pop();
-              interBlock= {
+              interBlock = {
                 robot: "Arm",
                 type: "end-condition",
                 name: "end-condition",
@@ -184,6 +190,8 @@ const FlowEditor = (props) => {
                     };
                   }
                   break;
+                default:
+                  break;
               }
             }
             blocksConfig.push(interBlock);
@@ -193,9 +201,9 @@ const FlowEditor = (props) => {
           
         }
       }
-      if (blocksConfig[blocksConfig.length - 1].type !== "end") {
-        return "disconnected";
-      }
+      // if (blocksConfig[blocksConfig.length - 1].type !== "end") {
+      //   return "disconnected";
+      // }
       console.log(blocksConfig);
       return blocksConfig;
     },
@@ -268,7 +276,7 @@ const FlowEditor = (props) => {
     } else if (type == "intialise") {
       defaultValues = { value: 0, varName: "varName" };
     } else if (type == "compare") {
-      defaultValues = { var1: "var1", sign: '<', var2: "var2", out: "varOut" };
+      defaultValues = { var1: "var1", eqSign: '<', var2: "var2", out: "varOut" };
     } else if (type == "while") {
       defaultValues = { boolVar: true };
     }

@@ -60,9 +60,9 @@ const CompareNode = ({ data }) => {
           <input
             type="number"
             id="compare-sign"
-            name="sign"
+            name="eqSign"
             placeholder="<"
-            value={compare.sign}
+            value={compare.eqSign}
             onChange={changeHandler}
             onFocus={focusHandler}
             onDragStart={dragHandler}

@@ -68,6 +68,7 @@ export class CodeGenerator {
     }
     return true;
   }
+
   private isBool(varName: string) {
     if (varName == "true" || varName == "false") {
       return true;
@@ -131,6 +132,26 @@ export class CodeGenerator {
     this.content += blockFunction.logic;
   }
 
+  private mathOp(blockDetail: any) {
+    let compareInputs = ["var1", "sign", "var2"];
+    let inputs: string = "";
+    for (let i = 0; i < compareInputs.length; i++) {
+      const val = String(blockDetail.value[compareInputs[i]]);
+      if (compareInputs[i] != "sign") {
+        if (!this.isNumber(val)) {
+          this.checkVariable(val);
+        }
+      } else {
+        this.checkEqualitySign(val);
+      }
+      inputs += val;
+    }
+    let output = '';
+    output = this.checkCorrectVar(String(blockDetail.value.out));
+    const str = `${output}(${inputs})`;
+    this.executes.push(str);
+  }
+
   private move(blockDetail: any) {
     // Fetch the Block Function
     const blockFunction = this.blockFunctions.find((element) => {
@@ -173,8 +194,7 @@ export class CodeGenerator {
     //const functionName = blockFunction.function.name + String(this.increment);
     this.increment++;
     // Build function
-    const func = `
-    let ${functionName} = (${inputVariables}) => {
+    const func = `let ${functionName} = (${inputVariables}) => {
       return new Promise((resolve, reject) => {
         ${blockFunction.function.logic}
       });
@@ -189,116 +209,69 @@ export class CodeGenerator {
     this.executes.push(execute);
   }
 
-
+  private forStart(blockDetail) {
+    const val = String(blockDetail.value.repNum);
+    if (!this.isNumber(val)) {
+      this.checkVariable(val);
+    }
+    const str = `for(let i=0;i<${val};i++){`;
+    this.executes.push(str);
+  }
 
   private ifStart(blockDetail: any) {
-    const blockFunction = this.blockFunctions.find((element) => {
-      if (element.type === "if") {
-        return (
-          element.function.name === blockDetail.name &&
-          element.robot === blockDetail.robot
-        );
-      } else {
-        return false;
-      }
-    });
-    if (blockFunction) {
-      const element = blockFunction.function.inputs;
-      const val = String(blockDetail.value[element.variable]);
-      if (!this.isBool(val)) {
-        this.checkVariable(val);
-      }
-      let inputs = val;
-      const str = `if(${inputs}){`;
-      this.executes.push(str);
+    const val = String(blockDetail.value.boolVar);
+    if (!this.isBool(val)) {
+      this.checkVariable(val);
     }
+    let inputs = val;
+    const str = `if(${inputs}){`;
+    this.executes.push(str);
   }
+
   private whileStart(blockDetail: any) {
-    const blockFunction = this.blockFunctions.find((element) => {
-      if (element.type === "while") {
-        return (
-          element.function.name === blockDetail.name &&
-          element.robot === blockDetail.robot
-        );
-      } else {
-        return false;
-      }
-    });
-    if (blockFunction) {
-      const element = blockFunction.function.inputs;
-      const val = String(blockDetail.value[element.variable]);
-      if (!this.isBool(val)) {
-        this.checkVariable(val);
-      }
-      let inputs = val;
-      const str = `while(${inputs}){`;
-      this.executes.push(str);
+    const val = String(blockDetail.value.boolVar);
+    if (!this.isBool(val)) {
+      this.checkVariable(val);
     }
+    let inputs = val;
+    const str = `while(${inputs}){`;
+    this.executes.push(str); 
   }
+
   private elseCondition() {
     let str = `}else{`;
     this.executes.push(str);
   }
 
   private compare(blockDetail) {
-    const blockFunction = this.blockFunctions.find((element) => {
-      if (element.type === "compare") {
-        return (
-          element.function.name === blockDetail.name &&
-          element.robot === blockDetail.robot
-        );
-      } else {
-        return false;
-      }
-    });
-    if (blockFunction) {
-      let inputs: string = "";
-      for (let i = 0; i < blockFunction.function.inputs.length; i++) {
-        const element = blockFunction.function.inputs[i];
-        const val = String(blockDetail.value[element.variable]);
-        if (i != 1) {
-          if (!this.isNumber(val)) {
-            this.checkVariable(val);
-          }
-        } else {
-          this.checkEqualitySign(val);
+    let compareInputs = ["var1", "eqSign", "var2"];
+    let inputs: string = "";
+    for (let i = 0; i < compareInputs.length; i++) {
+      const val = String(blockDetail.value[compareInputs[i]]);
+      if (compareInputs[i] != "eqSign") {
+        if (!this.isNumber(val)) {
+          this.checkVariable(val);
         }
-        inputs += String(blockDetail.value[element.variable]);
+      } else {
+        this.checkEqualitySign(val);
       }
-      const elementOut = blockFunction.function.output
-      let output = '';
-      if (elementOut) {
-        output = this.checkCorrectVar(String(blockDetail.value[elementOut.variable]));
-      }
-      const str = `${output}(${inputs})`;
-      this.executes.push(str);
+      inputs += val;
     }
+    let output = '';
+    output = this.checkCorrectVar(String(blockDetail.value.out));
+    const str = `${output}(${inputs})`;
+    this.executes.push(str);
   }
 
   private intialise(blockDetail) {
-    const blockFunction = this.blockFunctions.find((element) => {
-      if (element.type === "intialise") {
-        return (
-          element.function.name === blockDetail.name &&
-          element.robot === blockDetail.robot
-        );
-      } else {
-        return false;
-      }
-    });
-    // Build input
-    const element = blockFunction.function.inputs;
-    const currentInput = String(blockDetail.value[element.variable]);
+    const currentInput = String(blockDetail.value.value);
     if (!this.isNumber(currentInput) && !this.isBool(currentInput)) {
       if (!this.checkVariable(currentInput)) {
         console.log("Can't be used");
       }
     }
-    const elementOut = blockFunction.function.output
     let output = '';
-    if (elementOut) {
-      output = this.checkCorrectVar(String(blockDetail.value[elementOut.variable]));
-    }
+    output = this.checkCorrectVar(String(blockDetail.value.varName));
     const execute = `// Assign Variable
     ${output} ${currentInput};`;
     this.executes.push(execute);
@@ -320,10 +293,6 @@ export class CodeGenerator {
       this.executes.push(element);
     }
   }
-
-
-
-
 
   private run() {
     this.execute = "const run = async () => {\n";
@@ -379,6 +348,12 @@ export class CodeGenerator {
           break;
         case "while":
           this.whileStart(element);
+          break;
+        case "maths":
+          this.mathOp(element);
+          break;
+        case "for":
+          this.forStart(element);
           break;
         case "else-condition":
           this.elseCondition();

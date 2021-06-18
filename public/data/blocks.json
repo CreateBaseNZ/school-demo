@@ -21,52 +21,6 @@
   },
   {
     "robot": "Arm",
-    "type": "if",
-    "name": "if",
-    "function": {
-      "name": "if",
-      "inputs": 
-        { "variable": "boolVar", "type": "any", "value": 0 }
-      
-    }
-  },
-  {
-    "robot": "Arm",
-    "type": "while",
-    "name": "while",
-    "function": {
-      "name": "while",
-      "inputs": 
-        { "variable": "boolVar", "type": "any", "value": 0 }
-      
-    }
-  },
-  {
-    "robot": "Arm",
-    "type": "compare",
-    "name": "compare",
-    "function": {
-      "name": "compare",
-      "inputs": [
-        { "variable": "var1", "type": "any", "value": 0 },
-        { "variable": "sign", "type": "any", "value": 0 },
-        { "variable": "var2", "type": "any", "value": 0 }
-      ],
-      "output":{ "variable": "out", "type": "any", "value": 0 }
-    }
-  },
-  {
-    "robot": "Arm",
-    "type": "intialise",
-    "name": "intialise",
-    "function": {
-      "name": "intialise",
-      "inputs": { "variable": "value", "type": "any", "value": 0 },
-      "output": { "variable": "varName", "type": "any", "value": 0 }
-    }
-  },
-  {
-    "robot": "Arm",
     "type": "move",
     "name": "Gravity Switch",
     "function": {
