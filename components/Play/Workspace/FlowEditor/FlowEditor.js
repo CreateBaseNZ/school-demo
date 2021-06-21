@@ -128,6 +128,12 @@ const FlowEditor = (props) => {
                   ...block,
                   name: "for",
                 };
+              break;
+              case "math":
+                block = {
+                  ...block,
+                  name: "math",
+                };
                 break;
             default:
               break;
@@ -284,6 +290,8 @@ const FlowEditor = (props) => {
       defaultValues = { value: 0, varName: "varName" };
     } else if (type == "compare") {
       defaultValues = { var1: "var1", eqSign: '<', var2: "var2", out: "varOut" };
+    } else if (type == "math") {
+      defaultValues = { var1: "var1", sign: '+', var2: "var2", out: "varOut" };
     } else if (type == "while") {
       defaultValues = { boolVar: true };
     } else if (type == "for") {

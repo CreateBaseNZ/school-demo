@@ -43,7 +43,7 @@ const CompareNode = ({ data }) => {
             var1
           </label>
           <input
-            type="number"
+            type="any"
             id="compare-var1"
             name="var1"
             placeholder="var1"
@@ -58,7 +58,7 @@ const CompareNode = ({ data }) => {
             sign
           </label>
           <input
-            type="number"
+            type="any"
             id="compare-sign"
             name="eqSign"
             placeholder="<"
@@ -73,7 +73,7 @@ const CompareNode = ({ data }) => {
             var2
           </label>
           <input
-            type="number"
+            type="any"
             id="move-var2"
             name="var2"
             placeholder="var2"
@@ -88,7 +88,7 @@ const CompareNode = ({ data }) => {
             out
           </label>
           <input
-            type="number"
+            type="any"
             id="move-out"
             name="out"
             placeholder="varOut"

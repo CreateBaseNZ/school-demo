@@ -12,6 +12,7 @@ import IntialiseNode from "../components/Play/Workspace/FlowEditor/IntialiseNode
 import CompareNode from "../components/Play/Workspace/FlowEditor/CompareNode";
 import WhileNode from "../components/Play/Workspace/FlowEditor/WhileNode";
 import ForNode from "../components/Play/Workspace/FlowEditor/ForNode";
+import MathNode from "../components/Play/Workspace/FlowEditor/MathNode";
 
 export const initialData = {
   start: {},
@@ -26,6 +27,7 @@ export const nodeTypes = {
   read: ReadNode,
   set: SetNode,
   for: ForNode,
+  math:MathNode,
   if: IfNode,
   intialise: IntialiseNode,
   compare: CompareNode,

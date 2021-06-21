@@ -98,6 +98,18 @@ export class CodeGenerator {
     return false;
   }
   
+  private checkSign(varName: string) {
+    const possibility=["+","-","*","/","**","%"]
+    for (let i = 0; i < possibility.length; i++){
+      const data = possibility[i];
+      if (varName === data) {
+        return true;
+      }
+    }      
+    console.log("Incorrect Sign!");
+    return false;
+  }
+
   private checkVariable(varName: string) {
     //Check if variable in correct system
     const spaces = varName.includes(' ');
@@ -142,7 +154,7 @@ export class CodeGenerator {
           this.checkVariable(val);
         }
       } else {
-        this.checkEqualitySign(val);
+        this.checkSign(val);
       }
       inputs += val;
     }
@@ -349,7 +361,7 @@ export class CodeGenerator {
         case "while":
           this.whileStart(element);
           break;
-        case "maths":
+        case "math":
           this.mathOp(element);
           break;
         case "for":

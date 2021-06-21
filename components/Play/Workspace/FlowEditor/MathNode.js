@@ -5,13 +5,13 @@ import OpenWithRoundedIcon from "@material-ui/icons/OpenWithRounded";
 
 import classes from "./Nodes.module.scss";
 
-const MoveNode = ({ data }) => {
-  const [coords, setCoords] = useState(data.default);
+const MathNode = ({ data }) => {
+  const [compare, setCompare] = useState(data.default);
 
   const changeHandler = (event) => {
-    const newCoords = { ...coords, [event.target.name]: event.target.value };
-    data.callBack(newCoords);
-    setCoords(newCoords);
+    const newCompare = { ...compare, [event.target.name]: event.target.value };
+    data.callBack(newCompare);
+    setCompare(newCompare);
   };
 
   const focusHandler = (event) => {
@@ -23,7 +23,7 @@ const MoveNode = ({ data }) => {
   };
 
   return (
-    <div className={`${classes.node} ${classes.move} ${classes.arm}`}>
+    <div className={`${classes.node} ${classes.compare} ${classes.arm}`}>
       <Handle
         type="target"
         position="left"
@@ -35,19 +35,19 @@ const MoveNode = ({ data }) => {
       />
       <h5>
         <OpenWithRoundedIcon />
-        Move Arm
+        Math
       </h5>
       <div className={classes.inputContainer}>
         <div className={classes.inputWrapper}>
           <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-            X
+            var1
           </label>
           <input
             type="any"
-            id="move-x"
-            name="x"
-            placeholder="0"
-            value={coords.x}
+            id="compare-var1"
+            name="var1"
+            placeholder="var1"
+            value={compare.var1}
             onChange={changeHandler}
             onFocus={focusHandler}
             onDragStart={dragHandler}
@@ -55,27 +55,44 @@ const MoveNode = ({ data }) => {
         </div>
         <div className={classes.inputWrapper}>
           <label htmlFor="move-y" style={{ color: "#1ECC30" }}>
-            Y
+            sign
           </label>
           <input
             type="any"
-            id="move-y"
-            name="y"
-            placeholder="0"
-            value={coords.y}
+            id="math-sign"
+            name="sign"
+            placeholder="+"
+            value={compare.sign}
             onChange={changeHandler}
             onFocus={focusHandler}
             onDragStart={dragHandler}
           />
         </div>
         <div className={classes.inputWrapper}>
-          <label htmlFor="move-z">Z</label>
+          <label htmlFor="move-z">
+            var2
+          </label>
           <input
             type="any"
-            id="move-z"
-            name="z"
-            placeholder="0"
-            value={coords.z}
+            id="move-var2"
+            name="var2"
+            placeholder="var2"
+            value={compare.var2}
+            onChange={changeHandler}
+            onFocus={focusHandler}
+            onDragStart={dragHandler}
+          />
+        </div>
+        <div className={classes.inputWrapper}>
+          <label htmlFor="move-z">
+            out
+          </label>
+          <input
+            type="any"
+            id="move-out"
+            name="out"
+            placeholder="varOut"
+            value={compare.out}
             onChange={changeHandler}
             onFocus={focusHandler}
             onDragStart={dragHandler}
@@ -95,4 +112,4 @@ const MoveNode = ({ data }) => {
   );
 };
 
-export default memo(MoveNode);
+export default memo(MathNode);
