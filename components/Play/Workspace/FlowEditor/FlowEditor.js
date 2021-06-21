@@ -123,6 +123,12 @@ const FlowEditor = (props) => {
                 name: "while",
               };
               break;
+              case "for":
+                block = {
+                  ...block,
+                  name: "for",
+                };
+                break;
             default:
               break;
           }
@@ -140,6 +146,7 @@ const FlowEditor = (props) => {
             nextNode = findNextNode(currentNode, path[path.length - 1], elements);
             break;
           case "while":
+          case "for":
             maxPath.push(1);
             path.push(0);
             nodeContext.push(currentNode);
@@ -279,6 +286,8 @@ const FlowEditor = (props) => {
       defaultValues = { var1: "var1", eqSign: '<', var2: "var2", out: "varOut" };
     } else if (type == "while") {
       defaultValues = { boolVar: true };
+    } else if (type == "for") {
+      defaultValues = { repNum: 0 };
     }
     setData((data) => ({
       ...data,

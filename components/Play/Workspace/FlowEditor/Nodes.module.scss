@@ -71,6 +71,17 @@
     .handle.target {
       border: 2px solid $blue-dark;
     }
+  }&.for {
+    color: $blue-dark;
+    input:focus {
+      border-color: $blue-dark;
+    }
+    .handle.source {
+      background: $blue-dark;
+    }
+    .handle.target {
+      border: 2px solid $blue-dark;
+    }
   }&.compare {
     color: $blue-dark;
     input:focus {

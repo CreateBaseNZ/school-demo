@@ -11,6 +11,7 @@ import IfNode from "../components/Play/Workspace/FlowEditor/IfNode";
 import IntialiseNode from "../components/Play/Workspace/FlowEditor/IntialiseNode";
 import CompareNode from "../components/Play/Workspace/FlowEditor/CompareNode";
 import WhileNode from "../components/Play/Workspace/FlowEditor/WhileNode";
+import ForNode from "../components/Play/Workspace/FlowEditor/ForNode";
 
 export const initialData = {
   start: {},
@@ -24,6 +25,7 @@ export const nodeTypes = {
   gravity: GravityNode,
   read: ReadNode,
   set: SetNode,
+  for: ForNode,
   if: IfNode,
   intialise: IntialiseNode,
   compare: CompareNode,
@@ -39,8 +41,10 @@ export const miniMapStrokeColoriser = (node) => {
   switch (node.type) {
     case "move":
       return "#0a73dc";
+    case "for":
+      return "#0a73dc";
     case "while":
-        return "#0a73dc";
+      return "#0a73dc";
     case "compare":
       return "#0a73dc";
     case "if":

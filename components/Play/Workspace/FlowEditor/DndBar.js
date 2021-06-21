@@ -90,6 +90,24 @@ const DndBar = () => {
           </div>
         </div>
         <div
+          className={`${classes.dndNode} ${classes.for}`}
+          onDragStart={(event) => onDragStart(event, "for")}
+          draggable
+        >
+          <h5>
+            <OpenWithRoundedIcon />
+            Repeat
+          </h5>
+          <div className={classes.inputContainer}>
+            <div className={classes.inputWrapper}>
+              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
+                Rep Num
+              </label>
+              <input type="number" id="move-x" />
+            </div>
+          </div>
+        </div>
+        <div
           className={`${classes.dndNode} ${classes.compare}`}
           onDragStart={(event) => onDragStart(event, "compare")}
           draggable

@@ -5,7 +5,7 @@ import OpenWithRoundedIcon from "@material-ui/icons/OpenWithRounded";
 
 import classes from "./Nodes.module.scss";
 
-const WhileNode = ({ data }) => {
+const ForNode = ({ data }) => {
   const [coords, setCoords] =useState(data.default);
 
   const changeHandler = (event) => {
@@ -23,7 +23,7 @@ const WhileNode = ({ data }) => {
   };
 
   return (
-    <div className={`${classes.node} ${classes.while} ${classes.arm}`}>
+    <div className={`${classes.node} ${classes.for} ${classes.arm}`}>
       <Handle
         type="target"
         position="left"
@@ -35,7 +35,7 @@ const WhileNode = ({ data }) => {
       />
       <h5>
         <OpenWithRoundedIcon />
-        While
+        Repeat
       </h5>
       <div className={classes.inputContainer}>
         <div className={classes.inputWrapper}>
@@ -44,10 +44,10 @@ const WhileNode = ({ data }) => {
           </label>
           <input
             type="any"
-            id="if-var1"
-            name="boolVar"
+            id="repNum"
+            name="repNum"
             placeholder="0"
-            value={coords.boolVar}
+            value={coords.repNum}
             onChange={changeHandler}
             onFocus={focusHandler}
             onDragStart={dragHandler}
@@ -79,4 +79,4 @@ const WhileNode = ({ data }) => {
   );
 };
 
-export default memo(WhileNode);
+export default memo(ForNode);
