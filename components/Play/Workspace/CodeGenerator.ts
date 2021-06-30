@@ -26,7 +26,8 @@ export class CodeGenerator {
     //Check if variable in correct system
     const spaces = varName.includes(' ');
     const numberStart = (varName[0] < 'A' || varName[0] > 'z');
-    if (numberStart || spaces||this.isBool(varName)) {
+    if (numberStart || spaces || this.isBool(varName)) {
+      return false;
       console.log("Invalid Variable Name");
     }
     //Checks if variable created
@@ -140,29 +141,43 @@ export class CodeGenerator {
         element.robot === blockDetail.robot && blockDetail.type === "start"
       );
     });
+    if (blockFunction) {
+      this.content += blockFunction.logic;
+      return true;
+    }
+    else {
+      return false;
+    }
     // Add to content
-    this.content += blockFunction.logic;
+    
   }
 
   private mathOp(blockDetail: any) {
-    let compareInputs = ["var1", "sign", "var2"];
+    let mathInput = ["var1", "sign", "var2"];
     let inputs: string = "";
-    for (let i = 0; i < compareInputs.length; i++) {
-      const val = String(blockDetail.value[compareInputs[i]]);
-      if (compareInputs[i] != "sign") {
+    for (let i = 0; i < mathInput.length; i++) {
+      const val = String(blockDetail.value[mathInput[i]]);
+      if (mathInput[i] != "sign") {
         if (!this.isNumber(val)) {
-          this.checkVariable(val);
+          if (!this.checkVariable(val)) {
+            return false;
+          }
         }
       } else {
-        this.checkSign(val);
+        if (!this.checkSign(val)) {
+          return false;
+        }
       }
       inputs += val;
     }
-    let output = '';
+    let output: any;
+    output = '';
     output = this.checkCorrectVar(String(blockDetail.value.out));
     const str = `${output}(${inputs})`;
     this.executes.push(str);
+    return true;
   }
+
 
   private move(blockDetail: any) {
     // Fetch the Block Function
@@ -185,6 +200,7 @@ export class CodeGenerator {
       if (!this.isNumber(currentInput)&&!this.isBool(currentInput)) {
         if (!this.checkVariable(currentInput)) {
           console.log("Can't be used");
+          return false;
         }
       }
       if (i === blockFunction.function.inputs.length - 1) {
@@ -196,7 +212,8 @@ export class CodeGenerator {
       }
     }
     const elementOut = blockFunction.function.output
-    let output = '';
+    let output: any;
+    output = '';
     if (elementOut) {
       output =this.checkCorrectVar(String(blockDetail.value[elementOut.variable]));
     }
@@ -219,40 +236,52 @@ export class CodeGenerator {
     const execute = `// ${blockFunction.name}
     ${output}await ${functionName}(${inputs});`;
     this.executes.push(execute);
+    return true;
   }
 
   private forStart(blockDetail) {
     const val = String(blockDetail.value.repNum);
     if (!this.isNumber(val)) {
-      this.checkVariable(val);
+      if (!this.checkVariable(val)) {
+        return false;
+      }
     }
     const str = `for(let i=0;i<${val};i++){`;
     this.executes.push(str);
+    return true;
   }
 
   private ifStart(blockDetail: any) {
     const val = String(blockDetail.value.boolVar);
     if (!this.isBool(val)) {
-      this.checkVariable(val);
+      if (!this.checkVariable(val)) {
+        return false;
+      }
     }
     let inputs = val;
     const str = `if(${inputs}){`;
     this.executes.push(str);
+    return true;
   }
 
   private whileStart(blockDetail: any) {
     const val = String(blockDetail.value.boolVar);
+    console.log(val)
     if (!this.isBool(val)) {
-      this.checkVariable(val);
+      if (!this.checkVariable(val)) {
+        return false;
+      }
     }
     let inputs = val;
     const str = `while(${inputs}){`;
-    this.executes.push(str); 
+    this.executes.push(str);
+    return true
   }
 
   private elseCondition() {
     let str = `}else{`;
     this.executes.push(str);
+    return true;
   }
 
   private compare(blockDetail) {
@@ -262,17 +291,24 @@ export class CodeGenerator {
       const val = String(blockDetail.value[compareInputs[i]]);
       if (compareInputs[i] != "eqSign") {
         if (!this.isNumber(val)) {
-          this.checkVariable(val);
+          if (!this.checkVariable(val)) {
+            return false;
+          }
         }
       } else {
-        this.checkEqualitySign(val);
+        if (!this.checkEqualitySign(val)) {
+          return false;
+        }
       }
       inputs += val;
+      
     }
-    let output = '';
+    let output: any
+    output  = '';
     output = this.checkCorrectVar(String(blockDetail.value.out));
     const str = `${output}(${inputs})`;
     this.executes.push(str);
+    return true;
   }
 
   private intialise(blockDetail) {
@@ -280,18 +316,22 @@ export class CodeGenerator {
     if (!this.isNumber(currentInput) && !this.isBool(currentInput)) {
       if (!this.checkVariable(currentInput)) {
         console.log("Can't be used");
+        return false;
       }
     }
-    let output = '';
+    let output: any
+    output  = '';
     output = this.checkCorrectVar(String(blockDetail.value.varName));
     const execute = `// Assign Variable
     ${output} ${currentInput};`;
     this.executes.push(execute);
+    return true;
   }
 
   private endCondition() {
     let str = `}`;
     this.executes.push(str);
+    return true;
   }
 
   private end(blockDetail: any) {
@@ -300,10 +340,14 @@ export class CodeGenerator {
       return element.robot === blockDetail.robot && element.type === "end";
     });
     // Add to execute
-    for (let i = 0; i < blockFunction.executes.length; i++) {
-      const element = blockFunction.executes[i];
-      this.executes.push(element);
+    if (blockFunction) {
+      for (let i = 0; i < blockFunction.executes.length; i++) {
+        const element = blockFunction.executes[i];
+        this.executes.push(element);
+      }
+      return true;
     }
+    return false;
   }
 
   private run() {
@@ -332,52 +376,66 @@ export class CodeGenerator {
         el.addEventListener("click", handler);
       });`,
     ];
-
+    this.variables = [];
+    this.functions = [];
     this.execute = "";
     this.increment = 1;
     this.code = "";
     //
+    let state = true;
     for (let i = 0; i < blockDetails.length; i++) {
       const element = blockDetails[i];
       switch (element.type) {
         case "start":
-          this.start(element);
+          state = this.start(element);
           break;
         case "move":
-          this.move(element);
+          state = this.move(element);
           break;
         case "end":
-          this.end(element);
+          state = this.end(element);
           break;
         case "if":
-          this.ifStart(element);
+          state = this.ifStart(element);
           break;
         case "compare":
-          this.compare(element);
+          state = this.compare(element);
           break;
         case "intialise":
-          this.intialise(element);
+          state = this.intialise(element);
           break;
         case "while":
-          this.whileStart(element);
+          state = this.whileStart(element);
           break;
         case "math":
-          this.mathOp(element);
+          state = this.mathOp(element);
           break;
         case "for":
-          this.forStart(element);
+          state = this.forStart(element);
           break;
         case "else-condition":
-          this.elseCondition();
+          state = this.elseCondition();
           break;
         case "end-condition":
-          this.endCondition();
+          state = this.endCondition();
           break;
         default:
           break;
       }
+      if (!state) {
+        this.content = "";
+        this.executes = [];
+        this.variables = [];
+        this.functions = [];
+        this.execute = "";
+        this.increment = 1;
+        this.code = "";
+        break;
+      }
     }
-    this.run();
+    if (state) {
+      this.run();
+    }
     return this.intialiseVar()+this.content + this.execute;
   }
 }

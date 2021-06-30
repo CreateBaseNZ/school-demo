@@ -16,6 +16,7 @@ const StartNode = ({ data }) => {
         Start
       </h5>
       <Handle
+        id="flow"
         type="source"
         position="right"
         style={{

@@ -13,6 +13,9 @@ import CompareNode from "../components/Play/Workspace/FlowEditor/CompareNode";
 import WhileNode from "../components/Play/Workspace/FlowEditor/WhileNode";
 import ForNode from "../components/Play/Workspace/FlowEditor/ForNode";
 import MathNode from "../components/Play/Workspace/FlowEditor/MathNode";
+import NumNode from "../components/Play/Workspace/FlowEditor/NumNode";
+import VarNode from "../components/Play/Workspace/FlowEditor/VarNode";
+
 
 export const initialData = {
   start: {},
@@ -27,12 +30,14 @@ export const nodeTypes = {
   read: ReadNode,
   set: SetNode,
   for: ForNode,
-  math:MathNode,
+  math: MathNode,
   if: IfNode,
+  num: NumNode,
   intialise: IntialiseNode,
   compare: CompareNode,
-  while:WhileNode,
+  while: WhileNode,
   pause: PauseNode,
+  var: VarNode,
 };
 
 export const edgeTypes = {
@@ -41,7 +46,11 @@ export const edgeTypes = {
 
 export const miniMapStrokeColoriser = (node) => {
   switch (node.type) {
+    case "var":
+      return "#0a73dc";
     case "move":
+      return "#0a73dc";
+    case "num":
       return "#0a73dc";
     case "for":
       return "#0a73dc";

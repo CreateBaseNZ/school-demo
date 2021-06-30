@@ -15,6 +15,7 @@ const GravityNode = ({ id, data }) => {
   return (
     <div className={`${classes.node} ${classes.move} ${classes.gravity}`}>
       <Handle
+        id="flow"
         type="target"
         position="left"
         style={{
@@ -55,6 +56,7 @@ const GravityNode = ({ id, data }) => {
         </div>
       </div>
       <Handle
+        id="flow"
         type="source"
         position="right"
         style={{

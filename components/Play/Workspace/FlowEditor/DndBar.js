@@ -34,24 +34,6 @@ const DndBar = () => {
             <OpenWithRoundedIcon />
             Move Arm
           </h5>
-          <div className={classes.inputContainer}>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-                X
-              </label>
-              <input type="number" id="move-x" />
-            </div>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-y" style={{ color: "#1ECC30" }}>
-                Y
-              </label>
-              <input type="number" id="move-y" />
-            </div>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-z">Z</label>
-              <input type="number" id="move-z" />
-            </div>
-          </div>
         </div>
         <div
           className={`${classes.dndNode} ${classes.if}`}
@@ -62,14 +44,6 @@ const DndBar = () => {
             <OpenWithRoundedIcon />
             If
           </h5>
-          <div className={classes.inputContainer}>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-                Condition
-              </label>
-              <input type="number" id="move-x" />
-            </div>
-          </div>
         </div>
         <div
           className={`${classes.dndNode} ${classes.while}`}
@@ -80,14 +54,6 @@ const DndBar = () => {
             <OpenWithRoundedIcon />
             While
           </h5>
-          <div className={classes.inputContainer}>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-                Condition
-              </label>
-              <input type="number" id="move-x" />
-            </div>
-          </div>
         </div>
         <div
           className={`${classes.dndNode} ${classes.for}`}
@@ -98,14 +64,6 @@ const DndBar = () => {
             <OpenWithRoundedIcon />
             Repeat
           </h5>
-          <div className={classes.inputContainer}>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-                Rep Num
-              </label>
-              <input type="number" id="move-x" />
-            </div>
-          </div>
         </div>
         <div
           className={`${classes.dndNode} ${classes.compare}`}
@@ -116,28 +74,6 @@ const DndBar = () => {
             <OpenWithRoundedIcon />
             Compare
           </h5>
-          <div className={classes.inputContainer}>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-                var1
-              </label>
-              <input type="any" id="move-x" />
-            </div>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-y" style={{ color: "#1ECC30" }}>
-                sign
-              </label>
-              <input type="number" id="move-y" />
-            </div>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-z">var2</label>
-              <input type="number" id="move-z" />
-            </div>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-z">out</label>
-              <input type="number" id="move-z" />
-            </div>
-          </div>
         </div>
         <div
           className={`${classes.dndNode} ${classes.math}`}
@@ -148,28 +84,6 @@ const DndBar = () => {
             <OpenWithRoundedIcon />
             Math
           </h5>
-          <div className={classes.inputContainer}>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-                var1
-              </label>
-              <input type="number" id="move-x" />
-            </div>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-y" style={{ color: "#1ECC30" }}>
-                sign
-              </label>
-              <input type="number" id="move-y" />
-            </div>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-z">var2</label>
-              <input type="number" id="move-z" />
-            </div>
-            <div className={classes.inputWrapper}>
-              <label htmlFor="move-z">out</label>
-              <input type="number" id="move-z" />
-            </div>
-          </div>
         </div>
         <div
           className={`${classes.dndNode} ${classes.move} ${classes.gravity}`}
@@ -200,6 +114,16 @@ const DndBar = () => {
             <OpenWithRoundedIcon />
             Intialise
           </h5>
+        </div>
+        <div
+          className={`${classes.dndNode} ${classes.num}`}
+          onDragStart={(event) => onDragStart(event, "num")}
+          draggable
+        >
+          <h5>
+            <OpenWithRoundedIcon />
+            Number
+          </h5>
           <div className={classes.inputContainer}>
             <div className={classes.inputWrapper}>
               <label htmlFor="move-x" style={{ color: "#F50F30" }}>
@@ -207,11 +131,23 @@ const DndBar = () => {
               </label>
               <input type="number" id="move-x" />
             </div>
+          </div>
+        </div>
+        <div
+          className={`${classes.dndNode} ${classes.var}`}
+          onDragStart={(event) => onDragStart(event, "var")}
+          draggable
+        >
+          <h5>
+            <OpenWithRoundedIcon />
+            Variable
+          </h5>
+          <div className={classes.inputContainer}>
             <div className={classes.inputWrapper}>
-              <label htmlFor="move-y" style={{ color: "#1ECC30" }}>
-                varName
+              <label htmlFor="move-x" style={{ color: "#F50F30" }}>
+                value
               </label>
-              <input type="number" id="move-y" />
+              <input type="number" id="move-x" />
             </div>
           </div>
         </div>

@@ -12,6 +12,7 @@ const EndNode = ({ data }) => {
   return (
     <div className={`${classes.node} ${classes.end}`}>
       <Handle
+        id="flow"
         type="target"
         position="left"
         style={{

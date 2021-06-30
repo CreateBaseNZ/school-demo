@@ -25,8 +25,19 @@ const WhileNode = ({ data }) => {
   return (
     <div className={`${classes.node} ${classes.while} ${classes.arm}`}>
       <Handle
+        id="flow"
         type="target"
         position="left"
+        style={{
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.target}`}
+      />
+      <Handle
+        id="boolVar"
+        type="target"
+        position="top"
         style={{
           height: "8px",
           width: "8px",
@@ -37,27 +48,9 @@ const WhileNode = ({ data }) => {
         <OpenWithRoundedIcon />
         While
       </h5>
-      <div className={classes.inputContainer}>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-            Condition
-          </label>
-          <input
-            type="any"
-            id="if-var1"
-            name="boolVar"
-            placeholder="0"
-            value={coords.boolVar}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-      </div>
-      
       <Handle
         type="source"
-        id="0"
+        id="flow_0"
         position="right"
         style={{
           height: "8px",
@@ -67,7 +60,7 @@ const WhileNode = ({ data }) => {
       />
       <Handle
         type="source"
-        id="1"
+        id="flow_1"
         position="bottom"
         style={{
           height: "8px",

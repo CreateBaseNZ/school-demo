@@ -14,6 +14,7 @@ import ReactFlow, {
   Background,
   getOutgoers,
   getConnectedEdges,
+  getIncomers,
 } from "react-flow-renderer";
 import {
   initialData,
@@ -41,27 +42,60 @@ const findNextNode = (currentNode, path, elements) => {
   for (let i = 0; i < nodeCollection.length; i++) {
     if (currentNode.id == nodeCollection[i].source) {
       if (nodeCollection[i].sourceHandle == String(path)) {
-        nextNodeID = nodeCollection[i].target;
-        break;
+        if (nodeCollection[i].targetHandle && nodeCollection[i].targetHandle.split("_")[0] == "flow") {
+          nextNodeID = nodeCollection[i].target;
+          break;
+        }
+        else {
+          return [false,"Wrong Connection"];
+        }
       }
     }
   }
   for (let i = 0; i < nextNodeList.length; i++) {
     if (nextNodeID == nextNodeList[i].id) {
-      return nextNodeList[i];
+      return [true,nextNodeList[i]];
     }
   }
 
-  return false;
+  return [true,false];
 }
 
-const loopUntilNext = (block) => {
-  
 
 
-
-
+const determineType = (block, currentNode) => {
+  switch (currentNode.type) {
+    case "if":
+    case "intialise":
+    case "compare":
+    case "while":
+    case "for":
+    case "num":
+    case "math":
+      block = {
+        ...block,
+        name: currentNode.type,
+      };
+      break;
+    case "move":
+      block = {
+        ...block,
+        name: "MoveArm",
+      };
+      break;
+    case "gravity":
+      block = {
+        ...block,
+        name: "GravitySwitch",
+      };
+      block.type = "move";
+      break;
+    default:
+      break;
+  }
+  return block;
 }
+
 
 
 const FlowEditor = (props) => {
@@ -70,93 +104,159 @@ const FlowEditor = (props) => {
   const [elements, setElements] = useState(initialElements);
   const [data, setData] = useState(initialData);
 
+  const findInputs = (blocksOrder, currentNode, elements, val,level=0) => {
+    const nodes = [currentNode];
+    let edgeCollection = getConnectedEdges(nodes, elements);
+    let prevNodeList = getIncomers(currentNode, elements);
+    let IDlist = [];
+    let inputs = [];
+    if (level != 0) {
+      let outName = null;
+      let flowBlock = false;
+      for (let i = 0; i < edgeCollection.length; i++) {
+        if (currentNode.id == edgeCollection[i].source) {
+          if (edgeCollection[i].sourceHandle && (edgeCollection[i].sourceHandle).split("_")[0] == "flow") {
+            flowBlock = true;
+          } else if (edgeCollection[i].sourceHandle && (edgeCollection[i].sourceHandle).split("_")[0] == "flow") {
+            outName = blocksOrder[i].value[edgeCollection[i].sourceHandle];
+          }
+          if (flowBlock == true && outName) {
+            break;
+          }
+        }
+      }
+      if (flowBlock) {
+        for (let i = 0; i < blocksOrder.length; i++) {
+          if (blocksOrder[i].id == currentNode.id) {
+            return [blocksOrder, val, outName];
+          }
+        }
+        return [null, null, null];
+      }
+    }
+    console.log(currentNode)
+    console.log(edgeCollection);
+    console.log(prevNodeList);
+    for (let i = 0; i < edgeCollection.length; i++) {
+      if (currentNode.id == edgeCollection[i].target) {
+        if (edgeCollection[i].targetHandle&&(edgeCollection[i].targetHandle).split("_")[0] != "flow") {
+          inputs.push(edgeCollection[i].targetHandle);
+          for (let j = 0; j < prevNodeList.length; j++) {
+            if (edgeCollection[i].source == prevNodeList[j].id) {
+              IDlist.push(prevNodeList[j])
+              break;
+            }
+          }
+        }
+      }
+    }
+    if (IDlist.length != inputs.length) {
+      //console.log("gg",currentNode);
+    }
+    let block = {
+      robot: "Arm",
+      id: currentNode.id,
+      type: currentNode.type,
+      value: {...data[currentNode.id]},
+    };
+    block = determineType(block, currentNode);
+    let output;
+    for (let i = 0; i < IDlist.length; i++) {
+      [blocksOrder, val, output] = (findInputs(blocksOrder, IDlist[i], elements, val, 1));
+      if (blocksOrder || val || output) {
+        block.value[inputs[i]] = output;
+      }
+      else {
+        return [null,null,null];
+      }
+    }
+    let edgeNum;
+    for (let i = 0; i < edgeCollection.length; i++) {
+      if (currentNode.id == edgeCollection[i].source) {
+        if (edgeCollection[i].sourceHandle && (edgeCollection[i].sourceHandle).split("_")[0] != "flow") {
+          edgeNum = i;
+          break;
+        }
+      }
+    }
+    let outName = false;
+    switch (currentNode.type) {
+      case "num":
+        outName = { ...data[currentNode.id] };
+        outName = outName.value;
+        break;
+      case "intialise":
+        let nextNodeID = edgeCollection[edgeNum].target;
+        let nextNodeList = getOutgoers(currentNode, elements);
+        let nextNode;
+        for (let i = 0; i < nextNodeList.length; i++) {
+          if (nextNodeID == nextNodeList[i].id) {
+            nextNode = nextNodeList[i];
+          }
+        }
+        if (nextNode.type == "var") {
+          let value = { ...data[nextNode.id] };
+          block.value[edgeCollection[edgeNum].sourceHandle] = value.varName
+        }
+        blocksOrder.push(block);
+        break;
+      default:
+        if (edgeNum||edgeNum==0) {
+          let NextOut = edgeCollection[edgeNum].sourceHandle;
+          if (NextOut) {
+            outName = "out_" + String(val);
+            val++;
+          }
+          block.value[NextOut] = outName;
+        }
+        blocksOrder.push(block);
+        break;
+    }
+    return [blocksOrder, val, outName];
+  
+    // return false;
+  }
+
+
   useImperativeHandle(props.forwardedRef, () => ({
     getBlockConfig: () => {
       let blocksConfig = [];
       let currentNode = elements[0];
       let traverse = true;
+      let val = 0;
       let path = [];
       let maxPath = [];
       let nodeContext=[];
       while (traverse) {
         if (currentNode) {
           let block = {
-            robot: "Arm",
+            robot: "Argm",
             value: { ...data[currentNode.id] },
             type: currentNode.type,
           };
-          switch (currentNode.type) {
-            case "move":
-              block = {
-                ...block,
-                name: "MoveArm",
-              };
-              break;
-            case "gravity":
-              block = {
-                ...block,
-                name: "GravitySwitch",
-              };
-              block.type = "move";
-              break;
-            case "if":
-              block = {
-                ...block,
-                name: "if",
-              };
-              break;
-            case "intialise":
-              block = {
-                ...block,
-                name: "intialise",
-              };
-              break;
-            case "compare":
-              block = {
-                ...block,
-                name: "compare",
-              };
-              break;
-            case "while":
-              block = {
-                ...block,
-                name: "while",
-              };
-              break;
-              case "for":
-                block = {
-                  ...block,
-                  name: "for",
-                };
-              break;
-              case "math":
-                block = {
-                  ...block,
-                  name: "math",
-                };
-                break;
-            default:
-              break;
+          let f;
+          [blocksConfig, val, f] = findInputs(blocksConfig, currentNode, elements, val);
+          if (!(blocksConfig || val || f)) {
+            return "wrong order";
           }
-          blocksConfig.push(block);
         }
         let nextNode;
         let edges = [];
         let nodes = [currentNode];
-
+        let flowNext;
         switch (currentNode.type) {
           case "if":
             maxPath.push(2);
             path.push(0);
             nodeContext.push(currentNode);
-            nextNode = findNextNode(currentNode, path[path.length - 1], elements);
+            flowNext = "flow_" + String(path[path.length - 1]);
             break;
           case "while":
           case "for":
             maxPath.push(1);
             path.push(0);
             nodeContext.push(currentNode);
-            nextNode = findNextNode(currentNode, path[path.length - 1], elements);
+            flowNext = "flow_" + String(path[path.length - 1]);
             break;
           case undefined:
             let block = blocksConfig.pop();
@@ -165,11 +265,16 @@ const FlowEditor = (props) => {
             }
             break;
           default:
-            nextNode = getOutgoers(currentNode, elements)[0];
+            flowNext = "flow";
             break;
         }
-       
-
+        if (flowNext) {
+          let state;
+          [state,nextNode] = findNextNode(currentNode, flowNext, elements);
+          if (!state) {
+            return nextNode;
+          }
+        }
         if (nextNode) {
           currentNode = nextNode;
         } else {
@@ -177,18 +282,20 @@ const FlowEditor = (props) => {
             traverse = false;
             break;
           } else {
-            
-
             currentNode = nodeContext[path.length - 1];
             path[path.length - 1]++;
-            nextNode = findNextNode(currentNode, path[path.length - 1], elements);
+            let flowNext = "flow_" + String(path[path.length - 1]);
+            let state;
+            [state,nextNode] = findNextNode(currentNode, flowNext, elements);
+            if (!state) {
+              return nextNode;
+            }
             let interBlock;
             if (path[path.length - 1] == maxPath[path.length - 1]) {
               path.pop();
               maxPath.pop();
               nodeContext.pop();
               interBlock = {
-                robot: "Arm",
                 type: "end-condition",
                 name: "end-condition",
               };
@@ -197,7 +304,6 @@ const FlowEditor = (props) => {
                 case "if":
                   if (path[path.length - 1] == 1) {
                     interBlock = {
-                      robot: "Arm",
                       type: "else-condition",
                       name: "else-condition",
                     };
@@ -214,10 +320,11 @@ const FlowEditor = (props) => {
           
         }
       }
-      // if (blocksConfig[blocksConfig.length - 1].type !== "end") {
-      //   return "disconnected";
-      // }
       console.log(blocksConfig);
+
+      if (blocksConfig[blocksConfig.length - 1].type !== "end") {
+        return "disconnected";
+      }
       return blocksConfig;
     },
   }));
@@ -282,20 +389,10 @@ const FlowEditor = (props) => {
     let defaultValues = null;
     if (type === "gravity") {
       defaultValues = { isOn: true };
-    } else if (type === "move") {
-      defaultValues = { x: 0, y: 0, z: 0 };
-    } else if (type == "if") {
-      defaultValues = { boolVar: true };
-    } else if (type == "intialise") {
-      defaultValues = { value: 0, varName: "varName" };
-    } else if (type == "compare") {
-      defaultValues = { var1: "var1", eqSign: '<', var2: "var2", out: "varOut" };
-    } else if (type == "math") {
-      defaultValues = { var1: "var1", sign: '+', var2: "var2", out: "varOut" };
-    } else if (type == "while") {
-      defaultValues = { boolVar: true };
-    } else if (type == "for") {
-      defaultValues = { repNum: 0 };
+    } else if (type == "num") {
+      defaultValues = { value: 0 };
+    } else if (type == "var") {
+      defaultValues = { varName: "varOut" };
     }
     setData((data) => ({
       ...data,

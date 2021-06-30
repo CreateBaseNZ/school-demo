@@ -25,9 +25,22 @@ const IfNode = ({ data }) => {
   return (
     <div className={`${classes.node} ${classes.if} ${classes.arm}`}>
       <Handle
+        id="flow"
         type="target"
         position="left"
         style={{
+          top:"33.3%",
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.target}`}
+      />
+      <Handle
+        id="boolVar"
+        type="target"
+        position="left"
+        style={{
+          top:"66.6%",
           height: "8px",
           width: "8px",
         }}
@@ -37,38 +50,12 @@ const IfNode = ({ data }) => {
         <OpenWithRoundedIcon />
         If
       </h5>
-      <div className={classes.inputContainer}>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-            Condition
-          </label>
-          <input
-            type="any"
-            id="if-var1"
-            name="boolVar"
-            placeholder="0"
-            value={coords.boolVar}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-      </div>
       <Handle
         type="source"
-        id="0"
-        position="top"
-        style={{
-          height: "8px",
-          width: "8px",
-        }}
-        className={`${classes.handle} ${classes.source}`}
-      />
-      <Handle
-        type="source"
-        id="1"
+        id="flow_0"
         position="right"
         style={{
+          top:"25%",
           height: "8px",
           width: "8px",
         }}
@@ -76,9 +63,21 @@ const IfNode = ({ data }) => {
       />
       <Handle
         type="source"
-        id="2"
-        position="bottom"
+        id="flow_1"
+        position="right"
         style={{
+          top:"50%",
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.source}`}
+      />
+      <Handle
+        type="source"
+        id="flow_2"
+        position="right"
+        style={{
+          top:"75%",
           height: "8px",
           width: "8px",
         }}

@@ -25,9 +25,44 @@ const MoveNode = ({ data }) => {
   return (
     <div className={`${classes.node} ${classes.move} ${classes.arm}`}>
       <Handle
+        id="flow"
         type="target"
         position="left"
         style={{
+          top: '12.5%',
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.target}`}
+      />
+      <Handle
+        id="x"
+        type="target"
+        position="left"
+        style={{
+          top: '37.5%',
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.target}`}
+      />
+      <Handle
+        id="y"
+        type="target"
+        position="left"
+        style={{
+          top: '62.5%',
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.target}`}
+      />
+      <Handle
+        id="z"
+        type="target"
+        position="left"
+        style={{
+          top: '87.5%',
           height: "8px",
           width: "8px",
         }}
@@ -37,52 +72,8 @@ const MoveNode = ({ data }) => {
         <OpenWithRoundedIcon />
         Move Arm
       </h5>
-      <div className={classes.inputContainer}>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-            X
-          </label>
-          <input
-            type="any"
-            id="move-x"
-            name="x"
-            placeholder="0"
-            value={coords.x}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-y" style={{ color: "#1ECC30" }}>
-            Y
-          </label>
-          <input
-            type="any"
-            id="move-y"
-            name="y"
-            placeholder="0"
-            value={coords.y}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-z">Z</label>
-          <input
-            type="any"
-            id="move-z"
-            name="z"
-            placeholder="0"
-            value={coords.z}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-      </div>
       <Handle
+        id="flow"
         type="source"
         position="right"
         style={{

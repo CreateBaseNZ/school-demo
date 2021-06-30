@@ -25,8 +25,29 @@ const MathNode = ({ data }) => {
   return (
     <div className={`${classes.node} ${classes.compare} ${classes.arm}`}>
       <Handle
+        id="var1"
+        type="target"
+        position="top"
+        style={{
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.target}`}
+      />
+      <Handle
+        id="sign"
         type="target"
         position="left"
+        style={{
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.target}`}
+      />
+      <Handle
+        id="var2"
+        type="target"
+        position="bottom"
         style={{
           height: "8px",
           width: "8px",
@@ -37,69 +58,8 @@ const MathNode = ({ data }) => {
         <OpenWithRoundedIcon />
         Math
       </h5>
-      <div className={classes.inputContainer}>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-            var1
-          </label>
-          <input
-            type="any"
-            id="compare-var1"
-            name="var1"
-            placeholder="var1"
-            value={compare.var1}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-y" style={{ color: "#1ECC30" }}>
-            sign
-          </label>
-          <input
-            type="any"
-            id="math-sign"
-            name="sign"
-            placeholder="+"
-            value={compare.sign}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-z">
-            var2
-          </label>
-          <input
-            type="any"
-            id="move-var2"
-            name="var2"
-            placeholder="var2"
-            value={compare.var2}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-z">
-            out
-          </label>
-          <input
-            type="any"
-            id="move-out"
-            name="out"
-            placeholder="varOut"
-            value={compare.out}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-      </div>
       <Handle
+        id="out"
         type="source"
         position="right"
         style={{

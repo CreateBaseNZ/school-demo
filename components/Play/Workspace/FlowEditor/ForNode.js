@@ -25,9 +25,22 @@ const ForNode = ({ data }) => {
   return (
     <div className={`${classes.node} ${classes.for} ${classes.arm}`}>
       <Handle
+        id="flow"
         type="target"
         position="left"
         style={{
+          top:'33.3%',
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.target}`}
+      />
+      <Handle
+        id="repNum"
+        type="target"
+        position="left"
+        style={{
+          top:"66.6%",
           height: "8px",
           width: "8px",
         }}
@@ -37,27 +50,9 @@ const ForNode = ({ data }) => {
         <OpenWithRoundedIcon />
         Repeat
       </h5>
-      <div className={classes.inputContainer}>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-            Condition
-          </label>
-          <input
-            type="any"
-            id="repNum"
-            name="repNum"
-            placeholder="0"
-            value={coords.repNum}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-      </div>
-      
       <Handle
         type="source"
-        id="0"
+        id="flow_0"
         position="right"
         style={{
           height: "8px",
@@ -67,7 +62,7 @@ const ForNode = ({ data }) => {
       />
       <Handle
         type="source"
-        id="1"
+        id="flow_1"
         position="bottom"
         style={{
           height: "8px",

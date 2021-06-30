@@ -25,8 +25,19 @@ const IntialiseNode = ({ data }) => {
   return (
     <div className={`${classes.node} ${classes.intialise} ${classes.arm}`}>
       <Handle
+        id="flow"
         type="target"
         position="left"
+        style={{
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.target}`}
+      />
+      <Handle
+        id="value"
+        type="target"
+        position="top"
         style={{
           height: "8px",
           width: "8px",
@@ -37,41 +48,20 @@ const IntialiseNode = ({ data }) => {
         <OpenWithRoundedIcon />
         Intialise
       </h5>
-      <div className={classes.inputContainer}>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-x" style={{ color: "#F50F30" }}>
-            value
-          </label>
-          <input
-            type="any"
-            id="intialise-value"
-            name="value"
-            placeholder="0"
-            value={coords.value}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-        <div className={classes.inputWrapper}>
-          <label htmlFor="move-z">
-            output
-          </label>
-          <input
-            type="any"
-            id="intialise-varName"
-            name="varName"
-            placeholder="Var"
-            value={coords.varName}
-            onChange={changeHandler}
-            onFocus={focusHandler}
-            onDragStart={dragHandler}
-          />
-        </div>
-      </div>
       <Handle
+        id="flow"
         type="source"
         position="right"
+        style={{
+          height: "8px",
+          width: "8px",
+        }}
+        className={`${classes.handle} ${classes.source}`}
+      />
+      <Handle
+        id="varName"
+        type="source"
+        position="bottom"
         style={{
           height: "8px",
           width: "8px",
