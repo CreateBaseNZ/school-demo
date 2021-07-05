@@ -72,25 +72,27 @@ const determineType = (block, currentNode) => {
     case "for":
     case "num":
     case "math":
-      block = {
-        ...block,
-        name: currentNode.type,
-      };
+      block.name = currentNode.type;
       break;
-    case "move":
-      block = {
-        ...block,
-        name: "MoveArm",
-      };
+    case "add":
+    case "subtract":
+    case "multiply":
+    case "divide":
+      block.type = "math";
+      block.name = currentNode.type;
       break;
-    case "gravity":
-      block = {
-        ...block,
-        name: "GravitySwitch",
-      };
-      block.type = "move";
+    case "greaterThan":
+    case "lessThan":
+    case "equals":
+      block.type = "compare";
+      block.name = currentNode.type;
+      break;
+    case "start":
+    case "end":
       break;
     default:
+      block.type = "specific";
+      block.name = currentNode.type;
       break;
   }
   return block;
@@ -134,9 +136,6 @@ const FlowEditor = (props) => {
         return [null, null, null];
       }
     }
-    console.log(currentNode)
-    console.log(edgeCollection);
-    console.log(prevNodeList);
     for (let i = 0; i < edgeCollection.length; i++) {
       if (currentNode.id == edgeCollection[i].target) {
         if (edgeCollection[i].targetHandle&&(edgeCollection[i].targetHandle).split("_")[0] != "flow") {
@@ -320,11 +319,12 @@ const FlowEditor = (props) => {
           
         }
       }
-      console.log(blocksConfig);
+      
 
       if (blocksConfig[blocksConfig.length - 1].type !== "end") {
         return "disconnected";
       }
+      console.log(blocksConfig);
       return blocksConfig;
     },
   }));
