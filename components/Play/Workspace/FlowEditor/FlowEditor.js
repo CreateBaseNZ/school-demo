@@ -90,6 +90,15 @@ const determineType = (block, currentNode) => {
     case "start":
     case "end":
       break;
+    case "jump":
+    case "duck":
+    case "slide":
+    case "attack":
+    case "crouch":
+    case "doubleJump":
+      block.type = "move";
+      block.name = currentNode.type;
+      break;
     default:
       block.type = "specific";
       block.name = currentNode.type;

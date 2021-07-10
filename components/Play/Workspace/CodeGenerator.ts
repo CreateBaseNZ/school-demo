@@ -1,3 +1,4 @@
+import { FlareSharp } from "@material-ui/icons";
 import blockFunctions from "../../../public/data/blocks.json";
 
 export class CodeGenerator {
@@ -32,7 +33,7 @@ export class CodeGenerator {
     }
     //Checks if variable created
     let found = false;
-    for (let i = 0; i < this.variables.length; i++){
+    for (let i = 0; i < this.variables.length; i++) {
       if (this.variables[i] === varName) {
         found = true;
         break;
@@ -41,20 +42,20 @@ export class CodeGenerator {
     if (!found) {
       this.variables.push(varName);
     }
-    return varName+" = ";
+    return varName + " = ";
   }
 
   private intialiseVar() {
-    let str="";
-    const varNum=this.variables.length-1;
-    if(this.variables.length>0){
-      str+=`let `;
-      this.variables.forEach((data,index)=>{
+    let str = "";
+    const varNum = this.variables.length - 1;
+    if (this.variables.length > 0) {
+      str += `let `;
+      this.variables.forEach((data, index) => {
         str += `${data}`;
-        if(index==varNum){
-          str+=`;\n`;
-        }else{
-          str+=`, `
+        if (index == varNum) {
+          str += `;\n`;
+        } else {
+          str += `, `
         }
       })
     }
@@ -62,7 +63,7 @@ export class CodeGenerator {
   }
 
   private isNumber(varName: string) {
-    for (let i = 0; i < varName.length; i++){
+    for (let i = 0; i < varName.length; i++) {
       if (varName[i] < '0' || varName[i] > '9') {
         return false
       }
@@ -78,7 +79,7 @@ export class CodeGenerator {
   }
 
   private addFunction(functionName) {
-    for (let i = 0; i < this.functions.length; i++){
+    for (let i = 0; i < this.functions.length; i++) {
       if (this.functions[i] === functionName) {
         return false;
       }
@@ -88,25 +89,25 @@ export class CodeGenerator {
   }
 
   private checkEqualitySign(varName: string) {
-    const possibility=["<",">",">=","<=","==","!=",">="]
-    for (let i = 0; i < possibility.length; i++){
+    const possibility = ["<", ">", ">=", "<=", "==", "!=", ">="]
+    for (let i = 0; i < possibility.length; i++) {
       const data = possibility[i];
       if (varName === data) {
         return true;
       }
-    }      
+    }
     console.log("Incorrect Sign!");
     return false;
   }
   
   private checkSign(varName: string) {
-    const possibility=["+","-","*","/","**","%"]
-    for (let i = 0; i < possibility.length; i++){
+    const possibility = ["+", "-", "*", "/", "**", "%"]
+    for (let i = 0; i < possibility.length; i++) {
       const data = possibility[i];
       if (varName === data) {
         return true;
       }
-    }      
+    }
     console.log("Incorrect Sign!");
     return false;
   }
@@ -121,7 +122,7 @@ export class CodeGenerator {
     }
     //Checks if variable created
     let found = false;
-    for (let i = 0; i < this.variables.length; i++){
+    for (let i = 0; i < this.variables.length; i++) {
       if (this.variables[i] === varName) {
         found = true;
         break;
@@ -167,7 +168,7 @@ export class CodeGenerator {
         blockDetail.value.sign = "/";
         break;
     }
-    let mathInput = ["var1", "sign", "var2"];
+    let mathInput = ["a", "sign", "b"];
     let inputs: string = "";
     for (let i = 0; i < mathInput.length; i++) {
       let val = String(blockDetail.value[mathInput[i]]).trim();
@@ -176,14 +177,14 @@ export class CodeGenerator {
           if (!this.checkVariable(val)) {
             return false;
           }
-        }else {
+        } else {
           val = String(Number(val));
         }
       } else {
-        if(blockDetail)
-        if (!this.checkSign(val)) {
-          return false;
-        }
+        if (blockDetail)
+          if (!this.checkSign(val)) {
+            return false;
+          }
       }
       inputs += val;
     }
@@ -211,38 +212,40 @@ export class CodeGenerator {
     // Build input
     let inputVariables: string = "";
     let inputs: string = "";
-    for (let i = 0; i < blockFunction.function.inputs.length; i++) {
-      const element = blockFunction.function.inputs[i];
-      let currentInput = String(blockDetail.value[element.variable]).trim();
-      if (!this.checkVariable(currentInput)) {
-        if (element.type == "number")
-          if (!this.isNumber(currentInput)) {
-            console.log("Can't be used");
-            return false;
-          } else {
-            currentInput = String(Number(currentInput));
-          }
-      } else if (element.type == "boolean" && !this.isBool(currentInput)) {
-        console.log("Can't be used");
-        return false;
-      }
-      if (i === blockFunction.function.inputs.length - 1) {
-        inputVariables += element.variable;
-        inputs += currentInput;
-      } else {
-        inputVariables += element.variable + ", ";
-        inputs += currentInput + ", ";
+    if (blockFunction.function.inputs) {
+      for (let i = 0; i < blockFunction.function.inputs.length; i++) {
+        const element = blockFunction.function.inputs[i];
+        let currentInput = String(blockDetail.value[element.variable]).trim();
+        if (!this.checkVariable(currentInput)) {
+          if (element.type == "number")
+            if (!this.isNumber(currentInput)) {
+              console.log("Can't be used");
+              return false;
+            } else {
+              currentInput = String(Number(currentInput));
+            }
+        } else if (element.type == "boolean" && !this.isBool(currentInput)) {
+          console.log("Can't be used");
+          return false;
+        }
+        if (i === blockFunction.function.inputs.length - 1) {
+          inputVariables += element.variable;
+          inputs += currentInput;
+        } else {
+          inputVariables += element.variable + ", ";
+          inputs += currentInput + ", ";
+        }
       }
     }
     const elementOut = blockFunction.function.output
     let output: any;
     output = '';
     if (elementOut) {
-      output =this.checkCorrectVar(String(blockDetail.value[elementOut.variable]));
+      output = this.checkCorrectVar(String(blockDetail.value[elementOut.variable]));
     }
     // Function name
     const functionName = blockFunction.function.name
-    const added=this.addFunction(functionName);
+    const added = this.addFunction(functionName);
     //const functionName = blockFunction.function.name + String(this.increment);
     this.increment++;
     // Build function
@@ -320,7 +323,7 @@ export class CodeGenerator {
         blockDetail.value.eqSign = "==";
         break;
     }
-    let compareInputs = ["var1", "eqSign", "var2"];
+    let compareInputs = ["a", "eqSign", "b"];
     let inputs: string = "";
     for (let i = 0; i < compareInputs.length; i++) {
       let val = String(blockDetail.value[compareInputs[i]]).trim();
@@ -341,7 +344,7 @@ export class CodeGenerator {
       
     }
     let output: any
-    output  = '';
+    output = '';
     output = this.checkCorrectVar(String(blockDetail.value.out));
     const str = `${output}(${inputs})`;
     this.executes.push(str);
@@ -350,8 +353,8 @@ export class CodeGenerator {
 
   private intialise(blockDetail) {
     let currentInput = String(blockDetail.value.value).trim();
-    if (!this.isNumber(currentInput) ) {
-      if (!this.checkVariable(currentInput)&& !this.isBool(currentInput)) {
+    if (!this.isNumber(currentInput)) {
+      if (!this.checkVariable(currentInput) && !this.isBool(currentInput)) {
         console.log("Can't be used");
         return false;
       }
@@ -359,7 +362,7 @@ export class CodeGenerator {
       currentInput = String(Number(currentInput));
     }
     let output: any
-    output  = '';
+    output = '';
     output = this.checkCorrectVar(String(blockDetail.value.varName));
     const execute = `// Assign Variable
     ${output} ${currentInput};`;
@@ -388,6 +391,29 @@ export class CodeGenerator {
     }
     return false;
   }
+  
+  private doMove(blockDetail) {
+    const command = (blockDetail.name.charAt(0).toUpperCase()) + blockDetail.name.slice(1);
+    if (blockDetail.value) {
+      const target = (blockDetail.value.entity.charAt(0).toUpperCase()) + blockDetail.value.entity.slice(1);
+      const str = `unityContext.send("${target}","${command}");`;
+      this.executes.push(str);
+      return true;
+    } else {
+      return false;
+    }
+   
+  }
+
+  private readSensors(blockDetail) {
+    if (blockDetail.value) {
+      const output = this.checkCorrectVar(String(blockDetail.value.out));
+      const target = blockDetail.value.sensor;
+      let str=`${output}currentData.${target}`
+    } else {
+      return false;
+    }
+  }
 
   private run() {
     this.execute = "const run = async () => {\n";
@@ -397,6 +423,8 @@ export class CodeGenerator {
     }
     this.execute += "};\nrun();";
   }
+
+
 
   public build(blockDetails: Array<any> = []) {
     // Reset Values
@@ -455,8 +483,14 @@ export class CodeGenerator {
         case "else-condition":
           state = this.elseCondition();
           break;
+        case "move":
+          state = this.doMove(element);
+          break;
         case "end-condition":
           state = this.endCondition();
+          break;
+        case "sense":
+          state = this.readSensors(element);
           break;
         default:
           break;

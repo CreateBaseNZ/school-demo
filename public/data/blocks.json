@@ -6,6 +6,12 @@
     "executes": []
   },
   {
+    "robot": "Player",
+    "type": "start",
+    "logic": "while(true){\n\tcurrentData=sensorData\n\t",
+    "executes": []
+  },
+  {
     "robot": "Arm",
     "type": "specific",
     "name": "move",
