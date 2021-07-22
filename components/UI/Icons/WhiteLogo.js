@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-import tracker from "/utils/tracker";
-
 const WhiteLogo = (props) => {
   return (
     <a
